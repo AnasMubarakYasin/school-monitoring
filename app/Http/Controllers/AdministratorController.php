@@ -79,7 +79,7 @@ class AdministratorController extends Controller
      * @param  \App\Models\Administrator  $administrator
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Administrator $administrator)
+    public function delete(Administrator $administrator)
     {
         //
     }

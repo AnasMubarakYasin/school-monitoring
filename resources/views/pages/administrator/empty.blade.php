@@ -1,4 +1,4 @@
-@extends('layouts.admin.panel', ['content_card' => true])
+@extends('layouts.administrator.panel', ['content_card' => true])
 
 @section('title', 'Empty')
 

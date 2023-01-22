@@ -30,7 +30,10 @@ Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
         Route::get('administrator/notification', 'User\AdministratorController@notification')->name('web.administrator.notification');
         Route::get('administrator/empty', 'User\AdministratorController@empty')->name('web.administrator.empty');
         Route::get('administrator/logout', 'Auth\AdministratorController@logout_perfom')->name('web.administrator.logout_perfom');
-        Route::get('administrator/archive', 'User\AdministratorController@dashboard')->name('web.administrator.archive');
-        Route::get('administrator/about', 'User\AdministratorController@dashboard')->name('web.administrator.about');
+        Route::get('administrator/archive', 'User\AdministratorController@empty')->name('web.administrator.archive');
+        Route::get('administrator/about', 'User\AdministratorController@empty')->name('web.administrator.about');
+
+        Route::get('administrator/users', 'User\AdministratorController@empty')->name('web.administrator.users');
+        Route::get('administrator/users/administrator', 'User\AdministratorController@administrator')->name('web.administrator.users.administrator.index');
     });
 });

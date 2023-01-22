@@ -17,7 +17,10 @@ class AdministratorFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'photo' => fake()->imageUrl(),
+            'name' => fake()->unique()->name(),
+            'email' => fake()->unique()->email(),
+            'password' => '1234',
         ];
     }
 }

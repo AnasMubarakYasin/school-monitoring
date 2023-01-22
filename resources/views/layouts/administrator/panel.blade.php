@@ -54,6 +54,57 @@
                             <span class="ml-3">Dashboard</span>
                         </a>
                     </li>
+                    <li>
+                        @php
+                            $link = route('web.administrator.users');
+                        @endphp
+                        <button type="button"
+                            data-dropdown="{{ str(request()->url())->startsWith(route('web.administrator.users')) ? 'show' : 'hide' }}"
+                            data-accordion-trigger="hover" data-collapse-toggle="menu_user" @class([
+                                'flex items-center w-full p-2 text-base font-normal rounded-lg',
+                                'dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' => !str(
+                                    request()->url())->startsWith($link),
+                                'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' => str(
+                                    request()->url())->startsWith($link),
+                            ])
+                            aria-controls="menu_user">
+                            <svg xmlns="http://www.w3.org/2000/svg" @class([
+                                'w-6 h-6 transition',
+                                'text-gray-700 dark:text-white' => !str(request()->url())->startsWith(
+                                    $link),
+                                '' => str(request()->url())->startsWith($link),
+                            ]) fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                            <span class="flex-1 ml-3 text-left whitespace-nowrap capitalize">{{ __('users') }}</span>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                        <ul id="menu_user" class="hidden py-2 space-y-2">
+                            @foreach (App\Models\UserType::to_array() as $key => $value)
+                                <li>
+                                    @php
+                                        $link = route("web.administrator.users.$key.index");
+                                    @endphp
+                                    <a href="{{ $link }}" @class([
+                                        'flex items-center p-2 pl-11 w-full text-base font-normal rounded-lg transition group',
+                                        'dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' =>
+                                            request()->url() != $link,
+                                        'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' =>
+                                            request()->url() == $link,
+                                    ])>
+                                        {{ __($value) }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
                 </ul>
                 <ul class="pt-4 mt-4 space-y-2 border-t border-gray-200 dark:border-gray-700 capitalize">
                     <li>
@@ -80,6 +131,53 @@
                         </a>
                     </li>
                     <li>
+                        @php
+                            $link = route('web.administrator.empty');
+                        @endphp
+                        <a href="{{ $link }}" @class([
+                            'flex items-center p-2 text-base font-normal rounded-lg',
+                            'dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' =>
+                                request()->url() != $link,
+                            'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' =>
+                                request()->url() == $link,
+                        ])>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" @class([
+                                    'w-6 h-6 transition',
+                                    'text-gray-700 dark:text-white' => request()->url() != $link,
+                                    '' => request()->url() == $link,
+                                ])>
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                            </svg>
+                            <span class="ml-3">{{ __('trash') }}</span>
+                        </a>
+                    </li>
+                    <li>
+                        @php
+                            $link = route('web.administrator.empty');
+                        @endphp
+                        <a href="{{ $link }}" @class([
+                            'flex items-center p-2 text-base font-normal rounded-lg',
+                            'dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' =>
+                                request()->url() != $link,
+                            'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' =>
+                                request()->url() == $link,
+                        ])>
+
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" @class([
+                                    'w-6 h-6 transition',
+                                    'text-gray-700 dark:text-white' => request()->url() != $link,
+                                    '' => request()->url() == $link,
+                                ])>
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                            </svg>
+                            <span class="ml-3">{{ __('files') }}</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ route('web.administrator.logout_perfom') }}" @class([
                             'flex items-center p-2 text-base font-normal rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700',
                         ])>
@@ -100,8 +198,8 @@
                 <div class="flex-grow flex gap-4 items-center px-4">
                     <button id="drawer-btn"
                         class="text-sm p-2 text-gray-700 hover:bg-gray-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg dark:text-gray-400 dark:hover:text-white dark:focus:ring-gray-800">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-6 h-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
                         </svg>
@@ -118,8 +216,8 @@
                                 </div>
                             </div>
                         @endempty
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-6 h-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
                         </svg>
