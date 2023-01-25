@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAdministratorRequest;
 use App\Http\Requests\UpdateAdministratorRequest;
 use App\Models\Administrator;
+use Illuminate\Support\Facades\Vite;
 
 class AdministratorController extends Controller
 {

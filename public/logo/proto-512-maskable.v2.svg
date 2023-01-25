@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="512"
+   height="512"
+   viewBox="0 0 512 512"
+   version="1.1"
+   id="svg5"
+   sodipodi:docname="proto-512.v2.svg"
+   inkscape:export-filename="../86f6cfb9/proto-512.maskable.v2.png"
+   inkscape:export-xdpi="300"
+   inkscape:export-ydpi="300"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview25"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     showgrid="false" />
+  <defs
+     id="defs2" />
+  <g
+     id="layer1">
+    <g
+       id="g12">
+      <rect
+         style="fill:none;fill-rule:evenodd;stroke-width:6.93573"
+         id="rect31"
+         width="512"
+         height="512"
+         x="0"
+         y="0"
+         ry="150"
+         rx="0" />
+      <path
+         id="path58179"
+         style="fill:#2ca02c;stroke-width:3"
+         d="M 362.06601,362.06601 406.00055,256 362.06601,149.93398 256,105.99945 v 75.00028 L 309.03301,202.96699 331.00027,256 309.03301,309.03301 256,331.00027 202.96699,309.03301 180.99973,256 H 105.99945 L 149.93398,362.06601 256,406.00055 Z" />
+      <circle
+         style="fill:#2ca02c;stroke-width:1.82742"
+         id="path714"
+         cx="165"
+         cy="165"
+         r="50" />
+    </g>
+  </g>
+</svg>

@@ -5,7 +5,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    {{-- <title>Laravel</title> --}}
+
+    <title>My Awesome App</title>
+    <meta name="description" content="Web for Monitoring School">
+    <link rel="icon" href="/favicon.ico">
+    {{-- <link rel="apple-touch-icon" href="/icons/ios/180.png" sizes="180x180">
+    <link rel="mask-icon" href="/logo.svg" color="#FFFFFF">
+    <meta name="theme-color" content="#ffffff"> --}}
+    <link rel="manifest" href="/manifest.json" />
 
     <!-- Fonts -->
     <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">

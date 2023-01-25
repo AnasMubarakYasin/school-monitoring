@@ -1,0 +1,49 @@
+#!/usr/bin/env node
+
+const path = require("path");
+const fs = require("fs");
+const { Command } = require("commander");
+const program = new Command();
+
+program.name("node").description("CLI to node utilities").version("0.0.1");
+
+program
+    .command("pwa")
+    .description("PWA utils")
+    .action(() => {
+        console.log("pwa utils");
+    });
+program
+    .command("pwa:move")
+    .description("PWA move compiled file")
+    .action(() => {
+        const src = "public/build";
+        const dest = "public";
+        const files_to_move = ["site.webmanifest", "sw.js"];
+        for (const file of files_to_move) {
+            fs.copyFile(path.join(src, file), path.join(dest, file), (err) => {
+                console.log(
+                    path.join(src, file),
+                    "->",
+                    path.join(dest, file),
+                    err ? "fail" : "success"
+                );
+                err && console.error(err);
+            });
+        }
+    });
+program
+    .command("pwa:remove")
+    .description("PWA remove compiled file")
+    .action(() => {
+        const src = "public";
+        const files_to_move = ["site.webmanifest", "sw.js"];
+        for (const file of files_to_move) {
+            fs.rm(path.join(src, file), (err) => {
+                console.log(path.join(src, file), err ? "fail" : "success");
+                err && console.error(err);
+            });
+        }
+    });
+
+program.parse();
