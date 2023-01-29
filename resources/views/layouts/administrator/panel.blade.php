@@ -59,6 +59,60 @@
                     </li>
                     <li>
                         @php
+                            $link = route('web.administrator.school_year.list');
+                        @endphp
+                        <a href="{{ $link }}" @class([
+                            'flex items-center p-2 text-base font-normal rounded-lg',
+                            'dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' =>
+                                request()->url() != $link,
+                            'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' =>
+                                request()->url() == $link,
+                        ])>
+                            <svg @class([
+                                'w-6 h-6 transition',
+                                'text-gray-700 dark:text-white' => request()->url() != $link,
+                                '' => request()->url() == $link,
+                            ]) fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
+                            </svg>
+                            <span class="ml-3">
+                                {{ trans('school year') }}
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        @php
+                            $link = route('web.administrator.semester.list');
+                        @endphp
+                        <a href="{{ $link }}" @class([
+                            'flex items-center p-2 text-base font-normal rounded-lg',
+                            'dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' =>
+                                request()->url() != $link,
+                            'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' =>
+                                request()->url() == $link,
+                        ])>
+                            <svg @class([
+                                'w-6 h-6 transition',
+                                'text-gray-700 dark:text-white' => request()->url() != $link,
+                                '' => request()->url() == $link,
+                            ]) fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
+                            </svg>
+                            <span class="ml-3">
+                                {{ trans('semester') }}
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        @php
                             $link = route('web.administrator.users');
                         @endphp
                         <button type="button"
@@ -168,8 +222,8 @@
                                 request()->url() == $link,
                         ])>
 
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" @class([
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="2" stroke="currentColor" @class([
                                     'w-6 h-6 transition',
                                     'text-gray-700 dark:text-white' => request()->url() != $link,
                                     '' => request()->url() == $link,
@@ -219,8 +273,8 @@
                                 </div>
                             </div>
                         @endempty
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
                         </svg>
@@ -351,17 +405,17 @@
                             </button>
                             <div id="theme_menu"
                                 class="z-10 w-auto hidden bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700">
-                                <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                                <ul id="theme-list" class="py-1 text-sm text-gray-700 dark:text-gray-200"
                                     aria-labelledby="theme_menu_btn">
                                     <li>
-                                        <button
-                                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                        <button data-theme="light"
+                                            class='block w-full py-2 px-4 hover:text-gray-900 hover:bg-gray-200 dark:hover:bg-gray-600 dark:hover:text-white'>
                                             Light
                                         </button>
                                     </li>
                                     <li>
-                                        <button
-                                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                        <button data-theme="dark"
+                                            class='block w-full py-2 px-4 hover:text-gray-900 hover:bg-gray-200 dark:hover:bg-gray-600 dark:hover:text-white'>
                                             Dark
                                         </button>
                                     </li>

@@ -12,5 +12,6 @@
                 <div class="text-3xl text-gray-900 dark:text-gray-50 font-normal">{{ $administrator }}</div>
             </div>
         </div>
+        <x-school-year.stat></x-school-year.stat>
     </div>
 @endsection

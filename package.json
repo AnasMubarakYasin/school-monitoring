@@ -24,5 +24,8 @@
         "workbox-routing": "^6.5.4",
         "workbox-strategies": "^6.5.4",
         "workbox-window": "^6.5.4"
+    },
+    "dependencies": {
+        "flowbite-datepicker": "^1.2.2"
     }
 }
