@@ -2,12 +2,16 @@
     'fields' => [],
 ])
 @section('head')
-    @vite('resources/js/components/resource/create.js')
+    @vite('resources/js/components/resource/form.js')
 @endsection
 <form
     class="grid gap-4 px-5 py-3 lg:w-1/2 text-gray-700 border border-gray-200 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700"
-    action="{{ $resource->create }}" method="post" enctype="multipart/form-data">
+    action="{{ $resource->is_create() ? $resource->create : $resource->update($model) }}" method="post"
+    enctype="multipart/form-data">
     @csrf
+    @if ($resource->is_update())
+        @method('PATCH')
+    @endif
     <input type="hidden" name="_view_any" value="{{ $resource->view_any }}">
     <div class="grid gap-4">
 
@@ -82,8 +86,9 @@
                                         clip-rule="evenodd"></path>
                                 </svg>
                             </div>
-                            <input id="{{ $key }}" name="{{ $key }}" datepicker datepicker-autohide
-                                type="text" value="{{ old($key) ?? $model->{$key} }}"
+                            <input id="{{ $key }}" name="{{ $key }}" type="text" datepicker data-autohide
+                                data-format={{ $field['format_js'] }}
+                                value="{{ old($key) ?? Illuminate\Support\Carbon::parse()->format($field['format']) }}"
                                 class="block w-full pl-10 p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="">
                         </div>

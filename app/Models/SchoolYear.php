@@ -15,10 +15,6 @@ class SchoolYear extends Model
             'type' => 'string',
             'hide_create' => true,
         ],
-        // 'is_active' => [
-        //     'name' => 'is active',
-        //     'type' => 'boolean'
-        // ],
         'state' => [
             'name' => 'state',
             'type' => 'enum',
@@ -30,11 +26,15 @@ class SchoolYear extends Model
         ],
         'start_at' => [
             'name' => 'start at',
-            'type' => 'date'
+            'type' => 'date',
+            'format' => 'Y-m-d',
+            'format_js' => 'yyyy-mm-dd',
         ],
         'end_at' => [
             'name' => 'end at',
-            'type' => 'date'
+            'type' => 'date',
+            'format' => 'Y-m-d',
+            'format_js' => 'yyyy-mm-dd',
         ],
         'semesters' => [
             'name' => 'semesters',

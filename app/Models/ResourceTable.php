@@ -18,6 +18,7 @@ class ResourceTable
         $columns = request()->query('columns', $columns);
         $sort = [];
         $filter = [];
+        $id = [];
         if (request()->query->getBoolean('sort')) {
             $sort = ['name' => request()->query->get('sort_name'), 'dir' => request()->query->get('sort_dir')];
         }
@@ -29,6 +30,9 @@ class ResourceTable
                 return $result;
             }, []);
         }
+        if (request()->query->getBoolean('ref')) {
+            $id = request()->query('id', []);
+        }
         if ($pagination) {
             $pagination['per'] = request()->query->getInt('perpage', $pagination['per']);
             $pagination['num'] = request()->query->getInt('numpage', $pagination['num']);
@@ -36,6 +40,7 @@ class ResourceTable
         return new ResourceTable(
             query: $query,
             fields: $fields,
+            id: $id,
             columns: $columns,
             sort: $sort,
             filter: $filter,
@@ -51,6 +56,7 @@ class ResourceTable
         public array|null $sort = null,
         public array|null $filter = null,
         public array|null $fields = null,
+        public array|null $id = null,
         public string $view_any = "",
         public string $create = "",
         public string $delete_any = "",
@@ -58,11 +64,11 @@ class ResourceTable
         $route_gen = function () {
             return "";
         };
-        $this->route_view =$route_gen;
-        $this->route_update =$route_gen;
-        $this->route_delete =$route_gen;
-        $this->route_restore =$route_gen;
-        $this->route_model =$route_gen;
+        $this->route_view = $route_gen;
+        $this->route_update = $route_gen;
+        $this->route_delete = $route_gen;
+        $this->route_restore = $route_gen;
+        $this->route_model = $route_gen;
     }
     public Closure $route_view;
     public Closure $route_update;
@@ -96,20 +102,21 @@ class ResourceTable
         }
         if ($this->filter) {
             foreach ($this->columns as $column) {
-                switch ($column) {
-                    case 'name':
-                        if (isset($this->filter['name'])) {
-                            $this->query->orWhereFullText('name', $this->filter['name']);
-                        }
-                        break;
+                if (isset($this->filter[$column])) {
+                    switch ($this->fields[$column]['type']) {
+                        case 'string':
+                            $this->query->orWhereFullText($column, $this->filter[$column]);
+                            break;
 
-                    default:
-                        if (isset($this->filter[$column])) {
+                        default:
                             $this->query->orWhere($column, $this->filter[$column]);
-                        }
-                        break;
+                            break;
+                    }
                 }
             }
+        }
+        if ($this->id) {
+            $this->query->whereIn('id', $this->id);
         }
         if ($this->pagination) {
             /** @var LengthAwarePaginator */

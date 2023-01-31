@@ -35,10 +35,13 @@ Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
 
         Route::get('administrator/school_year/list', 'User\AdministratorController@school_year_list')->name('web.administrator.school_year.list');
         Route::get('administrator/school_year/create', 'User\AdministratorController@school_year_create')->name('web.administrator.school_year.create');
-
+        Route::get('administrator/school_year/update/{school_year}', 'User\AdministratorController@school_year_update')->name('web.administrator.school_year.update');
+        
         Route::get('administrator/semester/list', 'User\AdministratorController@semester_list')->name('web.administrator.semester.list');
         Route::get('administrator/semester/create', 'User\AdministratorController@semester_create')->name('web.administrator.semester.create');
         Route::get('administrator/semester/update/{semester}', 'User\AdministratorController@semester_update')->name('web.administrator.semester.update');
+
+        Route::get('administrator/employee/list', 'User\AdministratorController@employee_list')->name('web.administrator.employee.list');
 
         Route::get('administrator/users', 'User\AdministratorController@empty')->name('web.administrator.users');
         Route::get('administrator/users/administrator', 'User\AdministratorController@administrator')->name('web.administrator.users.administrator.index');
@@ -50,8 +53,14 @@ Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
 });
 Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
     Route::post('resource/school_year', 'SchoolYearController@create')->name('web.resource.school_year.create');
-
-    Route::post('resource/semester', 'SemesterController@create')->name('web.resource.semester.create');
+    Route::patch('resource/school_year/{school_year}', 'SchoolYearController@update')->name('web.resource.school_year.update');
+    Route::delete('resource/school_year/{school_year}', 'SchoolYearController@delete')->name('web.resource.school_year.delete');
+    Route::delete('resource/school_year', 'SchoolYearController@delete_any')->name('web.resource.school_year.delete_any');
 
     Route::post('resource/school_information', 'SchoolInformationController@create')->name('web.resource.data_master.school_information.create');
+
+    Route::post('resource/semester', 'SemesterController@create')->name('web.resource.semester.create');
+    Route::patch('resource/semester/{semester}', 'SemesterController@update')->name('web.resource.semester.update');
+    Route::delete('resource/semester/{semester}', 'SemesterController@delete')->name('web.resource.semester.delete');
+    Route::delete('resource/semester', 'SemesterController@delete_any')->name('web.resource.semester.delete_any');
 });

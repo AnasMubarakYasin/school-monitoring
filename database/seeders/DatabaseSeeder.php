@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Administrator;
+use App\Models\Employee;
 use App\Models\SchoolYear;
 use App\Models\Semester;
 use Illuminate\Database\Seeder;
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@host.local',
             'password' => 'admin',
         ]);
+        Employee::factory(30)->create();
 
         $school_year = SchoolYear::factory()->create([
             'name' => now()->year . "/" . now()->addYear()->year,

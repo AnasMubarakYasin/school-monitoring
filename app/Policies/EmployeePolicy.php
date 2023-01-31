@@ -2,12 +2,11 @@
 
 namespace App\Policies;
 
+use App\Models\Employee;
 use App\Models\Administrator;
-use App\Models\Semester;
-use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class SemesterPolicy
+class EmployeePolicy
 {
     use HandlesAuthorization;
 
@@ -16,7 +15,7 @@ class SemesterPolicy
         return true;
     }
 
-    public function view(Administrator $user, Semester $schoolYear)
+    public function view(Administrator $user, Employee $schoolYear)
     {
         return true;
     }
@@ -26,7 +25,7 @@ class SemesterPolicy
         return true;
     }
 
-    public function update(Administrator $user, Semester $schoolYear)
+    public function update(Administrator $user, Employee $schoolYear)
     {
         return true;
     }
@@ -36,17 +35,17 @@ class SemesterPolicy
         return true;
     }
 
-    public function delete(Administrator $user, Semester $schoolYear)
+    public function delete(Administrator $user, Employee $schoolYear)
     {
         return true;
     }
 
-    public function restore(Administrator $user, Semester $schoolYear)
+    public function restore(Administrator $user, Employee $schoolYear)
     {
         return true;
     }
 
-    public function forceDelete(Administrator $user, Semester $schoolYear)
+    public function forceDelete(Administrator $user, Employee $schoolYear)
     {
         return true;
     }
