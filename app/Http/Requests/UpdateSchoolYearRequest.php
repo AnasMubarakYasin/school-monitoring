@@ -24,7 +24,10 @@ class UpdateSchoolYearRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|string',
+            'state' => 'required|in:planned,ongoing,finished',
+            'start_at' => 'required|date',
+            'end_at' => 'required|date',
         ];
     }
 }

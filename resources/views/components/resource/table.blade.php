@@ -227,9 +227,27 @@
                         @switch($resource->fields[$column]['type'])
                             @case('model')
                                 <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
-                                    <a href="{{ $resource->model($resource->fields[$column], $item->{$column}) }}"
+                                    @php
+                                        $query = '?ref=on&id[]=' . $item->{$column}->id;
+                                    @endphp
+                                    <a href="{{ $resource->model($resource->fields[$column], $item->{$column}) . $query }}"
                                         class="bg-blue-100 text-blue-800 text-sm font-medium px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
-                                        {{ $item->{$column}->name }}
+                                        {{ $resource->fields[$column]['name'] }}
+                                    </a>
+                                </td>
+                            @break
+
+                            @case('models')
+                                <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
+                                    @php
+                                        $query = $item->{$column}->reduce(function ($result, $item, $index) {
+                                            $result .= '&id[]=' . $item->id;
+                                            return $result;
+                                        }, '?ref=on');
+                                    @endphp
+                                    <a href="{{ $resource->model($resource->fields[$column], $item->{$column}) . $query }}"
+                                        class="bg-blue-100 text-blue-800 text-sm font-medium px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
+                                        {{ count($item->{$column}) }} {{ $resource->fields[$column]['name'] }}
                                     </a>
                                 </td>
                             @break
@@ -283,7 +301,7 @@
         </table>
     </div>
     @if ($resource->pagination)
-        <nav class="flex flex-col md:flex-row justify-between items-center" aria-label="Table navigation">
+        <nav class="flex flex-col gap-2 md:flex-row justify-between items-center" aria-label="Table navigation">
             <div class="flex items-center gap-2 text-sm font-normal text-gray-700 dark:text-gray-400">
                 <div>
                     <span class="capitalize">{{ __('view') }}</span>

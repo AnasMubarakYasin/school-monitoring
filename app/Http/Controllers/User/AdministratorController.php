@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Administrator;
+use App\Models\Employee;
 use App\Models\ResourceForm;
 use App\Models\ResourceTable;
 use App\Models\SchoolYear;
@@ -30,14 +31,54 @@ class AdministratorController extends Controller
         return view('pages.administrator.empty');
     }
 
+    //SECTION - school_year
     public function school_year_list()
     {
-        return view('pages.administrator.school_year.list');
+        $resource = ResourceTable::create(
+            query: SchoolYear::query(),
+            fields: SchoolYear::$fields,
+            columns: ['name', 'state', 'start_at', 'end_at', 'semesters'],
+            pagination: ['per' => 5, 'num' => 1],
+        );
+        $resource->create = route('web.administrator.school_year.create');
+        $resource->route_update = function ($item) {
+            return route('web.administrator.school_year.update', ['school_year' => $item]);
+        };
+        $resource->route_delete = function ($item) {
+            return route('web.resource.school_year.delete', ['school_year' => $item]);
+        };
+        $resource->route_model = function ($field, $models) {
+            return route('web.administrator.semester.list');
+        };
+        return view('pages.administrator.school_year.list', ['resource' => $resource]);
     }
     public function school_year_create()
     {
-        return view('pages.administrator.school_year.create');
+        $resource = ResourceForm::create(
+            model: new SchoolYear(),
+            fields: SchoolYear::$fields,
+        );
+        $resource->create = route('web.resource.school_year.create');
+        $resource->view_any = route('web.administrator.school_year.list');
+        return view('pages.administrator.school_year.create', [
+            'resource' => $resource,
+        ]);
     }
+    public function school_year_update(SchoolYear $school_year)
+    {
+        $resource = ResourceForm::create(
+            model: $school_year,
+            fields: SchoolYear::$fields,
+        );
+        $resource->create = route('web.resource.school_year.create');
+        $resource->view_any = route('web.administrator.school_year.list');
+        return view('pages.administrator.school_year.update', [
+            'resource' => $resource,
+        ]);
+    }
+    //!SECTION - school_year
+
+    //SECTION - semester
     public function semester_list()
     {
         $resource = ResourceTable::create(
@@ -49,6 +90,9 @@ class AdministratorController extends Controller
         $resource->create = route('web.administrator.semester.create');
         $resource->route_update = function ($item) {
             return route('web.administrator.semester.update', ['semester' => $item]);
+        };
+        $resource->route_delete = function ($item) {
+            return route('web.resource.semester.delete', ['semester' => $item]);
         };
         $resource->route_model = function ($field, $item) {
             return route('web.administrator.school_year.list');
@@ -78,7 +122,11 @@ class AdministratorController extends Controller
             model: $semester,
             fields: Semester::$fields,
         );
-        $resource->create = route('web.resource.semester.create');
+        $resource->route_update = function ($item) {
+            return route('web.resource.semester.update', [
+                'semester' => $item,
+            ]);
+        };
         $resource->view_any = route('web.administrator.semester.list');
         $resource->fetcher_model = function ($field) {
             return SchoolYear::all();
@@ -87,6 +135,32 @@ class AdministratorController extends Controller
             'resource' => $resource,
         ]);
     }
+    //!SECTION - semester
+
+    //SECTION - employee
+    public function employee_list()
+    {
+        $resource = ResourceTable::create(
+            query: Employee::query(),
+            fields: Employee::$fields,
+            columns: ['name', 'email', 'telp'],
+            pagination: ['per' => 5, 'num' => 1],
+        );
+        // $resource->create = route('web.administrator.employee.create');
+        // $resource->route_update = function ($item) {
+        //     return route('web.administrator.employee.update', ['employee' => $item]);
+        // };
+        // $resource->route_delete = function ($item) {
+        //     return route('web.resource.employee.delete', ['employee' => $item]);
+        // };
+        // $resource->route_model = function ($field, $item) {
+        //     return route('web.administrator.school_year.list');
+        // };
+        return view('pages.administrator.employee.list', [
+            'resource' => $resource,
+        ]);
+    }
+    //!SECTION - employee
 
     public function administrator()
     {

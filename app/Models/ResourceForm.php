@@ -72,4 +72,12 @@ class ResourceForm
     {
         return $this->model->id ? 'update' : 'create';
     }
+    public function is_create()
+    {
+        return $this->mode() == 'create';
+    }
+    public function is_update()
+    {
+        return $this->mode() == 'update';
+    }
 }

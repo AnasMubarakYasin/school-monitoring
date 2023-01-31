@@ -21,25 +21,27 @@ class SemesterController extends Controller
         Semester::create($data);
         return redirect()->intended($request->input('_view_any'));
     }
-    public function update(UpdateSemesterRequest $request, Semester $school_year)
+    public function update(UpdateSemesterRequest $request, Semester $semester)
     {
-        $this->authorize('update', $school_year);
+        $this->authorize('update', $semester);
         $data = $request->validated();
-        return back();
+        $semester->update($data);
+        return redirect()->intended($request->input('_view_any'));
     }
-    public function delete(Semester $school_year)
+    public function delete(Semester $semester)
     {
-        $this->authorize('delete', $school_year);
+        $this->authorize('delete', $semester);
+        $semester->delete();
         return back();
     }
     public function delete_any()
     {
         $this->authorize('delete_any', Semester::class);
-        return back();
+        return abort(501);
     }
-    public function restore(Semester $school_year)
+    public function restore(Semester $semester)
     {
-        $this->authorize('restore', $school_year);
-        return back();
+        $this->authorize('restore', $semester);
+        return abort(501);
     }
 }

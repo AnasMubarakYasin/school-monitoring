@@ -34,11 +34,15 @@ class Semester extends Model
         ],
         'start_at' => [
             'name' => 'start at',
-            'type' => 'date'
+            'type' => 'date',
+            'format' => 'Y-m-d',
+            'format_js' => 'yyyy-mm-dd',
         ],
         'end_at' => [
             'name' => 'end at',
-            'type' => 'date'
+            'type' => 'date',
+            'format' => 'Y-m-d',
+            'format_js' => 'yyyy-mm-dd',
         ],
         'school_year' => [
             'name' => 'school year',
