@@ -35,24 +35,18 @@ Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
 
         Route::get('administrator/school_year/list', 'User\AdministratorController@school_year_list')->name('web.administrator.school_year.list');
         Route::get('administrator/school_year/create', 'User\AdministratorController@school_year_create')->name('web.administrator.school_year.create');
-        Route::get('administrator/school_year/update/{school_year}', 'User\AdministratorController@school_year_update')->name('web.administrator.school_year.update');
-        Route::get('administrator/school_year/update/{school_year}', 'User\AdministratorController@school_year_update')->name('web.administrator.school_year.update');
+        Route::get('administrator/school_year/{school_year}/update', 'User\AdministratorController@school_year_update')->name('web.administrator.school_year.update');
         
         Route::get('administrator/semester/list', 'User\AdministratorController@semester_list')->name('web.administrator.semester.list');
         Route::get('administrator/semester/create', 'User\AdministratorController@semester_create')->name('web.administrator.semester.create');
-        Route::get('administrator/semester/update/{semester}', 'User\AdministratorController@semester_update')->name('web.administrator.semester.update');
-
-        Route::get('administrator/employee/list', 'User\AdministratorController@employee_list')->name('web.administrator.employee.list');
-        Route::get('administrator/semester/update/{semester}', 'User\AdministratorController@semester_update')->name('web.administrator.semester.update');
-
-        Route::get('administrator/employee/list', 'User\AdministratorController@employee_list')->name('web.administrator.employee.list');
+        Route::get('administrator/semester/{semester}/update', 'User\AdministratorController@semester_update')->name('web.administrator.semester.update');
 
         Route::get('administrator/users', 'User\AdministratorController@empty')->name('web.administrator.users');
-        Route::get('administrator/users/administrator', 'User\AdministratorController@administrator')->name('web.administrator.users.administrator.index');
+        Route::get('administrator/users/administrator', 'User\AdministratorController@administrator')->name('web.administrator.users.administrator.list');
 
-        Route::get('administrator/data_master/school_information/list', 'User\AdministratorController@identitas_sekolah_list')->name('web.administrator.data_master.school_information.list');
-        Route::get('administrator/data_master/school_information/create', 'User\AdministratorController@identitas_sekolah_create')->name('web.administrator.data_master.school_information.create');
-        Route::get('administrator/data_master/school_information/update/{id}', 'User\AdministratorController@identitas_sekolah_update')->name('web.administrator.data_master.school_information.update');
+        Route::get('administrator/users/employee/list', 'User\AdministratorController@employee_list')->name('web.administrator.users.employee.list');
+        Route::get('administrator/users/employee/create', 'User\AdministratorController@employee_create')->name('web.administrator.users.employee.create');
+        Route::get('administrator/users/employee/{employee}/update', 'User\AdministratorController@employee_update')->name('web.administrator.users.employee.update');
     });
 });
 Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
@@ -67,4 +61,9 @@ Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
     Route::patch('resource/semester/{semester}', 'SemesterController@update')->name('web.resource.semester.update');
     Route::delete('resource/semester/{semester}', 'SemesterController@delete')->name('web.resource.semester.delete');
     Route::delete('resource/semester', 'SemesterController@delete_any')->name('web.resource.semester.delete_any');
+
+    Route::post('resource/employee', 'EmployeeController@create')->name('web.resource.employee.create');
+    Route::patch('resource/employee/{employee}', 'EmployeeController@update')->name('web.resource.employee.update');
+    Route::delete('resource/employee/{employee}', 'EmployeeController@delete')->name('web.resource.employee.delete');
+    Route::delete('resource/employee', 'EmployeeController@delete_any')->name('web.resource.employee.delete_any');
 });

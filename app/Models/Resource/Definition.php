@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Models\Resource;
+
+class Definition
+{
+    public function __construct(
+        public string $name,
+        public string $type,
+        public string|null $format = null,
+        public bool $array = false,
+        public bool $hide_create = false,
+        public bool $hide_view = false,
+        public bool $hide_update = false,
+
+        public mixed $default = null,
+        public mixed $enums = null,
+        public string|null $relation = null,
+        public string|null $alias = null,
+    ) {
+    }
+}
