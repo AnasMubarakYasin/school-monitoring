@@ -7,13 +7,19 @@
 <form
     class="grid gap-4 px-5 py-3 lg:w-1/2 text-gray-700 border border-gray-200 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700"
     action="{{ $resource->is_create() ? $resource->create : $resource->update($model) }}" method="post"
+    action="{{ $resource->is_create() ? $resource->create : $resource->update($model) }}" method="post"
     enctype="multipart/form-data">
     @csrf
     @if ($resource->is_update())
         @method('PATCH')
     @endif
     <input type="hidden" name="_view_any" value="{{ $resource->view_any }}">
+    <input type="hidden" name="_view_any" value="{{ $resource->view_any }}">
     <div class="grid gap-4">
+
+        @foreach ($resource->fields as $key => $field)
+            @continue(in_array('hide_' . $resource->mode(), $field))
+            @switch($field['type'])
 
         @foreach ($resource->fields as $key => $field)
             @continue(in_array('hide_' . $resource->mode(), $field))
@@ -21,13 +27,18 @@
                 @case('string')
                     <div class="flex flex-col gap-2">
                         <label for="{{ $key }}"
+                        <label for="{{ $key }}"
                             class="block capitalize text-sm font-medium text-gray-900 dark:text-white">
+                            {{ trans($field['name']) }}
                             {{ trans($field['name']) }}
                         </label>
                         <input type="text" id="{{ $key }}" name="{{ $key }}"
                             value="{{ old($key) ?? $model->{$key} }}"
+                        <input type="text" id="{{ $key }}" name="{{ $key }}"
+                            value="{{ old($key) ?? $model->{$key} }}"
                             class="block w-full p-2.5 text-sm rounded-lg border border-gray-300 bg-gray-50 text-gray-900 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="">
+                        @error($key)
                         @error($key)
                             <p class="text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                         @enderror
@@ -39,13 +50,17 @@
                         <label class="relative flex items-center gap-2 cursor-pointer">
                             <input type="checkbox" id="{{ $key }}" name="{{ $key }}" class="sr-only peer"
                                 @checked(old($key))>
+                            <input type="checkbox" id="{{ $key }}" name="{{ $key }}" class="sr-only peer"
+                                @checked(old($key))>
                             <div
                                 class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
                             </div>
                             <span class="capitalize text-sm font-medium text-gray-900 dark:text-gray-300">
                                 {{ trans($field['name']) }}
+                                {{ trans($field['name']) }}
                             </span>
                         </label>
+                        @error($key)
                         @error($key)
                             <p class="text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                         @enderror
@@ -55,9 +70,12 @@
                 @case('enum')
                     <div class="flex flex-col gap-2">
                         <label for="{{ $key }}"
+                        <label for="{{ $key }}"
                             class="block capitalize text-sm font-medium text-gray-900 dark:text-white">
                             {{ trans($field['name']) }}
+                            {{ trans($field['name']) }}
                         </label>
+                        <select id="{{ $key }}" name="{{ $key }}"
                         <select id="{{ $key }}" name="{{ $key }}"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 <<<<<<< Updated upstream
@@ -70,6 +88,7 @@
                             @endforeach
                         </select>
                         @error($key)
+                        @error($key)
                             <p class="text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                         @enderror
                     </div>
@@ -78,7 +97,9 @@
                 @case('date')
                     <div class="flex flex-col gap-2">
                         <label for="{{ $key }}"
+                        <label for="{{ $key }}"
                             class="block capitalize text-sm font-medium text-gray-900 dark:text-white">
+                            {{ trans($field['name']) }}
                             {{ trans($field['name']) }}
                         </label>
                         <div class="relative">
@@ -93,9 +114,13 @@
                             <input id="{{ $key }}" name="{{ $key }}" type="text" datepicker data-autohide
                                 data-format={{ $field['format_js'] }}
                                 value="{{ old($key) ?? Illuminate\Support\Carbon::parse()->format($field['format']) }}"
+                            <input id="{{ $key }}" name="{{ $key }}" type="text" datepicker data-autohide
+                                data-format={{ $field['format_js'] }}
+                                value="{{ old($key) ?? Illuminate\Support\Carbon::parse()->format($field['format']) }}"
                                 class="block w-full pl-10 p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="">
                         </div>
+                        @error($key)
                         @error($key)
                             <p class="text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                         @enderror
@@ -106,10 +131,18 @@
                     <div class="flex flex-col gap-2">
                         <label for="{{ $field['as'] }}" class="capitalize text-sm font-medium text-gray-900 dark:text-white">
                             {{ trans($field['name']) }}
+                        <label for="{{ $field['as'] }}" class="capitalize text-sm font-medium text-gray-900 dark:text-white">
+                            {{ trans($field['name']) }}
                         </label>
                         <input type="text" list="{{ $field['as'] }}_list" id="{{ $field['as'] }}"
                             name="{{ $field['as'] }}"
+                        <input type="text" list="{{ $field['as'] }}_list" id="{{ $field['as'] }}"
+                            name="{{ $field['as'] }}"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="{{ trans($field['name']) }}"
+                            value="{{ old($field['as']) ?? $model->{$field['as']} }}">
+                        <datalist id="{{ $field['as'] }}_list">
+                            @foreach ($resource->model($field) as $model)
                             placeholder="{{ trans($field['name']) }}"
                             value="{{ old($field['as']) ?? $model->{$field['as']} }}">
                         <datalist id="{{ $field['as'] }}_list">
@@ -118,12 +151,14 @@
                             @endforeach
                         </datalist>
                         @error($field['as'])
+                        @error($field['as'])
                             <p class="text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                         @enderror
                     </div>
                 @break
 
                 @default
+                    <div> {{ trans($field['name']) }} </div>
                     <div> {{ trans($field['name']) }} </div>
             @endswitch
         @endforeach
@@ -132,10 +167,12 @@
         <button
             class="w-full sm:w-1/2 lg:w-1/4 capitalize text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
             {{ __($resource->mode()) }}
+            {{ __($resource->mode()) }}
         </button>
     </div>
     @env('local')
     @forelse ($errors->all() as $error)
+        <div>{{ $error }}</div>
         <div>{{ $error }}</div>
     @empty
     @endforelse

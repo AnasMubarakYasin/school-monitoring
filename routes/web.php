@@ -36,9 +36,13 @@ Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
         Route::get('administrator/school_year/list', 'User\AdministratorController@school_year_list')->name('web.administrator.school_year.list');
         Route::get('administrator/school_year/create', 'User\AdministratorController@school_year_create')->name('web.administrator.school_year.create');
         Route::get('administrator/school_year/update/{school_year}', 'User\AdministratorController@school_year_update')->name('web.administrator.school_year.update');
+        Route::get('administrator/school_year/update/{school_year}', 'User\AdministratorController@school_year_update')->name('web.administrator.school_year.update');
         
         Route::get('administrator/semester/list', 'User\AdministratorController@semester_list')->name('web.administrator.semester.list');
         Route::get('administrator/semester/create', 'User\AdministratorController@semester_create')->name('web.administrator.semester.create');
+        Route::get('administrator/semester/update/{semester}', 'User\AdministratorController@semester_update')->name('web.administrator.semester.update');
+
+        Route::get('administrator/employee/list', 'User\AdministratorController@employee_list')->name('web.administrator.employee.list');
         Route::get('administrator/semester/update/{semester}', 'User\AdministratorController@semester_update')->name('web.administrator.semester.update');
 
         Route::get('administrator/employee/list', 'User\AdministratorController@employee_list')->name('web.administrator.employee.list');
