@@ -160,6 +160,7 @@ class AdministratorController extends Controller
         return view('pages.administrator.employee.list', [
             'resource' => $resource,
         ]);
+<<<<<<< Updated upstream
     }
     //!SECTION - employee
 
@@ -233,6 +234,8 @@ class AdministratorController extends Controller
         //     return route('web.administrator.data_master.school_information.update', ['school_information' => $item]);
         // };
         return view('pages.administrator.data_master.schol_information.list');
+=======
+>>>>>>> Stashed changes
     }
     // public function identitas_sekolah_create()
     // {

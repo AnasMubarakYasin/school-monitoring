@@ -40,6 +40,7 @@ Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
         Route::get('administrator/semester/list', 'User\AdministratorController@semester_list')->name('web.administrator.semester.list');
         Route::get('administrator/semester/create', 'User\AdministratorController@semester_create')->name('web.administrator.semester.create');
         Route::get('administrator/semester/update/{semester}', 'User\AdministratorController@semester_update')->name('web.administrator.semester.update');
+<<<<<<< Updated upstream
 
         Route::get('administrator/employee/list', 'User\AdministratorController@employee_list')->name('web.administrator.employee.list');
 
@@ -49,6 +50,13 @@ Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
         Route::get('administrator/data_master/school_information/list', 'User\AdministratorController@identitas_sekolah_list')->name('web.administrator.data_master.school_information.list');
         Route::get('administrator/data_master/school_information/create', 'User\AdministratorController@identitas_sekolah_create')->name('web.administrator.data_master.school_information.create');
         Route::get('administrator/data_master/school_information/update/{id}', 'User\AdministratorController@identitas_sekolah_update')->name('web.administrator.data_master.school_information.update');
+=======
+
+        Route::get('administrator/employee/list', 'User\AdministratorController@employee_list')->name('web.administrator.employee.list');
+
+        Route::get('administrator/users', 'User\AdministratorController@empty')->name('web.administrator.users');
+        Route::get('administrator/users/administrator', 'User\AdministratorController@administrator')->name('web.administrator.users.administrator.index');
+>>>>>>> Stashed changes
     });
 });
 Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
