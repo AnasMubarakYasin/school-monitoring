@@ -7,6 +7,7 @@ use App\Models\Administrator;
 use App\Models\Employee;
 use App\Models\ResourceForm;
 use App\Models\ResourceTable;
+use App\Models\School_Information;
 use App\Models\SchoolYear;
 use App\Models\Semester;
 
@@ -165,5 +166,89 @@ class AdministratorController extends Controller
     public function administrator()
     {
         return view('pages.administrator.users.administrator.index');
+    }
+
+    // public function identitas_sekolah_list()
+    // {
+    //     $resource = ResourceTable::create(
+    //         query: School_Information::query(),
+    //         fields: School_Information::$fields,
+    //         columns: [
+    //             'name',
+    //             'npsn',
+    //             'nss',
+    //             'status',
+    //             'address',
+    //             'village',
+    //             'sub_district',
+    //             'district',
+    //             'province',
+    //             'postal_code',
+    //             'telp',
+    //             'website',
+    //         ],
+    //         pagination: ['per' => 5, 'num' => 1],
+    //     );
+    //     $resource->create = route('web.administrator.data_master.school_information.create');
+    //     $resource->route_update = function ($item) {
+    //         return route('web.administrator.data_master.school_information.update', ['school_information' => $item]);
+    //     };
+    //     return view('pages.administrator.data_master.schol_information.list', [
+    //         'resource' => $resource,
+    //     ]);
+    // }
+    // public function identitas_sekolah_create()
+    // {
+    //     $resource = ResourceForm::create(
+    //         model: new School_Information(),
+    //         fields: School_Information::$fields,
+    //     );
+    //     $resource->create = route('web.resource.data_master.school_information.create');
+    //     $resource->view_any = route('web.administrator.data_master.school_information.list');
+    //     return view('pages.administrator.data_master.schol_information.create', [
+    //         'resource' => $resource,
+    //     ]);
+    // }
+    // public function identitas_sekolah_update(School_Information $school_information)
+    // {
+    //     $resource = ResourceForm::create(
+    //         model: $school_information,
+    //         fields: School_Information::$fields,
+    //     );
+    //     $resource->create = route('web.resource.data_master.school_information.create');
+    //     $resource->view_any = route('web.administrator.data_master.school_information.list');
+    //     return view('pages.administrator.data_master.schol_information.update', [
+    //         'resource' => $resource,
+    //     ]);
+    // }
+
+    public function identitas_sekolah_list()
+    {
+        // $resource = School_Information::all()->firstOrFail();
+        // $data = [
+        //     'resource' => $resource
+        // ];
+        // $resource->create = route('web.administrator.data_master.school_information.create');
+        // $resource->route_update = function ($item) {
+        //     return route('web.administrator.data_master.school_information.update', ['school_information' => $item]);
+        // };
+        return view('pages.administrator.data_master.schol_information.list');
+    }
+    // public function identitas_sekolah_create()
+    // {
+
+    //     return view('pages.administrator.data_master.schol_information.create');
+    // }
+    public function identitas_sekolah_update(School_Information $id)
+    {
+        $resource = ResourceForm::create(
+            model: $id,
+            fields: School_Information::$fields,
+        );
+        $resource->create = route('web.resource.data_master.school_information.create');
+        // $resource->view_any = route('web.administrator.data_master.school_information.list');
+        return view('pages.administrator.data_master.schol_information.update', [
+            'resource' => $resource,
+        ]);
     }
 }
