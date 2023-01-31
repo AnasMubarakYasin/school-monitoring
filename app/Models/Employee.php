@@ -2,8 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\Resource\Definition;
+use App\Models\Resource\Trait\Formable;
+use App\Models\Resource\Trait\Tableable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -13,50 +17,70 @@ class Employee extends Authenticatable
 {
     use HasRoles;
     use HasApiTokens, HasFactory, Notifiable;
+    use Tableable, Formable;
 
-    public static $fields = [
-        'photo' => [
-            'name' => 'photo',
-            'type' => 'string',
-        ],
-        'name' => [
-            'name' => 'name',
-            'type' => 'string',
-        ],
-        'email' => [
-            'name' => 'email',
-            'type' => 'string',
-        ],
-        'telp' => [
-            'name' => 'telp',
-            'type' => 'string',
-        ],
-        'password' => [
-            'name' => 'password',
-            'type' => 'string',
-        ],
+    public static function defining()
+    {
+        self::$definitions = [
+            'photo' => new Definition(
+                name: 'photo',
+                type: 'string',
+            ),
+            'name' => new Definition(
+                name: 'name',
+                type: 'string',
+            ),
+            'photo' => new Definition(
+                name: 'photo',
+                type: 'string',
+            ),
+            'email' => new Definition(
+                name: 'email',
+                type: 'string',
+            ),
+            'telp' => new Definition(
+                name: 'telp',
+                type: 'string',
+            ),
+            'password' => new Definition(
+                name: 'password',
+                type: 'string',
+            ),
 
-        'nip' => [
-            'name' => 'nip',
-            'type' => 'string',
-        ],
-        'fullname' => [
-            'name' => 'fullname',
-            'type' => 'string',
-        ],
-        'gender' => [
-            'name' => 'gender',
-            'type' => 'string',
-        ],
-        'state' => [
-            'name' => 'state',
-            'type' => 'string',
-        ],
-        'task' => [
-            'name' => 'task',
-            'type' => 'string',
-        ],
-    ];
+            'nip' => new Definition(
+                name: 'nip',
+                type: 'string',
+            ),
+            'fullname' => new Definition(
+                name: 'fullname',
+                type: 'string',
+            ),
+            'gender' => new Definition(
+                name: 'gender',
+                type: 'enum',
+                enums: [
+                    'male' => 'male',
+                    'female' => 'female',
+                ],
+            ),
+            'state' => new Definition(
+                name: 'state',
+                type: 'enum',
+                enums: [
+                    'honor' => 'honor',
+                    'pns' => 'pns',
+                ],
+            ),
+            'task' => new Definition(
+                name: 'task',
+                type: 'string',
+            )
+        ];
+    }
+    public static function modelable(): Model
+    {
+        return new Employee();
+    }
 
     protected $fillable = [
         'photo',

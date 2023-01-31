@@ -2,23 +2,22 @@
 
 namespace App\View\Components\Resource;
 
-use App\Models\ResourceTable;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\DB;
+use App\Models\Resource\Table as ResourceTable;
 use Illuminate\View\Component;
 
 class Table extends Component
 {
+    // public function __construct(public ResourceTable $resource)
     public function __construct(public ResourceTable $resource)
     {
-        $resource->processing();
+        $resource->process();
     }
 
     public function render()
     {
         return view('components.resource.table', [
             'paginator' => $this->resource->paginator,
-            'data' => $this->resource->data,
+            'all' => $this->resource->all,
         ]);
     }
 }

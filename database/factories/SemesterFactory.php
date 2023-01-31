@@ -19,7 +19,7 @@ class SemesterFactory extends Factory
         $start_at = fake()->dateTimeInInterval('-6 month', '+1 year');
         $end_at = fake()->dateTimeInInterval('+6 month', '-1 year');
         return [
-            'name' => $start_at->format('YYYY') . "-",
+            'name' => $start_at->format('YYYY') . "/",
             'start_at' => $start_at,
             'end_at' => $end_at,
         ];

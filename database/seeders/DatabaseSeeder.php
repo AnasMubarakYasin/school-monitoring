@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
             'end_at' => now()->addYear(),
         ]);
         $semester_odd = Semester::factory()->create([
-            'name' => $school_year->start_at->year . "-" . 'odd',
+            'name' => $school_year->start_at->year . "/" . 'odd',
             'part' => 'odd',
             'state' => 'ongoing',
             'start_at' => $school_year->start_at,
@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
             'school_year_id' => $school_year->id,
         ]);
         $semester_even = Semester::factory()->create([
-            'name' => $school_year->end_at->year . "-" . 'even',
+            'name' => $school_year->end_at->year . "/" . 'even',
             'part' => 'even',
             'state' => 'planned',
             'start_at' => Carbon::parse($school_year->start_at)->addMonths(7),

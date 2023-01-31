@@ -2,55 +2,62 @@
 
 namespace App\Models;
 
+use App\Models\Resource\Definition;
+use App\Models\Resource\Trait\Formable;
+use App\Models\Resource\Trait\Tableable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Semester extends Model
 {
     use HasFactory;
+    use Tableable, Formable;
 
-    public static $fields = [
-        'name' => [
-            'name' => 'name',
-            'type' => 'string',
-            'hide_create',
-        ],
-        'part' => [
-            'name' => 'part',
-            'type' => 'enum',
-            'enums' => [
+    public static function defining()
+    {
+        self::$definitions['name'] = new Definition(
+            name: 'name',
+            type: 'string',
+        );
+        self::$definitions['part'] = new Definition(
+            name: 'part',
+            type: 'enum',
+            enums: [
                 'odd' => 'odd',
-                'even' => 'even'
-            ]
-        ],
-        'state' => [
-            'name' => 'state',
-            'type' => 'enum',
-            'enums' => [
+                'even' => 'even',
+            ],
+        );
+        self::$definitions['state'] = new Definition(
+            name: 'state',
+            type: 'enum',
+            enums: [
                 'planned' => 'planned',
                 'ongoing' => 'ongoing',
-                'finished' => 'finished'
-            ]
-        ],
-        'start_at' => [
-            'name' => 'start at',
-            'type' => 'date',
-            'format' => 'Y-m-d',
-            'format_js' => 'yyyy-mm-dd',
-        ],
-        'end_at' => [
-            'name' => 'end at',
-            'type' => 'date',
-            'format' => 'Y-m-d',
-            'format_js' => 'yyyy-mm-dd',
-        ],
-        'school_year' => [
-            'name' => 'school year',
-            'type' => 'model',
-            'as' => 'school_year_id',
-            'child',
-        ],
-    ];
+                'finished' => 'finished',
+            ],
+        );
+        self::$definitions['start_at'] = new Definition(
+            name: 'start at',
+            type: 'date',
+            format: 'Y-m-d',
+        );
+        self::$definitions['end_at'] = new Definition(
+            name: 'end at',
+            type: 'date',
+            format: 'Y-m-d',
+        );
+        self::$definitions['school_year'] = new Definition(
+            name: 'school year',
+            type: 'model',
+            array: false,
+            relation: 'parent',
+            alias: 'school_year_id',
+        );
+    }
+    public static function modelable(): Model
+    {
+        return new Semester();
+    }
 
     protected $fillable = [
         'name',
@@ -62,11 +69,7 @@ class Semester extends Model
     ];
 
     protected $casts = [];
-
-    public function getComponentAttribute()
-    {
-        return 'semester.view';
-    }
+    protected $hidden = [];
 
     public function school_year()
     {

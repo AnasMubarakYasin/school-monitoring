@@ -9,8 +9,8 @@
 <div class="grid gap-4">
     @if ($menu)
         <div class="flex gap-2 items-center">
-            @can('create', App\Models\SchoolYear::class)
-                <a href="{{ $resource->create }}"
+            @can('create', $resource->model)
+                <a href="{{ $resource->route_store() }}"
                     class="text-sm p-1.5 text-gray-700 bg-white border dark:bg-gray-800 border-gray-300 hover:bg-gray-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg dark:text-gray-400 dark:hover:text-white dark:focus:ring-gray-800 dark:border-gray-600">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
@@ -46,8 +46,8 @@
                     </svg>
                 </a>
             @endcan
-            @can('delete_any', App\Models\SchoolYear::class)
-                <form class="contents" id="delete_any" action="{{ $resource->delete_any }}" method="post"
+            @can('delete_any', $resource->model)
+                <form class="contents" id="delete_any" action="{{ $resource->route_delete_any() }}" method="post"
                     enctype="multipart/form-data">
                     @csrf
                     @method('DELETE')
@@ -72,17 +72,17 @@
                     aria-labelledby="filter_btn">
                     @foreach ($resource->columns as $column)
                         <li>
-                            @switch($resource->fields[$column]['type'])
+                            @switch($resource->model->definition($column)->type)
                                 @case('string')
                                     <div class="flex flex-col gap-1">
                                         <label for="filter_{{ $column }}"
                                             class="text-sm font-medium text-gray-900 dark:text-white capitalize">
-                                            {{ __($resource->fields[$column]['name']) }}
+                                            {{ __($resource->model->definition($column)->name) }}
                                         </label>
                                         <input id="filter_{{ $column }}" name="filter_{{ $column }}"
                                             type="text" value="{{ request()->query("filter_$column") }}"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="{{ __('search ' . $resource->fields[$column]['name']) }}...">
+                                            placeholder="{{ __('search ' . $resource->model->definition($column)->name) }}...">
                                     </div>
                                 @break
 
@@ -90,13 +90,14 @@
                                     <div class="flex flex-col gap-1">
                                         <label for="filter_{{ $column }}"
                                             class="text-sm font-medium text-gray-900 dark:text-white capitalize">
-                                            {{ __($resource->fields[$column]['name']) }}
+                                            {{ __($resource->model->definition($column)->name) }}
                                         </label>
                                         <select id="filter_{{ $column }}" name="filter_{{ $column }}"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                            <option selected>{{ __('choose a ' . $resource->fields[$column]['name']) }}
+                                            <option selected>
+                                                {{ __('choose a ' . $resource->model->definition($column)->name) }}
                                             </option>
-                                            @foreach ($resource->fields[$column]['enums'] as $key => $val)
+                                            @foreach ($resource->model->definition($column)->enums as $key => $val)
                                                 <option @selected(request()->query("filter_$column") == $key) value="{{ $val }}">
                                                     {{ $val }}
                                                 </option>
@@ -109,7 +110,7 @@
                                     <div class="flex flex-col gap-1">
                                         <label for="filter_{{ $column }}"
                                             class="text-sm font-medium text-gray-900 dark:text-white capitalize">
-                                            {{ __($resource->fields[$column]['name']) }}
+                                            {{ __($resource->model->definition($column)->name) }}
                                         </label>
                                         <div class="relative">
                                             <div
@@ -126,7 +127,7 @@
                                                 datepicker datepicker-autohide type="text"
                                                 value="{{ request()->query("filter_$column") }}"
                                                 class="block w-full pl-10 p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                placeholder="{{ __('search ' . $resource->fields[$column]['name']) }}...">
+                                                placeholder="{{ __('search ' . $resource->model->definition($column)->name) }}...">
                                         </div>
                                     </div>
                                 @break
@@ -149,7 +150,7 @@
                 <input type="hidden" name="column" value="on">
                 <ul class="overflow-auto max-h-[50vh] p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200 border-b border-gray-200 dark:border-gray-600"
                     aria-labelledby="columns_btn">
-                    @foreach ($resource->fields as $key => $field)
+                    @foreach ($resource->model::$definitions as $key => $definition)
                         <li>
                             <div class="flex p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
                                 <label class="relative inline-flex items-center w-full cursor-pointer">
@@ -160,7 +161,7 @@
                                     </div>
                                     <span
                                         class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300 capitalize">
-                                        {{ __($field['name']) }}
+                                        {{ __($definition->name) }}
                                     </span>
                                 </label>
                             </div>
@@ -191,7 +192,7 @@
                 @foreach ($resource->columns as $column)
                     <th scope="col" class="p-3 text-base capitalize">
                         <div class="flex items-center w-full h-full">
-                            <span>{{ __($resource->fields[$column]['name']) }}</span>
+                            <span>{{ __($resource->model->definition($column)->name) }}</span>
                             <a
                                 href="{{ request()->fullUrlWithQuery(['sort' => 'on', 'sort_name' => $column, 'sort_dir' => request()->query('sort_dir', 'desc') == 'desc' ? 'asc' : 'desc']) }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3.5 h-3.5"
@@ -209,7 +210,7 @@
             </tr>
         </thead>
         <tbody>
-            @forelse($paginator ?? $data as $item)
+            @forelse($paginator ?? $all as $item)
                 <tr @class([
                     'bg-white dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-600 dark:border-gray-700',
                     'border-b' => !$loop->last,
@@ -224,32 +225,33 @@
                     @endif
 
                     @foreach ($resource->columns as $column)
-                        @switch($resource->fields[$column]['type'])
+                        @switch($resource->model->definition($column)->type)
                             @case('model')
-                                <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
-                                    @php
-                                        $query = '?ref=on&id[]=' . $item->{$column}->id;
-                                    @endphp
-                                    <a href="{{ $resource->model($resource->fields[$column], $item->{$column}) . $query }}"
-                                        class="bg-blue-100 text-blue-800 text-sm font-medium px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
-                                        {{ $resource->fields[$column]['name'] }}
-                                    </a>
-                                </td>
-                            @break
-
-                            @case('models')
-                                <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
-                                    @php
-                                        $query = $item->{$column}->reduce(function ($result, $item, $index) {
-                                            $result .= '&id[]=' . $item->id;
-                                            return $result;
-                                        }, '?ref=on');
-                                    @endphp
-                                    <a href="{{ $resource->model($resource->fields[$column], $item->{$column}) . $query }}"
-                                        class="bg-blue-100 text-blue-800 text-sm font-medium px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
-                                        {{ count($item->{$column}) }} {{ $resource->fields[$column]['name'] }}
-                                    </a>
-                                </td>
+                                @if ($resource->model->definition($column)->array)
+                                    <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
+                                        @php
+                                            $query = $item->{$column}->reduce(function ($result, $item, $index) {
+                                                $result .= '&id[]=' . $item->id;
+                                                return $result;
+                                            }, '?ref=on');
+                                        @endphp
+                                        <a href="{{ $resource->route_model($resource->model->definition($column), $item->{$column}) . $query }}"
+                                            class="bg-blue-100 text-blue-800 text-sm font-medium px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
+                                            {{ count($item->{$column}) }}
+                                            {{ $resource->model->definition($column)->name }}
+                                        </a>
+                                    </td>
+                                @else
+                                    <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
+                                        @php
+                                            $query = '?ref=on&id[]=' . $item->{$column}->id;
+                                        @endphp
+                                        <a href="{{ $resource->route_model($resource->model->definition($column), $item->{$column}) . $query }}"
+                                            class="bg-blue-100 text-blue-800 text-sm font-medium px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
+                                            {{ $resource->model->definition($column)->name }}
+                                        </a>
+                                    </td>
+                                @endif
                             @break
 
                             @default
@@ -261,7 +263,7 @@
 
                     <td class="flex justify-center gap-2 p-3 capitalize {{ $loop->last ? 'rounded-br-lg' : '' }}">
                         @can('update', $item)
-                            <a id="edt_btn" href="{{ $resource->update($item) }}"
+                            <a id="edt_btn" href="{{ $resource->route_edit($item) }}"
                                 class="p-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -273,7 +275,7 @@
                             </a>
                         @endcan
                         @can('delete', $item)
-                            <form class="contents" action="{{ $resource->delete($item) }}" method="post">
+                            <form class="contents" action="{{ $resource->route_delete($item) }}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <button id="del_btn"
