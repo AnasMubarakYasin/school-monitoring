@@ -47,6 +47,10 @@ Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
         Route::get('administrator/users/employee/list', 'User\AdministratorController@employee_list')->name('web.administrator.users.employee.list');
         Route::get('administrator/users/employee/create', 'User\AdministratorController@employee_create')->name('web.administrator.users.employee.create');
         Route::get('administrator/users/employee/{employee}/update', 'User\AdministratorController@employee_update')->name('web.administrator.users.employee.update');
+
+        Route::get('administrator/data_master/school_information/list', 'User\AdministratorController@identitas_sekolah_list')->name('web.administrator.data_master.school_information.list');
+        Route::get('administrator/data_master/school_information/create', 'User\AdministratorController@identitas_sekolah_create')->name('web.administrator.data_master.school_information.create');
+        Route::get('administrator/data_master/school_information/update/{id}', 'User\AdministratorController@identitas_sekolah_update')->name('web.administrator.data_master.school_information.update');
     });
 });
 Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
