@@ -56,7 +56,7 @@
                         </label>
                         <select id="{{ $key }}" name="{{ $key }}"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option selected></option>
+                            <option selected>-- pilih {{ trans($field['name']) }} --</option>
                             @foreach ($field['enums'] as $e_key => $e_val)
                                 <option @selected(old($key) ?? $model->{$key} == $e_key) value="{{ $e_key }}">{{ $e_val }}</option>
                             @endforeach
@@ -101,7 +101,8 @@
                         <input type="text" list="{{ $field['as'] }}_list" id="{{ $field['as'] }}"
                             name="{{ $field['as'] }}"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="{{ trans($field['name']) }}" value="{{ old($field['as']) ?? $model->{$field['as']} }}">
+                            placeholder="{{ trans($field['name']) }}"
+                            value="{{ old($field['as']) ?? $model->{$field['as']} }}">
                         <datalist id="{{ $field['as'] }}_list">
                             @foreach ($resource->model($field) as $model)
                                 <option value="{{ $model->id }}">{{ $model->name }}</option>

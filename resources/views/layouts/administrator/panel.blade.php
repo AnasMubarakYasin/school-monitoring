@@ -162,6 +162,56 @@
                             @endforeach
                         </ul>
                     </li>
+                    <li>
+                        @php
+                            $link = route('web.administrator.data_master.school_information.list');
+                        @endphp
+                        <button type="button"
+                            data-dropdown="{{ str(request()->url())->startsWith(route('web.administrator.data_master.school_information.list')) ? 'show' : 'hide' }}"
+                            data-accordion-trigger="hover" data-collapse-toggle="menu_information"
+                            @class([
+                                'flex items-center w-full p-2 text-base font-normal rounded-lg',
+                                'dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' => !str(
+                                    request()->url())->startsWith($link),
+                                'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' => str(
+                                    request()->url())->startsWith($link),
+                            ]) aria-controls="menu_information">
+                            <svg @class([
+                                'w-6 h-6 transition',
+                                'text-gray-700 dark:text-white' => !str(request()->url())->startsWith(
+                                    $link),
+                                '' => str(request()->url())->startsWith($link),
+                            ]) xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" />
+                            </svg>
+                            <span
+                                class="flex-1 ml-3 text-left whitespace-nowrap capitalize">{{ __('data master') }}</span>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                        <ul id="menu_information" class="hidden py-2 space-y-2">
+                            <li>
+                                @php
+                                    $link = route('web.administrator.data_master.school_information.list');
+                                @endphp
+                                <a href="{{ $link }}" @class([
+                                    'flex items-center p-2 pl-11 w-full text-base font-normal rounded-lg transition group',
+                                    'dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' =>
+                                        request()->url() != $link,
+                                    'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' =>
+                                        request()->url() == $link,
+                                ])>
+                                    {{ __('school identity') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
                 <ul class="pt-4 mt-4 space-y-2 border-t border-gray-200 dark:border-gray-700 capitalize">
                     <li>
@@ -198,8 +248,8 @@
                             'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' =>
                                 request()->url() == $link,
                         ])>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" @class([
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="2" stroke="currentColor" @class([
                                     'w-6 h-6 transition',
                                     'text-gray-700 dark:text-white' => request()->url() != $link,
                                     '' => request()->url() == $link,

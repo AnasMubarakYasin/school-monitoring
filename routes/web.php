@@ -35,17 +35,23 @@ Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
 
         Route::get('administrator/school_year/list', 'User\AdministratorController@school_year_list')->name('web.administrator.school_year.list');
         Route::get('administrator/school_year/create', 'User\AdministratorController@school_year_create')->name('web.administrator.school_year.create');
-        
+
         Route::get('administrator/semester/list', 'User\AdministratorController@semester_list')->name('web.administrator.semester.list');
         Route::get('administrator/semester/create', 'User\AdministratorController@semester_create')->name('web.administrator.semester.create');
         Route::get('administrator/semester/update/{semester}', 'User\AdministratorController@semester_update')->name('web.administrator.semester.update');
 
         Route::get('administrator/users', 'User\AdministratorController@empty')->name('web.administrator.users');
         Route::get('administrator/users/administrator', 'User\AdministratorController@administrator')->name('web.administrator.users.administrator.index');
+
+        Route::get('administrator/data_master/school_information/list', 'User\AdministratorController@identitas_sekolah_list')->name('web.administrator.data_master.school_information.list');
+        Route::get('administrator/data_master/school_information/create', 'User\AdministratorController@identitas_sekolah_create')->name('web.administrator.data_master.school_information.create');
+        Route::get('administrator/data_master/school_information/update/{id}', 'User\AdministratorController@identitas_sekolah_update')->name('web.administrator.data_master.school_information.update');
     });
 });
 Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
     Route::post('resource/school_year', 'SchoolYearController@create')->name('web.resource.school_year.create');
 
     Route::post('resource/semester', 'SemesterController@create')->name('web.resource.semester.create');
+
+    Route::post('resource/school_information', 'SchoolInformationController@create')->name('web.resource.data_master.school_information.create');
 });
