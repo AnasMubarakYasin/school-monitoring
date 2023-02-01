@@ -113,6 +113,60 @@
                     </li>
                     <li>
                         @php
+                            $link = route('web.administrator.major.list');
+                        @endphp
+                        <a href="{{ $link }}" @class([
+                            'flex items-center p-2 text-base font-normal rounded-lg',
+                            'dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' =>
+                                request()->url() != $link,
+                            'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' =>
+                                request()->url() == $link,
+                        ])>
+                            <svg @class([
+                                'w-6 h-6 transition',
+                                'text-gray-700 dark:text-white' => request()->url() != $link,
+                                '' => request()->url() == $link,
+                            ]) fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
+                            </svg>
+                            <span class="ml-3">
+                                {{ trans('major') }}
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        @php
+                            $link = route('web.administrator.classroom.list');
+                        @endphp
+                        <a href="{{ $link }}" @class([
+                            'flex items-center p-2 text-base font-normal rounded-lg',
+                            'dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' =>
+                                request()->url() != $link,
+                            'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' =>
+                                request()->url() == $link,
+                        ])>
+                            <svg @class([
+                                'w-6 h-6 transition',
+                                'text-gray-700 dark:text-white' => request()->url() != $link,
+                                '' => request()->url() == $link,
+                            ]) fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
+                            </svg>
+                            <span class="ml-3">
+                                {{ trans('classroom') }}
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        @php
                             $link = route('web.administrator.users');
                         @endphp
                         <button type="button"
