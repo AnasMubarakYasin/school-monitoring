@@ -26,7 +26,7 @@ class Classroom extends Model
             ),
             'total_student' => new Definition(
                 name: 'total student',
-                type: 'string',
+                type: 'number',
             ),
             'description' => new Definition(
                 name: 'description',
