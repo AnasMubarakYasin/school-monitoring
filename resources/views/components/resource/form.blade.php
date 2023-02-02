@@ -15,10 +15,23 @@
     <input type="hidden" name="_view_any" value="{{ $resource->route_view_any() }}">
     <div class="grid gap-4">
         @foreach ($resource->fields as $field)
-            {{-- @if ($field == 'expertise_field')
-                @dd($model->definition($field))
-            @endif --}}
             @switch($model->definition($field)->type)
+                @case('string')
+                    <div class="flex flex-col gap-2">
+                        <label for="{{ $field }}"
+                            class="block capitalize text-sm font-medium text-gray-900 dark:text-white">
+                            {{ trans($model->definition($field)->name) }}
+                        </label>
+                        <input type="text" id="{{ $field }}" name="{{ $field }}"
+                            value="{{ old($field) ?? $model->{$field} }}"
+                            class="block w-full p-2.5 text-sm rounded-lg border border-gray-300 bg-gray-50 text-gray-900 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="">
+                        @error($field)
+                            <p class="text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
+                        @enderror
+                    </div>
+                @break
+
                 @case('string')
                     <div class="flex flex-col gap-2">
                         <label for="{{ $field }}"
@@ -111,8 +124,8 @@
                             placeholder="{{ trans($model->definition($field)->name) }}"
                             value="{{ old($model->definition($field)->alias) ?? $model->{$model->definition($field)->alias} }}">
                         <datalist id="{{ $model->definition($field)->alias }}_list">
-                            @foreach ($resource->fetch_model($model->definition($field)) as $model)
-                                <option value="{{ $model->id }}">{{ $model->name }}</option>
+                            @foreach ($resource->fetch_model($model->definition($field)) as $relation)
+                                <option value="{{ $relation->id }}">{{ $relation->name }}</option>
                             @endforeach
                         </datalist>
                         @error($field)

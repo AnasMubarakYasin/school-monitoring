@@ -7,6 +7,7 @@ use App\Models\Resource\Trait\Formable;
 use App\Models\Resource\Trait\Tableable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class SchoolYear extends Model
 {
@@ -18,14 +19,6 @@ class SchoolYear extends Model
         self::$definitions['name'] = new Definition(
             name: 'name',
             type: 'string',
-        );
-        self::$definitions['part'] = new Definition(
-            name: 'part',
-            type: 'enum',
-            enums: [
-                'odd' => 'odd',
-                'even' => 'even',
-            ],
         );
         self::$definitions['state'] = new Definition(
             name: 'state',
