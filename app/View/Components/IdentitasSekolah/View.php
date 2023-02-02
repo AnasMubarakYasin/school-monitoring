@@ -2,7 +2,7 @@
 
 namespace App\View\Components\IdentitasSekolah;
 
-use App\Models\School_Information;
+use App\Models\SchoolInformation;
 use Illuminate\View\Component;
 
 class View extends Component
@@ -24,7 +24,7 @@ class View extends Component
      */
     public function render()
     {
-        $resource = School_Information::all()->firstOrFail();
+        $resource = SchoolInformation::all()->firstOrFail();
         $data = [
             'resource' => $resource
         ];

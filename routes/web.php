@@ -36,7 +36,7 @@ Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
         Route::get('administrator/school_year/list', 'User\AdministratorController@school_year_list')->name('web.administrator.school_year.list');
         Route::get('administrator/school_year/create', 'User\AdministratorController@school_year_create')->name('web.administrator.school_year.create');
         Route::get('administrator/school_year/{school_year}/update', 'User\AdministratorController@school_year_update')->name('web.administrator.school_year.update');
-        
+
         Route::get('administrator/semester/list', 'User\AdministratorController@semester_list')->name('web.administrator.semester.list');
         Route::get('administrator/semester/create', 'User\AdministratorController@semester_create')->name('web.administrator.semester.create');
         Route::get('administrator/semester/{semester}/update', 'User\AdministratorController@semester_update')->name('web.administrator.semester.update');
@@ -48,9 +48,15 @@ Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
         Route::get('administrator/users/employee/create', 'User\AdministratorController@employee_create')->name('web.administrator.users.employee.create');
         Route::get('administrator/users/employee/{employee}/update', 'User\AdministratorController@employee_update')->name('web.administrator.users.employee.update');
 
+        Route::get('administrator/data_master', 'User\AdministratorController@empty')->name('web.administrator.data_master');
+
         Route::get('administrator/data_master/school_information/list', 'User\AdministratorController@identitas_sekolah_list')->name('web.administrator.data_master.school_information.list');
         Route::get('administrator/data_master/school_information/create', 'User\AdministratorController@identitas_sekolah_create')->name('web.administrator.data_master.school_information.create');
-        Route::get('administrator/data_master/school_information/update/{id}', 'User\AdministratorController@identitas_sekolah_update')->name('web.administrator.data_master.school_information.update');
+        Route::get('administrator/data_master/school_information/update/{schoolInformation}', 'User\AdministratorController@identitas_sekolah_update')->name('web.administrator.data_master.school_information.update');
+
+        Route::get('administrator/data_master/facilityandinfrastructure/list', 'User\AdministratorController@facilityandinfrastructure_list')->name('web.administrator.data_master.facilityandinfrastructure.list');
+        Route::get('administrator/data_master/facilityandinfrastructure/create', 'User\AdministratorController@facilityandinfrastructure_create')->name('web.administrator.data_master.facilityandinfrastructure.create');
+        Route::get('administrator/data_master/facilityandinfrastructure/{facilityAndInfrastructure}/update', 'User\AdministratorController@facilityandinfrastructure_update')->name('web.administrator.data_master.facilityandinfrastructure.update');
     });
 });
 Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
@@ -60,6 +66,12 @@ Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
     Route::delete('resource/school_year', 'SchoolYearController@delete_any')->name('web.resource.school_year.delete_any');
 
     Route::post('resource/school_information', 'SchoolInformationController@create')->name('web.resource.data_master.school_information.create');
+    Route::patch('resource/school_information/{schoolInformation}', 'SchoolInformationController@update')->name('web.resource.data_master.school_information.update');
+
+    Route::post('resource/facilityAndInfrastructure', 'FacilityAndInfrastructureController@create')->name('web.resource.data_master.facilityAndInfrastructure.create');
+    Route::patch('resource/facilityAndInfrastructure/{facilityAndInfrastructure}', 'FacilityAndInfrastructureController@update')->name('web.resource.data_master.facilityAndInfrastructure.update');
+    Route::delete('resource/facilityAndInfrastructure/{facilityAndInfrastructure}', 'FacilityAndInfrastructureController@delete')->name('web.resource.data_master.facilityAndInfrastructure.delete');
+    Route::delete('resource/facilityAndInfrastructure', 'FacilityAndInfrastructureController@delete_any')->name('web.resource.data_master.facilityAndInfrastructure.delete_any');
 
     Route::post('resource/semester', 'SemesterController@create')->name('web.resource.semester.create');
     Route::patch('resource/semester/{semester}', 'SemesterController@update')->name('web.resource.semester.update');

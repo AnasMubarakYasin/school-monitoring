@@ -164,13 +164,13 @@
                     </li>
                     <li>
                         @php
-                            $link = route('web.administrator.data_master.school_information.list');
+                            $link = route('web.administrator.data_master');
                         @endphp
                         <button type="button"
-                            data-dropdown="{{ str(request()->url())->startsWith(route('web.administrator.data_master.school_information.list')) ? 'show' : 'hide' }}"
+                            data-collapse="{{ str(request()->url())->startsWith(route('web.administrator.data_master')) ? 'show' : 'hide' }}"
                             data-accordion-trigger="hover" data-collapse-toggle="menu_information"
                             @class([
-                                'flex items-center w-full p-2 text-base font-normal rounded-lg',
+                                'sidebar-menus flex items-center w-full p-2 text-base font-normal rounded-lg',
                                 'dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' => !str(
                                     request()->url())->startsWith($link),
                                 'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' => str(
@@ -207,7 +207,21 @@
                                     'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' =>
                                         request()->url() == $link,
                                 ])>
-                                    {{ __('school identity') }}
+                                    {{ __('school information') }}
+                                </a>
+                            </li>
+                            <li>
+                                @php
+                                    $link = route('web.administrator.data_master.facilityandinfrastructure.list');
+                                @endphp
+                                <a href="{{ $link }}" @class([
+                                    'flex items-center p-2 pl-11 w-full text-base font-normal rounded-lg transition group',
+                                    'dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' =>
+                                        request()->url() != $link,
+                                    'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' =>
+                                        request()->url() == $link,
+                                ])>
+                                    {{ __('data sarana dan prasarana') }}
                                 </a>
                             </li>
                         </ul>
