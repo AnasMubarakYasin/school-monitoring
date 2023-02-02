@@ -310,6 +310,8 @@ class AdministratorController extends Controller
                 'name',
                 'total_student',
                 'description',
+                'major',
+                'homeroom',
             ],
         );
         $resource->route_create = function () {
@@ -317,6 +319,13 @@ class AdministratorController extends Controller
         };
         $resource->route_view_any = function ($item) {
             return route('web.administrator.classroom.list');
+        };
+        $resource->fetcher_model = function ($definition) {
+            if ($definition->name == "major") {
+                return Major::all();
+            } else {
+                return Employee::all();
+            }
         };
         return view('pages.administrator.classroom.create', ['resource' => $resource]);
     }
@@ -329,6 +338,8 @@ class AdministratorController extends Controller
                 'name',
                 'total_student',
                 'description',
+                'major',
+                'homeroom',
             ],
         );
         $resource->route_update = function ($item) {
@@ -336,6 +347,13 @@ class AdministratorController extends Controller
         };
         $resource->route_view_any = function ($item) {
             return route('web.administrator.classroom.list');
+        };
+        $resource->fetcher_model = function ($definition) {
+            if ($definition->name == "major") {
+                return Major::all();
+            } else {
+                return Employee::all();
+            }
         };
         return view('pages.administrator.classroom.update', ['resource' => $resource]);
     }

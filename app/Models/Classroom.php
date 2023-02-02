@@ -16,7 +16,7 @@ class Classroom extends Model
     public static function defining()
     {
         self::$definitions = [
-            'Code' => new Definition(
+            'code' => new Definition(
                 name: 'code',
                 type: 'string',
             ),
@@ -45,7 +45,7 @@ class Classroom extends Model
                 array: false,
                 relation: 'parent',
                 alias: 'homeroom_id',
-            )
+            ),
         ];
     }
     public static function modelable(): Model

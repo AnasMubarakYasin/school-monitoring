@@ -304,7 +304,7 @@
     </div>
     @if ($resource->pagination)
         <nav class="flex flex-col gap-2 md:flex-row justify-between items-center" aria-label="Table navigation">
-            <div class="flex items-center gap-2 text-sm font-normal text-gray-700 dark:text-gray-400">
+            <div class="hidden sm:flex items-center gap-2 text-sm font-normal text-gray-700 dark:text-gray-400">
                 <div>
                     <span class="capitalize">{{ __('view') }}</span>
                     @if ($paginator->onFirstPage())
@@ -339,7 +339,31 @@
                     </select>
                 </form>
             </div>
-            <ul class="flex items-center -space-x-px">
+            <div class="w-full flex sm:hidden items-center justify-between">
+                @if ($paginator->previousPageUrl())
+                    <a href="{{ $paginator->previousPageUrl() }}"
+                        class="capitalize px-4 py-2 text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-lg hover:bg-gray-200 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                        {{ trans('previous') }}
+                    </a>
+                @else
+                    <button disabled
+                        class="cursor-not-allowed capitalize px-4 py-2 text-sm font-medium text-gray-500 bg-gray-200 border border-gray-300 rounded-lg dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400">
+                        {{ trans('previous') }}
+                    </button>
+                @endif
+                @if ($paginator->nextPageUrl())
+                    <a href="{{ $paginator->nextPageUrl() }}"
+                        class="capitalize px-4 py-2 text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-lg hover:bg-gray-200 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                        {{ trans('next') }}
+                    </a>
+                @else
+                    <button disabled
+                        class="cursor-not-allowed capitalize px-4 py-2 text-sm font-medium text-gray-500 bg-gray-200 border border-gray-300 rounded-lg dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400">
+                        {{ trans('next') }}
+                    </button>
+                @endif
+            </div>
+            <ul class="hidden sm:flex items-center -space-x-px">
                 <li>
                     @if ($paginator->previousPageUrl())
                         <a href="{{ $paginator->previousPageUrl() }}"
@@ -369,18 +393,54 @@
                     $count = (int) floor($paginator->total() / $paginator->perPage());
                 @endphp
                 @if ($count && $count > 1)
-                    @foreach (range(0, $count) as $item)
-                        <li>
-                            <a href="{{ $paginator->url($loop->iteration) }}" @class([
-                                'grid place-content-center p-2 w-5 h-5 aspect-square box-content text-base',
-                                'text-gray-700 bg-white border border-gray-300 hover:bg-gray-200 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white' =>
-                                    $paginator->currentPage() != $loop->iteration,
-                                'text-blue-600 border border-blue-300 bg-blue-100 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white' =>
-                                    $paginator->currentPage() == $loop->iteration,
-                            ])>
-                                {{ $loop->iteration }}
-                            </a>
-                        </li>
+                    @php
+                        $index = 1;
+                        $limit = 7;
+                        if ($count > $limit) {
+                            $div = floor($limit / 2);
+                            $start = $paginator->currentPage() - $div;
+                            $percent = ($paginator->currentPage() / $count) * 100;
+                            $pages = [];
+                            if ($start < 1) {
+                                $start = 1;
+                            } else {
+                                if ($paginator->currentPage() + $div > $count) {
+                                    $start = $count - ($limit - 1);
+                                }
+                            }
+                            $pages = range($start, $limit + ($start - 1));
+                            if ($percent > 70) {
+                                $elements = [[1, 2], '', $pages];
+                            } elseif ($percent < 30) {
+                                $elements = [$pages, '', [$count - 1, $count]];
+                            } else {
+                                $elements = [[1, 2], '', $pages, '', [$count - 1, $count]];
+                            }
+                        } else {
+                            $elements = [range(1, $count)];
+                        }
+                    @endphp
+                    @foreach ($elements as $element)
+                        @if (is_string($element))
+                            <div
+                                class="grid place-content-center p-2 w-5 h-5 aspect-square box-content text-base text-gray-700 bg-white border border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400">
+                                ...
+                            </div>
+                        @else
+                            @foreach ($element as $page)
+                                @if ($paginator->currentPage() == $page)
+                                    <div
+                                        class="grid place-content-center p-2 w-5 h-5 aspect-square box-content text-base text-blue-600 border border-blue-300 bg-blue-100 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">
+                                        {{ $page }}
+                                    </div>
+                                @else
+                                    <a href="{{ $paginator->url($page) }}"
+                                        class="grid place-content-center p-2 w-5 h-5 aspect-square box-content text-base text-gray-700 bg-white border border-gray-300 hover:bg-gray-200 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                        {{ $page }}
+                                    </a>
+                                @endif
+                            @endforeach
+                        @endif
                     @endforeach
                 @endif
                 <li>
