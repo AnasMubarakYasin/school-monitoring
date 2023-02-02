@@ -10,10 +10,12 @@ use App\Models\FacilityAndInfrastructure;
 use App\Models\Major;
 use App\Models\ResourceForm;
 use App\Models\ResourceTable;
+use App\Models\ScheduleOfSubjects;
 use App\Models\SchoolInformation;
 use App\Models\SchoolYear;
 use App\Models\Semester;
 use App\Models\Student;
+use App\Models\Subjects;
 
 class AdministratorController extends Controller
 {
@@ -492,7 +494,7 @@ class AdministratorController extends Controller
                 'responsible_person',
                 'description',
             ],
-            pagination: null,
+            pagination: ['per' => 5, 'num' => 1],
         );
         $resource->route_store = function () {
             return route('web.administrator.data_master.facilityandinfrastructure.create');
@@ -546,4 +548,167 @@ class AdministratorController extends Controller
         };
         return view('pages.administrator.data_master.facilitiandinfrastructure.update', ['resource' => $resource]);
     }
+
+    //!section - Subjects
+    public function subjects_list()
+    {
+        $resource = Subjects::tableable()->from_request(
+            request: request(),
+            columns: [
+                'code',
+                'name',
+                'level',
+                // 'major',
+                // 'teacher',
+                'description',
+            ],
+            pagination: ['per' => 5, 'num' => 1],
+        );
+        $resource->route_store = function () {
+            return route('web.administrator.academic_data.subjects.create');
+        };
+        $resource->route_edit = function ($item) {
+            return route('web.administrator.academic_data.subjects.update', ['subjects' => $item]);
+        };
+        $resource->route_delete = function ($item) {
+            return route('web.resource.academic_data.subjects.delete', ['subjects' => $item]);
+        };
+        $resource->route_model = function ($definition, $item) {
+            if ($definition->name == 'major') {
+                return route('web.administrator.major.list');
+            } else {
+                return route('web.administrator.users.employee.list');
+            }
+        };
+        return view('pages.administrator.data_master.subjects.list', ['resource' => $resource]);
+    }
+    public function subjects_create()
+    {
+        $resource = Subjects::formable()->from_create(
+            fields: [
+                'code',
+                'name',
+                'level',
+                'major',
+                'teacher',
+                'description',
+            ],
+        );
+        $resource->route_create = function () {
+            return route('web.resource.academic_data.subjects.create');
+        };
+        $resource->route_view_any = function () {
+            return route('web.administrator.academic_data.subjects.list');
+        };
+        $resource->fetcher_model = function ($definition) {
+            if ($definition->name == 'major') {
+                return Major::all();
+            } else {
+                return Employee::all();
+            }
+        };
+        return view('pages.administrator.data_master.subjects.create', ['resource' => $resource]);
+    }
+    public function subjects_update(Subjects $subjects)
+    {
+        $resource = Subjects::formable()->from_update(
+            model: $subjects,
+            fields: [
+                'code',
+                'name',
+                'level',
+                'major',
+                'teacher',
+                'description',
+            ],
+        );
+        $resource->route_update = function ($item) {
+            return route('web.resource.academic_data.subjects.update', ['subjects' => $item]);
+        };
+        $resource->route_view_any = function ($item) {
+            return route('web.administrator.academic_data.subjects.list');
+        };
+        return view('pages.administrator.data_master.subjects.update', ['resource' => $resource]);
+    }
+
+    //!section - Scheduleofsubjects
+    public function scheduleofsubjects_list()
+    {
+        $resource = ScheduleOfSubjects::tableable()->from_request(
+            request: request(),
+            columns: [
+                'subjects',
+                'classrooms',
+                'teacher',
+                'time',
+                'day',
+                'description'
+            ],
+            pagination: ['per' => 5, 'num' => 1],
+        );
+        $resource->route_store = function () {
+            return route('web.administrator.academic_data.scheduleofsubjects.create');
+        };
+        // $resource->route_edit = function ($item) {
+        //     return route('web.administrator.academic_data.subjects.update', ['subjects' => $item]);
+        // };
+        // $resource->route_delete = function ($item) {
+        //     return route('web.resource.academic_data.subjects.delete', ['subjects' => $item]);
+        // };
+        // $resource->route_model = function ($definition, $item) {
+        //     if ($definition->name == 'major') {
+        //         return route('web.administrator.major.list');
+        //     } else {
+        //         return route('web.administrator.users.employee.list');
+        //     }
+        // };
+        return view('pages.administrator.data_master.scheduleofsubjects.list', ['resource' => $resource]);
+    }
+    public function scheduleofsubjects_create()
+    {
+        $resource = ScheduleOfSubjects::formable()->from_create(
+            fields: [
+                'subjects',
+                'classrooms',
+                'teacher',
+                'time',
+                'day',
+                'description'
+            ],
+        );
+        // $resource->route_view_any = function () {
+        //     return route('web.administrator.academic_data.scheduleofsubjects.list');
+        // };
+        $resource->fetcher_model = function ($definition) {
+            if ($definition->name == 'subjects') {
+                return Subjects::all();
+            } else if ($definition->name == 'classrooms') {
+                return Classroom::all();
+            } else {
+                return Employee::all();
+            }
+        };
+        return view('pages.administrator.data_master.scheduleofsubjects.create', ['resource' => $resource]);
+    }
+    // public function subjects_update(Subjects $subjects)
+    // {
+    //     $resource = Subjects::formable()->from_update(
+    //         model: $subjects,
+    //         fields: [
+    //             'code',
+    //             'name',
+    //             'level',
+    //             // 'major',
+    //             // 'teacher',
+    //             'description',
+    //         ],
+    //     );
+    //     $resource->route_update = function ($item) {
+    //         return route('web.resource.academic_data.subjects.update', ['subjects' => $item]);
+    //     };
+    //     $resource->route_view_any = function ($item) {
+    //         return route('web.administrator.academic_data.subjects.list');
+    //     };
+    //     return view('pages.administrator.classroom.update', ['resource' => $resource]);
+    // }
 }

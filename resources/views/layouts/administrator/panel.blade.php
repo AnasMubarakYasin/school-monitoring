@@ -171,14 +171,14 @@
                         @endphp
                         <button type="button"
                             data-collapse="{{ str(request()->url())->startsWith(route('web.administrator.users')) ? 'show' : 'hide' }}"
-                            data-accordion-trigger="hover" data-collapse-toggle="menu_user" @class([
+                            data-accordion-trigger="hover" data-collapse-toggle="menu_user"
+                            @class([
                                 'sidebar-menus flex items-center w-full p-2 text-base font-normal rounded-lg',
                                 'dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' => !str(
                                     request()->url())->startsWith($link),
                                 'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' => str(
                                     request()->url())->startsWith($link),
-                            ])
-                            aria-controls="menu_user">
+                            ]) aria-controls="menu_user">
                             <svg xmlns="http://www.w3.org/2000/svg" @class([
                                 'w-6 h-6 transition',
                                 'text-gray-700 dark:text-white' => !str(request()->url())->startsWith(
@@ -189,7 +189,8 @@
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                             </svg>
-                            <span class="flex-1 ml-3 text-left whitespace-nowrap capitalize">{{ __('users') }}</span>
+                            <span
+                                class="flex-1 ml-3 text-left whitespace-nowrap capitalize">{{ __('users') }}</span>
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
@@ -241,7 +242,7 @@
                                     d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" />
                             </svg>
                             <span
-                                class="flex-1 ml-3 text-left whitespace-nowrap capitalize">{{ __('data master') }}</span>
+                                class="flex-1 ml-3 text-left whitespace-nowrap capitalize">{{ __('masterdata') }}</span>
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
@@ -276,6 +277,72 @@
                                         request()->url() == $link,
                                 ])>
                                     {{ __('data sarana dan prasarana') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        @php
+                            $link = route('web.administrator.academic_data');
+                        @endphp
+                        <button type="button"
+                            data-collapse="{{ str(request()->url())->startsWith(route('web.administrator.academic_data')) ? 'show' : 'hide' }}"
+                            data-accordion-trigger="hover" data-collapse-toggle="menu_academic"
+                            @class([
+                                'sidebar-menus flex items-center w-full p-2 text-base font-normal rounded-lg',
+                                'dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' => !str(
+                                    request()->url())->startsWith($link),
+                                'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' => str(
+                                    request()->url())->startsWith($link),
+                            ]) aria-controls="menu_academic">
+                            <svg @class([
+                                'w-6 h-6 transition',
+                                'text-gray-700 dark:text-white' => !str(request()->url())->startsWith(
+                                    $link),
+                                '' => str(request()->url())->startsWith($link),
+                            ]) xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
+                            </svg>
+
+                            <span
+                                class="flex-1 ml-3 text-left whitespace-nowrap capitalize">{{ __('academic data') }}</span>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                        <ul id="menu_academic" class="hidden py-2 space-y-2">
+                            <li>
+                                @php
+                                    $link = route('web.administrator.academic_data.subjects.list');
+                                @endphp
+                                <a href="{{ $link }}" @class([
+                                    'flex items-center p-2 pl-11 w-full text-base font-normal rounded-lg transition group',
+                                    'dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' =>
+                                        request()->url() != $link,
+                                    'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' =>
+                                        request()->url() == $link,
+                                ])>
+                                    {{ __('subject data') }}
+                                </a>
+                            </li>
+                            <li>
+                                @php
+                                    $link = route('web.administrator.academic_data.scheduleofsubjects.list');
+                                @endphp
+                                <a href="{{ $link }}" @class([
+                                    'flex items-center p-2 pl-11 w-full text-base font-normal rounded-lg transition group',
+                                    'dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' =>
+                                        request()->url() != $link,
+                                    'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' =>
+                                        request()->url() == $link,
+                                ])>
+                                    {{ __('lesson schedule data') }}
                                 </a>
                             </li>
                         </ul>
