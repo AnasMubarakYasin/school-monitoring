@@ -6,10 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Administrator;
 use App\Models\Classroom;
 use App\Models\Employee;
+use App\Models\FacilityAndInfrastructure;
 use App\Models\Major;
 use App\Models\ResourceForm;
 use App\Models\ResourceTable;
-use App\Models\School_Information;
+use App\Models\SchoolInformation;
 use App\Models\SchoolYear;
 use App\Models\Semester;
 use App\Models\Student;
@@ -424,87 +425,107 @@ class AdministratorController extends Controller
         return view('pages.administrator.users.administrator.index');
     }
 
-    // public function identitas_sekolah_list()
-    // {
-    //     $resource = ResourceTable::create(
-    //         query: School_Information::query(),
-    //         fields: School_Information::$fields,
-    //         columns: [
-    //             'name',
-    //             'npsn',
-    //             'nss',
-    //             'status',
-    //             'address',
-    //             'village',
-    //             'sub_district',
-    //             'district',
-    //             'province',
-    //             'postal_code',
-    //             'telp',
-    //             'website',
-    //         ],
-    //         pagination: ['per' => 5, 'num' => 1],
-    //     );
-    //     $resource->create = route('web.administrator.data_master.school_information.create');
-    //     $resource->route_update = function ($item) {
-    //         return route('web.administrator.data_master.school_information.update', ['school_information' => $item]);
-    //     };
-    //     return view('pages.administrator.data_master.schol_information.list', [
-    //         'resource' => $resource,
-    //     ]);
-    // }
-    // public function identitas_sekolah_create()
-    // {
-    //     $resource = ResourceForm::create(
-    //         model: new School_Information(),
-    //         fields: School_Information::$fields,
-    //     );
-    //     $resource->create = route('web.resource.data_master.school_information.create');
-    //     $resource->view_any = route('web.administrator.data_master.school_information.list');
-    //     return view('pages.administrator.data_master.schol_information.create', [
-    //         'resource' => $resource,
-    //     ]);
-    // }
-    // public function identitas_sekolah_update(School_Information $school_information)
-    // {
-    //     $resource = ResourceForm::create(
-    //         model: $school_information,
-    //         fields: School_Information::$fields,
-    //     );
-    //     $resource->create = route('web.resource.data_master.school_information.create');
-    //     $resource->view_any = route('web.administrator.data_master.school_information.list');
-    //     return view('pages.administrator.data_master.schol_information.update', [
-    //         'resource' => $resource,
-    //     ]);
-    // }
-
+    //!section - identitas sekolah
     public function identitas_sekolah_list()
     {
-        // $resource = School_Information::all()->firstOrFail();
-        // $data = [
-        //     'resource' => $resource
-        // ];
-        // $resource->create = route('web.administrator.data_master.school_information.create');
-        // $resource->route_update = function ($item) {
-        //     return route('web.administrator.data_master.school_information.update', ['school_information' => $item]);
-        // };
         return view('pages.administrator.data_master.schol_information.list');
     }
-    // public function identitas_sekolah_create()
-    // {
-
-    //     return view('pages.administrator.data_master.schol_information.create');
-    // }
-    public function identitas_sekolah_update(School_Information $id)
+    public function identitas_sekolah_update(SchoolInformation $schoolInformation)
     {
-        // $resource = ResourceForm::create(
-        //     model: $id,
-        //     fields: School_Information::$fields,
-        // );
-        // $resource->create = route('web.resource.data_master.school_information.create');
-        // // $resource->view_any = route('web.administrator.data_master.school_information.list');
-        // return view('pages.administrator.data_master.schol_information.update', [
-        //     'resource' => $resource,
-        // ]);
+        $resource = SchoolInformation::formable()->from_update(
+            model: $schoolInformation,
+            fields: [
+                'name',
+                'npsn',
+                'nss',
+                'status',
+                'address',
+                'village',
+                'sub_district',
+                'district',
+                'province',
+                'postal_code',
+                'telp',
+                'website',
+            ],
+        );
+        $resource->route_update = function ($item) {
+            return route('web.resource.data_master.school_information.update', ['schoolInformation' => $item]);
+        };
+        $resource->route_view_any = function ($item) {
+            return route('web.administrator.data_master.school_information.list');
+        };
+        // $resource->view_any = route('web.administrator.data_master.school_information.list');
+        return view('pages.administrator.data_master.schol_information.update', [
+            'resource' => $resource,
+        ]);
+    }
+
+    //!section - facility and infrastructure
+    public function facilityandinfrastructure_list()
+    {
+        $resource = FacilityAndInfrastructure::tableable()->from_request(
+            request: request(),
+            columns: [
+                'name',
+                'amount',
+                'condition',
+                'sarana_prasarana',
+                'responsible_person',
+                'description',
+            ],
+            pagination: null,
+        );
+        $resource->route_store = function () {
+            return route('web.administrator.data_master.facilityandinfrastructure.create');
+        };
+        $resource->route_edit = function ($item) {
+            return route('web.administrator.data_master.facilityandinfrastructure.update', ['facilityAndInfrastructure' => $item]);
+        };
+        $resource->route_delete = function ($item) {
+            return route('web.resource.data_master.facilityAndInfrastructure.delete', ['facilityAndInfrastructure' => $item]);
+        };
+        return view('pages.administrator.data_master.facilitiandinfrastructure.list', ['resource' => $resource]);
+    }
+    public function facilityandinfrastructure_create()
+    {
+        $resource = FacilityAndInfrastructure::formable()->from_create(
+            fields: [
+                'name',
+                'amount',
+                'condition',
+                'sarana_prasarana',
+                'responsible_person',
+                'description',
+            ],
+        );
+        $resource->route_create = function () {
+            return route('web.resource.data_master.facilityAndInfrastructure.create');
+        };
+        $resource->route_view_any = function () {
+            return route('web.administrator.data_master.facilityandinfrastructure.list');
+        };
+        return view('pages.administrator.data_master.facilitiandinfrastructure.create', ['resource' => $resource]);
+    }
+    public function facilityandinfrastructure_update(FacilityAndInfrastructure $facilityAndInfrastructure)
+    {
+        $resource = FacilityAndInfrastructure::formable()->from_update(
+            model: $facilityAndInfrastructure,
+            fields: [
+                'name',
+                'amount',
+                'condition',
+                'sarana_prasarana',
+                'responsible_person',
+                'description',
+            ],
+        );
+        $resource->route_update = function ($item) {
+            return route('web.resource.data_master.facilityAndInfrastructure.update', ['facilityAndInfrastructure' => $item]);
+        };
+        $resource->route_view_any = function () {
+            return route('web.administrator.data_master.facilityandinfrastructure.list');
+        };
+        return view('pages.administrator.data_master.facilitiandinfrastructure.update', ['resource' => $resource]);
     }
 }

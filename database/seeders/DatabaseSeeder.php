@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\Administrator;
 use App\Models\Classroom;
 use App\Models\Employee;
+use App\Models\SchoolInformation;
 use App\Models\Major;
 use App\Models\SchoolYear;
 use App\Models\Semester;
@@ -51,6 +52,20 @@ class DatabaseSeeder extends Seeder
             'start_at' => Carbon::parse($school_year->start_at)->addMonths(7),
             'end_at' => $school_year->end_at,
             'school_year_id' => $school_year->id,
+        ]);
+        SchoolInformation::create([
+            'name' => '',
+            'npsn' => '',
+            'nss' => '',
+            'status' => 'Negeri',
+            'address' => '',
+            'village' => '',
+            'sub_district' => '',
+            'district' => '',
+            'province' => '',
+            'postal_code' => '',
+            'telp' => '',
+            'website' => '',
         ]);
         $major_kimia = Major::factory()->create([
             'expertise' => 'kimia',
