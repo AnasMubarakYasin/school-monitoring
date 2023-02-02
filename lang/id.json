@@ -1,4 +1,16 @@
 {
+    "photo": "foto",
+    "name": "nama",
+    "user": "pengguna",
+    "users": "pengguna",
+    "major": "jurusan",
+    "classroom": "kelas",
+    "homeroom": "wali kelas",
+    "state": "status",
+    "student": "siswa",
+    "students": "siswa",
+    "employee": "pegawai",
+    "employees": "pegawai",
     "school year": "tahun ajaran",
     ":d days left": ":d days lagi"
 }

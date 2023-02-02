@@ -4,13 +4,16 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Administrator;
+use App\Models\Classroom;
 use App\Models\Employee;
 use App\Models\FacilityAndInfrastructure;
+use App\Models\Major;
 use App\Models\ResourceForm;
 use App\Models\ResourceTable;
 use App\Models\SchoolInformation;
 use App\Models\SchoolYear;
 use App\Models\Semester;
+use App\Models\Student;
 
 class AdministratorController extends Controller
 {
@@ -212,6 +215,210 @@ class AdministratorController extends Controller
         return view('pages.administrator.employee.update', ['resource' => $resource]);
     }
     //!SECTION - employee
+
+    //SECTION - major
+    public function major_list()
+    {
+        $resource = Major::tableable()->from_request(
+            request: request(),
+            columns: [
+                'name', 'expertise', 'general_competence', 'special_competence',
+            ],
+            pagination: ['per' => 5, 'num' => 1],
+        );
+        $resource->route_store = function () {
+            return route('web.administrator.major.create');
+        };
+        $resource->route_edit = function ($item) {
+            return route('web.administrator.major.update', ['major' => $item]);
+        };
+        $resource->route_delete = function ($item) {
+            return route('web.resource.major.delete', ['major' => $item]);
+        };
+        return view('pages.administrator.major.list', ['resource' => $resource]);
+    }
+    public function major_create()
+    {
+        $resource = Major::formable()->from_create(
+            fields: [
+                'name', 'expertise', 'general_competence', 'special_competence',
+            ],
+        );
+        $resource->route_create = function () {
+            return route('web.resource.major.create');
+        };
+        $resource->route_view_any = function ($item) {
+            return route('web.administrator.major.list');
+        };
+        return view('pages.administrator.major.create', ['resource' => $resource]);
+    }
+    public function major_update(Major $major)
+    {
+        $resource = Major::formable()->from_update(
+            model: $major,
+            fields: [
+                'name', 'expertise', 'general_competence', 'special_competence',
+            ],
+        );
+        $resource->route_update = function ($item) {
+            return route('web.resource.major.update', ['major' => $item]);
+        };
+        $resource->route_view_any = function ($item) {
+            return route('web.administrator.major.list');
+        };
+        return view('pages.administrator.major.update', ['resource' => $resource]);
+    }
+    //!SECTION - major
+
+    //SECTION - classroom
+    public function classroom_list()
+    {
+        $resource = Classroom::tableable()->from_request(
+            request: request(),
+            columns: [
+                'code',
+                'name',
+                'total_student',
+                'description',
+                'major',
+                'homeroom',
+            ],
+            pagination: ['per' => 5, 'num' => 1],
+        );
+        $resource->route_store = function () {
+            return route('web.administrator.classroom.create');
+        };
+        $resource->route_edit = function ($item) {
+            return route('web.administrator.classroom.update', ['classroom' => $item]);
+        };
+        $resource->route_delete = function ($item) {
+            return route('web.resource.classroom.delete', ['classroom' => $item]);
+        };
+        $resource->route_model = function ($definition, $item) {
+            if ($definition->name == 'major') {
+                return route('web.administrator.major.list');
+            } else {
+                return route('web.administrator.users.employee.list');
+            }
+        };
+        return view('pages.administrator.classroom.list', ['resource' => $resource]);
+    }
+    public function classroom_create()
+    {
+        $resource = Classroom::formable()->from_create(
+            fields: [
+                'code',
+                'name',
+                'total_student',
+                'description',
+            ],
+        );
+        $resource->route_create = function () {
+            return route('web.resource.classroom.create');
+        };
+        $resource->route_view_any = function ($item) {
+            return route('web.administrator.classroom.list');
+        };
+        return view('pages.administrator.classroom.create', ['resource' => $resource]);
+    }
+    public function classroom_update(Classroom $classroom)
+    {
+        $resource = Classroom::formable()->from_update(
+            model: $classroom,
+            fields: [
+                'code',
+                'name',
+                'total_student',
+                'description',
+            ],
+        );
+        $resource->route_update = function ($item) {
+            return route('web.resource.classroom.update', ['classroom' => $item]);
+        };
+        $resource->route_view_any = function ($item) {
+            return route('web.administrator.classroom.list');
+        };
+        return view('pages.administrator.classroom.update', ['resource' => $resource]);
+    }
+    //!SECTION - classroom
+
+    //SECTION - student
+    public function student_list()
+    {
+        $resource = Student::tableable()->from_request(
+            request: request(),
+            columns: [
+                'nis',
+                'nisn',
+                'fullname',
+                'gender',
+                'grade',
+            ],
+            pagination: ['per' => 5, 'num' => 1],
+        );
+        $resource->route_store = function () {
+            return route('web.administrator.users.student.create');
+        };
+        $resource->route_edit = function ($item) {
+            return route('web.administrator.users.student.update', ['student' => $item]);
+        };
+        $resource->route_delete = function ($item) {
+            return route('web.resource.student.delete', ['student' => $item]);
+        };
+        return view('pages.administrator.student.list', ['resource' => $resource]);
+    }
+    public function student_create()
+    {
+        $resource = Student::formable()->from_create(
+            fields: [
+                'photo',
+                'name',
+                'telp',
+                'email',
+                'password',
+
+                'nis',
+                'nisn',
+                'fullname',
+                'gender',
+                'grade',
+            ],
+        );
+        $resource->route_create = function () {
+            return route('web.resource.student.create');
+        };
+        $resource->route_view_any = function ($item) {
+            return route('web.administrator.users.student.list');
+        };
+        return view('pages.administrator.student.create', ['resource' => $resource]);
+    }
+    public function student_update(Student $student)
+    {
+        $resource = Student::formable()->from_update(
+            model: $student,
+            fields: [
+                'photo',
+                'name',
+                'telp',
+                'email',
+                'password',
+
+                'nis',
+                'nisn',
+                'fullname',
+                'gender',
+                'grade',
+            ],
+        );
+        $resource->route_update = function ($item) {
+            return route('web.resource.student.update', ['student' => $item]);
+        };
+        $resource->route_view_any = function ($item) {
+            return route('web.administrator.users.student.list');
+        };
+        return view('pages.administrator.student.update', ['resource' => $resource]);
+    }
+    //!SECTION - student
 
     public function administrator()
     {

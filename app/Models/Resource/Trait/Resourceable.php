@@ -11,7 +11,10 @@ trait Resourceable
     public static array $definitions = [];
     public static function definition(string $key): Definition
     {
-        return self::$definitions[$key];
+        if (isset(self::$definitions[$key])) {
+            return self::$definitions[$key];
+        }
+        return new Definition(name: "undefined", type: "undefined");
     }
     public static function defining()
     {

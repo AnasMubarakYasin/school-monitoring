@@ -15,6 +15,9 @@
     <input type="hidden" name="_view_any" value="{{ $resource->route_view_any() }}">
     <div class="grid gap-4">
         @foreach ($resource->fields as $field)
+            {{-- @if ($field == 'expertise_field')
+                @dd($model->definition($field))
+            @endif --}}
             @switch($model->definition($field)->type)
                 @case('string')
                     <div class="flex flex-col gap-2">

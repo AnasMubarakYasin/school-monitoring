@@ -5,10 +5,14 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Administrator;
+use App\Models\Classroom;
 use App\Models\Employee;
 use App\Models\SchoolInformation;
+use App\Models\Major;
 use App\Models\SchoolYear;
 use App\Models\Semester;
+use App\Models\Student;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
 
@@ -21,13 +25,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Administrator::factory()->create([
+        $administrator = Administrator::factory()->create([
             'name' => 'admin',
             'email' => 'admin@host.local',
             'password' => 'admin',
         ]);
-        Employee::factory(30)->create();
-
+        $employees = Employee::factory(30)->create();
         $school_year = SchoolYear::factory()->create([
             'name' => now()->year . "/" . now()->addYear()->year,
             'state' => 'ongoing',
@@ -64,5 +67,31 @@ class DatabaseSeeder extends Seeder
             'telp' => '',
             'website' => '',
         ]);
+        $major_kimia = Major::factory()->create([
+            'expertise' => 'kimia',
+        ]);
+        $major_biology = Major::factory()->create([
+            'expertise' => 'biology',
+        ]);
+        $classrooms = Classroom::factory()
+            ->count(15)
+            ->state(new Sequence(
+                ['major_id' => $major_kimia->id],
+                ['major_id' => $major_biology->id],
+            ))->state(new Sequence(
+                ...$employees->map(function ($item) {
+                    return ['homeroom_id' => $item->id];
+                })->toArray()
+            ))->create();
+        $students = Student::factory()
+            ->count(90)
+            ->state(new Sequence(
+                ['major_id' => $major_kimia->id],
+                ['major_id' => $major_biology->id],
+            ))->state(new Sequence(
+                ...$classrooms->map(function ($item) {
+                    return ['classroom_id' => $item->id];
+                })->toArray()
+            ))->create();
     }
 }

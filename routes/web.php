@@ -50,6 +50,18 @@ Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
 
         Route::get('administrator/data_master', 'User\AdministratorController@empty')->name('web.administrator.data_master');
 
+        Route::get('administrator/users/student/list', 'User\AdministratorController@student_list')->name('web.administrator.users.student.list');
+        Route::get('administrator/users/student/create', 'User\AdministratorController@student_create')->name('web.administrator.users.student.create');
+        Route::get('administrator/users/student/{student}/update', 'User\AdministratorController@student_update')->name('web.administrator.users.student.update');
+
+        Route::get('administrator/major/list', 'User\AdministratorController@major_list')->name('web.administrator.major.list');
+        Route::get('administrator/major/create', 'User\AdministratorController@major_create')->name('web.administrator.major.create');
+        Route::get('administrator/major/{major}/update', 'User\AdministratorController@major_update')->name('web.administrator.major.update');
+
+        Route::get('administrator/classroom/list', 'User\AdministratorController@classroom_list')->name('web.administrator.classroom.list');
+        Route::get('administrator/classroom/create', 'User\AdministratorController@classroom_create')->name('web.administrator.classroom.create');
+        Route::get('administrator/classroom/{classroom}/update', 'User\AdministratorController@classroom_update')->name('web.administrator.classroom.update');
+
         Route::get('administrator/data_master/school_information/list', 'User\AdministratorController@identitas_sekolah_list')->name('web.administrator.data_master.school_information.list');
         Route::get('administrator/data_master/school_information/create', 'User\AdministratorController@identitas_sekolah_create')->name('web.administrator.data_master.school_information.create');
         Route::get('administrator/data_master/school_information/update/{schoolInformation}', 'User\AdministratorController@identitas_sekolah_update')->name('web.administrator.data_master.school_information.update');
@@ -82,4 +94,19 @@ Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
     Route::patch('resource/employee/{employee}', 'EmployeeController@update')->name('web.resource.employee.update');
     Route::delete('resource/employee/{employee}', 'EmployeeController@delete')->name('web.resource.employee.delete');
     Route::delete('resource/employee', 'EmployeeController@delete_any')->name('web.resource.employee.delete_any');
+
+    Route::post('resource/major', 'MajorController@create')->name('web.resource.major.create');
+    Route::patch('resource/major/{major}', 'MajorController@update')->name('web.resource.major.update');
+    Route::delete('resource/major/{major}', 'MajorController@delete')->name('web.resource.major.delete');
+    Route::delete('resource/major', 'MajorController@delete_any')->name('web.resource.major.delete_any');
+
+    Route::post('resource/classroom', 'ClassroomController@create')->name('web.resource.classroom.create');
+    Route::patch('resource/classroom/{classroom}', 'ClassroomController@update')->name('web.resource.classroom.update');
+    Route::delete('resource/classroom/{classroom}', 'ClassroomController@delete')->name('web.resource.classroom.delete');
+    Route::delete('resource/classroom', 'ClassroomController@delete_any')->name('web.resource.classroom.delete_any');
+
+    Route::post('resource/student', 'StudentController@create')->name('web.resource.student.create');
+    Route::patch('resource/student/{student}', 'StudentController@update')->name('web.resource.student.update');
+    Route::delete('resource/student/{student}', 'StudentController@delete')->name('web.resource.student.delete');
+    Route::delete('resource/student', 'StudentController@delete_any')->name('web.resource.student.delete_any');
 });
