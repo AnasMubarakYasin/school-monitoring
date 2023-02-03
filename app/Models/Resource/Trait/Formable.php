@@ -2,14 +2,14 @@
 
 namespace App\Models\Resource\Trait;
 
-use App\Models\Resource\Stat;
+use App\Models\Resource\Form;
 
 trait Formable
 {
     use Resourceable;
-    public static function statable()
+    public static function formable()
     {
-        return new Stat(
+        return new Form(
             model: self::modelable(),
         );
     }
