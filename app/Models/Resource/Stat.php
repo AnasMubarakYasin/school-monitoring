@@ -5,7 +5,6 @@ namespace App\Models\Resource;
 class Stat extends Core
 {
     public int $total = 0;
-    public string $mode = "create";
 
     public function init(
         int $total = 0,
