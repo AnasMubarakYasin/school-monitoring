@@ -45,7 +45,7 @@ class Table extends Core
         }
         return $this;
     }
-    public function process(): Table
+    public function resourcing(): Table
     {
         /** @var Builder|EloquentBuilder */
         $query = $this->model::query();

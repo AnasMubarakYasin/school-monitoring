@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 trait Resourceable
 {
+    public static string $caption = "";
     public static array $definitions = [];
     public static function definition(string $key): Definition
     {
@@ -16,9 +17,7 @@ trait Resourceable
         }
         return new Definition(name: "undefined", type: "undefined");
     }
-    public static function defining()
-    {
-    }
+    abstract public static function defining();
     abstract public static function modelable(): Model;
     public static function resourceable()
     {

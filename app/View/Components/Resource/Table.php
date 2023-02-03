@@ -10,7 +10,7 @@ class Table extends Component
     // public function __construct(public ResourceTable $resource)
     public function __construct(public ResourceTable $resource)
     {
-        $resource->process();
+        $resource->resourcing();
     }
 
     public function render()

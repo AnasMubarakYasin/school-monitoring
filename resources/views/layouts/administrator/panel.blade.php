@@ -13,6 +13,7 @@
 
     <link rel="manifest" href="{{ asset('build/site.webmanifest') }}">
 
+    @vite('resources/js/progress.js')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @vite('resources/js/regis-sw.js')
     @vite('resources/js/layouts/panel/index.js')
@@ -27,7 +28,7 @@
             <header
                 class="flex gap-4 items-center justify-center sticky top-0 bg-white dark:bg-gray-800 text-xl font-semibold h-[56px] shadow transition-colors">
                 <div><img src="{{ asset('logo.svg') }}" alt="Bladerlaiga" class="w-8 h-8 rounded-md"></div>
-                <div class="text-green-700 dark:text-green-500">UIN Alauddin</div>
+                <div class="text-green-700 dark:text-green-500">{{ env('APP_NAME') }}</div>
             </header>
             <nav
                 class="flex flex-col h-[calc(100vh_-_56px)] p-4 overflow-auto bg-white dark:bg-gray-800 shadow transition-colors">
@@ -183,7 +184,7 @@
                                 'w-6 h-6 transition',
                                 'text-gray-700 dark:text-white' => !str(request()->url())->startsWith(
                                     $link),
-                                '' => str(request()->url())->startsWith($link),
+                                '' => str_starts_with(request()->url(), $link),
                             ]) fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -235,7 +236,7 @@
                                 'w-6 h-6 transition',
                                 'text-gray-700 dark:text-white' => !str(request()->url())->startsWith(
                                     $link),
-                                '' => str(request()->url())->startsWith($link),
+                                '' => str_starts_with(request()->url(), $link),
                             ]) xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -468,8 +469,8 @@
                         class="hidden z-20 w-full max-w-sm bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
                         aria-labelledby="notif-btn">
                         <div
-                            class="block py-2 px-4 font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-white rounded-t-md">
-                            Notifications
+                            class="capitalize block py-2 px-4 font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-white rounded-t-md">
+                            {{ trans('notifications') }}
                         </div>
                         <div class="divide-y divide-gray-100 dark:divide-gray-700">
                             @forelse ($user->unreadNotifications as $notification)
@@ -490,7 +491,7 @@
                                 </a>
                             @empty
                                 <div class="text-center py-4 text-gray-500 text-lg dark:text-gray-400">
-                                    Empty
+                                    {{ trans('empty') }}
                                 </div>
                             @endforelse
                         </div>
@@ -499,7 +500,7 @@
                         <a href="{{ route('admin.dashboard.show') }}"
                             class="block py-2 text-sm font-medium text-center text-gray-900 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white">
                             <div class="inline-flex items-center">
-                                View all
+                                {{ trans('view all') }}
                             </div>
                         </a>
                     @endempty
@@ -635,14 +636,19 @@
 
             </div>
         </header>
-        <main class="flex-grow p-4 overflow-auto">
-            @if (isset($content_card) && $content_card)
-                <div class="grid gap-4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow transition-colors">
+        <main class="overflow-auto">
+            <div id="progress-bar" class="sticky top-0 max-w-full h-0 bg-gray-200 rounded-full transition-all dark:bg-gray-700">
+                <div class="bg-blue-600 max-w-full h-full rounded-full dark:bg-blue-500" style="width: 100%"></div>
+            </div>
+            <div class="flex-grow p-4 overflow-auto">
+                @if (isset($content_card) && $content_card)
+                    <div class="grid gap-4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow transition-colors">
+                        @yield('content')
+                    </div>
+                @else
                     @yield('content')
-                </div>
-            @else
-                @yield('content')
-            @endif
+                @endif
+            </div>
         </main>
         <footer
             class="flex items-center justify-center h-[56px] bg-white dark:bg-gray-800 shadow transition-colors">

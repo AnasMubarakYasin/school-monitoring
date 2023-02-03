@@ -4,10 +4,10 @@ namespace App\Models\Resource\Trait;
 
 use App\Models\Resource\Stat;
 
-trait Formable
+trait Statable
 {
     use Resourceable;
-    public static function statable()
+    public static function stateable()
     {
         return new Stat(
             model: self::modelable(),

@@ -2,19 +2,19 @@
 
 namespace App\View\Components\Resource;
 
-use App\Models\Resource\Form as ModelsResourceForm;
+use App\Models\Resource\Stat as ModelsResourceStat;
 use Illuminate\View\Component;
 
-class Form extends Component
+class Stat extends Component
 {
-    public function __construct(public ModelsResourceForm $resource)
+    public function __construct(public ModelsResourceStat $resource)
     {
         $resource->resourcing();
     }
 
     public function render()
     {
-        return view('components.resource.form', [
+        return view('components.resource.stat', [
             'model' => $this->resource->model,
         ]);
     }

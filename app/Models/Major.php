@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Resource\Definition;
 use App\Models\Resource\Trait\Formable;
+use App\Models\Resource\Trait\Statable;
 use App\Models\Resource\Trait\Tableable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,10 +12,15 @@ use Illuminate\Database\Eloquent\Model;
 class Major extends Model
 {
     use HasFactory;
-    use Tableable, Formable;
+    use Tableable, Formable, Statable;
 
+    public static function modelable(): Model
+    {
+        return new Major();
+    }
     public static function defining()
     {
+        self::$caption = "major";
         self::$definitions = [
             'name' => new Definition(
                 name: 'name',
@@ -37,10 +43,6 @@ class Major extends Model
                 type: 'string',
             ),
         ];
-    }
-    public static function modelable(): Model
-    {
-        return new Major();
     }
 
     protected $fillable = [

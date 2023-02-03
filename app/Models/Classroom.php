@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Resource\Definition;
 use App\Models\Resource\Trait\Formable;
+use App\Models\Resource\Trait\Statable;
 use App\Models\Resource\Trait\Tableable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,10 +12,15 @@ use Illuminate\Database\Eloquent\Model;
 class Classroom extends Model
 {
     use HasFactory;
-    use Tableable, Formable;
+    use Tableable, Formable, Statable;
 
+    public static function modelable(): Model
+    {
+        return new Classroom();
+    }
     public static function defining()
     {
+        self::$caption = "classroom";
         self::$definitions = [
             'code' => new Definition(
                 name: 'code',
@@ -47,10 +53,6 @@ class Classroom extends Model
                 alias: 'homeroom_id',
             ),
         ];
-    }
-    public static function modelable(): Model
-    {
-        return new Classroom();
     }
 
     protected $fillable = [

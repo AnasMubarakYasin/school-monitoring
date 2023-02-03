@@ -4,18 +4,23 @@ namespace App\Models;
 
 use App\Models\Resource\Definition;
 use App\Models\Resource\Trait\Formable;
+use App\Models\Resource\Trait\Statable;
 use App\Models\Resource\Trait\Tableable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Carbon;
 
 class SchoolYear extends Model
 {
     use HasFactory;
-    use Tableable, Formable;
+    use Tableable, Formable, Statable;
 
+    public static function modelable(): Model
+    {
+        return new SchoolYear();
+    }
     public static function defining()
     {
+        self::$caption = "school year";
         self::$definitions['name'] = new Definition(
             name: 'name',
             type: 'string',
@@ -46,10 +51,6 @@ class SchoolYear extends Model
             relation: 'children',
             alias: "",
         );
-    }
-    public static function modelable(): Model
-    {
-        return new SchoolYear();
     }
 
     protected $fillable = [

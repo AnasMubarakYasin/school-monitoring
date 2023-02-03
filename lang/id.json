@@ -1,6 +1,14 @@
 {
     "photo": "foto",
     "name": "nama",
+    "notification": "pemberitahuan",
+    "notifications": "pemberitahuan",
+    "read": "baca",
+    "readed": "dibaca",
+    "unread": "belum dibaca",
+    "empty": "kosong",
+    "mark": "{0} tandai|[2,*] tandai semua",
+    "delete": "{0} hapus|[2,*] hapus semua",
     "user": "pengguna",
     "users": "pengguna",
     "major": "jurusan",
@@ -12,5 +20,6 @@
     "employee": "pegawai",
     "employees": "pegawai",
     "school year": "tahun ajaran",
+    "you are offline": "anda sedang offline",
     ":d days left": ":d days lagi"
 }
