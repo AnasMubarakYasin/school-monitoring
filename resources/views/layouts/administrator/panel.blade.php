@@ -27,7 +27,7 @@
             <header
                 class="flex gap-4 items-center justify-center sticky top-0 bg-white dark:bg-gray-800 text-xl font-semibold h-[56px] shadow transition-colors">
                 <div><img src="{{ asset('logo.svg') }}" alt="Bladerlaiga" class="w-8 h-8 rounded-md"></div>
-                <div class="text-green-700 dark:text-green-500">UIN Alauddin</div>
+                <div class="text-green-700 dark:text-green-500">{{ env('APP_NAME') }}</div>
             </header>
             <nav
                 class="flex flex-col h-[calc(100vh_-_56px)] p-4 overflow-auto bg-white dark:bg-gray-800 shadow transition-colors">
@@ -171,25 +171,26 @@
                         @endphp
                         <button type="button"
                             data-collapse="{{ str(request()->url())->startsWith(route('web.administrator.users')) ? 'show' : 'hide' }}"
-                            data-accordion-trigger="hover" data-collapse-toggle="menu_user" @class([
+                            data-accordion-trigger="hover" data-collapse-toggle="menu_user"
+                            @class([
                                 'sidebar-menus flex items-center w-full p-2 text-base font-normal rounded-lg',
                                 'dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' => !str(
                                     request()->url())->startsWith($link),
                                 'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' => str(
                                     request()->url())->startsWith($link),
-                            ])
-                            aria-controls="menu_user">
+                            ]) aria-controls="menu_user">
                             <svg xmlns="http://www.w3.org/2000/svg" @class([
                                 'w-6 h-6 transition',
                                 'text-gray-700 dark:text-white' => !str(request()->url())->startsWith(
                                     $link),
-                                '' => str(request()->url())->startsWith($link),
+                                '' => str_starts_with(request()->url(), $link),
                             ]) fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                             </svg>
-                            <span class="flex-1 ml-3 text-left whitespace-nowrap capitalize">{{ __('users') }}</span>
+                            <span
+                                class="flex-1 ml-3 text-left whitespace-nowrap capitalize">{{ __('users') }}</span>
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
@@ -234,7 +235,7 @@
                                 'w-6 h-6 transition',
                                 'text-gray-700 dark:text-white' => !str(request()->url())->startsWith(
                                     $link),
-                                '' => str(request()->url())->startsWith($link),
+                                '' => str_starts_with(request()->url(), $link),
                             ]) xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -401,8 +402,8 @@
                         class="hidden z-20 w-full max-w-sm bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
                         aria-labelledby="notif-btn">
                         <div
-                            class="block py-2 px-4 font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-white rounded-t-md">
-                            Notifications
+                            class="capitalize block py-2 px-4 font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-white rounded-t-md">
+                            {{ trans('notifications') }}
                         </div>
                         <div class="divide-y divide-gray-100 dark:divide-gray-700">
                             @forelse ($user->unreadNotifications as $notification)
@@ -423,7 +424,7 @@
                                 </a>
                             @empty
                                 <div class="text-center py-4 text-gray-500 text-lg dark:text-gray-400">
-                                    Empty
+                                    {{ trans('empty') }}
                                 </div>
                             @endforelse
                         </div>
@@ -432,7 +433,7 @@
                         <a href="{{ route('admin.dashboard.show') }}"
                             class="block py-2 text-sm font-medium text-center text-gray-900 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white">
                             <div class="inline-flex items-center">
-                                View all
+                                {{ trans('view all') }}
                             </div>
                         </a>
                     @endempty

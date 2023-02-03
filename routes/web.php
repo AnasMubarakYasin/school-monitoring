@@ -17,6 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 Route::get('/locale/{locale}', 'Locale@set')->name('web.locale.set');
+Route::patch('/notification/{notification}/mark', 'Notification@mark')->name('web.notification.mark');
+Route::get('/notification/{notification}/read', 'Notification@read')->name('web.notification.read');
+Route::delete('/notification/{notification}/delete', 'Notification@delete')->name('web.notification.delete');
+Route::patch('/notification/mark_all', 'Notification@mark_all')->name('web.notification.mark_all');
+Route::delete('/notification/delete_all', 'Notification@delete_all')->name('web.notification.delete_all');
 Route::middleware('authc.guest:web.administrator.dashboard,administrator')->group(function () {
     Route::middleware('locale:en')->group(function () {
         Route::get('administrator/login', 'Auth\AdministratorController@login_show')->name('web.administrator.login_show');
