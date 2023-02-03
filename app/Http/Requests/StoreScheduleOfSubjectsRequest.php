@@ -27,8 +27,8 @@ class StoreScheduleOfSubjectsRequest extends FormRequest
             'subjects_id' => 'required|integer',
             'class_id' => 'required|integer',
             'teacher_id' => 'required|integer',
-            'start_at' => 'required|date',
-            'end_at' => 'required|date',
+            // 'time' => 'required|time',
+            // 'day' => 'required|date',
             'description' => 'required|string',
         ];
     }

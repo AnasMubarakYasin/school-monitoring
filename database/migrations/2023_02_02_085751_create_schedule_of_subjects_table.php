@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->foreignId('subjects_id')->nullable()->constrained('subjects')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('class_id')->nullable()->constrained('classrooms')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('teacher_id')->nullable()->constrained('employees')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('subjects_id')->constrained('subjects')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('class_id')->constrained('classrooms')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('teacher_id')->constrained('employees')->cascadeOnUpdate()->cascadeOnDelete();
             $table->dateTime('start_at');
             $table->dateTime('end_at');
             $table->string('description')->nullable();

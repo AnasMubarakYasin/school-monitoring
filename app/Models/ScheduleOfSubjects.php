@@ -39,11 +39,11 @@ class ScheduleOfSubjects extends Model
         );
         self::$definitions['time'] = new Definition(
             name: 'time',
-            type: 'datetime',
+            type: 'time',
         );
         self::$definitions['day'] = new Definition(
             name: 'day',
-            type: 'datetime',
+            type: 'date',
         );
         self::$definitions['description'] = new Definition(
             name: 'description',
@@ -61,6 +61,8 @@ class ScheduleOfSubjects extends Model
         'teacher_id',
         'start_at',
         'end_at',
+        'time',
+        'day',
         'description',
     ];
 
@@ -95,5 +97,14 @@ class ScheduleOfSubjects extends Model
         } else {
             return "";
         }
+    }
+
+    public function setTimeAttribute($value)
+    {
+        $this->attributes['start_at'] = $value;
+    }
+    public function setDayAttribute($value)
+    {
+        $this->attributes['end_at'] = $value;
     }
 }

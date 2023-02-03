@@ -445,7 +445,7 @@ class AdministratorController extends Controller
         return view('pages.administrator.users.administrator.index');
     }
 
-    //!section - identitas sekolah
+    //SECTION - identitas sekolah
     public function identitas_sekolah_list()
     {
         return view('pages.administrator.data_master.schol_information.list');
@@ -480,8 +480,9 @@ class AdministratorController extends Controller
             'resource' => $resource,
         ]);
     }
+    //!SECTION
 
-    //!section - facility and infrastructure
+    //SECTION - facility and infrastructure
     public function facilityandinfrastructure_list()
     {
         $resource = FacilityAndInfrastructure::tableable()->from_request(
@@ -548,8 +549,9 @@ class AdministratorController extends Controller
         };
         return view('pages.administrator.data_master.facilitiandinfrastructure.update', ['resource' => $resource]);
     }
+    //!SECTION
 
-    //!section - Subjects
+    //SECTION - Subjects
     public function subjects_list()
     {
         $resource = Subjects::tableable()->from_request(
@@ -558,8 +560,8 @@ class AdministratorController extends Controller
                 'code',
                 'name',
                 'level',
-                // 'major',
-                // 'teacher',
+                'major',
+                'teacher',
                 'description',
             ],
             pagination: ['per' => 5, 'num' => 1],
@@ -580,7 +582,7 @@ class AdministratorController extends Controller
                 return route('web.administrator.users.employee.list');
             }
         };
-        return view('pages.administrator.data_master.subjects.list', ['resource' => $resource]);
+        return view('pages.administrator.academic_data.subjects.list', ['resource' => $resource]);
     }
     public function subjects_create()
     {
@@ -607,7 +609,7 @@ class AdministratorController extends Controller
                 return Employee::all();
             }
         };
-        return view('pages.administrator.data_master.subjects.create', ['resource' => $resource]);
+        return view('pages.administrator.academic_data.scheduleofsubjects.create', ['resource' => $resource]);
     }
     public function subjects_update(Subjects $subjects)
     {
@@ -628,10 +630,18 @@ class AdministratorController extends Controller
         $resource->route_view_any = function ($item) {
             return route('web.administrator.academic_data.subjects.list');
         };
-        return view('pages.administrator.data_master.subjects.update', ['resource' => $resource]);
+        $resource->fetcher_model = function ($definition) {
+            if ($definition->name == 'major') {
+                return Major::all();
+            } else {
+                return Employee::all();
+            }
+        };
+        return view('pages.administrator.academic_data.subjects.update', ['resource' => $resource]);
     }
+    //!SECTION
 
-    //!section - Scheduleofsubjects
+    //SECTION - Scheduleofsubjects
     public function scheduleofsubjects_list()
     {
         $resource = ScheduleOfSubjects::tableable()->from_request(
@@ -649,20 +659,20 @@ class AdministratorController extends Controller
         $resource->route_store = function () {
             return route('web.administrator.academic_data.scheduleofsubjects.create');
         };
-        // $resource->route_edit = function ($item) {
-        //     return route('web.administrator.academic_data.subjects.update', ['subjects' => $item]);
-        // };
-        // $resource->route_delete = function ($item) {
-        //     return route('web.resource.academic_data.subjects.delete', ['subjects' => $item]);
-        // };
-        // $resource->route_model = function ($definition, $item) {
-        //     if ($definition->name == 'major') {
-        //         return route('web.administrator.major.list');
-        //     } else {
-        //         return route('web.administrator.users.employee.list');
-        //     }
-        // };
-        return view('pages.administrator.data_master.scheduleofsubjects.list', ['resource' => $resource]);
+        $resource->route_edit = function ($item) {
+            return route('web.administrator.academic_data.subjects.update', ['subjects' => $item]);
+        };
+        $resource->route_delete = function ($item) {
+            return route('web.resource.academic_data.subjects.delete', ['subjects' => $item]);
+        };
+        $resource->route_model = function ($definition, $item) {
+            if ($definition->name == 'major') {
+                return route('web.administrator.major.list');
+            } else {
+                return route('web.administrator.users.employee.list');
+            }
+        };
+        return view('pages.administrator.academic_data.scheduleofsubjects.list', ['resource' => $resource]);
     }
     public function scheduleofsubjects_create()
     {
@@ -676,9 +686,12 @@ class AdministratorController extends Controller
                 'description'
             ],
         );
-        // $resource->route_view_any = function () {
-        //     return route('web.administrator.academic_data.scheduleofsubjects.list');
-        // };
+        $resource->route_create = function () {
+            return route('web.resource.academic_data.scheduleofsubjects.create');
+        };
+        $resource->route_view_any = function () {
+            return route('web.administrator.academic_data.scheduleofsubjects.list');
+        };
         $resource->fetcher_model = function ($definition) {
             if ($definition->name == 'subjects') {
                 return Subjects::all();
@@ -688,7 +701,7 @@ class AdministratorController extends Controller
                 return Employee::all();
             }
         };
-        return view('pages.administrator.data_master.scheduleofsubjects.create', ['resource' => $resource]);
+        return view('pages.administrator.academic_data.scheduleofsubjects.create', ['resource' => $resource]);
     }
     // public function subjects_update(Subjects $subjects)
     // {
@@ -711,4 +724,5 @@ class AdministratorController extends Controller
     //     };
     //     return view('pages.administrator.classroom.update', ['resource' => $resource]);
     // }
+    //!SECTION
 }
