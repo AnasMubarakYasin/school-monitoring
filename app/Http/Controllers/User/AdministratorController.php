@@ -8,8 +8,6 @@ use App\Models\Classroom;
 use App\Models\Employee;
 use App\Models\FacilityAndInfrastructure;
 use App\Models\Major;
-use App\Models\ResourceForm;
-use App\Models\ResourceTable;
 use App\Models\SchoolInformation;
 use App\Models\SchoolYear;
 use App\Models\Semester;
@@ -19,8 +17,40 @@ class AdministratorController extends Controller
 {
     public function dashboard()
     {
+        $school_year = SchoolYear::statable()->init();
+        $school_year->route_view_any = function() {
+            return route('web.administrator.school_year.list');
+        };
+        $semester = Semester::statable()->init();
+        $semester->route_view_any = function() {
+            return route('web.administrator.semester.list');
+        };
+        $employee = Employee::statable()->init();
+        $employee->route_view_any = function() {
+            return route('web.administrator.users.employee.list');
+        };
+        $student = Student::statable()->init();
+        $student->route_view_any = function() {
+            return route('web.administrator.users.student.list');
+        };
+        $major = Major::statable()->init();
+        $major->route_view_any = function() {
+            return route('web.administrator.major.list');
+        };
+        $classroom = Classroom::statable()->init();
+        $classroom->route_view_any = function() {
+            return route('web.administrator.classroom.list');
+        };
+        $stats = [
+            $school_year,
+            $semester,
+            $employee,
+            $student,
+            $major,
+            $classroom,
+        ];
         return view('pages.administrator.dashboard', [
-            'administrator' => Administrator::count()
+            'stats' => $stats,
         ]);
     }
     public function profile()
@@ -30,6 +60,10 @@ class AdministratorController extends Controller
     public function notification()
     {
         return view('pages.administrator.notification');
+    }
+    public function offline()
+    {
+        return view('pages.administrator.offline');
     }
     public function empty()
     {
@@ -112,7 +146,7 @@ class AdministratorController extends Controller
     public function semester_create()
     {
         $resource = Semester::formable()->from_create(
-            fields: ['part', 'state', 'start_at', 'end_at', 'school_year'],
+            fields: ['part', 'state', ['start_at', 'end_at'], 'school_year'],
         );
         $resource->route_create = function () {
             return route('web.resource.semester.create');
@@ -127,9 +161,10 @@ class AdministratorController extends Controller
     }
     public function semester_update(Semester $semester)
     {
+        // dd(Carbon::parse($semester->start_at)->format("d/m/Y"));
         $resource = Semester::formable()->from_update(
             model: $semester,
-            fields: ['name', 'part', 'state', 'start_at', 'end_at', 'school_year'],
+            fields: ['name', 'part', 'state', ['start_at', 'end_at'], 'school_year'],
         );
         $resource->route_update = function ($item) {
             return route('web.resource.semester.update', ['semester' => $item]);

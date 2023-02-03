@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Resource\Definition;
 use App\Models\Resource\Trait\Formable;
+use App\Models\Resource\Trait\Statable;
 use App\Models\Resource\Trait\Tableable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,10 +17,15 @@ class Student extends Authenticatable
 {
     use HasRoles;
     use HasApiTokens, HasFactory, Notifiable;
-    use Tableable, Formable;
+    use Tableable, Formable, Statable;
 
+    public static function modelable(): Model
+    {
+        return new Student();
+    }
     public static function defining()
     {
+        self::$caption = "student";
         self::$definitions = [
             'photo' => new Definition(
                 name: 'photo',
@@ -71,10 +77,6 @@ class Student extends Authenticatable
                 type: 'string',
             ),
         ];
-    }
-    public static function modelable(): Model
-    {
-        return new Student();
     }
 
     protected $fillable = [

@@ -22,6 +22,7 @@ Route::get('/notification/{notification}/read', 'Notification@read')->name('web.
 Route::delete('/notification/{notification}/delete', 'Notification@delete')->name('web.notification.delete');
 Route::patch('/notification/mark_all', 'Notification@mark_all')->name('web.notification.mark_all');
 Route::delete('/notification/delete_all', 'Notification@delete_all')->name('web.notification.delete_all');
+Route::redirect('/administrator', '/administrator/dashboard');
 Route::middleware('authc.guest:web.administrator.dashboard,administrator')->group(function () {
     Route::middleware('locale:en')->group(function () {
         Route::get('administrator/login', 'Auth\AdministratorController@login_show')->name('web.administrator.login_show');
@@ -33,6 +34,7 @@ Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
         Route::get('administrator/dashboard', 'User\AdministratorController@dashboard')->name('web.administrator.dashboard');
         Route::get('administrator/profile', 'User\AdministratorController@profile')->name('web.administrator.profile');
         Route::get('administrator/notification', 'User\AdministratorController@notification')->name('web.administrator.notification');
+        Route::get('administrator/offline', 'User\AdministratorController@offline')->name('web.administrator.offline');
         Route::get('administrator/empty', 'User\AdministratorController@empty')->name('web.administrator.empty');
         Route::get('administrator/logout', 'Auth\AdministratorController@logout_perfom')->name('web.administrator.logout_perfom');
         Route::get('administrator/archive', 'User\AdministratorController@empty')->name('web.administrator.archive');

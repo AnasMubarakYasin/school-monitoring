@@ -5,12 +5,9 @@
 @section('content')
     <div class="grid gap-4">
         <div class="grid grid-cols-3 gap-4">
-            <div
-                class="grid gap-2 p-4 bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-none border dark:border-gray-700 transition-all">
-                <div class="text-base text-gray-700 dark:text-gray-200 font-medium capitalize">
-                    {{ trans('administrator') }}</div>
-                <div class="text-3xl text-gray-900 dark:text-gray-50 font-normal">{{ $administrator }}</div>
-            </div>
+            @foreach ($stats as $stat)
+                <x-resource.stat :resource="$stat"></x-resource.stat>
+            @endforeach
         </div>
         <x-school-year.stat></x-school-year.stat>
     </div>

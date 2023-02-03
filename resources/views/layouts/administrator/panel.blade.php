@@ -13,6 +13,7 @@
 
     <link rel="manifest" href="{{ asset('build/site.webmanifest') }}">
 
+    @vite('resources/js/progress.js')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @vite('resources/js/regis-sw.js')
     @vite('resources/js/layouts/panel/index.js')
@@ -569,14 +570,19 @@
 
             </div>
         </header>
-        <main class="flex-grow p-4 overflow-auto">
-            @if (isset($content_card) && $content_card)
-                <div class="grid gap-4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow transition-colors">
+        <main class="overflow-auto">
+            <div id="progress-bar" class="sticky top-0 max-w-full h-0 bg-gray-200 rounded-full transition-all dark:bg-gray-700">
+                <div class="bg-blue-600 max-w-full h-full rounded-full dark:bg-blue-500" style="width: 100%"></div>
+            </div>
+            <div class="flex-grow p-4 overflow-auto">
+                @if (isset($content_card) && $content_card)
+                    <div class="grid gap-4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow transition-colors">
+                        @yield('content')
+                    </div>
+                @else
                     @yield('content')
-                </div>
-            @else
-                @yield('content')
-            @endif
+                @endif
+            </div>
         </main>
         <footer
             class="flex items-center justify-center h-[56px] bg-white dark:bg-gray-800 shadow transition-colors">

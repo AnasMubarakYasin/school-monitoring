@@ -17,6 +17,7 @@ class Definition
         public mixed $enums = null,
         public string|null $relation = null,
         public string|null $alias = null,
+        public array|null $children = null,
     ) {
     }
 }

@@ -18,10 +18,12 @@ class Core
     ) {
         return new Core($model);
     }
-
+    /** @var Model */
+    public mixed $model = null;
     public function __construct(
-        public mixed $model = null,
+        mixed $model = null,
     ) {
+        $this->model = $model;
         $this->model->defining();
         $route_default = function () {
             return "";
@@ -39,6 +41,11 @@ class Core
         $this->route_restore = $route_default;
 
         $this->route_model = $route_default;
+    }
+
+    public function resourcing(): Core
+    {
+        return $this;
     }
 
     public Closure $route_view_any;
