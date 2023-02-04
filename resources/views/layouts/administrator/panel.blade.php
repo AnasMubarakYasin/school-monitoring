@@ -346,6 +346,20 @@
                                     {{ __('lesson schedule data') }}
                                 </a>
                             </li>
+                            <li>
+                                @php
+                                    $link = route('web.administrator.academic_data.materialandassignment.list');
+                                @endphp
+                                <a href="{{ $link }}" @class([
+                                    'flex items-center p-2 pl-11 w-full text-base font-normal rounded-lg transition group',
+                                    'dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' =>
+                                        request()->url() != $link,
+                                    'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' =>
+                                        request()->url() == $link,
+                                ])>
+                                    {{ __('material and assignment') }}
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 </ul>

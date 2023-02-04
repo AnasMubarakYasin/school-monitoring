@@ -27,8 +27,9 @@ class UpdateScheduleOfSubjectsRequest extends FormRequest
             'subjects_id' => 'required|integer',
             'class_id' => 'required|integer',
             'teacher_id' => 'required|integer',
-            'start_at' => 'required|date',
-            'end_at' => 'required|date',
+            'start_time' => 'required|string',
+            'end_time' => 'required|string',
+            'day' => 'required|in:senin,selasa,rabu,kamis,jumat,sabtu,minggu',
             'description' => 'required|string',
         ];
     }

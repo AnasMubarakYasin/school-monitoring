@@ -85,7 +85,11 @@ Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
 
         Route::get('administrator/academic_data/scheduleofsubjects/list', 'User\AdministratorController@scheduleofsubjects_list')->name('web.administrator.academic_data.scheduleofsubjects.list');
         Route::get('administrator/academic_data/scheduleofsubjects/create', 'User\AdministratorController@scheduleofsubjects_create')->name('web.administrator.academic_data.scheduleofsubjects.create');
-        // Route::get('administrator/academic_data/scheduleofsubjects/{scheduleofsubjects}/update', 'User\AdministratorController@scheduleofsubjects_update')->name('web.administrator.academic_data.scheduleofsubjects.update');
+        Route::get('administrator/academic_data/scheduleofsubjects/{scheduleOfSubjects}/update', 'User\AdministratorController@scheduleofsubjects_update')->name('web.administrator.academic_data.scheduleofsubjects.update');
+
+        Route::get('administrator/academic_data/materialandassignment/list', 'User\AdministratorController@materialandassignment_list')->name('web.administrator.academic_data.materialandassignment.list');
+        Route::get('administrator/academic_data/materialandassignment/create', 'User\AdministratorController@materialandassignment_create')->name('web.administrator.academic_data.materialandassignment.create');
+        Route::get('administrator/academic_data/materialandassignment/{materialAndAssignment}/update', 'User\AdministratorController@materialandassignment_update')->name('web.administrator.academic_data.materialandassignment.update');
     });
 });
 Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
@@ -108,9 +112,14 @@ Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
     Route::delete('resource/subjects', 'SubjectsController@delete_any')->name('web.resource.academic_data.subjects.delete_any');
 
     Route::post('resource/scheduleofsubjects', 'ScheduleOfSubjectsController@create')->name('web.resource.academic_data.scheduleofsubjects.create');
-    // Route::patch('resource/scheduleofsubjects/{scheduleofsubjects}', 'ScheduleOfSubjectsController@update')->name('web.resource.academic_data.scheduleofsubjects.update');
-    // Route::delete('resource/scheduleofsubjects/{scheduleofsubjects}', 'ScheduleOfSubjectsController@delete')->name('web.resource.academic_data.scheduleofsubjects.delete');
-    // Route::delete('resource/scheduleofsubjects', 'ScheduleOfSubjectsController@delete_any')->name('web.resource.academic_data.scheduleofsubjects.delete_any');
+    Route::patch('resource/scheduleofsubjects/{scheduleOfSubjects}', 'ScheduleOfSubjectsController@update')->name('web.resource.academic_data.scheduleofsubjects.update');
+    Route::delete('resource/scheduleofsubjects/{scheduleOfSubjects}', 'ScheduleOfSubjectsController@delete')->name('web.resource.academic_data.scheduleofsubjects.delete');
+    Route::delete('resource/scheduleofsubjects', 'ScheduleOfSubjectsController@delete_any')->name('web.resource.academic_data.scheduleofsubjects.delete_any');
+
+    Route::post('resource/materialandassignment', 'MaterialAndAssignmentController@create')->name('web.resource.academic_data.materialandassignment.create');
+    Route::patch('resource/materialandassignment/{materialAndAssignment}', 'MaterialAndAssignmentController@update')->name('web.resource.academic_data.materialandassignment.update');
+    Route::delete('resource/materialandassignment/{materialAndAssignment}', 'MaterialAndAssignmentController@delete')->name('web.resource.academic_data.materialandassignment.delete');
+    Route::delete('resource/materialandassignment', 'MaterialAndAssignmentController@delete_any')->name('web.resource.academic_data.materialandassignment.delete_any');
 
     Route::post('resource/semester', 'SemesterController@create')->name('web.resource.semester.create');
     Route::patch('resource/semester/{semester}', 'SemesterController@update')->name('web.resource.semester.update');

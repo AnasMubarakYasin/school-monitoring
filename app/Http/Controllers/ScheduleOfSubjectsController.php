@@ -10,10 +10,12 @@ class ScheduleOfSubjectsController extends Controller
 {
     public function create(StoreScheduleOfSubjectsRequest $request)
     {
-        // dd($request);
         $this->authorize('create', ScheduleOfSubjects::class);
         $data = $request->validated();
-        ScheduleOfSubjects::create($data);
+        $schedule = new ScheduleOfSubjects();
+        $schedule->fill($data);
+        // dd($schedule);
+        $schedule->save();
         return redirect()->intended($request->input('_view_any'));
     }
     public function update(UpdateScheduleOfSubjectsRequest $request, ScheduleOfSubjects $scheduleOfSubjects)
