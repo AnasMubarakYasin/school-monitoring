@@ -16,7 +16,7 @@ use App\Models\Semester;
 use App\Models\Student;
 use App\Models\Subjects;
 
-class AdministratorController extends Controller
+class TeacherController extends Controller
 {
     public function dashboard()
     {
@@ -52,25 +52,25 @@ class AdministratorController extends Controller
             $major,
             $classroom,
         ];
-        return view('pages.administrator.dashboard', [
+        return view('pages.teacher.dashboard', [
             'stats' => $stats,
         ]);
     }
     public function profile()
     {
-        return view('pages.administrator.profile');
+        return view('pages.teacher.profile');
     }
     public function notification()
     {
-        return view('pages.administrator.notification');
+        return view('pages.teacher.notification');
     }
     public function offline()
     {
-        return view('pages.administrator.offline');
+        return view('pages.teacher.offline');
     }
     public function empty()
     {
-        return view('pages.administrator.empty');
+        return view('pages.teacher.empty');
     }
 
     //SECTION - school_year
@@ -93,7 +93,7 @@ class AdministratorController extends Controller
         $resource->route_model = function ($field, $item) {
             return route('web.administrator.academic_data.semester.list');
         };
-        return view('pages.administrator.school_year.list', ['resource' => $resource]);
+        return view('pages.teacher.school_year.list', ['resource' => $resource]);
     }
     public function school_year_create()
     {
@@ -106,7 +106,7 @@ class AdministratorController extends Controller
         $resource->route_view_any = function () {
             return route('web.administrator.academic_data.school_year.list');
         };
-        return view('pages.administrator.school_year.create', ['resource' => $resource]);
+        return view('pages.teacher.school_year.create', ['resource' => $resource]);
     }
     public function school_year_update(SchoolYear $school_year)
     {
@@ -120,7 +120,7 @@ class AdministratorController extends Controller
         $resource->route_view_any = function () {
             return route('web.administrator.academic_data.school_year.list');
         };
-        return view('pages.administrator.school_year.update', ['resource' => $resource]);
+        return view('pages.teacher.school_year.update', ['resource' => $resource]);
     }
     //!SECTION - school_year
 
@@ -144,7 +144,7 @@ class AdministratorController extends Controller
         $resource->route_model = function ($field, $item) {
             return route('web.administrator.academic_data.school_year.list');
         };
-        return view('pages.administrator.semester.list', ['resource' => $resource]);
+        return view('pages.teacher.semester.list', ['resource' => $resource]);
     }
     public function semester_create()
     {
@@ -160,7 +160,7 @@ class AdministratorController extends Controller
         $resource->fetcher_model = function ($definition) {
             return SchoolYear::all();
         };
-        return view('pages.administrator.semester.create', ['resource' => $resource]);
+        return view('pages.teacher.semester.create', ['resource' => $resource]);
     }
     public function semester_update(Semester $semester)
     {
@@ -177,7 +177,7 @@ class AdministratorController extends Controller
         $resource->fetcher_model = function ($definition) {
             return SchoolYear::all();
         };
-        return view('pages.administrator.semester.update', ['resource' => $resource]);
+        return view('pages.teacher.semester.update', ['resource' => $resource]);
     }
     //!SECTION - semester
 
@@ -198,7 +198,7 @@ class AdministratorController extends Controller
         $resource->route_delete = function ($item) {
             return route('web.resource.employee.delete', ['employee' => $item]);
         };
-        return view('pages.administrator.employee.list', ['resource' => $resource]);
+        return view('pages.teacher.employee.list', ['resource' => $resource]);
     }
     public function employee_create()
     {
@@ -223,7 +223,7 @@ class AdministratorController extends Controller
         $resource->route_view_any = function ($item) {
             return route('web.administrator.users.employee.list');
         };
-        return view('pages.administrator.employee.create', ['resource' => $resource]);
+        return view('pages.teacher.employee.create', ['resource' => $resource]);
     }
     public function employee_update(Employee $employee)
     {
@@ -249,7 +249,7 @@ class AdministratorController extends Controller
         $resource->route_view_any = function ($item) {
             return route('web.administrator.users.employee.list');
         };
-        return view('pages.administrator.employee.update', ['resource' => $resource]);
+        return view('pages.teacher.employee.update', ['resource' => $resource]);
     }
     //!SECTION - employee
 
@@ -272,7 +272,7 @@ class AdministratorController extends Controller
         $resource->route_delete = function ($item) {
             return route('web.resource.major.delete', ['major' => $item]);
         };
-        return view('pages.administrator.major.list', ['resource' => $resource]);
+        return view('pages.teacher.major.list', ['resource' => $resource]);
     }
     public function major_create()
     {
@@ -287,7 +287,7 @@ class AdministratorController extends Controller
         $resource->route_view_any = function ($item) {
             return route('web.administrator.data_master.major.list');
         };
-        return view('pages.administrator.major.create', ['resource' => $resource]);
+        return view('pages.teacher.major.create', ['resource' => $resource]);
     }
     public function major_update(Major $major)
     {
@@ -303,7 +303,7 @@ class AdministratorController extends Controller
         $resource->route_view_any = function ($item) {
             return route('web.administrator.data_master.major.list');
         };
-        return view('pages.administrator.major.update', ['resource' => $resource]);
+        return view('pages.teacher.major.update', ['resource' => $resource]);
     }
     //!SECTION - major
 
@@ -338,7 +338,7 @@ class AdministratorController extends Controller
                 return route('web.administrator.users.employee.list');
             }
         };
-        return view('pages.administrator.classroom.list', ['resource' => $resource]);
+        return view('pages.teacher.classroom.list', ['resource' => $resource]);
     }
     public function classroom_create()
     {
@@ -365,7 +365,7 @@ class AdministratorController extends Controller
                 return Employee::all();
             }
         };
-        return view('pages.administrator.classroom.create', ['resource' => $resource]);
+        return view('pages.teacher.classroom.create', ['resource' => $resource]);
     }
     public function classroom_update(Classroom $classroom)
     {
@@ -393,7 +393,7 @@ class AdministratorController extends Controller
                 return Employee::all();
             }
         };
-        return view('pages.administrator.classroom.update', ['resource' => $resource]);
+        return view('pages.teacher.classroom.update', ['resource' => $resource]);
     }
     //!SECTION - classroom
 
@@ -420,7 +420,7 @@ class AdministratorController extends Controller
         $resource->route_delete = function ($item) {
             return route('web.resource.student.delete', ['student' => $item]);
         };
-        return view('pages.administrator.student.list', ['resource' => $resource]);
+        return view('pages.teacher.student.list', ['resource' => $resource]);
     }
     public function student_create()
     {
@@ -445,7 +445,7 @@ class AdministratorController extends Controller
         $resource->route_view_any = function ($item) {
             return route('web.administrator.users.student.list');
         };
-        return view('pages.administrator.student.create', ['resource' => $resource]);
+        return view('pages.teacher.student.create', ['resource' => $resource]);
     }
     public function student_update(Student $student)
     {
@@ -471,19 +471,19 @@ class AdministratorController extends Controller
         $resource->route_view_any = function ($item) {
             return route('web.administrator.users.student.list');
         };
-        return view('pages.administrator.student.update', ['resource' => $resource]);
+        return view('pages.teacher.student.update', ['resource' => $resource]);
     }
     //!SECTION - student
 
     public function administrator()
     {
-        return view('pages.administrator.users.administrator.index');
+        return view('pages.teacher.users.administrator.index');
     }
 
     //SECTION - identitas sekolah
     public function identitas_sekolah_list()
     {
-        return view('pages.administrator.data_master.schol_information.list');
+        return view('pages.teacher.data_master.schol_information.list');
     }
     public function identitas_sekolah_update(SchoolInformation $schoolInformation)
     {
@@ -511,7 +511,7 @@ class AdministratorController extends Controller
             return route('web.administrator.data_master.school_information.list');
         };
         // $resource->view_any = route('web.administrator.data_master.school_information.list');
-        return view('pages.administrator.data_master.schol_information.update', [
+        return view('pages.teacher.data_master.schol_information.update', [
             'resource' => $resource,
         ]);
     }
@@ -541,7 +541,7 @@ class AdministratorController extends Controller
         $resource->route_delete = function ($item) {
             return route('web.resource.data_master.facilityAndInfrastructure.delete', ['facilityAndInfrastructure' => $item]);
         };
-        return view('pages.administrator.data_master.facilitiandinfrastructure.list', ['resource' => $resource]);
+        return view('pages.teacher.data_master.facilitiandinfrastructure.list', ['resource' => $resource]);
     }
     public function facilityandinfrastructure_create()
     {
@@ -561,7 +561,7 @@ class AdministratorController extends Controller
         $resource->route_view_any = function () {
             return route('web.administrator.data_master.facilityandinfrastructure.list');
         };
-        return view('pages.administrator.data_master.facilitiandinfrastructure.create', ['resource' => $resource]);
+        return view('pages.teacher.data_master.facilitiandinfrastructure.create', ['resource' => $resource]);
     }
     public function facilityandinfrastructure_update(FacilityAndInfrastructure $facilityAndInfrastructure)
     {
@@ -582,7 +582,7 @@ class AdministratorController extends Controller
         $resource->route_view_any = function () {
             return route('web.administrator.data_master.facilityandinfrastructure.list');
         };
-        return view('pages.administrator.data_master.facilitiandinfrastructure.update', ['resource' => $resource]);
+        return view('pages.teacher.data_master.facilitiandinfrastructure.update', ['resource' => $resource]);
     }
     //!SECTION
 
@@ -617,7 +617,7 @@ class AdministratorController extends Controller
                 return route('web.administrator.users.employee.list');
             }
         };
-        return view('pages.administrator.academic_data.subjects.list', ['resource' => $resource]);
+        return view('pages.teacher.academic_data.subjects.list', ['resource' => $resource]);
     }
     public function subjects_create()
     {
@@ -644,7 +644,7 @@ class AdministratorController extends Controller
                 return Employee::all();
             }
         };
-        return view('pages.administrator.academic_data.scheduleofsubjects.create', ['resource' => $resource]);
+        return view('pages.teacher.academic_data.scheduleofsubjects.create', ['resource' => $resource]);
     }
     public function subjects_update(Subjects $subjects)
     {
@@ -672,7 +672,7 @@ class AdministratorController extends Controller
                 return Employee::all();
             }
         };
-        return view('pages.administrator.academic_data.subjects.update', ['resource' => $resource]);
+        return view('pages.teacher.academic_data.subjects.update', ['resource' => $resource]);
     }
     //!SECTION
 
@@ -709,7 +709,7 @@ class AdministratorController extends Controller
                 return route('web.administrator.users.employee.list');
             }
         };
-        return view('pages.administrator.academic_data.scheduleofsubjects.list', ['resource' => $resource]);
+        return view('pages.teacher.academic_data.scheduleofsubjects.list', ['resource' => $resource]);
     }
     public function scheduleofsubjects_create()
     {
@@ -741,7 +741,7 @@ class AdministratorController extends Controller
                 return Employee::all();
             }
         };
-        return view('pages.administrator.academic_data.scheduleofsubjects.create', ['resource' => $resource]);
+        return view('pages.teacher.academic_data.scheduleofsubjects.create', ['resource' => $resource]);
     }
     public function scheduleofsubjects_update(ScheduleOfSubjects $scheduleOfSubjects)
     {
@@ -774,7 +774,7 @@ class AdministratorController extends Controller
                 return Employee::all();
             }
         };
-        return view('pages.administrator.academic_data.scheduleofsubjects.update', ['resource' => $resource]);
+        return view('pages.teacher.academic_data.scheduleofsubjects.update', ['resource' => $resource]);
     }
     //!SECTION
 
@@ -812,7 +812,7 @@ class AdministratorController extends Controller
                 return route('web.administrator.users.employee.list');
             }
         };
-        return view('pages.administrator.academic_data.materialandassigment.list', ['resource' => $resource]);
+        return view('pages.teacher.academic_data.materialandassigment.list', ['resource' => $resource]);
     }
     public function materialandassignment_create()
     {
@@ -842,7 +842,7 @@ class AdministratorController extends Controller
                 return Employee::all();
             }
         };
-        return view('pages.administrator.academic_data.materialandassigment.create', ['resource' => $resource]);
+        return view('pages.teacher.academic_data.materialandassigment.create', ['resource' => $resource]);
     }
     public function materialandassignment_update(MaterialAndAssignment $materialAndAssignment)
     {
@@ -873,7 +873,7 @@ class AdministratorController extends Controller
                 return Employee::all();
             }
         };
-        return view('pages.administrator.academic_data.materialandassigment.update', ['resource' => $resource]);
+        return view('pages.teacher.academic_data.materialandassigment.update', ['resource' => $resource]);
     }
     //!SECTION
 }

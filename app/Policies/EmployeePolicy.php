@@ -10,42 +10,42 @@ class EmployeePolicy
 {
     use HandlesAuthorization;
 
-    public function view_any(Administrator $user)
+    public function view_any(Administrator|Employee $user)
     {
         return true;
     }
 
-    public function view(Administrator $user, Employee $schoolYear)
+    public function view(Administrator|Employee $user, Employee $schoolYear)
     {
         return true;
     }
 
-    public function create(Administrator $user)
+    public function create(Administrator|Employee $user)
     {
         return true;
     }
 
-    public function update(Administrator $user, Employee $schoolYear)
+    public function update(Administrator|Employee $user, Employee $schoolYear)
     {
         return true;
     }
 
-    public function delete_any(Administrator $user)
+    public function delete_any(Administrator|Employee $user)
     {
         return true;
     }
 
-    public function delete(Administrator $user, Employee $schoolYear)
+    public function delete(Administrator|Employee $user, Employee $schoolYear)
     {
         return true;
     }
 
-    public function restore(Administrator $user, Employee $schoolYear)
+    public function restore(Administrator|Employee $user, Employee $schoolYear)
     {
         return true;
     }
 
-    public function forceDelete(Administrator $user, Employee $schoolYear)
+    public function forceDelete(Administrator|Employee $user, Employee $schoolYear)
     {
         return true;
     }

@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Administrator;
+use App\Models\Employee;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -11,42 +12,42 @@ class StudentPolicy
 {
     use HandlesAuthorization;
 
-    public function view_any(Administrator $user)
+    public function view_any(Administrator|Employee $user)
     {
         return true;
     }
 
-    public function view(Administrator $user, Student $student)
+    public function view(Administrator|Employee $user, Student $student)
     {
         return true;
     }
 
-    public function create(Administrator $user)
+    public function create(Administrator|Employee $user)
     {
         return true;
     }
 
-    public function update(Administrator $user, Student $student)
+    public function update(Administrator|Employee $user, Student $student)
     {
         return true;
     }
 
-    public function delete_any(Administrator $user)
+    public function delete_any(Administrator|Employee $user)
     {
         return true;
     }
 
-    public function delete(Administrator $user, Student $student)
+    public function delete(Administrator|Employee $user, Student $student)
     {
         return true;
     }
 
-    public function restore(Administrator $user, Student $student)
+    public function restore(Administrator|Employee $user, Student $student)
     {
         return true;
     }
 
-    public function forceDelete(Administrator $user, Student $student)
+    public function forceDelete(Administrator|Employee $user, Student $student)
     {
         return true;
     }

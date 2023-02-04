@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\SchoolYear;
 use App\Models\Administrator;
+use App\Models\Employee;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class SchoolYearPolicy
@@ -16,7 +17,7 @@ class SchoolYearPolicy
      * @param  \App\Models\Administrator  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view_any(Administrator $user)
+    public function view_any(Administrator|Employee $user)
     {
         return true;
     }
@@ -28,7 +29,7 @@ class SchoolYearPolicy
      * @param  \App\Models\SchoolYear  $schoolYear
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(Administrator $user, SchoolYear $schoolYear)
+    public function view(Administrator|Employee $user, SchoolYear $schoolYear)
     {
         return true;
     }
@@ -39,7 +40,7 @@ class SchoolYearPolicy
      * @param  \App\Models\Administrator  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(Administrator $user)
+    public function create(Administrator|Employee $user)
     {
         return true;
     }
@@ -51,7 +52,7 @@ class SchoolYearPolicy
      * @param  \App\Models\SchoolYear  $schoolYear
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(Administrator $user, SchoolYear $schoolYear)
+    public function update(Administrator|Employee $user, SchoolYear $schoolYear)
     {
         return true;
     }
@@ -63,7 +64,7 @@ class SchoolYearPolicy
      * @param  \App\Models\SchoolYear  $schoolYear
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete_any(Administrator $user)
+    public function delete_any(Administrator|Employee $user)
     {
         return true;
     }
@@ -75,7 +76,7 @@ class SchoolYearPolicy
      * @param  \App\Models\SchoolYear  $schoolYear
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(Administrator $user, SchoolYear $schoolYear)
+    public function delete(Administrator|Employee $user, SchoolYear $schoolYear)
     {
         return true;
     }
@@ -87,7 +88,7 @@ class SchoolYearPolicy
      * @param  \App\Models\SchoolYear  $schoolYear
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(Administrator $user, SchoolYear $schoolYear)
+    public function restore(Administrator|Employee $user, SchoolYear $schoolYear)
     {
         return true;
     }
@@ -99,7 +100,7 @@ class SchoolYearPolicy
      * @param  \App\Models\SchoolYear  $schoolYear
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(Administrator $user, SchoolYear $schoolYear)
+    public function forceDelete(Administrator|Employee $user, SchoolYear $schoolYear)
     {
         return true;
     }

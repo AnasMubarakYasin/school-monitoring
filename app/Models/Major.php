@@ -32,6 +32,7 @@ class Major extends Model
                 enums: [
                     'kimia' => 'kimia',
                     'biology' => 'biology',
+                    'language' => 'language',
                 ],
             ),
             'general_competence' => new Definition(

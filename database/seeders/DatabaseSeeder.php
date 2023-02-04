@@ -30,6 +30,12 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@host.local',
             'password' => 'admin',
         ]);
+        $teacher = Employee::factory()->create([
+            'name' => 'teacher',
+            'email' => 'teacher@host.local',
+            'password' => 'teacher',
+            'task' => 'teacher',
+        ]);
         $employees = Employee::factory(30)->create();
         $school_year = SchoolYear::factory()->create([
             'name' => now()->year . "/" . now()->addYear()->year,
@@ -73,11 +79,15 @@ class DatabaseSeeder extends Seeder
         $major_biology = Major::factory()->create([
             'expertise' => 'biology',
         ]);
+        $major_language = Major::factory()->create([
+            'expertise' => 'language',
+        ]);
         $classrooms = Classroom::factory()
             ->count(15)
             ->state(new Sequence(
                 ['major_id' => $major_kimia->id],
                 ['major_id' => $major_biology->id],
+                ['major_id' => $major_language->id],
             ))->state(new Sequence(
                 ...$employees->map(function ($item) {
                     return ['homeroom_id' => $item->id];
