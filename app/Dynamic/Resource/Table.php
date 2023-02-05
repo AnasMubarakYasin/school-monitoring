@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Models\Resource;
+namespace App\Dynamic\Resource;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class Table extends Core
+class Table extends Resource
 {
     public LengthAwarePaginator|null $paginator = null;
     public array $all = [];

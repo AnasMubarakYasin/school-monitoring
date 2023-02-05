@@ -2,12 +2,12 @@
 
 namespace App\View\Components\Resource;
 
-use App\Models\Resource\Form as ModelsResourceForm;
+use App\Dynamic\Resource\Form as DynamicResourceForm;
 use Illuminate\View\Component;
 
 class Form extends Component
 {
-    public function __construct(public ModelsResourceForm $resource)
+    public function __construct(public DynamicResourceForm $resource)
     {
         $resource->resourcing();
     }

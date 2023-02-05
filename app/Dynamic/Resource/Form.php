@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Models\Resource;
+namespace App\Dynamic\Resource;
 
 use Closure;
-use Illuminate\Database\Eloquent\Model;
+use App\Dynamic\Resource\Resource;
 
-class Form extends Core
+class Form extends Resource
 {
     public array|null $fields = [];
-    public Closure $fetcher_model;
+    public Closure $fetcher_relation;
     public string $mode = "create";
 
     public function from_create(
@@ -26,9 +26,9 @@ class Form extends Core
         $this->mode = "update";
         return $this;
     }
-    public function fetch_model(Definition $definition)
+    public function fetch_relation(Definition $definition)
     {
-        return $this->fetcher_model->call($this, $definition);
+        return $this->fetcher_relation->call($this, $definition);
     }
     public function is_create()
     {

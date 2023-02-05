@@ -1,8 +1,19 @@
-@extends('layouts.administrator.panel', ['content_card' => false])
+<x-panel.layout :title="'dashboard'">
+    <x-slot:top_bar>
+        <x-panel.top-bar>
 
-@section('title', 'Dashboard')
+        </x-panel.top-bar>
+    </x-slot>
+    <x-slot:side_bar>
+        <x-panel.side-bar>
 
-@section('content')
+        </x-panel.side-bar>
+    </x-slot>
+    <x-slot:bottom_bar>
+        <x-panel.bottom-bar>
+
+        </x-panel.bottom-bar>
+    </x-slot>
     <div class="grid gap-4">
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
             @foreach ($stats as $stat)
@@ -11,4 +22,4 @@
         </div>
         <x-school-year.stat></x-school-year.stat>
     </div>
-@endsection
+</x-panel.layout>

@@ -1,70 +1,63 @@
 <?php
 
-namespace App\Models\Resource;
+namespace App\Dynamic\Resource;
 
-use App\Models\Resource\Trait\Resourceable;
 use Illuminate\Database\Eloquent\Model;
 use Closure;
 
-abstract class Modelable extends Model
-{
-    use Resourceable;
-}
-
-class Core
+class Resource
 {
     public static function create(
         mixed $model = null,
     ) {
-        return new Core($model);
+        return new Resource($model);
     }
     /** @var Model */
     public mixed $model = null;
     public function __construct(
         mixed $model = null,
+        public ?Closure $route_view_any = null,
+        public ?Closure $route_view = null,
+        /**
+         * route ui create
+         */
+        public ?Closure $route_store = null,
+        public ?Closure $route_create = null,
+        /**
+         * route ui update
+         */
+        public ?Closure $route_edit = null,
+        public ?Closure $route_update = null,
+        public ?Closure $route_delete = null,
+        public ?Closure $route_delete_any = null,
+        public ?Closure $route_restore = null,
+
+        public ?Closure $route_relation = null,
     ) {
         $this->model = $model;
         $this->model->defining();
         $route_default = function () {
             return "";
         };
-        $this->route_view_any = $route_default;
-        $this->route_view = $route_default;
+        $this->route_view_any ??= $route_default;
+        $this->route_view ??= $route_default;
 
-        $this->route_store = $route_default;
-        $this->route_create = $route_default;
+        $this->route_store ??= $route_default;
+        $this->route_create ??= $route_default;
 
-        $this->route_edit = $route_default;
-        $this->route_update = $route_default;
-        $this->route_delete = $route_default;
-        $this->route_delete_any = $route_default;
-        $this->route_restore = $route_default;
+        $this->route_edit ??= $route_default;
+        $this->route_update ??= $route_default;
+        $this->route_delete ??= $route_default;
+        $this->route_delete_any ??= $route_default;
+        $this->route_restore ??= $route_default;
 
-        $this->route_model = $route_default;
+        $this->route_relation ??= $route_default;
     }
 
-    public function resourcing(): Core
+    public function resourcing(): Resource
     {
         return $this;
     }
-
-    public Closure $route_view_any;
-    public Closure $route_view;
-    /**
-     * route ui create
-     */
-    public Closure $route_store;
-    public Closure $route_create;
-    /**
-     * route ui update
-     */
-    public Closure $route_edit;
-    public Closure $route_update;
-    public Closure $route_delete;
-    public Closure $route_delete_any;
-    public Closure $route_restore;
-
-    public Closure $route_model;
 
     public function route_view_any(string $query = "")
     {
@@ -106,8 +99,8 @@ class Core
         return $this->route_delete->call($this, $item);
     }
 
-    public function route_model(Definition $definition, mixed $item)
+    public function route_relation(Definition $definition, mixed $params)
     {
-        return $this->route_model->call($this, $definition, $item);
+        return $this->route_relation->call($this, $definition, $params);
     }
 }

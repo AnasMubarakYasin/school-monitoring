@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Models\Resource;
+namespace App\Dynamic\Resource;
 
-class Stat extends Core
+class Stat extends Resource
 {
     public int $total = 0;
 

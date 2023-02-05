@@ -2,12 +2,11 @@
 
 namespace App\View\Components\Resource;
 
-use App\Models\Resource\Table as ResourceTable;
+use App\Dynamic\Resource\Table as ResourceTable;
 use Illuminate\View\Component;
 
 class Table extends Component
 {
-    // public function __construct(public ResourceTable $resource)
     public function __construct(public ResourceTable $resource)
     {
         $resource->resourcing();
