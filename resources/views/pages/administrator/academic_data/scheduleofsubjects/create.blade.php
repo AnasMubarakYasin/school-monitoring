@@ -1,7 +1,18 @@
-@extends('layouts.administrator.panel', ['content_card' => false])
+<x-panel.layout :title="'create schedule of subjects'">
+    <x-slot:top_bar>
+        <x-panel.top-bar>
 
-@section('title', __('create schedule of subjects'))
+        </x-panel.top-bar>
+        </x-slot>
+        <x-slot:side_bar>
+            <x-panel.side-bar>
 
-@section('content')
-    <x-resource.form :resource="$resource"></x-resource.form>
-@endsection
+            </x-panel.side-bar>
+            </x-slot>
+            <x-slot:bottom_bar>
+                <x-panel.bottom-bar>
+
+                </x-panel.bottom-bar>
+                </x-slot>
+                <x-resource.form :resource="$resource"></x-resource.form>
+</x-panel.layout>
