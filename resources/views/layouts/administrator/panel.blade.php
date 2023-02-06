@@ -92,34 +92,38 @@
                             </svg>
                         </button>
                         <ul id="menu_information" class="hidden py-2 space-y-2">
-                            <li>
-                                @php
-                                    $link = route('web.administrator.data_master.school_information.list');
-                                @endphp
-                                <a href="{{ $link }}" @class([
-                                    'flex items-center p-2 pl-11 w-full text-base font-normal rounded-lg transition group',
-                                    'dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' =>
-                                        request()->url() != $link,
-                                    'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' =>
-                                        request()->url() == $link,
-                                ])>
-                                    {{ __('school information') }}
-                                </a>
-                            </li>
-                            <li>
-                                @php
-                                    $link = route('web.administrator.data_master.facilityandinfrastructure.list');
-                                @endphp
-                                <a href="{{ $link }}" @class([
-                                    'flex items-center p-2 pl-11 w-full text-base font-normal rounded-lg transition group',
-                                    'dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' =>
-                                        request()->url() != $link,
-                                    'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' =>
-                                        request()->url() == $link,
-                                ])>
-                                    {{ __('data sarana dan prasarana') }}
-                                </a>
-                            </li>
+                            @can('view_any', App\Models\SchoolInformation::class)
+                                <li>
+                                    @php
+                                        $link = route('web.administrator.data_master.school_information.list');
+                                    @endphp
+                                    <a href="{{ $link }}" @class([
+                                        'flex items-center p-2 pl-11 w-full text-base font-normal rounded-lg transition group',
+                                        'dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' =>
+                                            request()->url() != $link,
+                                        'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' =>
+                                            request()->url() == $link,
+                                    ])>
+                                        {{ __('school information') }}
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('view_any', App\Models\FacilityAndInfrastructure::class)
+                                <li>
+                                    @php
+                                        $link = route('web.administrator.data_master.facilityandinfrastructure.list');
+                                    @endphp
+                                    <a href="{{ $link }}" @class([
+                                        'flex items-center p-2 pl-11 w-full text-base font-normal rounded-lg transition group',
+                                        'dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' =>
+                                            request()->url() != $link,
+                                        'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' =>
+                                            request()->url() == $link,
+                                    ])>
+                                        {{ __('data sarana dan prasarana') }}
+                                    </a>
+                                </li>
+                            @endcan
                             @can('view_any', App\Models\Major::class)
                                 <li>
                                     @php
@@ -221,48 +225,54 @@
                                     </a>
                                 </li>
                             @endcan
-                            <li>
-                                @php
-                                    $link = route('web.administrator.academic_data.subjects.list');
-                                @endphp
-                                <a href="{{ $link }}" @class([
-                                    'flex items-center p-2 pl-11 w-full text-base font-normal rounded-lg transition group',
-                                    'dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' =>
-                                        request()->url() != $link,
-                                    'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' =>
-                                        request()->url() == $link,
-                                ])>
-                                    {{ __('subject data') }}
-                                </a>
-                            </li>
-                            <li>
-                                @php
-                                    $link = route('web.administrator.academic_data.scheduleofsubjects.list');
-                                @endphp
-                                <a href="{{ $link }}" @class([
-                                    'flex items-center p-2 pl-11 w-full text-base font-normal rounded-lg transition group',
-                                    'dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' =>
-                                        request()->url() != $link,
-                                    'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' =>
-                                        request()->url() == $link,
-                                ])>
-                                    {{ __('lesson schedule data') }}
-                                </a>
-                            </li>
-                            <li>
-                                @php
-                                    $link = route('web.administrator.academic_data.materialandassignment.list');
-                                @endphp
-                                <a href="{{ $link }}" @class([
-                                    'flex items-center p-2 pl-11 w-full text-base font-normal rounded-lg transition group',
-                                    'dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' =>
-                                        request()->url() != $link,
-                                    'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' =>
-                                        request()->url() == $link,
-                                ])>
-                                    {{ __('material and assignment') }}
-                                </a>
-                            </li>
+                            @can('view_any', App\Models\Subjects::class)
+                                <li>
+                                    @php
+                                        $link = route('web.administrator.academic_data.subjects.list');
+                                    @endphp
+                                    <a href="{{ $link }}" @class([
+                                        'flex items-center p-2 pl-11 w-full text-base font-normal rounded-lg transition group',
+                                        'dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' =>
+                                            request()->url() != $link,
+                                        'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' =>
+                                            request()->url() == $link,
+                                    ])>
+                                        {{ __('subjects data') }}
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('view_any', App\Models\ScheduleOfSubjects::class)
+                                <li>
+                                    @php
+                                        $link = route('web.administrator.academic_data.scheduleofsubjects.list');
+                                    @endphp
+                                    <a href="{{ $link }}" @class([
+                                        'flex items-center p-2 pl-11 w-full text-base font-normal rounded-lg transition group',
+                                        'dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' =>
+                                            request()->url() != $link,
+                                        'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' =>
+                                            request()->url() == $link,
+                                    ])>
+                                        {{ __('lesson schedule data') }}
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('view_any', App\Models\MaterialAndAssignment::class)
+                                <li>
+                                    @php
+                                        $link = route('web.administrator.academic_data.materialandassignment.list');
+                                    @endphp
+                                    <a href="{{ $link }}" @class([
+                                        'flex items-center p-2 pl-11 w-full text-base font-normal rounded-lg transition group',
+                                        'dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' =>
+                                            request()->url() != $link,
+                                        'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' =>
+                                            request()->url() == $link,
+                                    ])>
+                                        {{ __('material and assignment') }}
+                                    </a>
+                                </li>
+                            @endcan
                         </ul>
                     </li>
                     <li>

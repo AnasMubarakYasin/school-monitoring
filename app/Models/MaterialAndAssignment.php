@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Resource\Definition;
 use App\Models\Resource\Trait\Formable;
+use App\Models\Resource\Trait\Statable;
 use App\Models\Resource\Trait\Tableable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,10 +12,11 @@ use Illuminate\Database\Eloquent\Model;
 class MaterialAndAssignment extends Model
 {
     use HasFactory;
-    use Tableable, Formable;
+    use Tableable, Formable, Statable;
 
     public static function defining()
     {
+        self::$caption = "material and assignment";
         self::$definitions['subjects'] = new Definition(
             name: 'subjects',
             type: 'model',

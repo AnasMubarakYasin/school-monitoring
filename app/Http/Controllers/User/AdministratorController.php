@@ -44,6 +44,22 @@ class AdministratorController extends Controller
         $classroom->route_view_any = function () {
             return route('web.administrator.data_master.classroom.list');
         };
+        $facilityandinfrastructure = FacilityAndInfrastructure::statable()->init();
+        $facilityandinfrastructure->route_view_any = function () {
+            return route('web.administrator.data_master.facilityandinfrastructure.list');
+        };
+        $subjects = Subjects::statable()->init();
+        $subjects->route_view_any = function () {
+            return route('web.administrator.academic_data.subjects.list');
+        };
+        $scheduleofsubjects = ScheduleOfSubjects::statable()->init();
+        $scheduleofsubjects->route_view_any = function () {
+            return route('web.administrator.academic_data.scheduleofsubjects.list');
+        };
+        $materialandassignment = MaterialAndAssignment::statable()->init();
+        $materialandassignment->route_view_any = function () {
+            return route('web.administrator.academic_data.materialandassignment.list');
+        };
         $stats = [
             $school_year,
             $semester,
@@ -51,6 +67,10 @@ class AdministratorController extends Controller
             $student,
             $major,
             $classroom,
+            $facilityandinfrastructure,
+            $subjects,
+            $scheduleofsubjects,
+            $materialandassignment
         ];
         return view('pages.administrator.dashboard', [
             'stats' => $stats,

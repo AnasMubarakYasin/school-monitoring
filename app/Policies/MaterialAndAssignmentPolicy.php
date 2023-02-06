@@ -4,90 +4,49 @@ namespace App\Policies;
 
 use App\Models\MaterialAndAssignment;
 use App\Models\Administrator;
+use App\Models\Employee;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class MaterialAndAssignmentPolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Determine whether the user can view any models.
-     *
-     * @param  \App\Models\Administrator  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function viewAny(Administrator $user)
+    public function view_any(Administrator|Employee $user)
     {
         return true;
     }
 
-    /**
-     * Determine whether the user can view the model.
-     *
-     * @param  \App\Models\Administrator  $user
-     * @param  \App\Models\MaterialAndAssignment  $materialAndAssignment
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function view(Administrator $user, MaterialAndAssignment $materialAndAssignment)
+    public function view(Administrator|Employee $user, MaterialAndAssignment $materialAndAssignment)
     {
         return true;
     }
 
-    /**
-     * Determine whether the user can create models.
-     *
-     * @param  \App\Models\Administrator  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function create(Administrator $user)
+    public function create(Administrator|Employee $user)
     {
         return true;
     }
 
-    /**
-     * Determine whether the user can update the model.
-     *
-     * @param  \App\Models\Administrator  $user
-     * @param  \App\Models\MaterialAndAssignment  $materialAndAssignment
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function update(Administrator $user, MaterialAndAssignment $materialAndAssignment)
+    public function update(Administrator|Employee $user, MaterialAndAssignment $materialAndAssignment)
     {
         return true;
     }
 
-    /**
-     * Determine whether the user can delete the model.
-     *
-     * @param  \App\Models\Administrator  $user
-     * @param  \App\Models\MaterialAndAssignment  $materialAndAssignment
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function delete(Administrator $user, MaterialAndAssignment $materialAndAssignment)
+    public function delete_any(Administrator|Employee $user)
     {
         return true;
     }
 
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\Administrator  $user
-     * @param  \App\Models\MaterialAndAssignment  $materialAndAssignment
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function restore(Administrator $user, MaterialAndAssignment $materialAndAssignment)
+    public function delete(Administrator|Employee $user, MaterialAndAssignment $materialAndAssignment)
     {
         return true;
     }
 
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\Models\Administrator  $user
-     * @param  \App\Models\MaterialAndAssignment  $materialAndAssignment
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(Administrator $user, MaterialAndAssignment $materialAndAssignment)
+    public function restore(Administrator|Employee $user, MaterialAndAssignment $materialAndAssignment)
+    {
+        return true;
+    }
+
+    public function forceDelete(Administrator|Employee $user, MaterialAndAssignment $materialAndAssignment)
     {
         return true;
     }
