@@ -34,6 +34,9 @@
         <div class="text-green-700 dark:text-green-500">
             {{ $landing->vendor_name }}
         </div>
+        <div class="text-sm self-end text-gray-700 dark:text-gray-500">
+            v{{ $landing->vendor_version }}
+        </div>
     </header>
     <main class="overflow-auto grid py-8 px-20">
         <section class="grid gap-8">
@@ -41,10 +44,10 @@
                 <div class="text-xl text-center font-semibold text-gray-800">
                     Users
                 </div>
-                <div class="p-2 grid gap-4 place-content-center">
+                <div class="p-2 flex gap-4 place-content-center">
                     @foreach ($landing->get_users() as $user)
                         <a href="{{ $user['login'] }}"
-                            class="grid gap-4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow hover:bg-gray-50 transition-colors">
+                            class="grid w-[200px] gap-4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow hover:bg-gray-50 transition-colors">
                             <div class="grid place-content-center aspect-square bg-gray-200 p-2 rounded-lg">
                                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                     xmlns="http://www.w3.org/2000/svg">

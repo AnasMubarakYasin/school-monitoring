@@ -101,85 +101,27 @@ Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
     });
 });
 /** !SECTION - Administrator */
-/** SECTION - Teacher */
-Route::redirect('/teacher', '/teacher/dashboard');
-Route::middleware('authc.guest:web.teacher.dashboard,employee')->group(function () {
+/** SECTION - Employee */
+Route::redirect('/employee', '/employee/dashboard');
+Route::middleware('authc.guest:web.employee.dashboard,employee')->group(function () {
     Route::middleware('locale:en')->group(function () {
-        Route::get('teacher/login', 'Auth\TeacherController@login_show')->name('web.teacher.login_show');
+        Route::get('employee/login', 'Auth\EmployeeController@login_show')->name('web.employee.login_show');
     });
-    Route::post('teacher/login', 'Auth\TeacherController@login_perfom')->name('web.teacher.login_perform');
+    Route::post('employee/login', 'Auth\EmployeeController@login_perfom')->name('web.employee.login_perform');
 });
 Route::middleware(['authc.basic:welcome,employee'])->group(function () {
     Route::middleware(['locale', 'view.share'])->group(function () {
-        Route::get('teacher/dashboard', 'User\TeacherController@dashboard')->name('web.teacher.dashboard');
-        Route::get('teacher/profile', 'User\TeacherController@profile')->name('web.teacher.profile');
-        Route::get('teacher/notification', 'User\TeacherController@notification')->name('web.teacher.notification');
-        Route::get('teacher/offline', 'User\TeacherController@offline')->name('web.teacher.offline');
-        Route::get('teacher/empty', 'User\TeacherController@empty')->name('web.teacher.empty');
-        Route::get('teacher/logout', 'Auth\TeacherController@logout_perfom')->name('web.teacher.logout_perfom');
-        Route::get('teacher/archive', 'User\TeacherController@empty')->name('web.teacher.archive');
-        Route::get('teacher/about', 'User\TeacherController@empty')->name('web.teacher.about');
-
-        /** SECTION - User */
-        Route::get('teacher/users', 'User\TeacherController@empty')->name('web.teacher.users');
-
-        Route::get('teacher/users/teacher', 'User\TeacherController@teacher')->name('web.teacher.users.teacher.list');
-
-        Route::get('teacher/users/employee/list', 'User\TeacherController@employee_list')->name('web.teacher.users.employee.list');
-        Route::get('teacher/users/employee/create', 'User\TeacherController@employee_create')->name('web.teacher.users.employee.create');
-        Route::get('teacher/users/employee/{employee}/update', 'User\TeacherController@employee_update')->name('web.teacher.users.employee.update');
-
-        Route::get('teacher/users/student/list', 'User\TeacherController@student_list')->name('web.teacher.users.student.list');
-        Route::get('teacher/users/student/create', 'User\TeacherController@student_create')->name('web.teacher.users.student.create');
-        Route::get('teacher/users/student/{student}/update', 'User\TeacherController@student_update')->name('web.teacher.users.student.update');
-        /** !SECTION - User */
-
-        /** SECTION - Master */
-        Route::get('teacher/data_master', 'User\TeacherController@empty')->name('web.teacher.data_master');
-
-        Route::get('teacher/data_master/major/list', 'User\TeacherController@major_list')->name('web.teacher.data_master.major.list');
-        Route::get('teacher/data_master/major/create', 'User\TeacherController@major_create')->name('web.teacher.data_master.major.create');
-        Route::get('teacher/data_master/major/{major}/update', 'User\TeacherController@major_update')->name('web.teacher.data_master.major.update');
-
-        Route::get('teacher/data_master/classroom/list', 'User\TeacherController@classroom_list')->name('web.teacher.data_master.classroom.list');
-        Route::get('teacher/data_master/classroom/create', 'User\TeacherController@classroom_create')->name('web.teacher.data_master.classroom.create');
-        Route::get('teacher/data_master/classroom/{classroom}/update', 'User\TeacherController@classroom_update')->name('web.teacher.data_master.classroom.update');
-
-        Route::get('teacher/data_master/school_information/list', 'User\TeacherController@identitas_sekolah_list')->name('web.teacher.data_master.school_information.list');
-        Route::get('teacher/data_master/school_information/create', 'User\TeacherController@identitas_sekolah_create')->name('web.teacher.data_master.school_information.create');
-        Route::get('teacher/data_master/school_information/update/{schoolInformation}', 'User\TeacherController@identitas_sekolah_update')->name('web.teacher.data_master.school_information.update');
-
-        Route::get('teacher/data_master/facilityandinfrastructure/list', 'User\TeacherController@facilityandinfrastructure_list')->name('web.teacher.data_master.facilityandinfrastructure.list');
-        Route::get('teacher/data_master/facilityandinfrastructure/create', 'User\TeacherController@facilityandinfrastructure_create')->name('web.teacher.data_master.facilityandinfrastructure.create');
-        Route::get('teacher/data_master/facilityandinfrastructure/{facilityAndInfrastructure}/update', 'User\TeacherController@facilityandinfrastructure_update')->name('web.teacher.data_master.facilityandinfrastructure.update');
-        /** !SECTION - Master */
-
-        /** SECTION - Academic */
-        Route::get('teacher/academic_data', 'User\TeacherController@empty')->name('web.teacher.academic_data');
-
-        Route::get('teacher/academic_data/school_year/list', 'User\TeacherController@school_year_list')->name('web.teacher.academic_data.school_year.list');
-        Route::get('teacher/academic_data/school_year/create', 'User\TeacherController@school_year_create')->name('web.teacher.academic_data.school_year.create');
-        Route::get('teacher/academic_data/school_year/{school_year}/update', 'User\TeacherController@school_year_update')->name('web.teacher.academic_data.school_year.update');
-
-        Route::get('teacher/academic_data/semester/list', 'User\TeacherController@semester_list')->name('web.teacher.academic_data.semester.list');
-        Route::get('teacher/academic_data/semester/create', 'User\academic_data.TeacherController@semester_create')->name('web.teacher.academic_data.semester.create');
-        Route::get('teacher/academic_data/semester/{semester}/update', 'User\TeacherController@semester_update')->name('web.teacher.academic_data.semester.update');
-
-        Route::get('teacher/academic_data/subjects/list', 'User\TeacherController@subjects_list')->name('web.teacher.academic_data.subjects.list');
-        Route::get('teacher/academic_data/subjects/create', 'User\TeacherController@subjects_create')->name('web.teacher.academic_data.subjects.create');
-        Route::get('teacher/academic_data/subjects/{subjects}/update', 'User\TeacherController@subjects_update')->name('web.teacher.academic_data.subjects.update');
-
-        Route::get('teacher/academic_data/scheduleofsubjects/list', 'User\TeacherController@scheduleofsubjects_list')->name('web.teacher.academic_data.scheduleofsubjects.list');
-        Route::get('teacher/academic_data/scheduleofsubjects/create', 'User\TeacherController@scheduleofsubjects_create')->name('web.teacher.academic_data.scheduleofsubjects.create');
-        Route::get('teacher/academic_data/scheduleofsubjects/{scheduleOfSubjects}/update', 'User\TeacherController@scheduleofsubjects_update')->name('web.teacher.academic_data.scheduleofsubjects.update');
-
-        Route::get('teacher/academic_data/materialandassignment/list', 'User\TeacherController@materialandassignment_list')->name('web.teacher.academic_data.materialandassignment.list');
-        Route::get('teacher/academic_data/materialandassignment/create', 'User\TeacherController@materialandassignment_create')->name('web.teacher.academic_data.materialandassignment.create');
-        Route::get('teacher/academic_data/materialandassignment/{materialAndAssignment}/update', 'User\TeacherController@materialandassignment_update')->name('web.teacher.academic_data.materialandassignment.update');
-        /** !SECTION - Academic */
+        Route::get('employee/dashboard', 'User\EmployeeController@dashboard')->name('web.employee.dashboard');
+        Route::get('employee/profile', 'User\EmployeeController@profile')->name('web.employee.profile');
+        Route::get('employee/notification', 'User\EmployeeController@notification')->name('web.employee.notification');
+        Route::get('employee/offline', 'User\EmployeeController@offline')->name('web.employee.offline');
+        Route::get('employee/empty', 'User\EmployeeController@empty')->name('web.employee.empty');
+        Route::get('employee/logout', 'Auth\EmployeeController@logout_perfom')->name('web.employee.logout_perfom');
+        Route::get('employee/archive', 'User\EmployeeController@empty')->name('web.employee.archive');
+        Route::get('employee/about', 'User\EmployeeController@empty')->name('web.employee.about');
     });
 });
-/** !SECTION - Teacher */
+/** !SECTION - Employee */
 Route::middleware(['authc.basic:welcome,administrator,employee'])->group(function () {
     Route::post('resource/school_year', 'SchoolYearController@create')->name('web.resource.school_year.create');
     Route::patch('resource/school_year/{school_year}', 'SchoolYearController@update')->name('web.resource.school_year.update');

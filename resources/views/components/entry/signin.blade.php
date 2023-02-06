@@ -1,3 +1,7 @@
+@props([
+    'title' => 'signup',
+    'action' => '',
+])
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -8,13 +12,10 @@
 
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
 
-    <title>Login Teacher</title>
+    <title>{{ $title }}</title>
 
-    <meta name="description" content="Login Teacher Page">
-    {{-- <link rel="icon" href="/favicon.ico"> --}}
-    {{-- <link rel="manifest" href="/manifest-teacher.json" /> --}}
+    <meta name="description" content="{{ $title }} Page">
 
-    <link rel="manifest" href="/site.webmanifest">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -24,15 +25,14 @@
     <meta name="theme-color" content="#3b82f6">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @vite('resources/js/regis-sw.js')
 </head>
 
 <body
     class="grid content-center justify-items-stretch  sm:place-content-center min-h-screen text-black bg-gray-100 dark:text-white dark:bg-gray-900 shadow">
     <form class="grid m-4 p-4 gap-4 bg-white rounded-lg sm:w-[400px]"
-        action="{{ route('web.teacher.login_perform') }}" method="post" enctype="multipart/form-data">
+        action="{{ $action }}" method="post" enctype="multipart/form-data">
         @csrf
-        <h1 class="text-2xl text-center text-black font-extrabold">Login Teacher</h1>
+        <h1 class="text-2xl text-center text-black font-extrabold">{{ $title }}</h1>
         <div>
             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
             <input type="text" id="name" name="name" autofocus
@@ -58,7 +58,7 @@
         </div>
         <button
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            Login
+            Signin
         </button>
         <x-validation></x-validation>
     </form>

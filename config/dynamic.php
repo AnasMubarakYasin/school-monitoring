@@ -1,6 +1,7 @@
 <?php
 
 use App\Dynamic\Panel\Administrator as PanelAdministrator;
+use App\Dynamic\Panel\Employee as PanelEmployee;
 use App\Models\Administrator;
 use App\Models\Employee;
 use App\Models\Student;
@@ -17,7 +18,8 @@ return [
         'vendor_logo' => '/logo.png',
     ],
     'panel' => [
-        Administrator::class => PanelAdministrator::class
+        Administrator::class => PanelAdministrator::class,
+        Employee::class => PanelEmployee::class,
     ],
     'account' => [
         'list' => [

@@ -6,11 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SignInAdministratorRequest;
 use Illuminate\Support\Arr;
 
-class TeacherController extends Controller
+class EmployeeController extends Controller
 {
     public function login_show()
     {
-        return view('pages.teacher.login');
+        return view('pages.employee.login');
     }
 
     public function login_perfom(SignInAdministratorRequest $request)
@@ -19,7 +19,7 @@ class TeacherController extends Controller
         if (auth()->attempt(Arr::only($data, ['name', 'password']), isset($data['remember']))) {
             session()->regenerate();
 
-            return to_route('web.teacher.dashboard');
+            return to_route('web.employee.dashboard');
         } else {
             return back()->withErrors(['name' => ['username mismatch'], 'password' => ['password mismatch']]);
         }
@@ -31,6 +31,6 @@ class TeacherController extends Controller
         session()->invalidate();
         session()->regenerateToken();
 
-        return to_route('web.teacher.login_show');
+        return to_route('web.employee.login_show');
     }
 }

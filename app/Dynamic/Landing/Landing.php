@@ -28,6 +28,10 @@ class Landing
                 'name' => 'Administrator',
                 'login' => route('web.administrator.login_perform')
             ],
+            'employee' => [
+                'name' => 'Employee',
+                'login' => route('web.employee.login_perform')
+            ],
         ];
     }
 }
