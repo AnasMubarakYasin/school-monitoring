@@ -53,7 +53,7 @@ class Administrator extends Authenticatable
     {
         $this->attributes['password'] = bcrypt($value);
     }
-    
+
     public function setPhotoAttribute($value)
     {
         if (is_string($value)) {

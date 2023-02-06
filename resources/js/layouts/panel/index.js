@@ -47,13 +47,11 @@ drawerBtn.addEventListener("click", (event) => {
     drawer.toggle();
 });
 for (const trigger of sidebarMenus) {
-    // const target = document.getElementById(trigger.dataset.collapseToggle);
-    // const dropdown = new Dropdown(target, trigger, {});
-    if (trigger.dataset.collapse == "show") {
-        setTimeout(() => {
-            trigger.click();
-        }, 500);
-    }
+    // if (trigger.dataset.collapse == "hide") {
+    //     setTimeout(() => {
+    //         trigger.click();
+    //     }, 500);
+    // }
 }
 drawerChange(maxLG.matches);
 maxLG.addEventListener("change", (event) => {

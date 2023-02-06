@@ -15,6 +15,8 @@ use App\Models\SchoolYear;
 use App\Models\Semester;
 use App\Models\Student;
 use App\Models\Subjects;
+use App\Panel\Context\Administrator as ContextAdministrator;
+use App\Panel\Menu;
 
 class AdministratorController extends Controller
 {
@@ -110,7 +112,7 @@ class AdministratorController extends Controller
         $resource->route_delete = function ($item) {
             return route('web.resource.school_year.delete', ['school_year' => $item]);
         };
-        $resource->route_model = function ($field, $item) {
+        $resource->route_relation = function ($field, $item) {
             return route('web.administrator.academic_data.semester.list');
         };
         return view('pages.administrator.school_year.list', ['resource' => $resource]);
@@ -161,7 +163,7 @@ class AdministratorController extends Controller
         $resource->route_delete = function ($item) {
             return route('web.resource.semester.delete', ['semester' => $item]);
         };
-        $resource->route_model = function ($field, $item) {
+        $resource->route_relation = function ($field, $item) {
             return route('web.administrator.academic_data.school_year.list');
         };
         return view('pages.administrator.semester.list', ['resource' => $resource]);
@@ -177,7 +179,7 @@ class AdministratorController extends Controller
         $resource->route_view_any = function () {
             return route('web.administrator.academic_data.semester.list');
         };
-        $resource->fetcher_model = function ($definition) {
+        $resource->fetcher_relation = function ($definition) {
             return SchoolYear::all();
         };
         return view('pages.administrator.semester.create', ['resource' => $resource]);
@@ -194,7 +196,7 @@ class AdministratorController extends Controller
         $resource->route_view_any = function () {
             return route('web.administrator.academic_data.semester.list');
         };
-        $resource->fetcher_model = function ($definition) {
+        $resource->fetcher_relation = function ($definition) {
             return SchoolYear::all();
         };
         return view('pages.administrator.semester.update', ['resource' => $resource]);
@@ -351,7 +353,7 @@ class AdministratorController extends Controller
         $resource->route_delete = function ($item) {
             return route('web.resource.classroom.delete', ['classroom' => $item]);
         };
-        $resource->route_model = function ($definition, $item) {
+        $resource->route_relation = function ($definition, $item) {
             if ($definition->name == 'major') {
                 return route('web.administrator.data_master.major.list');
             } else {
@@ -378,7 +380,7 @@ class AdministratorController extends Controller
         $resource->route_view_any = function ($item) {
             return route('web.administrator.data_master.classroom.list');
         };
-        $resource->fetcher_model = function ($definition) {
+        $resource->fetcher_relation = function ($definition) {
             if ($definition->name == "major") {
                 return Major::all();
             } else {
@@ -406,7 +408,7 @@ class AdministratorController extends Controller
         $resource->route_view_any = function ($item) {
             return route('web.administrator.data_master.classroom.list');
         };
-        $resource->fetcher_model = function ($definition) {
+        $resource->fetcher_relation = function ($definition) {
             if ($definition->name == "major") {
                 return Major::all();
             } else {
@@ -630,7 +632,7 @@ class AdministratorController extends Controller
         $resource->route_delete = function ($item) {
             return route('web.resource.academic_data.subjects.delete', ['subjects' => $item]);
         };
-        $resource->route_model = function ($definition, $item) {
+        $resource->route_relation = function ($definition, $item) {
             if ($definition->name == 'major') {
                 return route('web.administrator.data_master.major.list');
             } else {
@@ -657,7 +659,7 @@ class AdministratorController extends Controller
         $resource->route_view_any = function () {
             return route('web.administrator.academic_data.subjects.list');
         };
-        $resource->fetcher_model = function ($definition) {
+        $resource->fetcher_relation = function ($definition) {
             if ($definition->name == 'major') {
                 return Major::all();
             } else {
@@ -685,7 +687,7 @@ class AdministratorController extends Controller
         $resource->route_view_any = function ($item) {
             return route('web.administrator.academic_data.subjects.list');
         };
-        $resource->fetcher_model = function ($definition) {
+        $resource->fetcher_relation = function ($definition) {
             if ($definition->name == 'major') {
                 return Major::all();
             } else {
@@ -720,7 +722,7 @@ class AdministratorController extends Controller
         $resource->route_delete = function ($item) {
             return route('web.resource.academic_data.scheduleofsubjects.delete', ['scheduleOfSubjects' => $item]);
         };
-        $resource->route_model = function ($definition, $item) {
+        $resource->route_relation = function ($definition, $item) {
             if ($definition->name == 'major') {
                 return route('web.administrator.academic_data.subjects.list');
             } else if ($definition->name == 'classrooms') {
@@ -752,7 +754,7 @@ class AdministratorController extends Controller
         $resource->route_view_any = function () {
             return route('web.administrator.academic_data.scheduleofsubjects.list');
         };
-        $resource->fetcher_model = function ($definition) {
+        $resource->fetcher_relation = function ($definition) {
             if ($definition->name == 'subjects') {
                 return Subjects::all();
             } else if ($definition->name == 'classrooms') {
@@ -785,7 +787,7 @@ class AdministratorController extends Controller
         $resource->route_view_any = function ($item) {
             return route('web.administrator.academic_data.scheduleofsubjects.list');
         };
-        $resource->fetcher_model = function ($definition) {
+        $resource->fetcher_relation = function ($definition) {
             if ($definition->name == 'subjects') {
                 return Subjects::all();
             } else if ($definition->name == 'classrooms') {
@@ -823,7 +825,7 @@ class AdministratorController extends Controller
         $resource->route_delete = function ($item) {
             return route('web.resource.academic_data.materialandassignment.delete', ['materialAndAssignment' => $item]);
         };
-        $resource->route_model = function ($definition, $item) {
+        $resource->route_relation = function ($definition, $item) {
             if ($definition->name == 'major') {
                 return route('web.administrator.academic_data.subjects.list');
             } else if ($definition->name == 'classrooms') {
@@ -853,7 +855,7 @@ class AdministratorController extends Controller
         $resource->route_view_any = function () {
             return route('web.administrator.academic_data.materialandassignment.list');
         };
-        $resource->fetcher_model = function ($definition) {
+        $resource->fetcher_relation = function ($definition) {
             if ($definition->name == 'subjects') {
                 return Subjects::all();
             } else if ($definition->name == 'classrooms') {
@@ -884,7 +886,7 @@ class AdministratorController extends Controller
         $resource->route_view_any = function ($item) {
             return route('web.administrator.academic_data.materialandassignment.list');
         };
-        $resource->fetcher_model = function ($definition) {
+        $resource->fetcher_relation = function ($definition) {
             if ($definition->name == 'subjects') {
                 return Subjects::all();
             } else if ($definition->name == 'classrooms') {

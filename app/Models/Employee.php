@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use App\Models\Resource\Definition;
-use App\Models\Resource\Trait\Formable;
-use App\Models\Resource\Trait\Statable;
-use App\Models\Resource\Trait\Tableable;
+use App\Dynamic\Resource\Definition;
+use App\Dynamic\Trait\Formable;
+use App\Dynamic\Trait\Statable;
+use App\Dynamic\Trait\Tableable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

@@ -1,4 +1,4 @@
-import { Sequence } from "./lib";
+import { Sequence } from "../../lib";
 
 const progressElm = document.getElementById('progress-bar');
 const progressVal = progressElm.firstElementChild;

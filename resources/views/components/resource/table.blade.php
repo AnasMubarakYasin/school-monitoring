@@ -3,9 +3,9 @@
     'selection' => true,
     'action' => true,
 ])
-@section('head')
+<x-slot:head>
     @vite('resources/js/components/resource/table.js')
-@endsection
+</x-slot>
 <div class="grid gap-4">
     @if ($menu)
         <div class="flex gap-2 items-center">
@@ -235,7 +235,7 @@
                                                 return $result;
                                             }, '?ref=on');
                                         @endphp
-                                        <a href="{{ $resource->route_model($resource->model->definition($column), $item->{$column}) . $query }}"
+                                        <a href="{{ $resource->route_relation($resource->model->definition($column), $item->{$column}) . $query }}"
                                             class="bg-blue-100 text-blue-800 text-sm font-medium px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
                                             {{ count($item->{$column}) }}
                                             {{ $resource->model->definition($column)->name }}
@@ -246,7 +246,7 @@
                                         @php
                                             $query = '?ref=on&id[]=' . $item->{$column}->id;
                                         @endphp
-                                        <a href="{{ $resource->route_model($resource->model->definition($column), $item->{$column}) . $query }}"
+                                        <a href="{{ $resource->route_relation($resource->model->definition($column), $item->{$column}) . $query }}"
                                             class="bg-blue-100 text-blue-800 text-sm font-medium px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
                                             {{ $resource->model->definition($column)->name }}
                                         </a>

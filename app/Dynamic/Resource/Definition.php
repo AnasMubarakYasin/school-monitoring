@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Resource;
+namespace App\Dynamic\Resource;
 
 class Definition
 {

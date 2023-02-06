@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing');
 })->name('welcome');
 Route::get('/locale/{locale}', 'Locale@set')->name('web.locale.set');
 Route::patch('/notification/{notification}/mark', 'Notification@mark')->name('web.notification.mark');

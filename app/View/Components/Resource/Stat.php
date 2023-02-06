@@ -2,12 +2,12 @@
 
 namespace App\View\Components\Resource;
 
-use App\Models\Resource\Stat as ModelsResourceStat;
+use App\Dynamic\Resource\Stat as DynamicResourceStat;
 use Illuminate\View\Component;
 
 class Stat extends Component
 {
-    public function __construct(public ModelsResourceStat $resource)
+    public function __construct(public DynamicResourceStat $resource)
     {
         $resource->resourcing();
     }
