@@ -83,7 +83,7 @@ Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
         Route::get('administrator/academic_data/school_year/{school_year}/update', 'User\AdministratorController@school_year_update')->name('web.administrator.academic_data.school_year.update');
 
         Route::get('administrator/academic_data/semester/list', 'User\AdministratorController@semester_list')->name('web.administrator.academic_data.semester.list');
-        Route::get('administrator/academic_data/semester/create', 'User\academic_data.AdministratorController@semester_create')->name('web.administrator.academic_data.semester.create');
+        Route::get('administrator/academic_data/semester/create', 'User\AdministratorController@semester_create')->name('web.administrator.academic_data.semester.create');
         Route::get('administrator/academic_data/semester/{semester}/update', 'User\AdministratorController@semester_update')->name('web.administrator.academic_data.semester.update');
 
         Route::get('administrator/academic_data/subjects/list', 'User\AdministratorController@subjects_list')->name('web.administrator.academic_data.subjects.list');

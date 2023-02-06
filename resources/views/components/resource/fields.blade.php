@@ -141,7 +141,7 @@
                         placeholder="{{ trans($model->definition($field)->name) }}"
                         value="{{ old($model->definition($field)->alias) ?? $model->{$model->definition($field)->alias} }}">
                     <datalist id="{{ $model->definition($field)->alias }}_list">
-                        @foreach ($resource->fetch_model($model->definition($field)) as $relation)
+                        @foreach ($resource->fetch_relation($model->definition($field)) as $relation)
                             <option value="{{ $relation->id }}">{{ $relation->name }}</option>
                         @endforeach
                     </datalist>
