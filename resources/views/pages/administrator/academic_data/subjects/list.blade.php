@@ -1,7 +1,18 @@
-@extends('layouts.administrator.panel', ['content_card' => false])
+<x-panel.layout :title="'list of subjects'">
+    <x-slot:top_bar>
+        <x-panel.top-bar>
 
-@section('title', __('list of subjects'))
+        </x-panel.top-bar>
+        </x-slot>
+        <x-slot:side_bar>
+            <x-panel.side-bar>
 
-@section('content')
-    <x-resource.table :resource="$resource"></x-resource.table>
-@endsection
+            </x-panel.side-bar>
+            </x-slot>
+            <x-slot:bottom_bar>
+                <x-panel.bottom-bar>
+
+                </x-panel.bottom-bar>
+                </x-slot>
+                <x-resource.table :resource="$resource"></x-resource.table>
+</x-panel.layout>
