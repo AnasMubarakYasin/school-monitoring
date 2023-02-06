@@ -3,6 +3,12 @@
 namespace App\Dynamic\Panel;
 
 use App\Dynamic\Menu;
+use App\Models\Classroom;
+use App\Models\Employee;
+use App\Models\Major;
+use App\Models\SchoolYear;
+use App\Models\Semester;
+use App\Models\Student;
 
 class Administrator extends Panel
 {
@@ -20,20 +26,16 @@ class Administrator extends Panel
                 icon: '<svg  fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>',
                 submenu: [
                     new Menu(
-                        name: "school information",
-                        link: route('web.administrator.data_master.school_information.list'),
-                    ),
-                    new Menu(
-                        name: "facility and infrastructure",
-                        link: route('web.administrator.data_master.facilityandinfrastructure.list'),
-                    ),
-                    new Menu(
                         name: "major",
                         link: route('web.administrator.data_master.major.list'),
+                        pname: "view_any",
+                        pclass: Major::class,
                     ),
                     new Menu(
                         name: "classroom",
                         link: route('web.administrator.data_master.classroom.list'),
+                        pname: "view_any",
+                        pclass: Classroom::class,
                     ),
                 ]
             ),
@@ -45,10 +47,14 @@ class Administrator extends Panel
                     new Menu(
                         name: "school year",
                         link: route('web.administrator.academic_data.school_year.list'),
+                        pname: "view_any",
+                        pclass: SchoolYear::class,
                     ),
                     new Menu(
                         name: "semester",
                         link: route('web.administrator.academic_data.semester.list'),
+                        pname: "view_any",
+                        pclass: Semester::class,
                     ),
                 ]
             ),
@@ -64,10 +70,14 @@ class Administrator extends Panel
                     new Menu(
                         name: "employee",
                         link: route('web.administrator.users.employee.list'),
+                        pname: "view_any",
+                        pclass: Employee::class,
                     ),
                     new Menu(
                         name: "student",
                         link: route('web.administrator.users.student.list'),
+                        pname: "view_any",
+                        pclass: Student::class,
                     ),
                 ]
             ),

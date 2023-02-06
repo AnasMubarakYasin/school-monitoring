@@ -1,7 +1,17 @@
-@extends('layouts.administrator.panel', ['content_card' => true])
+<x-panel.layout :title="'empty'">
+    <x-slot:top_bar>
+        <x-panel.top-bar>
 
-@section('title', 'Empty')
+        </x-panel.top-bar>
+    </x-slot>
+    <x-slot:side_bar>
+        <x-panel.side-bar>
 
-@section('content')
+        </x-panel.side-bar>
+    </x-slot>
+    <x-slot:bottom_bar>
+        <x-panel.bottom-bar>
 
-@endsection
+        </x-panel.bottom-bar>
+    </x-slot>
+</x-panel.layout>

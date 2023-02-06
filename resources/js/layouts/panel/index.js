@@ -47,11 +47,11 @@ drawerBtn.addEventListener("click", (event) => {
     drawer.toggle();
 });
 for (const trigger of sidebarMenus) {
-    if (trigger.dataset.collapse == "hide") {
-        setTimeout(() => {
-            trigger.click();
-        }, 500);
-    }
+    // if (trigger.dataset.collapse == "hide") {
+    //     setTimeout(() => {
+    //         trigger.click();
+    //     }, 500);
+    // }
 }
 drawerChange(maxLG.matches);
 maxLG.addEventListener("change", (event) => {

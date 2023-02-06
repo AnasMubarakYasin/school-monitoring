@@ -3,9 +3,9 @@
     'selection' => true,
     'action' => true,
 ])
-@section('head')
+<x-slot:head>
     @vite('resources/js/components/resource/table.js')
-@endsection
+</x-slot>
 <div class="grid gap-4">
     @if ($menu)
         <div class="flex gap-2 items-center">
