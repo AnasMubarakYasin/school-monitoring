@@ -2,6 +2,7 @@
 
 use App\Dynamic\Panel\Administrator as PanelAdministrator;
 use App\Dynamic\Panel\Employee as PanelEmployee;
+use App\Dynamic\Panel\Student as PanelStudent;
 use App\Models\Administrator;
 use App\Models\Employee;
 use App\Models\Student;
@@ -20,6 +21,7 @@ return [
     'panel' => [
         Administrator::class => PanelAdministrator::class,
         Employee::class => PanelEmployee::class,
+        Student::class => PanelStudent::class,
     ],
     'entry' => [
         'enable_demo' => true,

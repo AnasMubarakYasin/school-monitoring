@@ -126,6 +126,27 @@ Route::middleware(['authc.basic:welcome,employee'])->group(function () {
     });
 });
 /** !SECTION - Employee */
+/** SECTION - Employee */
+Route::redirect('/student', '/student/dashboard');
+Route::middleware('authc.guest:web.student.dashboard,student')->group(function () {
+    Route::middleware('locale:en')->group(function () {
+        Route::get('student/login', 'Auth\StudentController@login_show')->name('web.student.login_show');
+    });
+    Route::post('student/login', 'Auth\StudentController@login_perfom')->name('web.student.login_perform');
+});
+Route::middleware(['authc.basic:welcome,student'])->group(function () {
+    Route::middleware(['locale', 'view.share'])->group(function () {
+        Route::get('student/dashboard', 'User\StudentController@dashboard')->name('web.student.dashboard');
+        Route::get('student/profile', 'User\StudentController@profile')->name('web.student.profile');
+        Route::get('student/notification', 'User\StudentController@notification')->name('web.student.notification');
+        Route::get('student/offline', 'User\StudentController@offline')->name('web.student.offline');
+        Route::get('student/empty', 'User\StudentController@empty')->name('web.student.empty');
+        Route::get('student/logout', 'Auth\StudentController@logout_perfom')->name('web.student.logout_perfom');
+        Route::get('student/archive', 'User\StudentController@empty')->name('web.student.archive');
+        Route::get('student/about', 'User\StudentController@empty')->name('web.student.about');
+    });
+});
+/** !SECTION - Employee */
 Route::middleware(['authc.basic:welcome,administrator,employee'])->group(function () {
     Route::post('resource/school_year', 'SchoolYearController@create')->name('web.resource.school_year.create');
     Route::patch('resource/school_year/{school_year}', 'SchoolYearController@update')->name('web.resource.school_year.update');

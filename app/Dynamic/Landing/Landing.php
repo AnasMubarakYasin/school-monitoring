@@ -45,6 +45,15 @@ class Landing
                 ],
                 'demo' => true,
             ],
+            'student' => [
+                'name' => 'Student',
+                'login' => route('web.student.login_perform'),
+                'user' => [
+                    'name' => 'student',
+                    'password' => 'student',
+                ],
+                'demo' => true,
+            ],
         ];
     }
 }

@@ -38,6 +38,7 @@ class DatabaseSeeder extends Seeder
             'password' => 'teacher',
             'task' => 'teacher',
         ]);
+
         $employees = Employee::factory(30)->create();
         $school_year = SchoolYear::factory()->create([
             'name' => now()->year . "/" . now()->addYear()->year,
@@ -146,6 +147,13 @@ class DatabaseSeeder extends Seeder
                     return ['homeroom_id' => $item->id];
                 })->toArray()
             ))->create();
+        $student = Student::factory()->create([
+            'name' => 'student',
+            'email' => 'student@host.local',
+            'password' => 'student',
+            'major_id' => $major_kimia->id,
+            'classroom_id' => $classroom_kimia_10->id,
+        ]);
         $students = Student::factory()
             ->count(90)
             ->state(new Sequence(
