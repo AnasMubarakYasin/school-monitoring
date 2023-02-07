@@ -105,6 +105,10 @@ Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
         Route::get('administrator/academic_data/attendance/list', 'User\AdministratorController@attendance_list')->name('web.administrator.academic_data.attendance.list');
         Route::get('administrator/academic_data/attendance/create', 'User\AdministratorController@attendance_create')->name('web.administrator.academic_data.attendance.create');
         Route::get('administrator/academic_data/attendance/{attendance}/update', 'User\AdministratorController@attendance_update')->name('web.administrator.academic_data.attendance.update');
+
+        Route::get('administrator/academic_data/academic_activity/list', 'User\AdministratorController@academic_activity_list')->name('web.administrator.academic_data.academic_activity.list');
+        Route::get('administrator/academic_data/academic_activity/create', 'User\AdministratorController@academic_activity_create')->name('web.administrator.academic_data.academic_activity.create');
+        Route::get('administrator/academic_data/academic_activity/{academic_activity}/update', 'User\AdministratorController@academic_activity_update')->name('web.administrator.academic_data.academic_activity.update');
         /** !SECTION - Academic */
     });
 });
@@ -148,6 +152,10 @@ Route::middleware(['authc.basic:welcome,student'])->group(function () {
         Route::get('student/logout', 'Auth\StudentController@logout_perfom')->name('web.student.logout_perfom');
         Route::get('student/archive', 'User\StudentController@empty')->name('web.student.archive');
         Route::get('student/about', 'User\StudentController@empty')->name('web.student.about');
+
+        Route::get('student/academic_activity/list', 'User\StudentController@academic_activity_list')->name('web.student.academic_activity.list');
+        Route::get('student/academic_activity/create', 'User\StudentController@academic_activity_create')->name('web.student.academic_activity.create');
+        Route::get('student/academic_activity/{academic_activity}/update', 'User\StudentController@academic_activity_update')->name('web.student.academic_activity.update');
     });
 });
 /** !SECTION - Employee */
@@ -214,4 +222,9 @@ Route::middleware(['authc.basic:welcome,administrator,employee'])->group(functio
     Route::patch('resource/attendance/{attendance}', 'PresenceController@update')->name('web.resource.attendance.update');
     Route::delete('resource/attendance/{attendance}', 'PresenceController@delete')->name('web.resource.attendance.delete');
     Route::delete('resource/attendance', 'PresenceController@delete_any')->name('web.resource.attendance.delete_any');
+
+    Route::post('resource/academic_activity', 'AcademicActivityController@create')->name('web.resource.academic_activity.create');
+    Route::patch('resource/academic_activity/{academic_activity}', 'AcademicActivityController@update')->name('web.resource.academic_activity.update');
+    Route::delete('resource/academic_activity/{academic_activity}', 'AcademicActivityController@delete')->name('web.resource.academic_activity.delete');
+    Route::delete('resource/academic_activity', 'AcademicActivityController@delete_any')->name('web.resource.academic_activity.delete_any');
 });

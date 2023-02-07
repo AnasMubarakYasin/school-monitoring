@@ -28,7 +28,7 @@ class StudentFactory extends Factory
             'nisn' => fake()->unique()->regexify('[0-9]{12}'),
             'fullname' => fake()->name($gender),
             'gender' => $gender,
-            'grade' => fake()->randomNumber(1),
+            'grade' => fake()->numberBetween(10, 12),
 
             'major_id' => 0,
             'classroom_id' => 0,

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\AcademicActivity;
 use App\Models\Administrator;
 use App\Models\Attendance;
 use App\Models\Classroom;
@@ -77,6 +78,7 @@ class DatabaseSeeder extends Seeder
             'telp' => '',
             'website' => '',
         ]);
+        AcademicActivity::factory()->count(30)->create();
         $major_kimia = Major::factory()->create([
             'name' => 'kimia',
             'expertise' => 'kimia',
@@ -103,13 +105,13 @@ class DatabaseSeeder extends Seeder
         ]);
         $subjects_basic_kimia = Subjects::factory()->create([
             'name' => 'basic kimia',
-            'level' => '10',
+            'grade' => 10,
             'major_id' => $major_kimia->id,
             'teacher_id' => $teacher_kimia->id,
         ]);
         $subjects_common_biology = Subjects::factory()->create([
             'name' => 'common biology',
-            'level' => '10',
+            'grade' => 10,
             'major_id' => $major_biology->id,
             'teacher_id' => $teacher_biology->id,
         ]);
@@ -133,6 +135,7 @@ class DatabaseSeeder extends Seeder
                 'email' => 'abcd@host.local',
                 'password' => 'abcd',
                 'fullname' => 'abcd',
+                'grade' => 10,
                 'major_id' => $major_kimia->id,
                 'classroom_id' => $classroom_kimia_10->id,
             ]);
@@ -142,6 +145,7 @@ class DatabaseSeeder extends Seeder
                 'email' => 'efgh@host.local',
                 'password' => 'efgh',
                 'fullname' => 'efgh',
+                'grade' => 10,
                 'major_id' => $major_biology->id,
                 'classroom_id' => $classroom_biology_10->id,
             ]);

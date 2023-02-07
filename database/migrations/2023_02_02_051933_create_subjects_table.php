@@ -19,7 +19,7 @@ return new class extends Migration
 
             $table->string('code')->unique();
             $table->string('name')->unique();
-            $table->string('level');
+            $table->integer('grade');
             $table->foreignId('major_id')->constrained('majors')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('teacher_id')->constrained('employees')->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('description')->nullable();

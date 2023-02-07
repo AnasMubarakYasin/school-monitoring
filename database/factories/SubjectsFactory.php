@@ -16,12 +16,10 @@ class SubjectsFactory extends Factory
      */
     public function definition()
     {
-        $name = fake()->randomElement(['kimia', 'biology', 'ipa', 'ips']);
-        $level = fake()->randomElement(['10', '11', '12']);
         return [
             'code' => fake()->unique()->regexify('[0-9]{6}'),
-            'name' => $name,
-            'level' => $level,
+            'name' => fake()->randomElement(['kimia', 'biology', 'ipa', 'ips']),
+            'grade' => fake()->numberBetween(10, 12),
             'description' => fake()->slug(),
 
             'major_id' => 0,

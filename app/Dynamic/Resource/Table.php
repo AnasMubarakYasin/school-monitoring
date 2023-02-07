@@ -17,6 +17,10 @@ class Table extends Resource
     public array|null $sort = null;
     public array|null $filter = null;
     public array|null $id = null;
+    public array $init = [
+        'perpage' => 5,
+        'limitpage' => 5,
+    ];
     public function from_request(
         Request $request,
         array|null $columns = [],

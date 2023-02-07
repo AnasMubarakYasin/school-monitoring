@@ -211,7 +211,7 @@
                     @foreach ($resource->columns as $column)
                         <th scope="col" class="p-3 text-base capitalize">
                             <div class="flex items-center w-full h-full">
-                                <span>{{ __($resource->model->definition($column)->name) }}</span>
+                                <span class="whitespace-nowrap">{{ __($resource->model->definition($column)->name) }}</span>
                                 <a
                                     href="{{ request()->fullUrlWithQuery(['sort' => 'on', 'sort_name' => $column, 'sort_dir' => request()->query('sort_dir', 'desc') == 'desc' ? 'asc' : 'desc']) }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3.5 h-3.5"
@@ -350,8 +350,11 @@
                         </label>
                         <select id="perpage" name="perpage"
                             class="text-gray-700 bg-white border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 capitalize">
+                            @php
+                                $perpage = $resource->init['perpage'];
+                            @endphp
                             @foreach (range(1, 3) as $per)
-                                <option @selected($paginator->perPage() == $per * 5) value="{{ $per * 5 }}">{{ $per * 5 }}
+                                <option @selected($paginator->perPage() == $per * $perpage) value="{{ $per * $perpage }}">{{ $per * $perpage }}
                                 </option>
                             @endforeach
                             <option @selected($paginator->perPage() == $paginator->total()) value="{{ $paginator->total() }}">
@@ -416,7 +419,7 @@
                     @if ($count && $count > 1)
                         @php
                             $index = 1;
-                            $limit = 7;
+                            $limit = $resource->init['limitpage'];
                             if ($count > $limit) {
                                 $div = floor($limit / 2);
                                 $start = $paginator->currentPage() - $div;

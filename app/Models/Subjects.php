@@ -25,9 +25,9 @@ class Subjects extends Model
             name: 'subject name',
             type: 'string',
         );
-        self::$definitions['level'] = new Definition(
-            name: 'level',
-            type: 'string',
+        self::$definitions['grade'] = new Definition(
+            name: 'grade',
+            type: 'number',
         );
         self::$definitions['major'] = new Definition(
             name: 'major',
@@ -56,7 +56,7 @@ class Subjects extends Model
     protected $fillable = [
         'code',
         'name',
-        'level',
+        'grade',
         'major_id',
         'teacher_id',
         'description',
