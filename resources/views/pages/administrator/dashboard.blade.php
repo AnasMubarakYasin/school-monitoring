@@ -18,11 +18,13 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <x-resource.infobox></x-resource.infobox>
         </div>
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
-            @foreach ($stats as $stat)
-                <x-resource.stat :resource="$stat"></x-resource.stat>
-            @endforeach
+        <div class="grid gap-2">
+            <div class="text-gray-800 dark:text-gray-300">{{ trans('Resources') }}</div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                @foreach ($stats as $stat)
+                    <x-resource.stat :resource="$stat"></x-resource.stat>
+                @endforeach
+            </div>
         </div>
-        <x-school-year.stat></x-school-year.stat>
     </div>
 </x-panel.layout>

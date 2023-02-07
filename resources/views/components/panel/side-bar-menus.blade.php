@@ -1,25 +1,22 @@
 @props([
     'id' => '',
     'menus' => '',
+    'hide' => false,
 ])
-<ul id="{{ $id }}" class="flex flex-col gap-2 capitalize">
+<ul id="{{ $id }}" class="flex flex-col gap-2 capitalize {{ $hide ? 'hidden' : '' }}">
     @foreach ($menus as $menu)
-        @if (is_array($menu))
-            <x-panel.side-bar-menus :id="$loop->iteration . $id . '-' . $loop->index" :menus="$menu">
-
-            </x-panel.side-bar-menus>
-        @else
-            <x-panel.side-bar-menu :id="$id . '-item-' . $loop->index" :name="$menu->name" :link="$menu->link" :button="!!$menu->submenu"
+        <li>
+            <x-panel.side-bar-menu :for="$id . '-item-' . $loop->iteration" :name="$menu->name" :link="$menu->link" :button="!!$menu->submenu"
                 :pname="$menu->pname" :pclass="$menu->pclass">
                 <x-slot:icon>
                     {!! $menu->icon !!}
                     </x-slot>
             </x-panel.side-bar-menu>
             @if ($menu->submenu)
-                <x-panel.side-bar-menus :id="$id . '-item-' . $loop->index" :menus="$menu->submenu">
+                <x-panel.side-bar-menus :id="$id . '-item-' . $loop->iteration" :menus="$menu->submenu" :hide="!str_starts_with(request()->url(), $menu->link)">
 
                 </x-panel.side-bar-menus>
             @endif
-        @endif
+        </li>
     @endforeach
 </ul>
