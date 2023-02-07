@@ -21,6 +21,10 @@ class SchoolYear extends Model
     public static function defining()
     {
         self::$caption = "school year";
+        self::$definitions['id'] = new Definition(
+            name: 'id',
+            type: 'number',
+        );
         self::$definitions['name'] = new Definition(
             name: 'name',
             type: 'string',
@@ -48,7 +52,7 @@ class SchoolYear extends Model
             name: 'semesters',
             type: 'model',
             array: true,
-            relation: 'children',
+            relation: 'semesters',
             alias: "",
         );
     }

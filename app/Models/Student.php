@@ -76,6 +76,20 @@ class Student extends Authenticatable
                 name: 'grade',
                 type: 'string',
             ),
+            'major' => new Definition(
+                name: 'major',
+                type: 'model',
+                array: false,
+                relation: 'parent',
+                alias: 'major_id',
+            ),
+            'classroom' => new Definition(
+                name: 'classroom',
+                type: 'model',
+                array: false,
+                relation: 'parent',
+                alias: 'classroom_id',
+            ),
         ];
     }
 
@@ -91,6 +105,9 @@ class Student extends Authenticatable
         'fullname',
         'gender',
         'grade',
+
+        'major_id',
+        'classroom_id',
     ];
 
     protected $hidden = [
@@ -105,5 +122,14 @@ class Student extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
+    }
+
+    public function major()
+    {
+        return $this->belongsTo(Major::class, 'major_id');
+    }
+    public function classroom()
+    {
+        return $this->belongsTo(Classroom::class, 'classroom_id');
     }
 }

@@ -22,6 +22,10 @@ class Semester extends Model
     {
         self::$caption = "semester";
         self::$definitions = [
+            'id' => new Definition(
+                name: 'id',
+                type: 'number',
+            ),
             'name' => new Definition(
                 name: 'name',
                 type: 'string',
@@ -57,7 +61,7 @@ class Semester extends Model
                 name: 'school year',
                 type: 'model',
                 array: false,
-                relation: 'parent',
+                relation: 'school_year',
                 alias: 'school_year_id',
             ),
         ];

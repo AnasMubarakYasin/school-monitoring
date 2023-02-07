@@ -59,6 +59,16 @@ class Table extends Resource
                         case 'string':
                             $query->orWhereFullText($column, $this->filter[$column]);
                             break;
+                        case 'number':
+                            $query->orWhere($column, $this->filter[$column]);
+                            break;
+                        case 'model':
+                            $value = $this->filter[$column];
+                            $relation = $this->model->definition($column)->relation;
+                            $query->with($relation)->orWhereHas($relation, function ($builder) use ($value) {
+                                $builder->where('id', $value);
+                            });
+                            break;
 
                         default:
                             $query->orWhere($column, $this->filter[$column]);

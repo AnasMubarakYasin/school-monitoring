@@ -3,12 +3,23 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Presence;
+use App\Models\Student;
+use Illuminate\Database\Eloquent\Builder;
 
 class StudentController extends Controller
 {
     public function dashboard()
     {
-        return view('pages.employee.dashboard');
+        /** @var Student */
+        $user = auth()->user();
+        $presences = Presence::with('classroom')->whereHas("classroom", function (Builder $builder) use ($user) {
+            $builder->where('id', $user->classroom_id);
+        })->get();
+
+        return view('pages.employee.dashboard', [
+            'presences' => $presences,
+        ]);
     }
     public function profile()
     {

@@ -65,6 +65,11 @@
         </button>
         <x-validation></x-validation>
     </form>
+    <div class="mx-4 px-4 font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline">
+        <a href="/">
+            landing
+        </a>
+    </div>
 </body>
 
 </html>
