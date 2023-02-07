@@ -19,7 +19,7 @@
         </x-panel.side-bar-menus>
         <ul class="pt-4 mt-4 space-y-2 border-t border-gray-200 dark:border-gray-700 capitalize">
             <li>
-                <a href="{{ route('web.administrator.logout_perfom') }}" @class([
+                <a href="{{ $panel->signout() }}" @class([
                     'flex items-center p-2 text-base font-normal rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700',
                 ])>
                     <svg @class(['w-6 h-6 transition text-gray-700 dark:text-white']) xmlns="http://www.w3.org/2000/svg" fill="none"

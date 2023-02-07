@@ -6,7 +6,7 @@
     'title' => 'Panel',
     'logo' => '/logo.png',
     'favicon' => '/favicon.ico',
-    
+
     'head' => '',
     'body' => '',
     'top_bar' => '',
@@ -30,7 +30,13 @@
     @vite('resources/js/layouts/panel/progress.js')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @vite('resources/js/layouts/panel/index.js')
-    {{-- @vite('resources/js/regis-sw.js') --}}
+
+    @if ($panel->webmanifest)
+        <link rel="manifest" href="{{ $panel->get_webmanifest() }}">
+    @endif
+    @if ($panel->service_worker)
+        @vite($panel->get_service_worker())
+    @endif
 
     {{ $head }}
 </head>

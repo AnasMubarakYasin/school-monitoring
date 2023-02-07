@@ -16,4 +16,20 @@ class Employee extends Panel
             ),
         ];
     }
+    public function empty()
+    {
+        return route('web.employee.empty');
+    }
+    public function profile()
+    {
+        return route('web.employee.profile');
+    }
+    public function notifications()
+    {
+        return route('web.employee.notification');
+    }
+    public function signout()
+    {
+        return route('web.employee.logout_perfom');
+    }
 }

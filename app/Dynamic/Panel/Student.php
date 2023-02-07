@@ -16,4 +16,20 @@ class Student extends Panel
             ),
         ];
     }
+    public function empty()
+    {
+        return route('web.student.empty');
+    }
+    public function profile()
+    {
+        return route('web.student.profile');
+    }
+    public function notifications()
+    {
+        return route('web.student.notification');
+    }
+    public function signout()
+    {
+        return route('web.student.logout_perfom');
+    }
 }

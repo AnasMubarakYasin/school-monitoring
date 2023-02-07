@@ -132,4 +132,20 @@ class Administrator extends Panel
             ),
         ];
     }
+    public function empty()
+    {
+        return route('web.administrator.empty');
+    }
+    public function profile()
+    {
+        return route('web.administrator.profile');
+    }
+    public function notifications()
+    {
+        return route('web.administrator.notification');
+    }
+    public function signout()
+    {
+        return route('web.administrator.logout_perfom');
+    }
 }

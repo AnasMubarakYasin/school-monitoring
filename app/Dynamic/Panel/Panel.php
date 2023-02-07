@@ -27,6 +27,8 @@ class Panel
     public string $app_logo = '';
     public string $vendor_name = '';
     public string $vendor_year = '';
+    public bool $webmanifest = false;
+    public bool $service_worker = false;
     public function get_user_photo(): string
     {
         return "";
@@ -55,7 +57,24 @@ class Panel
     {
         return "";
     }
+    public function get_service_worker(): string
+    {
+        return "";
+    }
     public function get_webmanifest(): string
+    {
+        return "";
+    }
+
+    public function profile()
+    {
+        return "";
+    }
+    public function notifications()
+    {
+        return "";
+    }
+    public function signout()
     {
         return "";
     }

@@ -140,13 +140,13 @@
             <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
                 aria-labelledby="dropdownInformProfileButtonationButton">
                 <li>
-                    <a href="{{ route('web.administrator.profile') }}"
+                    <a href="{{ $panel->profile() }}"
                         class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                         {{ trans('profile') }}
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('web.administrator.notification') }}"
+                    <a href="{{ $panel->notifications() }}"
                         class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                         {{ trans('notifications') }}
                     </a>
@@ -197,14 +197,14 @@
                     </button>
                 </li>
                 <li>
-                    <a href="{{ route('web.administrator.empty') }}"
+                    <a href="{{ $panel->empty() }}"
                         class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                         {{ trans('settings') }}
                     </a>
                 </li>
             </ul>
             <div class="py-1">
-                <a href="{{ route('web.administrator.logout_perfom') }}"
+                <a href="{{ $panel->signout() }}"
                     class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                     Logout
                 </a>
