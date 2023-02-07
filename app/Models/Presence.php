@@ -63,6 +63,12 @@ class Presence extends Model
                 relation: 'parent',
                 alias: 'classroom_id',
             ),
+            'attendances' => new Definition(
+                name: 'attendances',
+                type: 'model',
+                array: true,
+                relation: 'children',
+            ),
         ];
         
         self::$route_create = function () {
@@ -120,5 +126,10 @@ class Presence extends Model
     public function classroom()
     {
         return $this->belongsTo(Classroom::class, 'classroom_id');
+    }
+
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class);
     }
 }

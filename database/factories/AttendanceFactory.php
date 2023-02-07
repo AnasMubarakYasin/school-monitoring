@@ -17,7 +17,11 @@ class AttendanceFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'state' => fake()->randomElement(['present', 'unpresent']),
+            'description' => fake()->slug(),
+            
+            'presence_id' => 0,
+            'student_id' => 0,
         ];
     }
 }

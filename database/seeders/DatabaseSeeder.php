@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Administrator;
+use App\Models\Attendance;
 use App\Models\Classroom;
 use App\Models\Employee;
 use App\Models\SchoolInformation;
@@ -126,13 +127,33 @@ class DatabaseSeeder extends Seeder
                 'major_id' => $major_biology->id,
                 'homeroom_id' => $homeroom_biology_10->id,
             ]);
-        $student_kimia_10 = Student::factory()
-            ->count(10)->create([
+        $student_abcd = Student::factory()
+            ->create([
+                'name' => 'abcd',
+                'email' => 'abcd@host.local',
+                'password' => 'abcd',
+                'fullname' => 'abcd',
                 'major_id' => $major_kimia->id,
                 'classroom_id' => $classroom_kimia_10->id,
             ]);
-        $student_biology_10 = Student::factory()
-            ->count(10)->create([
+        $student_efgh = Student::factory()
+            ->create([
+                'name' => 'efgh',
+                'email' => 'efgh@host.local',
+                'password' => 'efgh',
+                'fullname' => 'efgh',
+                'major_id' => $major_biology->id,
+                'classroom_id' => $classroom_biology_10->id,
+            ]);
+        $students_kimia_10 = Student::factory()
+            ->count(10)
+            ->create([
+                'major_id' => $major_kimia->id,
+                'classroom_id' => $classroom_kimia_10->id,
+            ]);
+        $students_biology_10 = Student::factory()
+            ->count(10)
+            ->create([
                 'major_id' => $major_biology->id,
                 'classroom_id' => $classroom_biology_10->id,
             ]);
@@ -182,6 +203,18 @@ class DatabaseSeeder extends Seeder
                 'teacher_id' => $teacher_biology->id,
                 'subjects_id' => $subjects_common_biology->id,
                 'classroom_id' => $classroom_kimia_10->id,
+            ]);
+        $attendance = Attendance::factory()
+            ->count(16)
+            ->create([
+                'presence_id' => $presence_kimia_10->id,
+                'student_id' => $student_abcd->id,
+            ]);
+        $attendance = Attendance::factory()
+            ->count(16)
+            ->create([
+                'presence_id' => $presence_biology_10->id,
+                'student_id' => $student_efgh->id,
             ]);
     }
 }

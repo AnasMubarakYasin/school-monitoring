@@ -3,6 +3,7 @@
 namespace App\Dynamic\Panel;
 
 use App\Dynamic\Menu;
+use App\Models\Attendance;
 use App\Models\Classroom;
 use App\Models\Employee;
 use App\Models\FacilityAndInfrastructure;
@@ -97,6 +98,12 @@ class Administrator extends Panel
                         link: route('web.administrator.academic_data.presence.list'),
                         pname: "view_any",
                         pclass: Presence::class,
+                    ),
+                    new Menu(
+                        name: "attendance",
+                        link: route('web.administrator.academic_data.attendance.list'),
+                        pname: "view_any",
+                        pclass: Attendance::class,
                     ),
                 ]
             ),

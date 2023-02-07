@@ -2,7 +2,10 @@
 
 namespace App\Policies;
 
+use App\Models\Administrator;
 use App\Models\Attendance;
+use App\Models\Employee;
+use App\Models\Student;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -10,85 +13,43 @@ class AttendancePolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Determine whether the user can view any models.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function viewAny(User $user)
+    public function view_any(Administrator|Employee|Student $user)
     {
-        //
+        return true;
     }
 
-    /**
-     * Determine whether the user can view the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Attendance  $attendance
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function view(User $user, Attendance $attendance)
+    public function view(Administrator|Employee|Student $user, Attendance $attendance)
     {
-        //
+        return true;
     }
 
-    /**
-     * Determine whether the user can create models.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function create(User $user)
+    public function create(Administrator|Employee|Student $user)
     {
-        //
+        return true;
     }
 
-    /**
-     * Determine whether the user can update the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Attendance  $attendance
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function update(User $user, Attendance $attendance)
+    public function update(Administrator|Employee|Student $user, Attendance $attendance)
     {
-        //
+        return true;
     }
 
-    /**
-     * Determine whether the user can delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Attendance  $attendance
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function delete(User $user, Attendance $attendance)
+    public function delete_any(Administrator|Employee|Student $user)
     {
-        //
+        return true;
     }
 
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Attendance  $attendance
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function restore(User $user, Attendance $attendance)
+    public function delete(Administrator|Employee|Student $user, Attendance $attendance)
     {
-        //
+        return true;
     }
 
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Attendance  $attendance
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(User $user, Attendance $attendance)
+    public function restore(Administrator|Employee|Student $user, Attendance $attendance)
     {
-        //
+        return true;
+    }
+
+    public function forceDelete(Administrator|Employee|Student $user, Attendance $attendance)
+    {
+        return true;
     }
 }
