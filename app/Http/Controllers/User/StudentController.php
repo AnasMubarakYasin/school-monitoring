@@ -18,25 +18,25 @@ class StudentController extends Controller
             $builder->where('id', $user->classroom_id);
         })->get();
 
-        return view('pages.employee.dashboard', [
+        return view('pages.student.dashboard', [
             'presences' => $presences,
         ]);
     }
     public function profile()
     {
-        return view('pages.employee.profile');
+        return view('pages.student.profile');
     }
     public function notification()
     {
-        return view('pages.employee.notification');
+        return view('pages.student.notification');
     }
     public function offline()
     {
-        return view('pages.employee.offline');
+        return view('pages.student.offline');
     }
     public function empty()
     {
-        return view('pages.employee.empty');
+        return view('pages.student.empty');
     }
 
     //SECTION - academic_activity
