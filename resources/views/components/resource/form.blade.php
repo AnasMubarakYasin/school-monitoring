@@ -4,6 +4,7 @@
 <x-slot:head>
     @vite('resources/js/components/resource/form.js')
 </x-slot>
+{{-- @dd($resource->model::$definitions) --}}
 <form
     class="grid gap-4 px-5 py-3 lg:w-1/2 text-gray-700 border border-gray-200 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700"
     action="{{ $resource->is_create() ? $resource->route_create() : $resource->route_update($model) }}" method="post"

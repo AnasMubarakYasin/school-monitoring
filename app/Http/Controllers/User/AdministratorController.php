@@ -9,6 +9,7 @@ use App\Models\Employee;
 use App\Models\FacilityAndInfrastructure;
 use App\Models\Major;
 use App\Models\MaterialAndAssignment;
+use App\Models\Presence;
 use App\Models\ScheduleOfSubjects;
 use App\Models\SchoolInformation;
 use App\Models\SchoolYear;
@@ -62,6 +63,10 @@ class AdministratorController extends Controller
         $materialandassignment->route_view_any = function () {
             return route('web.administrator.academic_data.materialandassignment.list');
         };
+        $presence = Presence::statable()->init();
+        $presence->route_view_any = function () {
+            return route('web.administrator.academic_data.presence.list');
+        };
         $stats = [
             $school_year,
             $semester,
@@ -72,7 +77,8 @@ class AdministratorController extends Controller
             $facilityandinfrastructure,
             $subjects,
             $scheduleofsubjects,
-            $materialandassignment
+            $materialandassignment,
+            $presence,
         ];
         return view('pages.administrator.dashboard', [
             'stats' => $stats,
@@ -898,4 +904,76 @@ class AdministratorController extends Controller
         return view('pages.administrator.academic_data.materialandassigment.update', ['resource' => $resource]);
     }
     //!SECTION
+    //SECTION - presence
+    public function presence_list()
+    {
+        $resource = Presence::tableable()->from_request(
+            request: request(),
+            columns: [
+                'name',
+
+                'school_year',
+                'semester',
+                'teacher',
+                'subjects',
+                'classroom',
+            ],
+            pagination: ['per' => 5, 'num' => 1],
+        );
+        $resource->route_store = function () {
+            return route('web.administrator.academic_data.presence.create');
+        };
+        $resource->route_edit = function ($item) {
+            return route('web.administrator.academic_data.presence.update', ['presence' => $item]);
+        };
+        $resource->route_relation = function ($definition, $item) {
+            return match ($definition->name) {
+                'school year' => route('web.administrator.academic_data.school_year.list'),
+                'semester' => route('web.administrator.academic_data.semester.list'),
+                'teacher' => route('web.administrator.users.employee.list'),
+                'subjects' => route('web.administrator.academic_data.subjects.list'),
+                'classroom' => route('web.administrator.data_master.classroom.list'),
+                default => ""
+            };
+        };
+        return view('pages.administrator.presence.list', ['resource' => $resource]);
+    }
+    public function presence_create()
+    {
+        $resource = Presence::formable()->from_create(
+            fields: [
+                'name',
+
+                'school_year',
+                'semester',
+                'teacher',
+                'subjects',
+                'classroom',
+            ],
+        );
+        $resource->route_view_any = function () {
+            return route('web.administrator.academic_data.presence.list');
+        };
+        return view('pages.administrator.presence.create', ['resource' => $resource]);
+    }
+    public function presence_update(Presence $presence)
+    {
+        $resource = Presence::formable()->from_update(
+            model: $presence,
+            fields: [
+                'name',
+
+                'school_year',
+                'semester',
+                'teacher',
+                'subjects',
+                'classroom',
+            ],
+        );
+        $resource->route_view_any = function () {
+            return route('web.administrator.academic_data.presence.list');
+        };
+        return view('pages.administrator.presence.update', ['resource' => $resource]);
+    }
+    //!SECTION - presence
 }

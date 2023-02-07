@@ -16,9 +16,9 @@ class MajorFactory extends Factory
      */
     public function definition()
     {
-        $expertise = fake()->randomElement(['kimia', 'biology']);
+        $expertise = fake()->randomElement(['kimia', 'biology', 'language']);
         return [
-            'name' => fake()->name(),
+            'name' => $expertise,
             'expertise' => $expertise,
             'general_competence' => fake()->slug(),
             'special_competence' => fake()->slug(),

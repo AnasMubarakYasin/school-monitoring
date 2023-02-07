@@ -8,6 +8,7 @@ use App\Models\Employee;
 use App\Models\FacilityAndInfrastructure;
 use App\Models\Major;
 use App\Models\MaterialAndAssignment;
+use App\Models\Presence;
 use App\Models\ScheduleOfSubjects;
 use App\Models\SchoolInformation;
 use App\Models\SchoolYear;
@@ -90,6 +91,12 @@ class Administrator extends Panel
                         link: route('web.administrator.academic_data.materialandassignment.list'),
                         pname: "view_any",
                         pclass: MaterialAndAssignment::class,
+                    ),
+                    new Menu(
+                        name: "presence",
+                        link: route('web.administrator.academic_data.presence.list'),
+                        pname: "view_any",
+                        pclass: Presence::class,
                     ),
                 ]
             ),

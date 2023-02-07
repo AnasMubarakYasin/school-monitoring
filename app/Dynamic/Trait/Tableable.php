@@ -9,6 +9,7 @@ trait Tableable
     use Resourceable;
     public static function tableable()
     {
+        self::defining();
         return new Table(
             model: self::modelable(),
             route_store: self::$route_store,

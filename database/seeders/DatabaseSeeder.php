@@ -9,9 +9,11 @@ use App\Models\Classroom;
 use App\Models\Employee;
 use App\Models\SchoolInformation;
 use App\Models\Major;
+use App\Models\Presence;
 use App\Models\SchoolYear;
 use App\Models\Semester;
 use App\Models\Student;
+use App\Models\Subjects;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
@@ -74,14 +76,65 @@ class DatabaseSeeder extends Seeder
             'website' => '',
         ]);
         $major_kimia = Major::factory()->create([
+            'name' => 'kimia',
             'expertise' => 'kimia',
         ]);
         $major_biology = Major::factory()->create([
+            'name' => 'biology',
             'expertise' => 'biology',
         ]);
         $major_language = Major::factory()->create([
+            'name' => 'language',
             'expertise' => 'language',
         ]);
+        $teacher_kimia = Employee::factory()->create([
+            'name' => 'kimia_teacher',
+            'email' => 'kimia_teacher@host.local',
+            'password' => 'kimia_teacher',
+            'task' => 'teacher',
+        ]);
+        $teacher_biology = Employee::factory()->create([
+            'name' => 'biology_teacher',
+            'email' => 'biology_teacher@host.local',
+            'password' => 'biology_teacher',
+            'task' => 'teacher',
+        ]);
+        $subjects_basic_kimia = Subjects::factory()->create([
+            'name' => 'basic kimia',
+            'level' => '10',
+            'major_id' => $major_kimia->id,
+            'teacher_id' => $teacher_kimia->id,
+        ]);
+        $subjects_common_biology = Subjects::factory()->create([
+            'name' => 'common biology',
+            'level' => '10',
+            'major_id' => $major_biology->id,
+            'teacher_id' => $teacher_biology->id,
+        ]);
+        $homeroom_kimia_10 =  Employee::factory()->create(['task' => 'teacher']);
+        $homeroom_biology_10 =  Employee::factory()->create(['task' => 'teacher']);
+        $classroom_kimia_10 = Classroom::factory()
+            ->create([
+                'name' => 'kimia 10',
+                'major_id' => $major_kimia->id,
+                'homeroom_id' => $homeroom_kimia_10->id,
+            ]);
+        $classroom_biology_10 = Classroom::factory()
+            ->create([
+                'name' => 'biology 10',
+                'major_id' => $major_biology->id,
+                'homeroom_id' => $homeroom_biology_10->id,
+            ]);
+        $student_kimia_10 = Student::factory()
+            ->count(10)->create([
+                'major_id' => $major_kimia->id,
+                'classroom_id' => $classroom_kimia_10->id,
+            ]);
+        $student_biology_10 = Student::factory()
+            ->count(10)->create([
+                'major_id' => $major_biology->id,
+                'classroom_id' => $classroom_biology_10->id,
+            ]);
         $classrooms = Classroom::factory()
             ->count(15)
             ->state(new Sequence(
@@ -98,10 +151,29 @@ class DatabaseSeeder extends Seeder
             ->state(new Sequence(
                 ['major_id' => $major_kimia->id],
                 ['major_id' => $major_biology->id],
+                ['major_id' => $major_language->id],
             ))->state(new Sequence(
                 ...$classrooms->map(function ($item) {
                     return ['classroom_id' => $item->id];
                 })->toArray()
             ))->create();
+        $presence_kimia_10 = Presence::factory()
+            ->create([
+                'name' => 'kimia 10',
+                'school_year_id' => $school_year->id,
+                'semester_id' => $semester_odd->id,
+                'teacher_id' => $teacher_kimia->id,
+                'subjects_id' => $subjects_basic_kimia->id,
+                'classroom_id' => $classroom_biology_10->id,
+            ]);
+        $presence_biology_10 = Presence::factory()
+            ->create([
+                'name' => 'biology 10',
+                'school_year_id' => $school_year->id,
+                'semester_id' => $semester_odd->id,
+                'teacher_id' => $teacher_biology->id,
+                'subjects_id' => $subjects_common_biology->id,
+                'classroom_id' => $classroom_kimia_10->id,
+            ]);
     }
 }

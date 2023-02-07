@@ -97,6 +97,10 @@ Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
         Route::get('administrator/academic_data/materialandassignment/list', 'User\AdministratorController@materialandassignment_list')->name('web.administrator.academic_data.materialandassignment.list');
         Route::get('administrator/academic_data/materialandassignment/create', 'User\AdministratorController@materialandassignment_create')->name('web.administrator.academic_data.materialandassignment.create');
         Route::get('administrator/academic_data/materialandassignment/{materialAndAssignment}/update', 'User\AdministratorController@materialandassignment_update')->name('web.administrator.academic_data.materialandassignment.update');
+
+        Route::get('administrator/academic_data/presence/list', 'User\AdministratorController@presence_list')->name('web.administrator.academic_data.presence.list');
+        Route::get('administrator/academic_data/presence/create', 'User\AdministratorController@presence_create')->name('web.administrator.academic_data.presence.create');
+        Route::get('administrator/academic_data/presence/{presence}/update', 'User\AdministratorController@presence_update')->name('web.administrator.academic_data.presence.update');
         /** !SECTION - Academic */
     });
 });
@@ -175,4 +179,9 @@ Route::middleware(['authc.basic:welcome,administrator,employee'])->group(functio
     Route::patch('resource/student/{student}', 'StudentController@update')->name('web.resource.student.update');
     Route::delete('resource/student/{student}', 'StudentController@delete')->name('web.resource.student.delete');
     Route::delete('resource/student', 'StudentController@delete_any')->name('web.resource.student.delete_any');
+
+    Route::post('resource/presence', 'PresenceController@create')->name('web.resource.presence.create');
+    Route::patch('resource/presence/{presence}', 'PresenceController@update')->name('web.resource.presence.update');
+    Route::delete('resource/presence/{presence}', 'PresenceController@delete')->name('web.resource.presence.delete');
+    Route::delete('resource/presence', 'PresenceController@delete_any')->name('web.resource.presence.delete_any');
 });
