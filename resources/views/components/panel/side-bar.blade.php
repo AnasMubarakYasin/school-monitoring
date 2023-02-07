@@ -14,7 +14,7 @@
     </header>
     <nav
         class="flex flex-col h-[calc(100vh_-_56px)] p-4 overflow-auto bg-white dark:bg-gray-800 shadow transition-colors">
-        <x-panel.side-bar-menus :id="'side-menus'" :menus="$panel->get_menus()">
+        <x-panel.side-bar-menus :id="'side-bar-menus'" :menus="$panel->get_menus()">
 
         </x-panel.side-bar-menus>
         <ul class="pt-4 mt-4 space-y-2 border-t border-gray-200 dark:border-gray-700 capitalize">

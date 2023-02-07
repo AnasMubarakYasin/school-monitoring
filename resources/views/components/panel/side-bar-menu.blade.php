@@ -1,5 +1,5 @@
 @props([
-    'id' => '',
+    'for' => '',
     'name' => '',
     'link' => '',
     'icon' => '',
@@ -8,15 +8,14 @@
     'pclass' => '',
 ])
 @if ($button)
-    <button type="button" data-collapse="{{ str(request()->url())->startsWith($link) ? 'show' : 'hide' }}"
-        data-accordion-trigger="hover" data-collapse-toggle="{{ $id }}" @class([
+    <button type="button" data-collapse-toggle="{{ $for }}" aria-controls="{{ $for }}"
+        @class([
             'sidebar-menus flex items-center w-full p-2 text-base font-normal rounded-lg',
             'dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' => !str(
                 request()->url())->startsWith($link),
             'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' => str(
                 request()->url())->startsWith($link),
-        ])
-        aria-controls="{{ $id }}">
+        ])>
         @if ($icon)
             <div
                 {{ $icon->attributes->class([
