@@ -666,7 +666,7 @@ class AdministratorController extends Controller
                 return Employee::all();
             }
         };
-        return view('pages.administrator.academic_data.scheduleofsubjects.create', ['resource' => $resource]);
+        return view('pages.administrator.academic_data.subjects.create', ['resource' => $resource]);
     }
     public function subjects_update(Subjects $subjects)
     {
