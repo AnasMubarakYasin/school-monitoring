@@ -15,9 +15,5 @@
     </x-panel.bottom-bar>
     </x-slot>
     <x-employee.schedule-of-subjects-table></x-employee.schedule-of-subjects-table>
-    {{-- @dd($presences) --}}
-    {{-- @foreach ($presences as $presence)
-        <x-student.presence :presence="$presence"></x-student.presence>
-    @endforeach --}}
     <x-student.presence :presences="$presences"></x-student.presence>
 </x-panel.layout>
