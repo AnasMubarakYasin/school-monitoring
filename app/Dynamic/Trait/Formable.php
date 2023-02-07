@@ -24,7 +24,7 @@ trait Formable
             route_delete_any: self::$route_delete_any,
             route_relation: self::$route_relation,
         );
-        if (self::$fetcher_relation) {
+        if (isset(self::$fetcher_relation)) {
             $form->fetcher_relation = self::$fetcher_relation;
         }
         return $form;
