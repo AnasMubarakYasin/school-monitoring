@@ -2,6 +2,9 @@
 
 namespace App\Dynamic\Landing;
 
+use App\Models\Administrator;
+use App\Models\Employee;
+
 class Landing
 {
     /** @return Landing|null */
@@ -26,11 +29,21 @@ class Landing
         return [
             'administrator' => [
                 'name' => 'Administrator',
-                'login' => route('web.administrator.login_perform')
+                'login' => route('web.administrator.login_perform'),
+                'user' => [
+                    'name' => 'admin',
+                    'password' => 'admin',
+                ],
+                'demo' => true,
             ],
             'employee' => [
-                'name' => 'Employee',
-                'login' => route('web.employee.login_perform')
+                'name' => 'Employee (teacher)',
+                'login' => route('web.employee.login_perform'),
+                'user' => [
+                    'name' => 'teacher',
+                    'password' => 'teacher',
+                ],
+                'demo' => true,
             ],
         ];
     }

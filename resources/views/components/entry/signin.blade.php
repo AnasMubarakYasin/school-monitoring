@@ -1,6 +1,9 @@
 @props([
     'title' => 'signup',
     'action' => '',
+    'for' => '',
+    'data' => null,
+    'demo' => false,
 ])
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -29,22 +32,22 @@
 
 <body
     class="grid content-center justify-items-stretch  sm:place-content-center min-h-screen text-black bg-gray-100 dark:text-white dark:bg-gray-900 shadow">
-    <form class="grid m-4 p-4 gap-4 bg-white rounded-lg sm:w-[400px]"
-        action="{{ $action }}" method="post" enctype="multipart/form-data">
+    <form class="grid m-4 p-4 gap-4 bg-white rounded-lg sm:w-[400px]" action="{{ $action }}" method="post"
+        enctype="multipart/form-data">
         @csrf
         <h1 class="text-2xl text-center text-black font-extrabold">{{ $title }}</h1>
         <div>
             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
             <input type="text" id="name" name="name" autofocus
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="username" required value="{{ old('name') }}">
+                placeholder="username" required value="{{ old('name') ?? $data['name'] }}">
             @error('name')
                 <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
             @enderror
         </div>
         <div>
             <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-            <input type="password" id="password" name="password"
+            <input type="password" id="password" name="password" value="{{ $data['password'] }}"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="••••••••" required>
             @error('password')

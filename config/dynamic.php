@@ -21,6 +21,9 @@ return [
         Administrator::class => PanelAdministrator::class,
         Employee::class => PanelEmployee::class,
     ],
+    'entry' => [
+        'enable_demo' => true,
+    ],
     'account' => [
         'list' => [
             Administrator::class => [

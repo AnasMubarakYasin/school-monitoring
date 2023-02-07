@@ -27,7 +27,8 @@
 
 <body
     class="flex flex-col w-max-[100vw] min-h-screen overflow-hidden text-black bg-gray-100 dark:text-white dark:bg-gray-900 transition-colors content-start">
-    <header class="flex gap-4 items-center px-20 py-10 bg-gray-100 dark:bg-gray-800 text-3xl font-semibold transition-colors">
+    <header
+        class="flex gap-4 items-center px-20 py-10 bg-gray-100 dark:bg-gray-800 text-3xl font-semibold transition-colors">
         <div>
             <img src="{{ $landing->vendor_logo }}" alt="Bladerlaiga" class="w-8 h-8 rounded-md">
         </div>
@@ -46,7 +47,7 @@
                 </div>
                 <div class="p-2 flex gap-4 place-content-center">
                     @foreach ($landing->get_users() as $user)
-                        <a href="{{ $user['login'] }}"
+                        <a href="{{ $user['login'] . ($user['demo'] ? '?demo=true' : '') }}"
                             class="grid w-[200px] gap-4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow hover:bg-gray-50 transition-colors">
                             <div class="grid place-content-center aspect-square bg-gray-200 p-2 rounded-lg">
                                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"

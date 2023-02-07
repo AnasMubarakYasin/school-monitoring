@@ -1,1 +1,1 @@
-<x-entry.signin :title="'Sign In Administrator'" :action="route('web.administrator.login_perform')"></x-entry.signin>
+<x-entry.signin :for="'administrator'" :title="'Sign In Administrator'" :action="route('web.administrator.login_perform')"></x-entry.signin>
