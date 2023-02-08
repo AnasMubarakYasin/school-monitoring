@@ -14,5 +14,5 @@
 
                 </x-panel.bottom-bar>
                 </x-slot>
-                <x-resource.table :resource="$resource"></x-resource.table>
+                <x-resource.table :resource="$resource" :action="false"></x-resource.table>
 </x-panel.layout>

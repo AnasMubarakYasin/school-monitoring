@@ -42,7 +42,7 @@ class EmployeeController extends Controller
             columns: [
                 'subjects',
                 'classrooms',
-                'teacher',
+                // 'teacher',
                 'time',
                 'day',
                 'description'
@@ -50,6 +50,8 @@ class EmployeeController extends Controller
             pagination: ['per' => 5, 'num' => 1],
         );
         $resource->filter = ['teacher' =>  Auth::user()->id];
+        $resource->init['filter_by_column'] = false;
+        $resource->init['reference'] = '';
         return view('pages.employee.academic_data.scheduleofsubjects.list', ['resource' => $resource]);
     }
     //!SECTION - subject of schedule
@@ -62,7 +64,7 @@ class EmployeeController extends Controller
             columns: [
                 'subjects',
                 'classrooms',
-                'teacher',
+                // 'teacher',
                 'type',
                 'start_at',
                 'end_at',
@@ -79,15 +81,8 @@ class EmployeeController extends Controller
         $resource->route_delete = function ($item) {
             return route('web.resource.academic_data.materialandassignment.delete', ['materialAndAssignment' => $item]);
         };
-        $resource->route_relation = function ($definition, $item) {
-            if ($definition->name == 'major') {
-                return route('web.administrator.academic_data.subjects.list');
-            } else if ($definition->name == 'classrooms') {
-                return route('web.administrator.data_master.classroom.list');
-            } else {
-                return route('web.administrator.users.employee.list');
-            }
-        };
+        $resource->init['filter_by_column'] = false;
+        $resource->init['reference'] = '';
         $resource->filter = ['teacher' =>  Auth::user()->id];
         return view('pages.employee.academic_data.materialandassigment.list', ['resource' => $resource]);
     }
@@ -103,7 +98,11 @@ class EmployeeController extends Controller
                 'end_at',
                 'description'
             ],
+            hidden: [
+                'teacher'
+            ]
         );
+        $resource->model['teacher_id'] = Auth::user()->id;
         $resource->route_create = function () {
             return route('web.resource.academic_data.materialandassignment.create');
         };
@@ -135,6 +134,9 @@ class EmployeeController extends Controller
                 'end_at',
                 'description'
             ],
+            hidden: [
+                'teacher'
+            ]
         );
         $resource->route_update = function ($item) {
             return route('web.resource.academic_data.materialandassignment.update', ['materialAndAssignment' => $item]);
