@@ -2,6 +2,7 @@
 
 namespace App\Dynamic\Resource;
 
+use App\Dynamic\Trait\Resourceable;
 use Illuminate\Database\Eloquent\Model;
 use Closure;
 
@@ -12,7 +13,7 @@ class Resource
     ) {
         return new Resource($model);
     }
-    /** @var Model */
+    /** @var Model|Resourceable */
     public mixed $model = null;
     public function __construct(
         mixed $model = null,

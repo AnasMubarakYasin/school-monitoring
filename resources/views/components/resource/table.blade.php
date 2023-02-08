@@ -211,7 +211,8 @@
                     @foreach ($resource->columns as $column)
                         <th scope="col" class="p-3 text-base capitalize">
                             <div class="flex items-center w-full h-full">
-                                <span class="whitespace-nowrap">{{ __($resource->model->definition($column)->name) }}</span>
+                                <span
+                                    class="whitespace-nowrap">{{ __($resource->model->definition($column)->name) }}</span>
                                 <a
                                     href="{{ request()->fullUrlWithQuery(['sort' => 'on', 'sort_name' => $column, 'sort_dir' => request()->query('sort_dir', 'desc') == 'desc' ? 'asc' : 'desc']) }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3.5 h-3.5"
@@ -223,9 +224,11 @@
                             </div>
                         </th>
                     @endforeach
-                    <th scope="col" class="text-base text-center py-3 px-6 rounded-tr-lg capitalize">
-                        {{ __('action') }}
-                    </th>
+                    @if ($action)
+                        <th scope="col" class="text-base text-center py-3 px-6 rounded-tr-lg capitalize">
+                            {{ __('action') }}
+                        </th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -261,15 +264,21 @@
                                             </a>
                                         </td>
                                     @else
-                                        <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
-                                            @php
-                                                $query = '?ref=on&id[]=' . $item->{$column}->id;
-                                            @endphp
-                                            <a href="{{ $resource->route_relation($resource->model->definition($column), $item->{$column}) . $query }}"
-                                                class="bg-blue-100 text-blue-800 text-sm font-medium px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
-                                                {{ $resource->model->definition($column)->name }}
-                                            </a>
-                                        </td>
+                                        @if ($resource->init['reference'] == 'on')
+                                            <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
+                                                @php
+                                                    $query = '?ref=on&id[]=' . $item->{$column}->id;
+                                                @endphp
+                                                <a href="{{ $resource->route_relation($resource->model->definition($column), $item->{$column}) . $query }}"
+                                                    class="bg-blue-100 text-blue-800 text-sm font-medium px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
+                                                    {{ $resource->model->definition($column)->name }}
+                                                </a>
+                                            </td>
+                                        @else
+                                            <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
+                                                {{ $item->{$column}->name }}
+                                            </td>
+                                        @endif
                                     @endif
                                 @break
 
@@ -280,6 +289,9 @@
                             @endswitch
                         @endforeach
 
+                        @if (!$action)
+                            @continue
+                        @endif
                         <td
                             class="flex justify-center gap-2 p-3 capitalize {{ $loop->last ? 'rounded-br-lg' : '' }}">
                             @can('update', $item)
@@ -354,7 +366,8 @@
                                 $perpage = $resource->init['perpage'];
                             @endphp
                             @foreach (range(1, 3) as $per)
-                                <option @selected($paginator->perPage() == $per * $perpage) value="{{ $per * $perpage }}">{{ $per * $perpage }}
+                                <option @selected($paginator->perPage() == $per * $perpage) value="{{ $per * $perpage }}">
+                                    {{ $per * $perpage }}
                                 </option>
                             @endforeach
                             <option @selected($paginator->perPage() == $paginator->total()) value="{{ $paginator->total() }}">

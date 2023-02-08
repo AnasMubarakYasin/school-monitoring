@@ -107,7 +107,7 @@ class Administrator extends Panel
                         pclass: Attendance::class,
                     ),
                     new Menu(
-                        name: "academic_activity",
+                        name: "academic activity",
                         link: route('web.administrator.academic_data.academic_activity.list'),
                         pname: "view_any",
                         pclass: AcademicActivity::class,

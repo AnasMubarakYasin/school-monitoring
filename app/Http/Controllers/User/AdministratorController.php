@@ -997,6 +997,69 @@ class AdministratorController extends Controller
         return view('pages.administrator.presence.update', ['resource' => $resource]);
     }
     //!SECTION - presence
+    //SECTION - attendance
+    public function attendance_list()
+    {
+        $resource = Attendance::tableable()->from_request(
+            request: request(),
+            columns: [
+                'state',
+                'description',
+
+                'presence',
+                'student',
+            ],
+            pagination: ['per' => 5, 'num' => 1],
+        );
+        $resource->route_store = function () {
+            return route('web.administrator.academic_data.attendance.create');
+        };
+        $resource->route_edit = function ($item) {
+            return route('web.administrator.academic_data.attendance.update', ['attendance' => $item]);
+        };
+        $resource->route_relation = function ($definition, $item) {
+            return match ($definition->name) {
+                'presence' => route('web.administrator.academic_data.presence.list'),
+                'student' => route('web.administrator.users.student.list'),
+                default => ""
+            };
+        };
+        return view('pages.administrator.attendance.list', ['resource' => $resource]);
+    }
+    public function attendance_create()
+    {
+        $resource = Attendance::formable()->from_create(
+            fields: [
+                'state',
+                'description',
+
+                'presence',
+                'student',
+            ],
+        );
+        $resource->route_view_any = function () {
+            return route('web.administrator.academic_data.attendance.list');
+        };
+        return view('pages.administrator.attendance.create', ['resource' => $resource]);
+    }
+    public function attendance_update(Attendance $attendance)
+    {
+        $resource = Attendance::formable()->from_update(
+            model: $attendance,
+            fields: [
+                'state',
+                'description',
+
+                'presence',
+                'student',
+            ],
+        );
+        $resource->route_view_any = function () {
+            return route('web.administrator.academic_data.attendance.list');
+        };
+        return view('pages.administrator.attendance.update', ['resource' => $resource]);
+    }
+    //!SECTION - attendance
     //SECTION - academic_activity
     public function academic_activity_list()
     {
@@ -1034,8 +1097,10 @@ class AdministratorController extends Controller
                 'duration',
                 'executive',
                 'type',
-                'start_at',
-                'end_at',
+                [
+                    'start_at',
+                    'end_at'
+                ],
                 'description',
             ],
         );
@@ -1053,8 +1118,10 @@ class AdministratorController extends Controller
                 'duration',
                 'executive',
                 'type',
-                'start_at',
-                'end_at',
+                [
+                    'start_at',
+                    'end_at'
+                ],
                 'description',
             ],
         );

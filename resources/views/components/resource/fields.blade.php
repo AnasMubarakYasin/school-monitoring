@@ -11,7 +11,7 @@
     @else
         @switch($model->definition($field)->type)
             @case('string')
-                <div class="flex flex-col gap-2">
+                <div class="flex flex-col gap-2 {{ $resource->hidden($field) }}">
                     <label for="{{ $field }}" class="block capitalize text-sm font-medium text-gray-900 dark:text-white">
                         {{ trans($model->definition($field)->name) }}
                     </label>
@@ -26,7 +26,7 @@
             @break
 
             @case('number')
-                <div class="flex flex-col gap-2">
+                <div class="flex flex-col gap-2 {{ $resource->hidden($field) }}">
                     <label for="{{ $field }}" class="block capitalize text-sm font-medium text-gray-900 dark:text-white">
                         {{ trans($model->definition($field)->name) }}
                     </label>
@@ -41,7 +41,7 @@
             @break
 
             @case('boolean')
-                <div class="flex flex-col gap-2">
+                <div class="flex flex-col gap-2 {{ $resource->hidden($field) }}">
                     <label class="relative flex items-center gap-2 cursor-pointer">
                         <input type="checkbox" id="{{ $field }}" name="{{ $field }}" class="sr-only peer"
                             @checked(old($field))>
@@ -59,7 +59,7 @@
             @break
 
             @case('enum')
-                <div class="flex flex-col gap-2">
+                <div class="flex flex-col gap-2 {{ $resource->hidden($field) }}">
                     <label for="{{ $field }}"
                         class="block capitalize text-sm font-medium text-gray-900 dark:text-white">
                         {{ trans($model->definition($field)->name) }}
@@ -68,7 +68,7 @@
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option selected></option>
                         @foreach ($model->definition($field)->enums as $e_key => $e_val)
-                            <option @selected(old($field) ?? $model->{$field} == $e_key) value="{{ $e_key }}">{{ $e_val }}</option>
+                            <option @selected((old($field) ?? $model->{$field}) == $e_key) value="{{ $e_key }}">{{ $e_val }}</option>
                         @endforeach
                     </select>
                     @error($field)
@@ -78,7 +78,7 @@
             @break
 
             @case('date')
-                <div class="flex flex-col gap-2">
+                <div class="flex flex-col gap-2 {{ $resource->hidden($field) }}">
                     <label for="{{ $field }}"
                         class="block capitalize text-sm font-medium text-gray-900 dark:text-white">
                         {{ trans($model->definition($field)->name) }}
@@ -93,7 +93,7 @@
                             </svg>
                         </div>
                         <input id="{{ $field }}" name="{{ $field }}" type="date"
-                            value="{{ old($field) ?? $carbon::parse($model->{$field})->format("Y-m-d") }}"
+                            value="{{ old($field) ?? $model->{$field} ? $carbon::parse($model->{$field})->format('Y-m-d') : '' }}"
                             class="block w-full pl-10 p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="">
                     </div>
@@ -104,7 +104,7 @@
             @break
 
             @case('time')
-                <div class="flex flex-col gap-2">
+                <div class="flex flex-col gap-2 {{ $resource->hidden($field) }}">
                     <label for="{{ $field }}"
                         class="block capitalize text-sm font-medium text-gray-900 dark:text-white">
                         {{ trans($model->definition($field)->name) }}
@@ -119,7 +119,7 @@
                             </svg>
                         </div>
                         <input id="{{ $field }}" name="{{ $field }}" type="time"
-                            value="{{ old($field) ?? $carbon::parse($model->{$field})->format("Y-m-d") }}"
+                            value="{{ old($field) ?? $model->{$field} ? $carbon::parse($model->{$field})->format('h:m:s') : '' }}"
                             class="block w-full pl-10 p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="">
                     </div>
@@ -130,7 +130,7 @@
             @break
 
             @case('model')
-                <div class="flex flex-col gap-2">
+                <div class="flex flex-col gap-2 {{ $resource->hidden($field) }}">
                     <label for="{{ $model->definition($field)->alias }}"
                         class="capitalize text-sm font-medium text-gray-900 dark:text-white">
                         {{ trans($model->definition($field)->name) }}

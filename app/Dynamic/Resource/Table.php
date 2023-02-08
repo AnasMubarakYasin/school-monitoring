@@ -20,6 +20,8 @@ class Table extends Resource
     public array $init = [
         'perpage' => 5,
         'limitpage' => 5,
+        'reference' => 'on',
+        'filter_by_column' => true,
     ];
     public function from_request(
         Request $request,
@@ -57,7 +59,12 @@ class Table extends Resource
             $query->orderBy($this->sort['name'], $this->sort['dir']);
         }
         if ($this->filter) {
-            foreach ($this->columns as $column) {
+            if ($this->init['filter_by_column']) {
+                $columns = $this->columns;
+            } else {
+                $columns = array_keys( $this->model::$definitions);
+            }
+            foreach ($columns as $column) {
                 if (isset($this->filter[$column])) {
                     switch ($this->model->definition($column)->type) {
                         case 'string':

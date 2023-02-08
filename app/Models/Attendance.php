@@ -40,14 +40,14 @@ class Attendance extends Model
                 name: 'presence',
                 type: 'model',
                 array: false,
-                relation: 'parent',
+                relation: 'presence',
                 alias: 'presence_id',
             ),
             'student' => new Definition(
                 name: 'student',
                 type: 'model',
                 array: false,
-                relation: 'parent',
+                relation: 'student',
                 alias: 'student_id',
             ),
         ];
