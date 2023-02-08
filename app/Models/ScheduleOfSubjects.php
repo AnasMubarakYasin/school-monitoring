@@ -29,7 +29,7 @@ class ScheduleOfSubjects extends Model
             name: 'classrooms',
             type: 'model',
             array: false,
-            relation: 'parent',
+            relation: 'classrooms',
             alias: 'class_id',
         );
         self::$definitions['teacher'] = new Definition(

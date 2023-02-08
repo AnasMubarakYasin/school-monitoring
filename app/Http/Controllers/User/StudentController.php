@@ -4,9 +4,12 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\AcademicActivity;
+use App\Models\MaterialAndAssignment;
 use App\Models\Presence;
+use App\Models\ScheduleOfSubjects;
 use App\Models\Student;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
@@ -96,4 +99,46 @@ class StudentController extends Controller
         return view('pages.student.academic_activity.update', ['resource' => $resource]);
     }
     //!SECTION - academic_activity
+
+    //SECTION - subject of schedule
+    public function scheduleofsubjects_list()
+    {
+        $resource = ScheduleOfSubjects::tableable()->from_request(
+            request: request(),
+            columns: [
+                'subjects',
+                'classrooms',
+                'teacher',
+                'time',
+                'day',
+                'description'
+            ],
+            pagination: ['per' => 5, 'num' => 1],
+        );
+        $resource->filter = ['classrooms' => Auth::user()->classroom_id];
+        $resource->init['reference'] = '';
+        return view('pages.student.scheduleofsubjects.list', ['resource' => $resource]);
+    }
+    //!SECTION - subject of schedule
+
+    //SECTION - material and assignment
+    public function materialandassignment_list()
+    {
+        $resource = MaterialAndAssignment::tableable()->from_request(
+            request: request(),
+            columns: [
+                'subjects',
+                'classrooms',
+                'type',
+                'start_at',
+                'end_at',
+                'description'
+            ],
+            pagination: ['per' => 5, 'num' => 1],
+        );
+        $resource->init['reference'] = '';
+        $resource->filter = ['classrooms' => Auth::user()->classroom_id];
+        return view('pages.student.materialandassignment.list', ['resource' => $resource]);
+    }
+    //!SECTION - material and assignment
 }

@@ -1,4 +1,4 @@
-<x-panel.layout :title="'list of schedule of subjects'">
+<x-panel.layout :title="'list of material and assignment'">
     <x-slot:top_bar>
         <x-panel.top-bar>
 
