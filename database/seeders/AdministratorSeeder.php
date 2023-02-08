@@ -15,6 +15,10 @@ class AdministratorSeeder extends Seeder
      */
     public function run()
     {
-        Administrator::factory()->count(30)->create();
+        $administrator = Administrator::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@host.local',
+            'password' => 'admin',
+        ]);
     }
 }
