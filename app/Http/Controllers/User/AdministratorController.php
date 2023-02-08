@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Dynamic\Flow\Administrator as FlowAdministrator;
 use App\Http\Controllers\Controller;
 use App\Models\AcademicActivity;
 use App\Models\Administrator;
@@ -75,6 +76,7 @@ class AdministratorController extends Controller
         $academic_activity->route_view_any = function () {
             return route('web.administrator.academic_data.academic_activity.list');
         };
+        $flow = new FlowAdministrator();
         $stats = [
             $school_year,
             $semester,
@@ -92,6 +94,7 @@ class AdministratorController extends Controller
         ];
         return view('pages.administrator.dashboard', [
             'stats' => $stats,
+            'flow' => $flow,
         ]);
     }
     public function profile()
