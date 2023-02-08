@@ -11,7 +11,7 @@
                 <th rowspan="2" scope="col" class="p-3 text-base capitalize">
                     <div class="flex items-center w-full h-full">
                         <span>classrooms</span>
-                        
+
                     </div>
                 </th>
                 <th colspan="2" scope="col" class="p-3 text-base capitalize">
@@ -69,47 +69,68 @@
             </tr>
         </thead>
         <tbody>
-            <tr @class([
-                'bg-white capitalize text-center dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-600 dark:border-gray-700',
-                'border-b',
-            ])>
-                <td class="p-3  text-gray-900 dark:text-white whitespace-nowrap">
-                    1
-                </td>
-                <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
-                    XXI IPA 2
-                </td>
-                <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
-                    Fis
-                </td>
-                <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
-                    fisika
-                </td>
-                <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
-                    12:30 WIB
-                </td>
-                <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
-                    12:30 WIB
-                </td>
-                <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
-                    12:30 WIB
-                </td>
-                <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
-                    12:30 WIB
-                </td>
-                <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
-                    12:30 WIB
-                </td>
-                <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
-                    12:30 WIB
-                </td>
-            </tr>
-            {{-- <tr>
-                <td class="p-4 text-center text-lg text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 rounded-b-lg capitalize"
-                    colspan="">
-                    {{ __('empty') }}
-                </td>
-            </tr> --}}
+            @foreach ($resource as $data)
+                <tr @class([
+                    'bg-white capitalize text-center dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-600 dark:border-gray-700',
+                    'border-b',
+                ])>
+                    <td class="p-3  text-gray-900 dark:text-white whitespace-nowrap">
+                        {{ $loop->iteration }}
+                    </td>
+                    <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
+                        {{ $data->subjects->grade }}
+                    </td>
+                    <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
+                        {{ $data->subjects->code }}
+                    </td>
+                    <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
+                        {{ $data->subjects->name }}
+                    </td>
+                    <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
+                        @if ($data->day == 'senin')
+                            {{ $data->start_at . ' - ' . $data->end_at }}
+                        @else
+                            -
+                        @endif
+                    </td>
+                    <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
+                        @if ($data->day == 'selasa')
+                            {{ $data->start_at . ' - ' . $data->end_at }}
+                        @else
+                            -
+                        @endif
+                    </td>
+                    <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
+                        @if ($data->day == 'rabu')
+                            {{ $data->start_at . ' - ' . $data->end_at }}
+                        @else
+                            -
+                        @endif
+                    </td>
+                    <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
+                        @if ($data->day == 'kamis')
+                            {{ $data->start_at . ' - ' . $data->end_at }}
+                        @else
+                            -
+                        @endif
+                    </td>
+                    <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
+                        @if ($data->day == 'jumat')
+                            {{ $data->start_at . ' - ' . $data->end_at }}
+                        @else
+                            -
+                        @endif
+                    </td>
+                    <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
+                        @if ($data->day == 'sabtu')
+                            {{ $data->start_at . ' - ' . $data->end_at }}
+                        @else
+                            -
+                        @endif
+                    </td>
+                </tr>
+            @endforeach
+
         </tbody>
     </table>
 </div>

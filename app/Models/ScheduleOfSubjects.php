@@ -36,16 +36,18 @@ class ScheduleOfSubjects extends Model
             name: 'teacher',
             type: 'model',
             array: false,
-            relation: 'parent',
+            relation: 'teacher',
             alias: 'teacher_id',
         );
         self::$definitions['start_time'] = new Definition(
             name: 'start time',
             type: 'time',
+            format: 'h:m:s',
         );
         self::$definitions['end_time'] = new Definition(
             name: 'end time',
             type: 'time',
+            format: 'h:m:s',
         );
         self::$definitions['time'] = new Definition(
             name: 'time',

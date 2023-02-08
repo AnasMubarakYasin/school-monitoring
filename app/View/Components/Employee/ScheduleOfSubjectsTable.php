@@ -2,6 +2,8 @@
 
 namespace App\View\Components\Employee;
 
+use App\Models\ScheduleOfSubjects;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
 
 class ScheduleOfSubjectsTable extends Component
@@ -23,6 +25,8 @@ class ScheduleOfSubjectsTable extends Component
      */
     public function render()
     {
-        return view('components.employee.schedule-of-subjects-table');
+        $teacherId = Auth::user()->id;
+        $resource = ScheduleOfSubjects::with('subjects', 'classrooms')->where('teacher_id', $teacherId)->get();
+        return view('components.employee.schedule-of-subjects-table', ['resource' => $resource]);
     }
 }

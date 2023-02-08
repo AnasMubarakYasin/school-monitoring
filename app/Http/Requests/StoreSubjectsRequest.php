@@ -26,7 +26,7 @@ class StoreSubjectsRequest extends FormRequest
         return [
             'code' => 'required|string',
             'name' => 'required|string',
-            'level' => 'required|string',
+            'grade' => 'required|integer',
             'major_id' => 'required|integer',
             'teacher_id' => 'required|integer',
             'description' => 'required|string',

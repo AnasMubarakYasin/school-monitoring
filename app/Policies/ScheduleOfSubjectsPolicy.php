@@ -23,31 +23,49 @@ class ScheduleOfSubjectsPolicy
 
     public function create(Administrator|Employee $user)
     {
-        return true;
+        return match ($user::class) {
+            Employee::class => false,
+            default => true
+        };
     }
 
     public function update(Administrator|Employee $user, ScheduleOfSubjects $scheduleOfSubjects)
     {
-        return true;
+        return match ($user::class) {
+            Employee::class => false,
+            default => true
+        };
     }
 
     public function delete_any(Administrator|Employee $user)
     {
-        return true;
+        return match ($user::class) {
+            Employee::class => false,
+            default => true
+        };
     }
 
     public function delete(Administrator|Employee $user, ScheduleOfSubjects $scheduleOfSubjects)
     {
-        return true;
+        return match ($user::class) {
+            Employee::class => false,
+            default => true
+        };
     }
 
     public function restore(Administrator|Employee $user, ScheduleOfSubjects $scheduleOfSubjects)
     {
-        return true;
+        return match ($user::class) {
+            Employee::class => false,
+            default => true
+        };
     }
 
     public function forceDelete(Administrator|Employee $user, ScheduleOfSubjects $scheduleOfSubjects)
     {
-        return true;
+        return match ($user::class) {
+            Employee::class => false,
+            default => true
+        };
     }
 }
