@@ -14,7 +14,7 @@ class Form extends Resource
 
     public function from_create(
         array|null $fields = null,
-        array|null $hidden = null,
+        array $hidden = [],
     ): Form {
         $this->fields = $fields;
         $this->hidden = $hidden;
@@ -23,7 +23,7 @@ class Form extends Resource
     public function from_update(
         $model = null,
         array|null $fields = null,
-        array|null $hidden = null,
+        array $hidden = [],
     ): Form {
         $this->model = $model;
         $this->fields = $fields;
