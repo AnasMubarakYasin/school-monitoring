@@ -3,6 +3,12 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Classroom;
+use App\Models\Employee;
+use App\Models\MaterialAndAssignment;
+use App\Models\ScheduleOfSubjects;
+use App\Models\Subjects;
+use Illuminate\Support\Facades\Auth;
 
 class EmployeeController extends Controller
 {
@@ -26,4 +32,126 @@ class EmployeeController extends Controller
     {
         return view('pages.employee.empty');
     }
+
+    //SECTION - subject of schedule
+    public function scheduleofsubjects_list()
+    {
+        // $teacherId = Auth::user()->id;
+        $resource = ScheduleOfSubjects::tableable()->from_request(
+            request: request(),
+            columns: [
+                'subjects',
+                'classrooms',
+                'teacher',
+                'time',
+                'day',
+                'description'
+            ],
+            pagination: ['per' => 5, 'num' => 1],
+        );
+        $resource->filter = ['teacher' =>  Auth::user()->id];
+        return view('pages.employee.academic_data.scheduleofsubjects.list', ['resource' => $resource]);
+    }
+    //!SECTION - subject of schedule
+
+    //SECTION - material and assignment
+    public function materialandassignment_list()
+    {
+        $resource = MaterialAndAssignment::tableable()->from_request(
+            request: request(),
+            columns: [
+                'subjects',
+                'classrooms',
+                'teacher',
+                'type',
+                'start_at',
+                'end_at',
+                'description'
+            ],
+            pagination: ['per' => 5, 'num' => 1],
+        );
+        $resource->route_store = function () {
+            return route('web.employee.academic_data.materialandassignment.create');
+        };
+        $resource->route_edit = function ($item) {
+            return route('web.employee.academic_data.materialandassignment.update', ['materialAndAssignment' => $item]);
+        };
+        $resource->route_delete = function ($item) {
+            return route('web.resource.academic_data.materialandassignment.delete', ['materialAndAssignment' => $item]);
+        };
+        $resource->route_relation = function ($definition, $item) {
+            if ($definition->name == 'major') {
+                return route('web.administrator.academic_data.subjects.list');
+            } else if ($definition->name == 'classrooms') {
+                return route('web.administrator.data_master.classroom.list');
+            } else {
+                return route('web.administrator.users.employee.list');
+            }
+        };
+        $resource->filter = ['teacher' =>  Auth::user()->id];
+        return view('pages.employee.academic_data.materialandassigment.list', ['resource' => $resource]);
+    }
+    public function materialandassignment_create()
+    {
+        $resource = MaterialAndAssignment::formable()->from_create(
+            fields: [
+                'subjects',
+                'classrooms',
+                'teacher',
+                'type',
+                'start_at',
+                'end_at',
+                'description'
+            ],
+        );
+        $resource->route_create = function () {
+            return route('web.resource.academic_data.materialandassignment.create');
+        };
+        $resource->route_view_any = function () {
+            return route('web.employee.academic_data.materialandassignment.list');
+        };
+        $resource->fetcher_relation = function ($definition) {
+            if ($definition->name == 'subjects') {
+                return Subjects::all();
+            } else if ($definition->name == 'classrooms') {
+                return Classroom::all();
+            } else {
+                return collect([Auth::user()]);
+            }
+        };
+
+        return view('pages.employee.academic_data.materialandassigment.create', ['resource' => $resource]);
+    }
+    public function materialandassignment_update(MaterialAndAssignment $materialAndAssignment)
+    {
+        $resource = MaterialAndAssignment::formable()->from_update(
+            model: $materialAndAssignment,
+            fields: [
+                'subjects',
+                'classrooms',
+                'teacher',
+                'type',
+                'start_at',
+                'end_at',
+                'description'
+            ],
+        );
+        $resource->route_update = function ($item) {
+            return route('web.resource.academic_data.materialandassignment.update', ['materialAndAssignment' => $item]);
+        };
+        $resource->route_view_any = function ($item) {
+            return route('web.employee.academic_data.materialandassignment.list');
+        };
+        $resource->fetcher_relation = function ($definition) {
+            if ($definition->name == 'subjects') {
+                return Subjects::all();
+            } else if ($definition->name == 'classrooms') {
+                return Classroom::all();
+            } else {
+                return Employee::all();
+            }
+        };
+        return view('pages.employee.academic_data.materialandassigment.update', ['resource' => $resource]);
+    }
+    //!SECTION - material and assignment
 }

@@ -641,7 +641,7 @@ class AdministratorController extends Controller
             columns: [
                 'code',
                 'name',
-                'level',
+                'grade',
                 'major',
                 'teacher',
                 'description',
@@ -672,7 +672,7 @@ class AdministratorController extends Controller
             fields: [
                 'code',
                 'name',
-                'level',
+                'grade',
                 'major',
                 'teacher',
                 'description',
@@ -700,7 +700,7 @@ class AdministratorController extends Controller
             fields: [
                 'code',
                 'name',
-                'level',
+                'grade',
                 'major',
                 'teacher',
                 'description',

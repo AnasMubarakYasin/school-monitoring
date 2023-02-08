@@ -35,7 +35,7 @@ class MaterialAndAssignment extends Model
             name: 'teacher',
             type: 'model',
             array: false,
-            relation: 'parent',
+            relation: 'teacher',
             alias: 'teacher_id',
         );
         self::$definitions['type'] = new Definition(

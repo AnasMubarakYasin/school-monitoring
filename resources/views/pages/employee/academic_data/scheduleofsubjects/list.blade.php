@@ -1,4 +1,4 @@
-<x-panel.layout :title="'update material and assigment'">
+<x-panel.layout :title="'list of schedule of subjects'">
     <x-slot:top_bar>
         <x-panel.top-bar>
 
@@ -14,5 +14,5 @@
 
                 </x-panel.bottom-bar>
                 </x-slot>
-                <x-resource.form :resource="$resource"></x-resource.form>
+                <x-resource.table :resource="$resource"></x-resource.table>
 </x-panel.layout>

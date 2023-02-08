@@ -131,6 +131,14 @@ Route::middleware(['authc.basic:welcome,employee'])->group(function () {
         Route::get('employee/logout', 'Auth\EmployeeController@logout_perfom')->name('web.employee.logout_perfom');
         Route::get('employee/archive', 'User\EmployeeController@empty')->name('web.employee.archive');
         Route::get('employee/about', 'User\EmployeeController@empty')->name('web.employee.about');
+
+        Route::get('employee/academic_data', 'User\EmployeeController@empty')->name('web.employee.academic_data');
+
+        Route::get('employee/academic_data/scheduleofsubjects/list', 'User\EmployeeController@scheduleofsubjects_list')->name('web.employee.academic_data.scheduleofsubjects.list');
+
+        Route::get('employee/academic_data/materialandassignment/list', 'User\EmployeeController@materialandassignment_list')->name('web.employee.academic_data.materialandassignment.list');
+        Route::get('employee/academic_data/materialandassignment/create', 'User\EmployeeController@materialandassignment_create')->name('web.employee.academic_data.materialandassignment.create');
+        Route::get('employee/academic_data/materialandassignment/{materialAndAssignment}/update', 'User\EmployeeController@materialandassignment_update')->name('web.employee.academic_data.materialandassignment.update');
     });
 });
 /** !SECTION - Employee */
