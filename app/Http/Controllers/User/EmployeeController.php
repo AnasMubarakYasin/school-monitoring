@@ -36,7 +36,6 @@ class EmployeeController extends Controller
     //SECTION - subject of schedule
     public function scheduleofsubjects_list()
     {
-        // $teacherId = Auth::user()->id;
         $resource = ScheduleOfSubjects::tableable()->from_request(
             request: request(),
             columns: [
@@ -64,7 +63,6 @@ class EmployeeController extends Controller
             columns: [
                 'subjects',
                 'classrooms',
-                // 'teacher',
                 'type',
                 'start_at',
                 'end_at',

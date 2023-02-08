@@ -166,6 +166,8 @@ Route::middleware(['authc.basic:welcome,student'])->group(function () {
         Route::get('student/academic_activity/{academic_activity}/update', 'User\StudentController@academic_activity_update')->name('web.student.academic_activity.update');
 
         Route::get('student/scheduleofsubjects/list', 'User\StudentController@scheduleofsubjects_list')->name('web.student.scheduleofsubjects.list');
+
+        Route::get('student/materialandassignment/list', 'User\StudentController@materialandassignment_list')->name('web.student.materialandassignment.list');
     });
 });
 /** !SECTION - Employee */

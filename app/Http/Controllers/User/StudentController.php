@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\AcademicActivity;
+use App\Models\MaterialAndAssignment;
 use App\Models\Presence;
 use App\Models\ScheduleOfSubjects;
 use App\Models\Student;
@@ -114,13 +115,30 @@ class StudentController extends Controller
             ],
             pagination: ['per' => 5, 'num' => 1],
         );
-        $user = auth()->user();
-        $resource = Presence::with('classrooms')->whereHas("classrooms", function (Builder $builder) use ($user) {
-            $builder->where('id', $user->class_id);
-        })->get();
-        // $resource->init['filter_by_column'] = false;
-        // $resource->init['reference'] = '';
+        $resource->filter = ['classrooms' => Auth::user()->classroom_id];
+        $resource->init['reference'] = '';
         return view('pages.student.scheduleofsubjects.list', ['resource' => $resource]);
     }
     //!SECTION - subject of schedule
+
+    //SECTION - material and assignment
+    public function materialandassignment_list()
+    {
+        $resource = MaterialAndAssignment::tableable()->from_request(
+            request: request(),
+            columns: [
+                'subjects',
+                'classrooms',
+                'type',
+                'start_at',
+                'end_at',
+                'description'
+            ],
+            pagination: ['per' => 5, 'num' => 1],
+        );
+        $resource->init['reference'] = '';
+        $resource->filter = ['classrooms' => Auth::user()->classroom_id];
+        return view('pages.student.materialandassignment.list', ['resource' => $resource]);
+    }
+    //!SECTION - material and assignment
 }

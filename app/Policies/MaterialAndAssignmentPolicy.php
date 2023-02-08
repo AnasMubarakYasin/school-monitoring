@@ -5,49 +5,68 @@ namespace App\Policies;
 use App\Models\MaterialAndAssignment;
 use App\Models\Administrator;
 use App\Models\Employee;
+use App\Models\Student;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class MaterialAndAssignmentPolicy
 {
     use HandlesAuthorization;
 
-    public function view_any(Administrator|Employee $user)
+    public function view_any(Administrator|Employee|Student $user)
     {
         return true;
     }
 
-    public function view(Administrator|Employee $user, MaterialAndAssignment $materialAndAssignment)
+    public function view(Administrator|Employee|Student $user, MaterialAndAssignment $materialAndAssignment)
     {
         return true;
     }
 
-    public function create(Administrator|Employee $user)
+    public function create(Administrator|Employee|Student $user)
     {
-        return true;
+        return match ($user::class) {
+            Student::class => false,
+            default => true
+        };
     }
 
-    public function update(Administrator|Employee $user, MaterialAndAssignment $materialAndAssignment)
+    public function update(Administrator|Employee|Student $user, MaterialAndAssignment $materialAndAssignment)
     {
-        return true;
+        return match ($user::class) {
+            Student::class => false,
+            default => true
+        };
     }
 
-    public function delete_any(Administrator|Employee $user)
+    public function delete_any(Administrator|Employee|Student $user)
     {
-        return true;
+        return match ($user::class) {
+            Student::class => false,
+            default => true
+        };
     }
 
-    public function delete(Administrator|Employee $user, MaterialAndAssignment $materialAndAssignment)
+    public function delete(Administrator|Employee|Student $user, MaterialAndAssignment $materialAndAssignment)
     {
-        return true;
+        return match ($user::class) {
+            Student::class => false,
+            default => true
+        };
     }
 
-    public function restore(Administrator|Employee $user, MaterialAndAssignment $materialAndAssignment)
+    public function restore(Administrator|Employee|Student $user, MaterialAndAssignment $materialAndAssignment)
     {
-        return true;
+        return match ($user::class) {
+            Student::class => false,
+            default => true
+        };
     }
 
-    public function forceDelete(Administrator|Employee $user, MaterialAndAssignment $materialAndAssignment)
+    public function forceDelete(Administrator|Employee|Student $user, MaterialAndAssignment $materialAndAssignment)
     {
-        return true;
+        return match ($user::class) {
+            Student::class => false,
+            default => true
+        };
     }
 }
