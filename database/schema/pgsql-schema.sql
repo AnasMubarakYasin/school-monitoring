@@ -377,6 +377,7 @@ CREATE TABLE public.majors (
     created_at timestamp(0) without time zone,
     updated_at timestamp(0) without time zone,
     name character varying(255) NOT NULL,
+    code character varying(255) NOT NULL,
     expertise character varying(255) NOT NULL,
     general_competence character varying(255) NOT NULL,
     special_competence character varying(255) NOT NULL,
@@ -1358,6 +1359,14 @@ ALTER TABLE ONLY public.jobs
 
 
 --
+-- Name: majors majors_code_unique; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.majors
+    ADD CONSTRAINT majors_code_unique UNIQUE (code);
+
+
+--
 -- Name: majors majors_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1913,32 +1922,32 @@ SET row_security = off;
 --
 
 COPY public.migrations (id, migration, batch) FROM stdin;
-77	0000_00_00_000000_create_websockets_statistics_entries_table	1
-78	2014_10_12_000000_create_users_table	1
-79	2014_10_12_100000_create_password_resets_table	1
-80	2019_08_19_000000_create_failed_jobs_table	1
-81	2019_12_14_000001_create_personal_access_tokens_table	1
-82	2023_01_20_000000_create_cache_table	1
-83	2023_01_20_000000_create_jobs_table	1
-84	2023_01_20_000000_create_notifications_table	1
-85	2023_01_20_000000_create_sessions_table	1
-86	2023_01_20_110049_create_deleted_models_table	1
-87	2023_01_20_110331_create_permission_tables	1
-88	2023_01_20_132146_create_administrators_table	1
-89	2023_01_28_110447_create_school_years_table	1
-90	2023_01_28_122153_create_semesters_table	1
-91	2023_01_30_120535_create_school__information_table	1
-92	2023_01_30_151914_create_employees_table	1
-93	2023_02_01_071420_create_majors_table	1
-94	2023_02_01_071920_create_classrooms_table	1
-95	2023_02_01_072748_create_students_table	1
-96	2023_02_01_132219_create_facility_and_infrastructures_table	1
-97	2023_02_02_051933_create_subjects_table	1
-98	2023_02_02_085751_create_schedule_of_subjects_table	1
-99	2023_02_03_110258_create_material_and_assignments_table	1
-100	2023_02_07_081315_create_presences_table	1
-101	2023_02_07_112033_create_attendances_table	1
-102	2023_02_07_174451_create_academic_activities_table	1
+103	0000_00_00_000000_create_websockets_statistics_entries_table	1
+104	2014_10_12_000000_create_users_table	1
+105	2014_10_12_100000_create_password_resets_table	1
+106	2019_08_19_000000_create_failed_jobs_table	1
+107	2019_12_14_000001_create_personal_access_tokens_table	1
+108	2023_01_20_000000_create_cache_table	1
+109	2023_01_20_000000_create_jobs_table	1
+110	2023_01_20_000000_create_notifications_table	1
+111	2023_01_20_000000_create_sessions_table	1
+112	2023_01_20_110049_create_deleted_models_table	1
+113	2023_01_20_110331_create_permission_tables	1
+114	2023_01_20_132146_create_administrators_table	1
+115	2023_01_28_110447_create_school_years_table	1
+116	2023_01_28_122153_create_semesters_table	1
+117	2023_01_30_120535_create_school__information_table	1
+118	2023_01_30_151914_create_employees_table	1
+119	2023_02_01_071420_create_majors_table	1
+120	2023_02_01_071920_create_classrooms_table	1
+121	2023_02_01_072748_create_students_table	1
+122	2023_02_01_132219_create_facility_and_infrastructures_table	1
+123	2023_02_02_051933_create_subjects_table	1
+124	2023_02_02_085751_create_schedule_of_subjects_table	1
+125	2023_02_03_110258_create_material_and_assignments_table	1
+126	2023_02_07_081315_create_presences_table	1
+127	2023_02_07_112033_create_attendances_table	1
+128	2023_02_07_174451_create_academic_activities_table	1
 \.
 
 
@@ -1946,7 +1955,7 @@ COPY public.migrations (id, migration, batch) FROM stdin;
 -- Name: migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.migrations_id_seq', 102, true);
+SELECT pg_catalog.setval('public.migrations_id_seq', 128, true);
 
 
 --

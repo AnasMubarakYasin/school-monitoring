@@ -300,7 +300,7 @@ class AdministratorController extends Controller
         $resource = Major::tableable()->from_request(
             request: request(),
             columns: [
-                'name', 'expertise', 'general_competence', 'special_competence',
+                'name', 'code', 'expertise', 'general_competence', 'special_competence',
             ],
             pagination: ['per' => 5, 'num' => 1],
         );
@@ -319,7 +319,7 @@ class AdministratorController extends Controller
     {
         $resource = Major::formable()->from_create(
             fields: [
-                'name', 'expertise', 'general_competence', 'special_competence',
+                'name', 'code', 'expertise', 'general_competence', 'special_competence',
             ],
         );
         $resource->route_create = function () {
@@ -335,7 +335,7 @@ class AdministratorController extends Controller
         $resource = Major::formable()->from_update(
             model: $major,
             fields: [
-                'name', 'expertise', 'general_competence', 'special_competence',
+                'name', 'code', 'expertise', 'general_competence', 'special_competence',
             ],
         );
         $resource->route_update = function ($item) {

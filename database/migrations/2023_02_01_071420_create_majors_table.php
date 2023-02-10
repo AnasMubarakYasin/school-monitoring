@@ -18,6 +18,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->string('name');
+            $table->string('code')->unique();
             $table->enum('expertise', ['kimia', 'biology', 'language']);
             $table->string('general_competence');
             $table->string('special_competence');

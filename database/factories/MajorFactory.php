@@ -16,10 +16,11 @@ class MajorFactory extends Factory
      */
     public function definition()
     {
-        $expertise = fake()->randomElement(['kimia', 'biology', 'language']);
+        $expertise = fake()->randomElement(['ipa', 'ips', 'language']);
         return [
             'name' => $expertise,
             'expertise' => $expertise,
+            'code' => $expertise,
             'general_competence' => fake()->slug(),
             'special_competence' => fake()->slug(),
         ];

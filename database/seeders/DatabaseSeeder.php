@@ -79,16 +79,19 @@ class DatabaseSeeder extends Seeder
             'website' => '',
         ]);
         AcademicActivity::factory()->count(30)->create();
-        $major_kimia = Major::factory()->create([
-            'name' => 'kimia',
+        $major_ipa = Major::factory()->create([
+            'name' => 'ipa',
+            'code' => 'ipa',
             'expertise' => 'kimia',
         ]);
-        $major_biology = Major::factory()->create([
-            'name' => 'biology',
+        $major_ips = Major::factory()->create([
+            'name' => 'ips',
+            'code' => 'ips',
             'expertise' => 'biology',
         ]);
         $major_language = Major::factory()->create([
             'name' => 'language',
+            'code' => 'language',
             'expertise' => 'language',
         ]);
         $teacher_kimia = Employee::factory()->create([
@@ -106,13 +109,13 @@ class DatabaseSeeder extends Seeder
         $subjects_basic_kimia = Subjects::factory()->create([
             'name' => 'basic kimia',
             'grade' => 10,
-            'major_id' => $major_kimia->id,
+            'major_id' => $major_ipa->id,
             'teacher_id' => $teacher_kimia->id,
         ]);
         $subjects_common_biology = Subjects::factory()->create([
             'name' => 'common biology',
             'grade' => 10,
-            'major_id' => $major_biology->id,
+            'major_id' => $major_ips->id,
             'teacher_id' => $teacher_biology->id,
         ]);
         $homeroom_kimia_10 =  Employee::factory()->create(['task' => 'teacher']);
@@ -120,13 +123,13 @@ class DatabaseSeeder extends Seeder
         $classroom_kimia_10 = Classroom::factory()
             ->create([
                 'name' => 'kimia 10',
-                'major_id' => $major_kimia->id,
+                'major_id' => $major_ipa->id,
                 'homeroom_id' => $homeroom_kimia_10->id,
             ]);
         $classroom_biology_10 = Classroom::factory()
             ->create([
                 'name' => 'biology 10',
-                'major_id' => $major_biology->id,
+                'major_id' => $major_ips->id,
                 'homeroom_id' => $homeroom_biology_10->id,
             ]);
         $student_abcd = Student::factory()
@@ -136,7 +139,7 @@ class DatabaseSeeder extends Seeder
                 'password' => 'abcd',
                 'fullname' => 'abcd',
                 'grade' => 10,
-                'major_id' => $major_kimia->id,
+                'major_id' => $major_ipa->id,
                 'classroom_id' => $classroom_kimia_10->id,
             ]);
         $student_efgh = Student::factory()
@@ -146,26 +149,26 @@ class DatabaseSeeder extends Seeder
                 'password' => 'efgh',
                 'fullname' => 'efgh',
                 'grade' => 10,
-                'major_id' => $major_biology->id,
+                'major_id' => $major_ips->id,
                 'classroom_id' => $classroom_biology_10->id,
             ]);
         $students_kimia_10 = Student::factory()
             ->count(10)
             ->create([
-                'major_id' => $major_kimia->id,
+                'major_id' => $major_ipa->id,
                 'classroom_id' => $classroom_kimia_10->id,
             ]);
         $students_biology_10 = Student::factory()
             ->count(10)
             ->create([
-                'major_id' => $major_biology->id,
+                'major_id' => $major_ips->id,
                 'classroom_id' => $classroom_biology_10->id,
             ]);
         $classrooms = Classroom::factory()
             ->count(15)
             ->state(new Sequence(
-                ['major_id' => $major_kimia->id],
-                ['major_id' => $major_biology->id],
+                ['major_id' => $major_ipa->id],
+                ['major_id' => $major_ips->id],
                 ['major_id' => $major_language->id],
             ))->state(new Sequence(
                 ...$employees->map(function ($item) {
@@ -176,14 +179,14 @@ class DatabaseSeeder extends Seeder
             'name' => 'student',
             'email' => 'student@host.local',
             'password' => 'student',
-            'major_id' => $major_kimia->id,
+            'major_id' => $major_ipa->id,
             'classroom_id' => $classroom_kimia_10->id,
         ]);
         $students = Student::factory()
             ->count(90)
             ->state(new Sequence(
-                ['major_id' => $major_kimia->id],
-                ['major_id' => $major_biology->id],
+                ['major_id' => $major_ipa->id],
+                ['major_id' => $major_ips->id],
                 ['major_id' => $major_language->id],
             ))->state(new Sequence(
                 ...$classrooms->map(function ($item) {

@@ -26,6 +26,10 @@ class Major extends Model
                 name: 'name',
                 type: 'string',
             ),
+            'code' => new Definition(
+                name: 'code',
+                type: 'string',
+            ),
             'expertise' => new Definition(
                 name: 'expertise',
                 type: 'enum',
@@ -48,6 +52,7 @@ class Major extends Model
 
     protected $fillable = [
         'name',
+        'code',
         'expertise',
         'general_competence',
         'special_competence',
