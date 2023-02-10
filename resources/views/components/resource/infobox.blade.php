@@ -8,10 +8,10 @@
         </svg>
     </div>
     <div class="col-span-2 grid content-around">
-        <span class="capitalize">learners</span>
+        <span class="capitalize">{{ trans("learners") }}</span>
         <div>
             <span class="font-bold">120</span>
-            <small>person</small>
+            <small>{{ trans("person") }}</small>
         </div>
     </div>
 </a>
@@ -25,10 +25,10 @@
         </svg>
     </div>
     <div class="col-span-2 grid content-around">
-        <span class="capitalize">academic activities</span>
+        <span class="capitalize">{{ trans("academic activities") }}</span>
         <div>
             <span class="font-bold">120</span>
-            <small>person</small>
+            <small>{{ trans("person") }}</small>
         </div>
     </div>
 </a>
@@ -42,10 +42,10 @@
         </svg>
     </div>
     <div class="col-span-2 grid content-around">
-        <span class="capitalize">educators and employees</span>
+        <span class="capitalize">{{ trans("educators and employees") }}</span>
         <div>
             <span class="font-bold">120</span>
-            <small>person</small>
+            <small>{{ trans("person") }}</small>
         </div>
     </div>
 </a>
