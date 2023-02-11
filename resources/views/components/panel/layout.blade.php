@@ -27,6 +27,10 @@
 
     <link rel="shortcut icon" href="{{ $favicon }}" type="image/x-icon">
 
+    <script>
+        var panel = @json($panel);
+    </script>
+
     @vite('resources/js/layouts/panel/progress.js')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @vite('resources/js/layouts/panel/index.js')
@@ -35,7 +39,7 @@
         <link rel="manifest" href="{{ $panel->get_webmanifest() }}">
     @endif
     @if ($panel->service_worker)
-        @vite($panel->get_service_worker())
+        <script type="module" src="{{ $panel->get_service_worker() }}"></script>
     @endif
 
     {{ $head }}
@@ -53,7 +57,7 @@
                     <div class="bg-blue-600 max-w-full h-full rounded-full dark:bg-blue-500" style="width: 100%">
                     </div>
                 </div>
-                <div class="flex-grow p-4 overflow-auto">
+                <div id="main" class="flex-grow relative p-4 overflow-auto">
                     {{ $slot }}
                 </div>
             </main>

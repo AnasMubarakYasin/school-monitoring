@@ -1,0 +1,106 @@
+{
+  "_Datepicker-aec77fe4.js": {
+    "file": "assets/Datepicker-aec77fe4.js"
+  },
+  "_NetworkFirst-6cd2f28b.js": {
+    "file": "assets/NetworkFirst-6cd2f28b.js"
+  },
+  "_index-c70d8983.js": {
+    "file": "assets/index-c70d8983.js"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-29a7003b.css",
+    "isEntry": true,
+    "src": "resources/css/app.css"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-9af8dba4.js",
+    "imports": [
+      "resources/js/bootstrap.js",
+      "_index-c70d8983.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/app.js"
+  },
+  "resources/js/bootstrap.js": {
+    "file": "assets/bootstrap-2e4764a0.js",
+    "imports": [
+      "_index-c70d8983.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/bootstrap.js"
+  },
+  "resources/js/components/administrator/index.js": {
+    "file": "assets/index-2aadd806.js",
+    "imports": [
+      "resources/js/lib.ts"
+    ],
+    "isEntry": true,
+    "src": "resources/js/components/administrator/index.js"
+  },
+  "resources/js/components/administrator/regis-sw.js": {
+    "file": "assets/regis-sw-e35d6577.js",
+    "imports": [
+      "resources/js/lib.ts",
+      "_index-c70d8983.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/components/administrator/regis-sw.js"
+  },
+  "resources/js/components/administrator/sw.js": {
+    "file": "assets/sw-849f23d6.js",
+    "imports": [
+      "_NetworkFirst-6cd2f28b.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/components/administrator/sw.js"
+  },
+  "resources/js/components/resource/form.js": {
+    "file": "assets/form-aecc209f.js",
+    "imports": [
+      "_Datepicker-aec77fe4.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/components/resource/form.js"
+  },
+  "resources/js/components/resource/table.js": {
+    "file": "assets/table-65ab1931.js",
+    "imports": [
+      "resources/js/lib.ts",
+      "_Datepicker-aec77fe4.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/components/resource/table.js"
+  },
+  "resources/js/layouts/panel/index.js": {
+    "file": "assets/index-aa51bdbb.js",
+    "isEntry": true,
+    "src": "resources/js/layouts/panel/index.js"
+  },
+  "resources/js/layouts/panel/progress.js": {
+    "file": "assets/progress-4a4badfd.js",
+    "imports": [
+      "resources/js/lib.ts"
+    ],
+    "isEntry": true,
+    "src": "resources/js/layouts/panel/progress.js"
+  },
+  "resources/js/lib.ts": {
+    "file": "assets/lib-3547cf2e.js",
+    "isEntry": true,
+    "src": "resources/js/lib.ts"
+  },
+  "resources/js/regis-sw.js": {
+    "file": "assets/regis-sw-4ed993c7.js",
+    "isEntry": true,
+    "src": "resources/js/regis-sw.js"
+  },
+  "resources/js/sw.js": {
+    "file": "assets/sw-c6c40e17.js",
+    "imports": [
+      "_NetworkFirst-6cd2f28b.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/sw.js"
+  }
+}

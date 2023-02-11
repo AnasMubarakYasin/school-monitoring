@@ -1,22 +1,35 @@
 import {
     cleanupOutdatedCaches,
     precacheAndRoute,
+    matchPrecache,
     createHandlerBoundToURL,
 } from "workbox-precaching";
 
 const manifest = self.__WB_MANIFEST;
+const fallback_document = "/administrator/offline";
 
 cleanupOutdatedCaches();
 precacheAndRoute(manifest);
 
+// console.log(manifest);
+
 import { clientsClaim } from "workbox-core";
 
-self.skipWaiting();
-clientsClaim();
+// self.skipWaiting();
+// clientsClaim();
 
-import { registerRoute, Route, NavigationRoute } from "workbox-routing";
-import { NetworkFirst, StaleWhileRevalidate } from "workbox-strategies";
-
+import { offlineFallback } from "workbox-recipes";
+import {
+    setDefaultHandler,
+    setCatchHandler,
+    registerRoute,
+    Route,
+} from "workbox-routing";
+import {
+    NetworkFirst,
+    NetworkOnly,
+    StaleWhileRevalidate,
+} from "workbox-strategies";
 
 // Handle documents:
 const documentRoute = new Route(
@@ -63,3 +76,20 @@ registerRoute(documentRoute);
 registerRoute(imageRoute);
 registerRoute(scriptsRoute);
 registerRoute(stylesRoute);
+
+// This "catch" handler is triggered when any of the other routes fail to
+// generate a response.
+setCatchHandler(async ({ request }) => {
+    // Fallback assets are precached when the service worker is installed, and are
+    // served in the event of an error below. Use `event`, `request`, and `url` to
+    // figure out how to respond, or use request.destination to match requests for
+    // specific resource types.
+    switch (request.destination) {
+        case "document":
+            // FALLBACK_HTML_URL must be defined as a precached URL for this to work:
+            return matchPrecache(fallback_document);
+        default:
+            // If we don't have a fallback, return an error response.
+            return Response.error();
+    }
+});

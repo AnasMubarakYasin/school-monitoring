@@ -57,11 +57,11 @@ class Panel
     {
         return "";
     }
-    public function get_service_worker(): string
+    public function get_webmanifest(): string
     {
         return "";
     }
-    public function get_webmanifest(): string
+    public function get_service_worker(): string
     {
         return "";
     }
