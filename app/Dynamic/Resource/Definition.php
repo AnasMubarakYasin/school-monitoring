@@ -16,6 +16,7 @@ class Definition
         public mixed $default = null,
         public mixed $enums = null,
         public bool $multiple = false,
+        public string|null $accept = null,
         public string|null $relation = null,
         public string|null $alias = null,
         public array|null $children = null,
