@@ -57,7 +57,7 @@
                     <div class="bg-blue-600 max-w-full h-full rounded-full dark:bg-blue-500" style="width: 100%">
                     </div>
                 </div>
-                <div id="main" class="flex-grow relative p-4 overflow-auto">
+                <div id="main" class="flex-grow p-4 overflow-auto">
                     {{ $slot }}
                 </div>
             </main>

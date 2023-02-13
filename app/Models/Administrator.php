@@ -11,6 +11,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
+use Shetabit\Visitor\Visitor;
 
 class Administrator extends Authenticatable
 {
@@ -74,5 +75,10 @@ class Administrator extends Authenticatable
         } else {
             return Storage::url($this->photo);
         }
+    }
+
+    public function visits()
+    {
+        return visits($this);
     }
 }

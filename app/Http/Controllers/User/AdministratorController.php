@@ -92,9 +92,14 @@ class AdministratorController extends Controller
             $attendance,
             $academic_activity,
         ];
+        $visitors =
+            visits(Administrator::class)->count() +
+            visits(Employee::class)->count() +
+            visits(Student::class)->count();
         return view('pages.administrator.dashboard', [
             'stats' => $stats,
             'flow' => $flow,
+            'visitors' => $visitors,
         ]);
     }
     public function profile()
@@ -835,7 +840,7 @@ class AdministratorController extends Controller
             request: request(),
             columns: [
                 'subjects',
-                'classrooms',
+                'classroom',
                 'teacher',
                 'type',
                 'start_at',
@@ -1133,5 +1138,9 @@ class AdministratorController extends Controller
         };
         return view('pages.administrator.academic_activity.update', ['resource' => $resource]);
     }
-    //!SECTION - academic_activity
+    public function evaluation_list()
+    {
+        $data = Student::paginate(10);
+        return view('pages.administrator.evaluation', ['evaluations' => $data]);
+    }
 }

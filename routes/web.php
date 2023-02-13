@@ -31,7 +31,7 @@ Route::middleware('authc.guest:web.administrator.dashboard,administrator')->grou
     Route::post('administrator/login', 'Auth\AdministratorController@login_perfom')->name('web.administrator.login_perform');
 });
 Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
-    Route::middleware(['locale', 'view.share'])->group(function () {
+    Route::middleware(['locale', 'view.share', 'visitor.visit'])->group(function () {
         Route::get('administrator/dashboard', 'User\AdministratorController@dashboard')->name('web.administrator.dashboard');
         Route::get('administrator/profile', 'User\AdministratorController@profile')->name('web.administrator.profile');
         Route::get('administrator/notification', 'User\AdministratorController@notification')->name('web.administrator.notification');
@@ -109,6 +109,8 @@ Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
         Route::get('administrator/academic_data/academic_activity/list', 'User\AdministratorController@academic_activity_list')->name('web.administrator.academic_data.academic_activity.list');
         Route::get('administrator/academic_data/academic_activity/create', 'User\AdministratorController@academic_activity_create')->name('web.administrator.academic_data.academic_activity.create');
         Route::get('administrator/academic_data/academic_activity/{academic_activity}/update', 'User\AdministratorController@academic_activity_update')->name('web.administrator.academic_data.academic_activity.update');
+
+        Route::get('administrator/academic_data/evaluation', 'User\AdministratorController@evaluation_list')->name('web.administrator.academic_data.evaluation.list');
         /** !SECTION - Academic */
     });
 });
@@ -122,7 +124,7 @@ Route::middleware('authc.guest:web.employee.dashboard,employee')->group(function
     Route::post('employee/login', 'Auth\EmployeeController@login_perfom')->name('web.employee.login_perform');
 });
 Route::middleware(['authc.basic:welcome,employee'])->group(function () {
-    Route::middleware(['locale', 'view.share'])->group(function () {
+    Route::middleware(['locale', 'view.share', 'visitor.visit'])->group(function () {
         Route::get('employee/dashboard', 'User\EmployeeController@dashboard')->name('web.employee.dashboard');
         Route::get('employee/profile', 'User\EmployeeController@profile')->name('web.employee.profile');
         Route::get('employee/notification', 'User\EmployeeController@notification')->name('web.employee.notification');
@@ -151,7 +153,7 @@ Route::middleware('authc.guest:web.student.dashboard,student')->group(function (
     Route::post('student/login', 'Auth\StudentController@login_perfom')->name('web.student.login_perform');
 });
 Route::middleware(['authc.basic:welcome,student'])->group(function () {
-    Route::middleware(['locale', 'view.share'])->group(function () {
+    Route::middleware(['locale', 'view.share', 'visitor.visit'])->group(function () {
         Route::get('student/dashboard', 'User\StudentController@dashboard')->name('web.student.dashboard');
         Route::get('student/profile', 'User\StudentController@profile')->name('web.student.profile');
         Route::get('student/notification', 'User\StudentController@notification')->name('web.student.notification');

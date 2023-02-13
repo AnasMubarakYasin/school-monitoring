@@ -52,7 +52,7 @@ function template_prompt_install() {
     return `
         <div
             id="prompt-install"
-            class="w-full fixed bottom-5 left-5 max-w-xs p-4 text-gray-500 bg-white rounded-lg drop-shadow-xl dark:bg-gray-800 dark:text-gray-400"
+            class="w-full fixed bottom-5 right-5 max-w-xs p-4 text-gray-500 bg-white rounded-lg drop-shadow-xl dark:bg-gray-800 dark:text-gray-400"
             role="alert"
         >
             <div class="flex">
@@ -107,7 +107,7 @@ function template_prompt_update() {
     return `
         <div
             id="prompt-update"
-            class="w-full fixed bottom-5 left-5 max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow-xl dark:bg-gray-800 dark:text-gray-400"
+            class="w-full fixed bottom-5 right-5 max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow-xl dark:bg-gray-800 dark:text-gray-400"
             role="alert"
         >
             <div class="flex">

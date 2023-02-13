@@ -11,6 +11,7 @@ use App\Models\Classroom;
 use App\Models\Employee;
 use App\Models\SchoolInformation;
 use App\Models\Major;
+use App\Models\MaterialAndAssignment;
 use App\Models\Presence;
 use App\Models\SchoolYear;
 use App\Models\Semester;
@@ -222,6 +223,20 @@ class DatabaseSeeder extends Seeder
             ->create([
                 'presence_id' => $presence_biology_10->id,
                 'student_id' => $student_efgh->id,
+            ]);
+        MaterialAndAssignment::factory()
+            ->count(16)
+            ->create([
+                'subjects_id' => $subjects_basic_kimia->id,
+                'classroom_id' => $classroom_kimia_10->id,
+                'teacher_id' => $teacher_kimia->id,
+            ]);
+        MaterialAndAssignment::factory()
+            ->count(16)
+            ->create([
+                'subjects_id' => $subjects_common_biology->id,
+                'classroom_id' => $classroom_biology_10->id,
+                'teacher_id' => $teacher_biology->id,
             ]);
     }
 }
