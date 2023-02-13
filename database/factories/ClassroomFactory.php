@@ -18,7 +18,7 @@ class ClassroomFactory extends Factory
     {
         return [
             'code' => fake()->unique()->regexify('[0-9]{6}'),
-            'name' => fake()->name(),
+            'name' => fake()->unique()->name(),
             'total_student' => fake()->randomNumber(2),
             'description' => fake()->slug(),
 

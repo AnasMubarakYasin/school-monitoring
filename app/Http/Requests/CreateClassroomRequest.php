@@ -24,7 +24,13 @@ class CreateClassroomRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'code' => 'required|string',
+            'name' => 'required|string',
+            'total_student' => 'nullable|integer',
+            'description' => 'nullable|string',
+
+            'major_id' => 'required|integer',
+            'homeroom_id' => 'required|integer',
         ];
     }
 }
