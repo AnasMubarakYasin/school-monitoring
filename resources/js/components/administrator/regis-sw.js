@@ -10,9 +10,10 @@ if ("serviceWorker" in navigator) {
         scope: "/administrator/",
     });
     wb.addEventListener("waiting", (event) => {
-        console.log(event);
+        // console.log(event);
         wb.addEventListener("controlling", (event) => {
-            console.log(event);
+            // console.log(event);
+            window.location.reload();
         });
         const toast = create_element(template_prompt_update());
         const dismiss = new Dismiss(toast, toast.querySelector("#close-btn"));
@@ -21,7 +22,7 @@ if ("serviceWorker" in navigator) {
         document.getElementById("main").prepend(toast);
         toast.querySelector("#update-btn").addEventListener("click", () => {
             wb.messageSkipWaiting();
-            event.dismiss.hide();
+            dismiss.hide();
         });
         // setTimeout(() => {
         //     prompted_update = false;
