@@ -1,3 +1,9 @@
+@props([
+    'visitors' => 0,
+])
+@aware([
+    'user' => null,
+])
 <a href=""
     class="grid grid-cols-3 p-2 bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-none border dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all">
     <div class="bg-[#F9A620] w-[70px] h-[70px] rounded-lg grid place-content-center"><svg
@@ -8,10 +14,10 @@
         </svg>
     </div>
     <div class="col-span-2 grid content-around">
-        <span class="capitalize">{{ trans("learners") }}</span>
+        <span class="capitalize">{{ trans('learners') }}</span>
         <div>
             <span class="font-bold">120</span>
-            <small>{{ trans("person") }}</small>
+            <small>{{ trans('person') }}</small>
         </div>
     </div>
 </a>
@@ -25,10 +31,10 @@
         </svg>
     </div>
     <div class="col-span-2 grid content-around">
-        <span class="capitalize">{{ trans("academic activities") }}</span>
+        <span class="capitalize">{{ trans('academic activities') }}</span>
         <div>
             <span class="font-bold">120</span>
-            <small>{{ trans("person") }}</small>
+            <small>{{ trans('person') }}</small>
         </div>
     </div>
 </a>
@@ -42,10 +48,27 @@
         </svg>
     </div>
     <div class="col-span-2 grid content-around">
-        <span class="capitalize">{{ trans("educators and employees") }}</span>
+        <span class="capitalize">{{ trans('educators and employees') }}</span>
         <div>
             <span class="font-bold">120</span>
-            <small>{{ trans("person") }}</small>
+            <small>{{ trans('person') }}</small>
+        </div>
+    </div>
+</a>
+<a href=""
+    class="flex gap-4 p-2 bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-none border dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all">
+    <div class="grid place-content-center p-3.5 bg-gray-400 rounded-lg">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="w-11 h-11">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5m.75-9l3-3 2.148 2.148A12.061 12.061 0 0116.5 7.605" />
+        </svg>
+    </div>
+    <div class="flex flex-col place-content-evenly">
+        <span class="capitalize font-medium text-gray-800 dark:text-gray-100">{{ trans('visitors today') }}</span>
+        <div>
+            <span class="font-bold">{{ $visitors }}</span>
+            <small class="text-gray-900 dark:text-gray-100 font-medium">{{ trans('user') }}</small>
         </div>
     </div>
 </a>

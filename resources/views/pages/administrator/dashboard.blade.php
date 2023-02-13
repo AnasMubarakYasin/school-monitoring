@@ -16,7 +16,7 @@
     </x-slot>
     <div class="grid gap-4">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <x-resource.infobox></x-resource.infobox>
+            <x-resource.infobox :visitors="$visitors"></x-resource.infobox>
         </div>
         <div class="grid gap-2">
             <div class="text-gray-900 font-medium dark:text-gray-300">{{ trans('Resources') }}</div>

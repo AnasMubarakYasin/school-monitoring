@@ -18,9 +18,9 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreignId('subjects_id')->constrained('subjects')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('class_id')->constrained('classrooms')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('classroom_id')->constrained('classrooms')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('teacher_id')->constrained('employees')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->enum('type', ['Bahan Ajar']);
+            $table->enum('type', ['material', 'assignment']);
             $table->dateTime('start_at');
             $table->dateTime('end_at');
             $table->string('description');

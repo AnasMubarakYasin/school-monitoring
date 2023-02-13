@@ -132,4 +132,14 @@ class Student extends Authenticatable
     {
         return $this->belongsTo(Classroom::class, 'classroom_id');
     }
+
+    public function material_and_assignments()
+    {
+        return $this->hasMany(MaterialAndAssignment::class);
+    }
+
+    public function visits()
+    {
+        return visits($this);
+    }
 }

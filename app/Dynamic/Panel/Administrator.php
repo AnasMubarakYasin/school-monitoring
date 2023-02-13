@@ -21,8 +21,8 @@ use Illuminate\Support\Facades\Vite;
 
 class Administrator extends Panel
 {
-    public bool $webmanifest = true;
-    public bool $service_worker = true;
+    public bool $webmanifest = false;
+    public bool $service_worker = false;
     public function get_webmanifest(): string
     {
         return asset('administrator/site.webmanifest');
@@ -122,6 +122,12 @@ class Administrator extends Panel
                         link: route('web.administrator.academic_data.academic_activity.list'),
                         pname: "view_any",
                         pclass: AcademicActivity::class,
+                    ),
+                    new Menu(
+                        name: "evaluation",
+                        link: route('web.administrator.academic_data.evaluation.list'),
+                        // pname: "view_any",
+                        // pclass: AcademicActivity::class,
                     ),
                 ]
             ),

@@ -13,7 +13,6 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-
 class Employee extends Authenticatable
 {
     use HasRoles;
@@ -110,5 +109,10 @@ class Employee extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
+    }
+
+    public function visits()
+    {
+        return visits($this);
     }
 }

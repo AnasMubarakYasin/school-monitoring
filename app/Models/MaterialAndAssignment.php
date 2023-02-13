@@ -24,12 +24,12 @@ class MaterialAndAssignment extends Model
             relation: 'parent',
             alias: 'subjects_id',
         );
-        self::$definitions['classrooms'] = new Definition(
-            name: 'classrooms',
+        self::$definitions['classroom'] = new Definition(
+            name: 'classroom',
             type: 'model',
             array: false,
-            relation: 'classrooms',
-            alias: 'class_id',
+            relation: 'classroom',
+            alias: 'classroom_id',
         );
         self::$definitions['teacher'] = new Definition(
             name: 'teacher',
@@ -41,9 +41,7 @@ class MaterialAndAssignment extends Model
         self::$definitions['type'] = new Definition(
             name: 'type',
             type: 'enum',
-            enums: [
-                'Bahan Ajar' => 'Bahan Ajar',
-            ],
+            enums: ['material' => 'material', 'assignment' => 'assignment'],
         );
         self::$definitions['start_at'] = new Definition(
             name: 'start at',
@@ -67,7 +65,7 @@ class MaterialAndAssignment extends Model
 
     protected $fillable = [
         'subjects_id',
-        'class_id',
+        'classroom_id',
         'teacher_id',
         'type',
         'start_at',
@@ -82,9 +80,9 @@ class MaterialAndAssignment extends Model
     {
         return $this->belongsTo(Subjects::class, 'subjects_id');
     }
-    public function classrooms()
+    public function classroom()
     {
-        return $this->belongsTo(Classroom::class, 'class_id');
+        return $this->belongsTo(Classroom::class, 'classroom_id');
     }
     public function teacher()
     {
