@@ -93,9 +93,9 @@ class AdministratorController extends Controller
             $academic_activity,
         ];
         $visitors =
-            visits(Administrator::class)->count() +
-            visits(Employee::class)->count() +
-            visits(Student::class)->count();
+            visits(Administrator::class)->period('day')->count() +
+            visits(Employee::class)->period('day')->count() +
+            visits(Student::class)->period('day')->count();
         return view('pages.administrator.dashboard', [
             'stats' => $stats,
             'flow' => $flow,
