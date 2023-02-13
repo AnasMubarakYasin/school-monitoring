@@ -21,8 +21,8 @@ use Illuminate\Support\Facades\Vite;
 
 class Administrator extends Panel
 {
-    public bool $webmanifest = false;
-    public bool $service_worker = false;
+    public bool $webmanifest = true;
+    public bool $service_worker = true;
     public function get_webmanifest(): string
     {
         return asset('administrator/site.webmanifest');

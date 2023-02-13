@@ -40,6 +40,20 @@
                 </div>
             @break
 
+            @case('file')
+                <div class="flex flex-col gap-2 {{ $resource->hidden($field) }}">
+                    <label for="{{ $field }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        {{ trans($model->definition($field)->name) }}
+                    </label>
+                    <input
+                        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                        id="{{ $field }}" type="file">
+                    @error($field)
+                        <p class="text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
+                    @enderror
+                </div>
+            @break
+
             @case('boolean')
                 <div class="flex flex-col gap-2 {{ $resource->hidden($field) }}">
                     <label class="relative flex items-center gap-2 cursor-pointer">
