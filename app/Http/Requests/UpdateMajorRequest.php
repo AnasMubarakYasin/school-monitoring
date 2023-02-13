@@ -26,7 +26,7 @@ class UpdateMajorRequest extends FormRequest
         return [
             'name' => 'required|string',
             'code' => 'required|string',
-            'expertise' => 'required|string',
+            'expertise.*' => 'required|string',
             'general_competence' => 'required|string',
             'special_competence' => 'required|string',
         ];
