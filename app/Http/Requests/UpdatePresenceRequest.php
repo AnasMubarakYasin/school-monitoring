@@ -24,7 +24,13 @@ class UpdatePresenceRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|string',
+
+            'school_year_id' => 'required|integer',
+            'semester_id' => 'required|integer',
+            'teacher_id' => 'required|integer',
+            'subjects_id' => 'required|integer',
+            'classroom_id' => 'required|integer',
         ];
     }
 }

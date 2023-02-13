@@ -24,7 +24,11 @@ class CreateAttendanceRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'state' => 'nullable|string',
+            'description' => 'nullable|string',
+
+            'presence_id' => 'required|integer',
+            'student_id' => 'required|integer',
         ];
     }
 }

@@ -232,10 +232,10 @@ Route::middleware(['authc.basic:welcome,administrator,employee'])->group(functio
     Route::delete('resource/presence/{presence}', 'PresenceController@delete')->name('web.resource.presence.delete');
     Route::delete('resource/presence', 'PresenceController@delete_any')->name('web.resource.presence.delete_any');
 
-    Route::post('resource/attendance', 'PresenceController@create')->name('web.resource.attendance.create');
-    Route::patch('resource/attendance/{attendance}', 'PresenceController@update')->name('web.resource.attendance.update');
-    Route::delete('resource/attendance/{attendance}', 'PresenceController@delete')->name('web.resource.attendance.delete');
-    Route::delete('resource/attendance', 'PresenceController@delete_any')->name('web.resource.attendance.delete_any');
+    Route::post('resource/attendance', 'AttendanceController@create')->name('web.resource.attendance.create');
+    Route::patch('resource/attendance/{attendance}', 'AttendanceController@update')->name('web.resource.attendance.update');
+    Route::delete('resource/attendance/{attendance}', 'AttendanceController@delete')->name('web.resource.attendance.delete');
+    Route::delete('resource/attendance', 'AttendanceController@delete_any')->name('web.resource.attendance.delete_any');
 
     Route::post('resource/academic_activity', 'AcademicActivityController@create')->name('web.resource.academic_activity.create');
     Route::patch('resource/academic_activity/{academic_activity}', 'AcademicActivityController@update')->name('web.resource.academic_activity.update');

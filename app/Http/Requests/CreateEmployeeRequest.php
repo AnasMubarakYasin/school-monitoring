@@ -24,7 +24,17 @@ class CreateEmployeeRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'photo' => 'nullable|string',
+            'name' => 'required|string',
+            'telp' => 'required|string',
+            'email' => 'required|email',
+            'password' => 'required|string',
+
+            'nip' => 'required|string',
+            'fullname' => 'required|string',
+            'gender' => 'required|in:male,female',
+            'state' => 'required|in:honor,pns',
+            'task' => 'required|string',
         ];
     }
 }

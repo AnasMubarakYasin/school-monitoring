@@ -40,6 +40,10 @@ class AcademicActivity extends Model
                 name: 'type',
                 type: 'string',
             ),
+            'date' => new Definition(
+                name: 'date',
+                type: 'date',
+            ),
             'start_at' => new Definition(
                 name: 'start at',
                 type: 'time',
@@ -80,6 +84,7 @@ class AcademicActivity extends Model
         'duration',
         'executive',
         'type',
+        'date',
         'start_at',
         'end_at',
         'description',

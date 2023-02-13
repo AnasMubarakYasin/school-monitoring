@@ -1078,6 +1078,7 @@ class AdministratorController extends Controller
                 'duration',
                 'executive',
                 'type',
+                'date',
                 'start_at',
                 'end_at',
                 'description',
@@ -1105,6 +1106,7 @@ class AdministratorController extends Controller
                 'duration',
                 'executive',
                 'type',
+                'date',
                 [
                     'start_at',
                     'end_at'
@@ -1126,6 +1128,7 @@ class AdministratorController extends Controller
                 'duration',
                 'executive',
                 'type',
+                'date',
                 [
                     'start_at',
                     'end_at'
