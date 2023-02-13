@@ -19,7 +19,7 @@ return new class extends Migration
 
             $table->string('name');
             $table->string('code')->unique();
-            $table->enum('expertise', ['kimia', 'biology', 'language']);
+            $table->json('expertise');
             $table->string('general_competence');
             $table->string('special_competence');
         });

@@ -64,11 +64,24 @@
                         class="block capitalize text-sm font-medium text-gray-900 dark:text-white">
                         {{ trans($model->definition($field)->name) }}
                     </label>
-                    <select id="{{ $field }}" name="{{ $field }}"
+                    <select id="{{ $field }}"
+                        name="{{ $field }}{{ $model->definition($field)->multiple ? '[]' : '' }}"
+                        {{ $model->definition($field)->multiple ? 'multiple' : '' }}
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option selected></option>
+                        @if (!$model->definition($field)->multiple)
+                            <option selected></option>
+                        @endif
                         @foreach ($model->definition($field)->enums as $e_key => $e_val)
-                            <option @selected((old($field) ?? $model->{$field}) == $e_key) value="{{ $e_key }}">{{ $e_val }}</option>
+                            @if (is_array($e_val))
+                                <optgroup label="{{ $e_key }}">
+                                    @foreach ($e_val as $ee_key => $ee_val)
+                                        <option @selected((old($field) ?? $model->{$field}) == $ee_key) value="{{ $ee_key }}">{{ $ee_val }}
+                                        </option>
+                                    @endforeach
+                                </optgroup>
+                            @else
+                                <option @selected((old($field) ?? $model->{$field}) == $e_key) value="{{ $e_key }}">{{ $e_val }}</option>
+                            @endif
                         @endforeach
                     </select>
                     @error($field)
@@ -135,7 +148,7 @@
                         class="capitalize text-sm font-medium text-gray-900 dark:text-white">
                         {{ trans($model->definition($field)->name) }}
                     </label>
-                    <input type="text" list="{{ $model->definition($field)->alias }}_list"
+                    <input type="text" list="{{ $model->definition($field)->alias }}_list" multiple
                         id="{{ $model->definition($field)->alias }}" name="{{ $model->definition($field)->alias }}"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="{{ trans($model->definition($field)->name) }}"

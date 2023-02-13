@@ -33,9 +33,18 @@ class Major extends Model
             'expertise' => new Definition(
                 name: 'expertise',
                 type: 'enum',
+                multiple: true,
                 enums: [
-                    'kimia' => 'kimia',
-                    'biology' => 'biology',
+                    'ipa' => [
+                        'kimia' => 'kimia',
+                        'fisika' => 'fisika',
+                        'biology' => 'biology',
+                    ],
+                    'ips' => [
+                        'ekonomi' => 'ekonomi',
+                        'geografi' => 'geografi',
+                        'sosiologi' => 'sosiologi',
+                    ],
                     'language' => 'language',
                 ],
             ),
@@ -57,4 +66,8 @@ class Major extends Model
         'general_competence',
         'special_competence',
     ];
+    protected $casts = [
+        'expertise' => 'array',
+    ];
+    protected $hidden = [];
 }

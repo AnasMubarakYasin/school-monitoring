@@ -99,13 +99,25 @@
                                             </label>
                                             <select id="filter_{{ $column }}" name="filter_{{ $column }}"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                                <option selected>
-                                                    {{ __('choose a ' . $resource->model->definition($column)->name) }}
-                                                </option>
-                                                @foreach ($resource->model->definition($column)->enums as $key => $val)
-                                                    <option @selected(request()->query("filter_$column") == $key) value="{{ $val }}">
-                                                        {{ $val }}
+
+                                                @if (!$resource->model->definition($column)->multiple)
+                                                    <option selected>
+                                                        {{ __('choose a ' . $resource->model->definition($column)->name) }}
                                                     </option>
+                                                @endif
+                                                @foreach ($resource->model->definition($column)->enums as $e_key => $e_val)
+                                                    @if (is_array($e_val))
+                                                        <optgroup label="{{ $e_key }}">
+                                                            @foreach ($e_val as $ee_key => $ee_val)
+                                                                <option @selected((request()->query("filter_$column") ?? $resource->model->{$column}) == $ee_key)
+                                                                    value="{{ $ee_key }}">{{ $ee_val }}
+                                                                </option>
+                                                            @endforeach
+                                                        </optgroup>
+                                                    @else
+                                                        <option @selected((request()->query("filter_$column") ?? $resource->model->{$column}) == $e_key) value="{{ $e_key }}">
+                                                            {{ $e_val }}</option>
+                                                    @endif
                                                 @endforeach
                                             </select>
                                         </div>
@@ -284,7 +296,11 @@
 
                                 @default
                                     <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
-                                        {{ $item->{$column} }}
+                                        @if (is_array($item->{$column}))
+                                            {{ implode(', ', $item->{$column}) }}
+                                        @else
+                                            {{ $item->{$column} }}
+                                        @endif
                                     </td>
                             @endswitch
                         @endforeach

@@ -24,7 +24,11 @@ class UpdateMajorRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|string',
+            'code' => 'required|string',
+            'expertise' => 'required|string',
+            'general_competence' => 'required|string',
+            'special_competence' => 'required|string',
         ];
     }
 }
