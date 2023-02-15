@@ -584,7 +584,7 @@ program
                     filename: "sw.js",
                     injectManifest: {
                         additionalManifestEntries: [
-                            { revision: "1", url: "/administrator/dashboard" },
+                            { revision: "2", url: "/administrator/dashboard" },
                             { revision: "1", url: "/administrator/offline" },
                         ],
                     },
