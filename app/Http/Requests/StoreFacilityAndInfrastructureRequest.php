@@ -29,7 +29,7 @@ class StoreFacilityAndInfrastructureRequest extends FormRequest
             'condition' => 'required|in:Baik,Sedang,Tidak Baik',
             'sarana_prasarana' => 'required|string',
             'responsible_person' => 'required|string',
-            'description' => 'required|string',
+            'description' => 'nullable|string',
         ];
     }
 }

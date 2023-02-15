@@ -107,11 +107,12 @@ class StudentController extends Controller
             request: request(),
             columns: [
                 'subjects',
-                'classrooms',
+                'classroom',
                 'teacher',
                 'time',
                 'day',
-                'description'
+                'description',
+                'file'
             ],
             pagination: ['per' => 5, 'num' => 1],
         );
@@ -128,11 +129,12 @@ class StudentController extends Controller
             request: request(),
             columns: [
                 'subjects',
-                'classrooms',
+                'classroom',
                 'type',
                 'start_at',
                 'end_at',
-                'description'
+                'description',
+                'file'
             ],
             pagination: ['per' => 5, 'num' => 1],
         );

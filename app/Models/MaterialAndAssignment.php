@@ -57,6 +57,10 @@ class MaterialAndAssignment extends Model
             name: 'description',
             type: 'string',
         );
+        self::$definitions['file'] = new Definition(
+            name: 'file',
+            type: 'file',
+        );
     }
     public static function modelable(): Model
     {
@@ -71,6 +75,7 @@ class MaterialAndAssignment extends Model
         'start_at',
         'end_at',
         'description',
+        'file'
     ];
 
     protected $casts = [];

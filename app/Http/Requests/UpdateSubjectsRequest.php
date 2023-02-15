@@ -29,7 +29,7 @@ class UpdateSubjectsRequest extends FormRequest
             'grade' => 'required|integer',
             'major_id' => 'required|integer',
             'teacher_id' => 'required|integer',
-            'description' => 'required|string',
+            'description' => 'nullable|string',
         ];
     }
 }

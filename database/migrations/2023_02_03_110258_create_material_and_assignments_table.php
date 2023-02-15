@@ -23,7 +23,8 @@ return new class extends Migration
             $table->enum('type', ['material', 'assignment']);
             $table->dateTime('start_at');
             $table->dateTime('end_at');
-            $table->string('description');
+            $table->string('description')->nullable();
+            $table->string('file')->nullable();
         });
     }
 

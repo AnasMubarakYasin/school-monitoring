@@ -8,12 +8,16 @@
                         <span>no</span>
                     </div>
                 </th>
-                <th rowspan="2" scope="col" class="p-3 text-base capitalize">
-                    <div class="flex items-center w-full h-full">
-                        <span>classrooms</span>
 
-                    </div>
-                </th>
+                @if ($authUser == App\Models\Employee::class)
+                    <th rowspan="2" scope="col" class="p-3 text-base capitalize">
+                        <div class="flex items-center w-full h-full">
+                            <span>classrooms</span>
+
+                        </div>
+                    </th>
+                @endif
+
                 <th colspan="2" scope="col" class="p-3 text-base capitalize">
                     <div class="flex items-center justify-center w-full h-full">
                         <span>subjects</span>
@@ -77,9 +81,11 @@
                     <td class="p-3  text-gray-900 dark:text-white whitespace-nowrap">
                         {{ $loop->iteration }}
                     </td>
-                    <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
-                        {{ $data->subjects->grade }}
-                    </td>
+                    @if ($authUser == App\Models\Employee::class)
+                        <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
+                            {{ $data->subjects->grade }}
+                        </td>
+                    @endif
                     <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
                         {{ $data->subjects->code }}
                     </td>

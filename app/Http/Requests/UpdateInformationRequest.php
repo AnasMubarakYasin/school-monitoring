@@ -26,7 +26,7 @@ class UpdateInformationRequest extends FormRequest
         return [
             'name' => 'required|string',
             'npsn' => 'required|string',
-            'nss' => 'required|string',
+            'nss' => 'nullable|string',
             'status' => 'required|in:Negeri,Swasta,Madrasah,Homeschooling',
             'address' => 'required|string',
             'village' => 'required|string',
@@ -35,7 +35,7 @@ class UpdateInformationRequest extends FormRequest
             'province' => 'required|string',
             'postal_code' => 'required|string',
             'telp' => 'required|string',
-            'website' => 'required|string',
+            'website' => 'nullable|string',
         ];
     }
 }

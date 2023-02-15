@@ -845,7 +845,8 @@ class AdministratorController extends Controller
                 'type',
                 'start_at',
                 'end_at',
-                'description'
+                'description',
+                'file'
             ],
             pagination: ['per' => 5, 'num' => 1],
         );
@@ -874,12 +875,13 @@ class AdministratorController extends Controller
         $resource = MaterialAndAssignment::formable()->from_create(
             fields: [
                 'subjects',
-                'classrooms',
+                'classroom',
                 'teacher',
                 'type',
                 'start_at',
                 'end_at',
-                'description'
+                'description',
+                'file'
             ],
         );
         $resource->route_create = function () {
@@ -905,12 +907,13 @@ class AdministratorController extends Controller
             model: $materialAndAssignment,
             fields: [
                 'subjects',
-                'classrooms',
+                'classroom',
                 'teacher',
                 'type',
                 'start_at',
                 'end_at',
-                'description'
+                'description',
+                'file'
             ],
         );
         $resource->route_update = function ($item) {
