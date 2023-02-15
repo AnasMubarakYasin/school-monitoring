@@ -25,12 +25,13 @@ class StoreMaterialAndAssignmentRequest extends FormRequest
     {
         return [
             'subjects_id' => 'required|integer',
-            'class_id' => 'required|integer',
+            'classroom_id' => 'required|integer',
             'teacher_id' => 'required|integer',
-            'type' => 'required|in:Bahan Ajar',
+            'type' => 'required|in:material,assignment',
             'start_at' => 'required|date',
             'end_at' => 'required|date',
-            'description' => 'required|string',
+            'description' => 'nullable|string',
+            'file' => 'required|mimes:csv,txt,xlx,xls,pdf|max:5048'
         ];
     }
 }

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->enum('condition', ['Baik', 'Sedang', 'Tidak Baik']);
             $table->string('sarana_prasarana');
             $table->string('responsible_person');
-            $table->string('description');
+            $table->string('description')->nullable();
         });
     }
 

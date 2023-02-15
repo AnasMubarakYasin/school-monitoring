@@ -19,7 +19,7 @@ return new class extends Migration
 
             $table->string('name');
             $table->string('npsn');
-            $table->string('nss');
+            $table->string('nss')->nullable();
             $table->enum('status', ['Negeri', 'Swasta', 'Madrasah', 'Homeschooling'])->nullable();
             $table->string('address');
             $table->string('village');
@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('province');
             $table->string('postal_code');
             $table->string('telp');
-            $table->string('website');
+            $table->string('website')->nullable();
         });
     }
 

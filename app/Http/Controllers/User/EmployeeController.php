@@ -40,7 +40,7 @@ class EmployeeController extends Controller
             request: request(),
             columns: [
                 'subjects',
-                'classrooms',
+                'classroom',
                 // 'teacher',
                 'time',
                 'day',
@@ -62,11 +62,12 @@ class EmployeeController extends Controller
             request: request(),
             columns: [
                 'subjects',
-                'classrooms',
+                'classroom',
                 'type',
                 'start_at',
                 'end_at',
-                'description'
+                'description',
+                'file'
             ],
             pagination: ['per' => 5, 'num' => 1],
         );
@@ -89,12 +90,13 @@ class EmployeeController extends Controller
         $resource = MaterialAndAssignment::formable()->from_create(
             fields: [
                 'subjects',
-                'classrooms',
+                'classroom',
                 'teacher',
                 'type',
                 'start_at',
                 'end_at',
-                'description'
+                'description',
+                'file'
             ],
             hidden: [
                 'teacher'
@@ -130,7 +132,8 @@ class EmployeeController extends Controller
                 'type',
                 'start_at',
                 'end_at',
-                'description'
+                'description',
+                'file'
             ],
             hidden: [
                 'teacher'

@@ -30,7 +30,7 @@ class StoreScheduleOfSubjectsRequest extends FormRequest
             'start_time' => 'required|string',
             'end_time' => 'required|string',
             'day' => 'required|in:senin,selasa,rabu,kamis,jumat,sabtu,minggu',
-            'description' => 'required|string',
+            'description' => 'nullable|string',
         ];
     }
 }
