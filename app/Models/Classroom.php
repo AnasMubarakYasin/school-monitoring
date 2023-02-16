@@ -52,6 +52,13 @@ class Classroom extends Model
                 relation: 'parent',
                 alias: 'homeroom_id',
             ),
+            'students' => new Definition(
+                name: 'students',
+                type: 'model',
+                array: true,
+                relation: 'students',
+                alias: 'students_id',
+            ),
         ];
     }
 
@@ -72,5 +79,9 @@ class Classroom extends Model
     public function homeroom()
     {
         return $this->belongsTo(Employee::class, 'homeroom_id');
+    }
+    public function students()
+    {
+        return $this->hasMany(Student::class);
     }
 }

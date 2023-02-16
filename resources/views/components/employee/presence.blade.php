@@ -19,6 +19,12 @@
                 <th rowspan="2" scope="col" class="p-2 text-base text-center capitalize">
                     subjects
                 </th>
+                <th rowspan="2" scope="col" class="p-2 text-base text-center capitalize">
+                    classroom
+                </th>
+                <th rowspan="2" scope="col" class="p-2 text-base text-center capitalize">
+                    student
+                </th>
                 <th colspan="16" scope="col" class="p-2 text-base text-center capitalize">
                     meeting
                 </th>
@@ -37,11 +43,23 @@
                     'bg-white capitalize text-center dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-600 dark:border-gray-700',
                     'border-b',
                 ])>
-                    <td class="p-3  text-gray-900 dark:text-white whitespace-nowrap">
+                    {{-- <td class="p-3  text-gray-900 dark:text-white whitespace-nowrap">
+                    {{ $presence->student() }}
+                </td> --}}
+                    <td rowspan="{{ $presence->classroom->students->count() }}"
+                        class="p-3  text-gray-900 dark:text-white whitespace-nowrap">
                         {{ $loop->iteration }}
                     </td>
+                    <td rowspan="{{ $presence->classroom->students->count() }}"
+                        class="p-3  text-gray-900 dark:text-white whitespace-nowrap">
+                        {{ $presence->subjects->name }}
+                    </td>
+                    <td rowspan="{{ $presence->classroom->students->count() }}"
+                        class="p-3  text-gray-900 dark:text-white whitespace-nowrap">
+                        {{ $presence->classroom->name }}
+                    </td>
                     <td class="p-3  text-gray-900 dark:text-white whitespace-nowrap">
-                        {{ $presence->subjects()->first()->name }}
+                        {{ $presence->classroom->students[0]->fullname }}
                     </td>
                     @foreach ($presence->attendances()->get() as $attendance)
                         <td class="p-3  text-gray-900 dark:text-white whitespace-nowrap">
@@ -49,10 +67,20 @@
                         </td>
                     @endforeach
                 </tr>
+                @foreach (range(1, $presence->classroom->students->count() - 1) as $index)
+                    <tr @class([
+                        'bg-white capitalize text-center dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-600 dark:border-gray-700',
+                        'border-b',
+                    ])>
+                        <td class="p-3  text-gray-900 dark:text-white whitespace-nowrap">
+                            {{ $presence->classroom->students[$index]->fullname }}
+                        </td>
+                    </tr>
+                @endforeach
             @empty
                 <tr>
                     <td class="p-4 text-center text-lg text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 rounded-b-lg capitalize"
-                        colspan="18">
+                        colspan="20">
                         {{ __('empty') }}
                     </td>
                 </tr>

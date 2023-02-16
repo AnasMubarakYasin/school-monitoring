@@ -158,25 +158,29 @@
             @break
 
             @case('model')
-                <div class="flex flex-col gap-2 {{ $resource->hidden($field) }}">
-                    <label for="{{ $model->definition($field)->alias }}"
-                        class="capitalize text-sm font-medium text-gray-900 dark:text-white">
-                        {{ trans($model->definition($field)->name) }}
-                    </label>
-                    <input type="text" list="{{ $model->definition($field)->alias }}_list" multiple
-                        id="{{ $model->definition($field)->alias }}" name="{{ $model->definition($field)->alias }}"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="{{ trans($model->definition($field)->name) }}"
-                        value="{{ old($model->definition($field)->alias) ?? $model->{$model->definition($field)->alias} }}">
-                    <datalist id="{{ $model->definition($field)->alias }}_list">
-                        @foreach ($resource->fetch_relation($model->definition($field)) as $relation)
-                            <option value="{{ $relation->id }}">{{ $relation->name }}</option>
-                        @endforeach
-                    </datalist>
-                    @error($model->definition($field)->alias)
-                        <p class="text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
-                    @enderror
-                </div>
+                @if ($model->definition($field)->array)
+                    <div> {{ trans($model->definition($field)->name) }} models </div>
+                @else
+                    <div class="flex flex-col gap-2 {{ $resource->hidden($field) }}">
+                        <label for="{{ $model->definition($field)->alias }}"
+                            class="capitalize text-sm font-medium text-gray-900 dark:text-white">
+                            {{ trans($model->definition($field)->name) }}
+                        </label>
+                        <input type="text" list="{{ $model->definition($field)->alias }}_list" multiple
+                            id="{{ $model->definition($field)->alias }}" name="{{ $model->definition($field)->alias }}"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="{{ trans($model->definition($field)->name) }}"
+                            value="{{ old($model->definition($field)->alias) ?? $model->{$model->definition($field)->alias} }}">
+                        <datalist id="{{ $model->definition($field)->alias }}_list">
+                            @foreach ($resource->fetch_relation($model->definition($field)) as $relation)
+                                <option value="{{ $relation->id }}">{{ $relation->name }}</option>
+                            @endforeach
+                        </datalist>
+                        @error($model->definition($field)->alias)
+                            <p class="text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
+                        @enderror
+                    </div>
+                @endif
             @break
 
             @default
