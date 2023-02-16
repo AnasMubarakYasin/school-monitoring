@@ -27,6 +27,7 @@ class Panel
     public string $app_logo = '';
     public string $vendor_name = '';
     public string $vendor_year = '';
+    public string $token = '';
     public bool $webmanifest = false;
     public bool $service_worker = false;
     public function get_user_photo(): string

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateAcademicActivityRequest;
 use App\Http\Requests\UpdateAcademicActivityRequest;
 use App\Models\AcademicActivity;
+use App\Models\Student;
+use App\Models\User;
+use App\Notifications\AcademicActivityReleased;
 
 class AcademicActivityController extends Controller
 {
@@ -12,7 +15,11 @@ class AcademicActivityController extends Controller
     {
         $this->authorize('create', AcademicActivity::class);
         $data = $request->validated();
-        AcademicActivity::create($data);
+        $model = AcademicActivity::create($data);
+        $students = Student::all();
+        foreach ($students as $student) {
+            $student->notifyNow(new AcademicActivityReleased($model));
+        }
         return redirect()->intended($request->input('_view_any'));
     }
     public function update(UpdateAcademicActivityRequest $request, AcademicActivity $academic_activity)

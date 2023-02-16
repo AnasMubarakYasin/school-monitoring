@@ -1,4 +1,4 @@
-import{v as o}from"./workbox-window.prod.es5-8f11f700.js";import{c as i}from"./lib-3547cf2e.js";import{D as a}from"./index-c70d8983.js";if("serviceWorker"in navigator){const t=new o("/student/sw.js",{type:"module",scope:"/student/"});t.addEventListener("waiting",r=>{t.addEventListener("controlling",d=>{window.location.reload()});const e=i(l()),n=new a(e,e.querySelector("#close-btn"));document.getElementById("main").prepend(e),e.querySelector("#update-btn").addEventListener("click",()=>{t.messageSkipWaiting(),n.hide()})}),window.addEventListener("beforeinstallprompt",r=>{r.preventDefault();const e=i(s()),n=new a(e,e.querySelector("#close-btn"));document.getElementById("main").prepend(e),e.querySelector("#install-btn").addEventListener("click",()=>{r.prompt(),n.hide()})}),t.register({immediate:!0}).then(r=>{})}function s(){return`
+import{v as o}from"./workbox-window.prod.es5-8f11f700.js";import{c as a}from"./lib-c0c25e73.js";import{D as l}from"./index-c70d8983.js";if("serviceWorker"in navigator){let n=!1;const t=new o("/administrator/sw.js",{type:"module",scope:"/administrator/"});window.addEventListener("beforeinstallprompt",r=>{r.preventDefault();const e=a(s()),i=new l(e,e.querySelector("#close-btn"));n=!0,document.getElementById("main").prepend(e),e.querySelector("#install-btn").addEventListener("click",()=>{r.prompt(),i.hide()})}),t.addEventListener("waiting",r=>{t.addEventListener("controlling",u=>{window.location.reload()});const e=a(d()),i=new l(e,e.querySelector("#close-btn"),{onHide(){n&&(document.getElementById("prompt-install").style.display="block")}});n&&(document.getElementById("prompt-install").style.display="none"),document.getElementById("main").prepend(e),e.querySelector("#update-btn").addEventListener("click",()=>{t.messageSkipWaiting(),i.hide()})}),t.register({immediate:!0}).then(r=>{})}function s(){return`
         <div
             id="prompt-install"
             class="w-full fixed bottom-5 right-5 max-w-xs p-4 text-gray-500 bg-white rounded-lg drop-shadow-xl dark:bg-gray-800 dark:text-gray-400"
@@ -50,7 +50,7 @@ import{v as o}from"./workbox-window.prod.es5-8f11f700.js";import{c as i}from"./l
                 </div>
             </div>
         </div>
-    `}function l(){return`
+    `}function d(){return`
         <div
             id="prompt-update"
             class="w-full fixed bottom-5 right-5 max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow-xl dark:bg-gray-800 dark:text-gray-400"

@@ -5,6 +5,9 @@
   "_NetworkFirst-6cd2f28b.js": {
     "file": "assets/NetworkFirst-6cd2f28b.js"
   },
+  "_axios-bff3f665.js": {
+    "file": "assets/axios-bff3f665.js"
+  },
   "_index-c70d8983.js": {
     "file": "assets/index-c70d8983.js"
   },
@@ -23,24 +26,26 @@
     "src": "resources/css/app.css"
   },
   "resources/js/app.js": {
-    "file": "assets/app-9af8dba4.js",
+    "file": "assets/app-f0619294.js",
     "imports": [
       "resources/js/bootstrap.js",
+      "_axios-bff3f665.js",
       "_index-c70d8983.js"
     ],
     "isEntry": true,
     "src": "resources/js/app.js"
   },
   "resources/js/bootstrap.js": {
-    "file": "assets/bootstrap-2e4764a0.js",
+    "file": "assets/bootstrap-82b095aa.js",
     "imports": [
+      "_axios-bff3f665.js",
       "_index-c70d8983.js"
     ],
     "isEntry": true,
     "src": "resources/js/bootstrap.js"
   },
   "resources/js/components/administrator/index.js": {
-    "file": "assets/index-2aadd806.js",
+    "file": "assets/index-49a1e2cd.js",
     "imports": [
       "resources/js/lib.ts"
     ],
@@ -48,7 +53,7 @@
     "src": "resources/js/components/administrator/index.js"
   },
   "resources/js/components/administrator/regis-sw.js": {
-    "file": "assets/regis-sw-893fdea2.js",
+    "file": "assets/regis-sw-95a3aecc.js",
     "imports": [
       "_workbox-window.prod.es5-8f11f700.js",
       "resources/js/lib.ts",
@@ -75,7 +80,7 @@
     "src": "resources/js/components/resource/form.js"
   },
   "resources/js/components/resource/table.js": {
-    "file": "assets/table-65ab1931.js",
+    "file": "assets/table-5fd2c4d4.js",
     "imports": [
       "resources/js/lib.ts",
       "_Datepicker-aec77fe4.js"
@@ -84,17 +89,18 @@
     "src": "resources/js/components/resource/table.js"
   },
   "resources/js/components/student/regis-sw.js": {
-    "file": "assets/regis-sw-642c2b68.js",
+    "file": "assets/regis-sw-952e6918.js",
     "imports": [
       "_workbox-window.prod.es5-8f11f700.js",
       "resources/js/lib.ts",
-      "_index-c70d8983.js"
+      "_index-c70d8983.js",
+      "_axios-bff3f665.js"
     ],
     "isEntry": true,
     "src": "resources/js/components/student/regis-sw.js"
   },
   "resources/js/components/student/sw.js": {
-    "file": "assets/sw-eaa7a7dc.js",
+    "file": "assets/sw-1d279366.js",
     "imports": [
       "_NetworkFirst-6cd2f28b.js",
       "_setCatchHandler-142d2621.js"
@@ -103,12 +109,12 @@
     "src": "resources/js/components/student/sw.js"
   },
   "resources/js/layouts/panel/index.js": {
-    "file": "assets/index-aa51bdbb.js",
+    "file": "assets/index-9fbbea74.js",
     "isEntry": true,
     "src": "resources/js/layouts/panel/index.js"
   },
   "resources/js/layouts/panel/progress.js": {
-    "file": "assets/progress-4a4badfd.js",
+    "file": "assets/progress-40344444.js",
     "imports": [
       "resources/js/lib.ts"
     ],
@@ -116,7 +122,7 @@
     "src": "resources/js/layouts/panel/progress.js"
   },
   "resources/js/lib.ts": {
-    "file": "assets/lib-3547cf2e.js",
+    "file": "assets/lib-c0c25e73.js",
     "isEntry": true,
     "src": "resources/js/lib.ts"
   },

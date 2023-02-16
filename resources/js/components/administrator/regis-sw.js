@@ -9,26 +9,6 @@ if ("serviceWorker" in navigator) {
         type: "module",
         scope: "/administrator/",
     });
-    wb.addEventListener("waiting", (event) => {
-        // console.log(event);
-        wb.addEventListener("controlling", (event) => {
-            // console.log(event);
-            window.location.reload();
-        });
-        const toast = create_element(template_prompt_update());
-        const dismiss = new Dismiss(toast, toast.querySelector("#close-btn"));
-
-        prompted_update = true;
-        document.getElementById("main").prepend(toast);
-        toast.querySelector("#update-btn").addEventListener("click", () => {
-            wb.messageSkipWaiting();
-            dismiss.hide();
-        });
-        // setTimeout(() => {
-        //     prompted_update = false;
-        //     dismiss.hide();
-        // }, 3000);
-    });
     window.addEventListener("beforeinstallprompt", (event) => {
         event.preventDefault();
         const toast = create_element(template_prompt_install());
@@ -40,14 +20,33 @@ if ("serviceWorker" in navigator) {
             event.prompt();
             dismiss.hide();
         });
-        // setTimeout(() => {
-        //     prompted_install = false;
-        //     dismiss.hide();
-        // }, 5000);
     });
-    wb.register({ immediate: true }).then((swr) => {
-        // console.log(swr);
+    wb.addEventListener("waiting", (event) => {
+        wb.addEventListener("controlling", (event) => {
+            window.location.reload();
+        });
+        const toast = create_element(template_prompt_update());
+        const dismiss = new Dismiss(toast, toast.querySelector("#close-btn"), {
+            onHide() {
+                if (prompted_install) {
+                    document.getElementById("prompt-install").style.display =
+                        "block";
+                }
+            },
+        });
+
+        if (prompted_install) {
+            document.getElementById("prompt-install").style.display = "none";
+        }
+
+        prompted_update = true;
+        document.getElementById("main").prepend(toast);
+        toast.querySelector("#update-btn").addEventListener("click", () => {
+            wb.messageSkipWaiting();
+            dismiss.hide();
+        });
     });
+    wb.register({ immediate: true }).then((swr) => {});
 }
 function template_prompt_install() {
     return `

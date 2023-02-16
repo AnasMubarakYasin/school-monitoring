@@ -97,3 +97,23 @@ setCatchHandler(async ({ request }) => {
             return Response.error();
     }
 });
+
+self.addEventListener("push", (event) => {
+    const data = event.data.json();
+    if (!data) return;
+    event.waitUntil(self.registration.showNotification(data.title, data));
+    if ("setAppBadge" in navigator) {
+        navigator.setAppBadge(1);
+        navigator.setClientBadge();
+    }
+});
+self.addEventListener("notificationclick", (event) => {
+    event.notification.close();
+    let url = "";
+    if (event.action) {
+        url = event.action;
+    } else {
+        url = `${self.location.origin}/student/dashboard`;
+    }
+    clients.openWindow(url);
+});

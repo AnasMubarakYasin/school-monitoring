@@ -1,6 +1,7 @@
 import { Workbox } from "workbox-window";
-import { create_element } from "../../lib";
+import { create_element, urlBase64ToUint8Array } from "../../lib";
 import { Dismiss } from "flowbite";
+import axios from "axios";
 
 if ("serviceWorker" in navigator) {
     let prompted_install = false;
@@ -8,20 +9,6 @@ if ("serviceWorker" in navigator) {
     const wb = new Workbox("/student/sw.js", {
         type: "module",
         scope: "/student/",
-    });
-    wb.addEventListener("waiting", (event) => {
-        wb.addEventListener("controlling", (event) => {
-            window.location.reload();
-        });
-        const toast = create_element(template_prompt_update());
-        const dismiss = new Dismiss(toast, toast.querySelector("#close-btn"));
-
-        prompted_update = true;
-        document.getElementById("main").prepend(toast);
-        toast.querySelector("#update-btn").addEventListener("click", () => {
-            wb.messageSkipWaiting();
-            dismiss.hide();
-        });
     });
     window.addEventListener("beforeinstallprompt", (event) => {
         event.preventDefault();
@@ -35,8 +22,124 @@ if ("serviceWorker" in navigator) {
             dismiss.hide();
         });
     });
-    wb.register({ immediate: true }).then((swr) => {
+    wb.addEventListener("waiting", (event) => {
+        wb.addEventListener("controlling", (event) => {
+            window.location.reload();
+        });
+        const toast = create_element(template_prompt_update());
+        const dismiss = new Dismiss(toast, toast.querySelector("#close-btn"), {
+            onHide() {
+                if (prompted_install) {
+                    document.getElementById("prompt-install").style.display =
+                        "block";
+                }
+            },
+        });
+
+        if (prompted_install) {
+            document.getElementById("prompt-install").style.display = "none";
+        }
+
+        prompted_update = true;
+        document.getElementById("main").prepend(toast);
+        toast.querySelector("#update-btn").addEventListener("click", () => {
+            wb.messageSkipWaiting();
+            dismiss.hide();
+        });
     });
+    wb.register({ immediate: true }).then(async (swr) => {
+        const subscribtion = await swr.pushManager.getSubscription();
+
+        if (!subscribtion) {
+            const pkey = await axios.get("/api/webpush/pkey");
+            const ppkey = urlBase64ToUint8Array(pkey.data);
+            let subscribe = null;
+            try {
+                subscribe = await swr.pushManager.subscribe({
+                    userVisibleOnly: false,
+                    applicationServerKey: ppkey,
+                });
+            } catch (error) {
+                if (
+                    error.message == "Registration failed - permission denied"
+                ) {
+                    subscribe = await swr.pushManager.subscribe({
+                        userVisibleOnly: true,
+                        applicationServerKey: ppkey,
+                    });
+                }
+            }
+            if (subscribe) {
+                console.log(subscribe);
+                await axios.post("/api/webpush/subscribe", subscribe);
+            }
+        }
+
+        if ("Notification" in window) {
+            if (Notification.permission != "granted") {
+                const toast = create_element(template_prompt_notification());
+                const dismiss = new Dismiss(
+                    toast,
+                    toast.querySelector("#allow-btn")
+                );
+
+                document.getElementById("main").prepend(toast);
+                toast
+                    .querySelector("#allow-btn")
+                    .addEventListener("click", () => {
+                        Notification.requestPermission();
+                        dismiss.hide();
+                    });
+            }
+        }
+    });
+}
+if ("PushManager" in window) {
+}
+
+function template_prompt_notification() {
+    return `
+        <div
+            id="prompt-notification"
+            class="w-full fixed bottom-5 right-5 max-w-xs p-4 text-gray-500 bg-white rounded-lg drop-shadow-xl dark:bg-gray-800 dark:text-gray-400"
+            role="alert"
+        >
+            <div class="flex">
+                <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-blue-500 bg-blue-100 rounded-lg dark:text-blue-300 dark:bg-blue-900">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0M3.124 7.5A8.969 8.969 0 015.292 3m13.416 0a8.969 8.969 0 012.168 4.5" />
+                </svg>
+                    <span class="sr-only">Refresh icon</span>
+                </div>
+                <div class="ml-3 text-sm font-normal">
+                    <span class="mb-1 text-sm font-semibold text-gray-900 dark:text-white">
+                        Allow Receive Notification
+                    </span>
+                    <div class="mb-2 text-sm font-normal">
+                        This site can show important message from notification.
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <button
+                                id="allow-btn"
+                                class="inline-flex justify-center w-full px-2 py-1.5 text-xs font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800"
+                            >
+                                Allow
+                            </button>
+                        </div>
+                        <div>
+                            <button
+                                id="close-btn"
+                                class="inline-flex justify-center w-full px-2 py-1.5 text-xs font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-600 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
+                            >
+                                Not now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
 }
 function template_prompt_install() {
     return `

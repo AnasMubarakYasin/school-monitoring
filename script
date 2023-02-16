@@ -569,8 +569,13 @@ program
 program
     .command("pwa:build")
     .description("PWA build")
-    .action(async () => {
-        for (const key of Object.keys(manifest)) {
+    .option("-n, --name [string]", "name of manifest")
+    .action(async (options) => {
+        let keys = Object.keys(manifest);
+        if (options.name && keys.includes(options.name)) {
+            keys = [options.name];
+        }
+        for (const key of keys) {
             console.log("build", key);
             await vite.build({
                 build: {
@@ -605,34 +610,38 @@ program
             });
         }
     });
-program
-    .command("pwa:move")
-    .description("PWA move compiled file")
-    .action(() => {
-        const src = "public/build";
-        const dest = "public";
-        const files_to_move = ["site.webmanifest", "sw.js"];
-        for (const file of files_to_move) {
-            fs.copyFile(path.join(src, file), path.join(dest, file), (err) => {
-                console.log(
-                    path.join(src, file),
-                    "->",
-                    path.join(dest, file),
-                    err ? "fail" : "success"
-                );
-                err && console.error(err);
-            });
-        }
-    });
+// program
+//     .command("pwa:move")
+//     .description("PWA move compiled file")
+//     .action(() => {
+//         const src = "public/build";
+//         const dest = "public";
+//         const files_to_move = ["site.webmanifest", "sw.js"];
+//         for (const file of files_to_move) {
+//             fs.copyFile(path.join(src, file), path.join(dest, file), (err) => {
+//                 console.log(
+//                     path.join(src, file),
+//                     "->",
+//                     path.join(dest, file),
+//                     err ? "fail" : "success"
+//                 );
+//                 err && console.error(err);
+//             });
+//         }
+//     });
 program
     .command("pwa:remove")
     .description("PWA remove compiled file")
-    .action(() => {
+    .option("-n, --name [string]", "name of manifest")
+    .action(async (options) => {
+        let dirs = Object.keys(manifest);
+        if (options.name && dirs.includes(options.name)) {
+            dirs = [options.name];
+        }
         const src = "public";
-        const files_to_move = ["site.webmanifest", "sw.js"];
-        for (const file of files_to_move) {
-            fs.rm(path.join(src, file), (err) => {
-                console.log(path.join(src, file), err ? "fail" : "success");
+        for (const dir of dirs) {
+            fs.rm(path.join(src, dir), { recursive: true }, (err) => {
+                console.log(path.join(src, dir), err ? "fail" : "success");
                 err && console.error(err);
             });
         }

@@ -12,12 +12,14 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use NotificationChannels\WebPush\HasPushSubscriptions;
 
 class Student extends Authenticatable
 {
     use HasRoles;
     use HasApiTokens, HasFactory, Notifiable;
     use Tableable, Formable, Statable;
+    use HasPushSubscriptions;
 
     public static function modelable(): Model
     {
