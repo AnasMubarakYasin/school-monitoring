@@ -21,8 +21,15 @@ class StudentController extends Controller
             $builder->where('id', $user->classroom_id);
         })->get();
 
+        $academicactivity = AcademicActivity::all()->count();
+        $scheduleofsubject = ScheduleOfSubjects::all()->where('class_id', $user->classroom_id)->count();
+        $materialandassignment = MaterialAndAssignment::all()->where('classroom_id', $user->classroom_id)->count();
+
         return view('pages.student.dashboard', [
             'presences' => $presences,
+            'academicactivity' => $academicactivity,
+            'scheduleofsubject' => $scheduleofsubject,
+            'materialandassignment' => $materialandassignment
         ]);
     }
     public function profile()
