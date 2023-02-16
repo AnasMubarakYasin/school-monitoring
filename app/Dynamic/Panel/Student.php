@@ -5,9 +5,20 @@ namespace App\Dynamic\Panel;
 use App\Dynamic\Menu;
 use App\Models\AcademicActivity;
 use App\Models\ScheduleOfSubjects;
+use Illuminate\Support\Facades\Vite;
 
 class Student extends Panel
 {
+    public bool $webmanifest = true;
+    public bool $service_worker = true;
+    public function get_webmanifest(): string
+    {
+        return asset('student/site.webmanifest');
+    }
+    public function get_service_worker(): string
+    {
+        return Vite::asset('resources/js/components/student/regis-sw.js');
+    }
     public function get_menus(): array
     {
         return [

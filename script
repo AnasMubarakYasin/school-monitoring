@@ -534,7 +534,7 @@ const manifest = {
         name: "School Monitoring Student",
         short_name: "School Monitoring Student",
         description: "Web Monitoring School for Student",
-        start_url: ".",
+        start_url: "/student/dashboard",
         scope: "/student/",
         display: "standalone",
         display_override: ["window-controls-overlay"],
@@ -570,34 +570,40 @@ program
     .command("pwa:build")
     .description("PWA build")
     .action(async () => {
-        await vite.build({
-            build: {
-                outDir: "public/administrator",
-            },
-            plugins: [
-                pwa_plugin.VitePWA({
-                    registerType: "prompt",
-                    injectRegister: "auto",
-                    strategies: "injectManifest",
-                    base: "/administrator/",
-                    srcDir: "resources/js/components/administrator",
-                    filename: "sw.js",
-                    injectManifest: {
-                        additionalManifestEntries: [
-                            // { revision: "2", url: "/administrator/dashboard" },
-                            { revision: "1", url: "/administrator/offline" },
+        for (const key of Object.keys(manifest)) {
+            console.log("build", key);
+            await vite.build({
+                build: {
+                    outDir: `public/${key}`,
+                },
+                plugins: [
+                    pwa_plugin.VitePWA({
+                        registerType: "prompt",
+                        injectRegister: "auto",
+                        strategies: "injectManifest",
+                        base: `/${key}/`,
+                        srcDir: `resources/js/components/${key}`,
+                        filename: "sw.js",
+                        injectManifest: {
+                            additionalManifestEntries: [
+                                // { revision: "2", url: `/${key}/dashboard` },
+                                {
+                                    revision: "1",
+                                    url: `/${key}/offline`,
+                                },
+                            ],
+                        },
+                        includeAssets: [
+                            "favicon.ico",
+                            "apple-touch-icon.png",
+                            "masked-icon.svg",
                         ],
-                    },
-                    includeAssets: [
-                        "favicon.ico",
-                        "apple-touch-icon.png",
-                        "masked-icon.svg",
-                    ],
-                    manifestFilename: "site.webmanifest",
-                    manifest: manifest.administrator,
-                }),
-            ],
-        });
+                        manifestFilename: "site.webmanifest",
+                        manifest: manifest[key],
+                    }),
+                ],
+            });
+        }
     });
 program
     .command("pwa:move")
