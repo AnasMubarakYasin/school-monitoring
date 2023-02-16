@@ -14,7 +14,10 @@ class EmployeeController extends Controller
 {
     public function dashboard()
     {
-        return view('pages.employee.dashboard');
+        $user = Auth::user();
+        $scheduleofsubject = ScheduleOfSubjects::all()->where('teacher_id', $user->id)->count();
+        $materialandassignment = MaterialAndAssignment::all()->where('teacher_id', $user->id)->count();
+        return view('pages.employee.dashboard', ['scheduleofsubject' => $scheduleofsubject, 'materialandassignment' => $materialandassignment]);
     }
     public function profile()
     {
