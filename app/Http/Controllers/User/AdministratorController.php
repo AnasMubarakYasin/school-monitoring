@@ -365,6 +365,7 @@ class AdministratorController extends Controller
                 'description',
                 'major',
                 'homeroom',
+                'students',
             ],
             pagination: ['per' => 5, 'num' => 1],
         );
@@ -396,6 +397,7 @@ class AdministratorController extends Controller
                 'description',
                 'major',
                 'homeroom',
+                'students',
             ],
         );
         $resource->route_create = function () {
@@ -424,6 +426,7 @@ class AdministratorController extends Controller
                 'description',
                 'major',
                 'homeroom',
+                'students',
             ],
         );
         $resource->route_update = function ($item) {

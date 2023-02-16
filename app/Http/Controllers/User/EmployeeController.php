@@ -6,15 +6,24 @@ use App\Http\Controllers\Controller;
 use App\Models\Classroom;
 use App\Models\Employee;
 use App\Models\MaterialAndAssignment;
+use App\Models\Presence;
 use App\Models\ScheduleOfSubjects;
 use App\Models\Subjects;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 
 class EmployeeController extends Controller
 {
     public function dashboard()
     {
-        return view('pages.employee.dashboard');
+        /** @var Employee */
+        $user = auth()->user();
+        $presences = Presence::with('teacher')->whereHas("teacher", function (Builder $builder) use ($user) {
+            $builder->where('id', $user->id);
+        })->get();
+        return view('pages.employee.dashboard', [
+            'presences' => $presences,
+        ]);
     }
     public function profile()
     {

@@ -15,4 +15,5 @@
     </x-panel.bottom-bar>
     </x-slot>
     <x-employee.schedule-of-subjects-table></x-employee.schedule-of-subjects-table>
+    <x-employee.presence :presences="$presences"></x-employee.presence>
 </x-panel.layout>

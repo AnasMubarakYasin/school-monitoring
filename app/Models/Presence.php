@@ -128,6 +128,10 @@ class Presence extends Model
         return $this->belongsTo(Classroom::class, 'classroom_id');
     }
 
+    public function students()
+    {
+        return $this->hasMany(Student::class);
+    }
     public function attendances()
     {
         return $this->hasMany(Attendance::class);

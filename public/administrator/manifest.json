@@ -9,7 +9,7 @@
     "file": "assets/index-c70d8983.js"
   },
   "resources/css/app.css": {
-    "file": "assets/app-29a7003b.css",
+    "file": "assets/app-9959a2e2.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
@@ -39,7 +39,7 @@
     "src": "resources/js/components/administrator/index.js"
   },
   "resources/js/components/administrator/regis-sw.js": {
-    "file": "assets/regis-sw-e35d6577.js",
+    "file": "assets/regis-sw-0a2005b4.js",
     "imports": [
       "resources/js/lib.ts",
       "_index-c70d8983.js"
@@ -48,7 +48,7 @@
     "src": "resources/js/components/administrator/regis-sw.js"
   },
   "resources/js/components/administrator/sw.js": {
-    "file": "assets/sw-849f23d6.js",
+    "file": "assets/sw-9fae8568.js",
     "imports": [
       "_NetworkFirst-6cd2f28b.js"
     ],
