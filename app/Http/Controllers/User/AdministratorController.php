@@ -96,10 +96,16 @@ class AdministratorController extends Controller
             visits(Administrator::class)->period('day')->count() +
             visits(Employee::class)->period('day')->count() +
             visits(Student::class)->period('day')->count();
+        $student = Student::all()->count();
+        $academicactivity = AcademicActivity::all()->count();
+        $teacher = Employee::all()->count();
         return view('pages.administrator.dashboard', [
             'stats' => $stats,
             'flow' => $flow,
             'visitors' => $visitors,
+            'student' => $student,
+            'academicactivity' => $academicactivity,
+            'teacher' => $teacher,
         ]);
     }
     public function profile()

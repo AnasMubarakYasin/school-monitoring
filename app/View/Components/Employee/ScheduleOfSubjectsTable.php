@@ -30,7 +30,7 @@ class ScheduleOfSubjectsTable extends Component
         $user = Auth::user();
         $authUser = $user::class;
         if ($user::class == Student::class) {
-            $resource = ScheduleOfSubjects::with('subjects')->where('class_id', $user->classroom_id)->get();
+            $resource = ScheduleOfSubjects::with('subjects', 'classrooms')->where('class_id', $user->classroom_id)->get();
         } else if ($user::class == Employee::class) {
             $resource = ScheduleOfSubjects::with('subjects', 'classrooms')->where('teacher_id', $user->id)->get();
         }
