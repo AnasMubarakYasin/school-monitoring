@@ -6,6 +6,7 @@ use App\Dynamic\Resource\Definition;
 use App\Dynamic\Trait\Formable;
 use App\Dynamic\Trait\Statable;
 use App\Dynamic\Trait\Tableable;
+use Error;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -93,6 +94,13 @@ class Student extends Authenticatable
                 alias: 'classroom_id',
             ),
         ];
+        self::$fetcher_relation = function ($definition) {
+            return match ($definition->name) {
+                'major' => Major::all(),
+                'classroom' => Classroom::all(),
+                default => throw new Error("unknown name of $definition->name")
+            };
+        };
     }
 
     protected $fillable = [

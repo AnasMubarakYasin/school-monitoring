@@ -30,8 +30,14 @@ class StudentController extends Controller
     }
     public function delete_any()
     {
+        $request=request();
         $this->authorize('delete_any', Student::class);
-        return abort(501);
+        if ($request->input('all')) {
+            Student::truncate();
+        } else {
+            Student::destroy($request->input('id', []));
+        }
+        return back();
     }
     public function restore(Student $student)
     {
