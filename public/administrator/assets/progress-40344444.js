@@ -1,0 +1,1 @@
+import{S as s}from"./lib-c0c25e73.js";const t=document.getElementById("progress-bar"),o=t.firstElementChild,e=new s({timeout:5e3});e.onStart=function(){t.style.height="4px"};e.onProgress=function(n){o.style.width=n+"%"};e.onFinish=function(){t.style.height="0px"};e.start();window.sequence=e;requestIdleCallback(n=>{e.finish()});

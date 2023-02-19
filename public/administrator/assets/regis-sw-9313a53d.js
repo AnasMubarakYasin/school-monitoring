@@ -1,4 +1,4 @@
-import{v as c}from"./workbox-window.prod.es5-8f11f700.js";import{c as s,u as g}from"./lib-c0c25e73.js";import{D as l}from"./index-c70d8983.js";import{a as d}from"./axios-bff3f665.js";if("serviceWorker"in navigator){let a=!1;const o=new c("/student/sw.js",{type:"module",scope:"/student/"});window.addEventListener("beforeinstallprompt",r=>{r.preventDefault();const e=s(p()),t=new l(e,e.querySelector("#close-btn"));a=!0,document.getElementById("main").prepend(e),e.querySelector("#install-btn").addEventListener("click",()=>{r.prompt(),t.hide()})}),o.addEventListener("waiting",r=>{o.addEventListener("controlling",i=>{window.location.reload()});const e=s(f()),t=new l(e,e.querySelector("#close-btn"),{onHide(){a&&(document.getElementById("prompt-install").style.display="block")}});a&&(document.getElementById("prompt-install").style.display="none"),document.getElementById("main").prepend(e),e.querySelector("#update-btn").addEventListener("click",()=>{o.messageSkipWaiting(),t.hide()})}),o.register({immediate:!0}).then(async r=>{console.log(await d.get("/api/webpush/pkey"));const e=await r.pushManager.getSubscription();if(console.log(e),!e){const t=await d.get("/api/webpush/pkey"),i=g(t.data);let n=null;try{n=await r.pushManager.subscribe({userVisibleOnly:!1,applicationServerKey:i})}catch(u){u.message=="Registration failed - permission denied"&&(n=await r.pushManager.subscribe({userVisibleOnly:!0,applicationServerKey:i}))}n&&(console.log(n),await d.post("/api/webpush/subscribe",n))}if("Notification"in window&&Notification.permission!="granted"){const t=s(b()),i=new l(t,t.querySelector("#allow-btn"));document.getElementById("main").prepend(t),t.querySelector("#allow-btn").addEventListener("click",()=>{Notification.requestPermission(),i.hide()})}})}function b(){return`
+import{v as c}from"./workbox-window.prod.es5-8f11f700.js";import{c as a,u as g}from"./lib-c0c25e73.js";import{D as l}from"./index-c70d8983.js";import{a as d}from"./axios-bff3f665.js";if("serviceWorker"in navigator){let s=!1;const o=new c("/student/sw.js",{type:"module",scope:"/student/"});window.addEventListener("beforeinstallprompt",r=>{r.preventDefault();const e=a(f()),t=new l(e,e.querySelector("#close-btn"));s=!0,document.getElementById("main").prepend(e),e.querySelector("#install-btn").addEventListener("click",()=>{r.prompt(),t.hide()})}),o.addEventListener("waiting",r=>{o.addEventListener("controlling",i=>{window.location.reload()});const e=a(p()),t=new l(e,e.querySelector("#close-btn"),{onHide(){s&&(document.getElementById("prompt-install").style.display="block")}});s&&(document.getElementById("prompt-install").style.display="none"),document.getElementById("main").prepend(e),e.querySelector("#update-btn").addEventListener("click",()=>{o.messageSkipWaiting(),t.hide()})}),o.register({immediate:!0}).then(async r=>{if(!await r.pushManager.getSubscription()){const t=await d.get("/api/webpush/pkey"),i=g(t.data);let n=null;try{n=await r.pushManager.subscribe({userVisibleOnly:!1,applicationServerKey:i})}catch(u){u.message=="Registration failed - permission denied"&&(n=await r.pushManager.subscribe({userVisibleOnly:!0,applicationServerKey:i}))}n&&(console.log(n),await d.post("/api/webpush/subscribe",n))}if("Notification"in window&&Notification.permission!="granted"){const t=a(b()),i=new l(t,t.querySelector("#allow-btn"));document.getElementById("main").prepend(t),t.querySelector("#allow-btn").addEventListener("click",()=>{Notification.requestPermission(),i.hide()})}})}function b(){return`
         <div
             id="prompt-notification"
             class="w-full fixed bottom-5 right-5 max-w-xs p-4 text-gray-500 bg-white rounded-lg drop-shadow-xl dark:bg-gray-800 dark:text-gray-400"
@@ -39,7 +39,7 @@ import{v as c}from"./workbox-window.prod.es5-8f11f700.js";import{c as s,u as g}f
                 </div>
             </div>
         </div>
-    `}function p(){return`
+    `}function f(){return`
         <div
             id="prompt-install"
             class="w-full fixed bottom-5 right-5 max-w-xs p-4 text-gray-500 bg-white rounded-lg drop-shadow-xl dark:bg-gray-800 dark:text-gray-400"
@@ -91,7 +91,7 @@ import{v as c}from"./workbox-window.prod.es5-8f11f700.js";import{c as s,u as g}f
                 </div>
             </div>
         </div>
-    `}function f(){return`
+    `}function p(){return`
         <div
             id="prompt-update"
             class="w-full fixed bottom-5 right-5 max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow-xl dark:bg-gray-800 dark:text-gray-400"
