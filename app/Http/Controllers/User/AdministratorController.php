@@ -477,6 +477,9 @@ class AdministratorController extends Controller
         $resource->route_delete = function ($item) {
             return route('web.resource.student.delete', ['student' => $item]);
         };
+        $resource->route_delete_any = function ($item) {
+            return route('web.resource.student.delete_any');
+        };
         $resource->route_relation = function ($definition, $item) {
             if ($definition->name == 'major') {
                 return route('web.administrator.data_master.major.list');
@@ -501,6 +504,8 @@ class AdministratorController extends Controller
                 'fullname',
                 'gender',
                 'grade',
+                'major',
+                'classroom',
             ],
         );
         $resource->route_create = function () {
@@ -527,6 +532,8 @@ class AdministratorController extends Controller
                 'fullname',
                 'gender',
                 'grade',
+                'major',
+                'classroom',
             ],
         );
         $resource->route_update = function ($item) {

@@ -24,7 +24,20 @@ class CreateStudentRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'photo'=>"nullable|string",
+            'name'=>"required|string",
+            'telp'=>"required|string",
+            'email'=>"required|string",
+            'password'=>"required|string",
+
+            'nis'=>"required|string",
+            'nisn'=>"required|string",
+            'fullname'=>"required|string",
+            'gender'=>"required|string",
+            'grade'=>"required|string",
+
+            'major_id'=>"required|integer",
+            'classroom_id'=>"required|integer",
         ];
     }
 }
