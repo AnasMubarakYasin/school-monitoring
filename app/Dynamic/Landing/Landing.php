@@ -40,8 +40,8 @@ class Landing
                 'name' => 'Employee (teacher)',
                 'login' => route('web.employee.login_perform'),
                 'user' => [
-                    'name' => 'teacher',
-                    'password' => 'teacher',
+                    'name' => 'kimia_teacher',
+                    'password' => 'kimia_teacher',
                 ],
                 'demo' => true,
             ],
@@ -49,8 +49,8 @@ class Landing
                 'name' => 'Student',
                 'login' => route('web.student.login_perform'),
                 'user' => [
-                    'name' => 'student',
-                    'password' => 'student',
+                    'name' => '10_a_1',
+                    'password' => '10_a_1',
                 ],
                 'demo' => true,
             ],

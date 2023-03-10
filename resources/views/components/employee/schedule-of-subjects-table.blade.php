@@ -83,7 +83,7 @@
                     </td>
                     @if ($authUser == App\Models\Employee::class)
                         <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
-                            {{ $data->subjects->grade }}
+                            {{ $data->classrooms->name }}
                         </td>
                     @endif
                     <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">

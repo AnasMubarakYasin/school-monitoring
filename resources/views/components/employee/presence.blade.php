@@ -61,9 +61,15 @@
                     <td class="p-3  text-gray-900 dark:text-white whitespace-nowrap">
                         {{ $presence->classroom->students[0]->fullname }}
                     </td>
-                    @foreach ($presence->attendances()->get() as $attendance)
+                    @foreach ($presence->attendances()->where('student_id', $presence->classroom->students[0]->id)->get() as $attendance)
                         <td class="p-3  text-gray-900 dark:text-white whitespace-nowrap">
-                            {{ $attendance->state == 'present' ? '✅' : '❌' }}
+                            @if ($attendance->state == 'present')
+                                ✅
+                            @elseif ($attendance->state == 'unpresent')
+                                ❌
+                            @else
+                                -
+                            @endif
                         </td>
                     @endforeach
                 </tr>
@@ -72,9 +78,20 @@
                         'bg-white capitalize text-center dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-600 dark:border-gray-700',
                         'border-b',
                     ])>
-                        <td class="p-3  text-gray-900 dark:text-white whitespace-nowrap">
+                        <td sc class="p-3  text-gray-900 dark:text-white whitespace-nowrap">
                             {{ $presence->classroom->students[$index]->fullname }}
                         </td>
+                        @foreach ($presence->attendances()->where('student_id', $presence->classroom->students[0]->id)->get() as $attendance)
+                            <td class="p-3  text-gray-900 dark:text-white whitespace-nowrap">
+                                @if ($attendance->state == 'present')
+                                    ✅
+                                @elseif ($attendance->state == 'unpresent')
+                                    ❌
+                                @else
+                                    -
+                                @endif
+                            </td>
+                        @endforeach
                     </tr>
                 @endforeach
             @empty

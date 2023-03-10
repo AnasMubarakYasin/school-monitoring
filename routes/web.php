@@ -227,6 +227,7 @@ Route::middleware(['authc.basic:welcome,administrator,employee'])->group(functio
     Route::delete('resource/student/{student}', 'StudentController@delete')->name('web.resource.student.delete');
     Route::delete('resource/student', 'StudentController@delete_any')->name('web.resource.student.delete_any');
 
+    Route::get('resource/presence/generate', 'PresenceController@generate')->name('web.resource.presence.generate');
     Route::post('resource/presence', 'PresenceController@create')->name('web.resource.presence.create');
     Route::patch('resource/presence/{presence}', 'PresenceController@update')->name('web.resource.presence.update');
     Route::delete('resource/presence/{presence}', 'PresenceController@delete')->name('web.resource.presence.delete');

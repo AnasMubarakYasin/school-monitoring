@@ -8,6 +8,11 @@ use App\Models\Presence;
 
 class PresenceController extends Controller
 {
+    public function generate()
+    {
+        Presence::generate();
+        return back();
+    }
     public function create(CreatePresenceRequest $request)
     {
         $this->authorize('create', Presence::class);
@@ -30,8 +35,14 @@ class PresenceController extends Controller
     }
     public function delete_any()
     {
+        $request=request();
         $this->authorize('delete_any', Presence::class);
-        return abort(501);
+        if ($request->input('all')) {
+            Presence::truncate();
+        } else {
+            Presence::destroy($request->input('id', []));
+        }
+        return back();
     }
     public function restore(Presence $presence)
     {

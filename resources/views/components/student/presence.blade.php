@@ -43,9 +43,15 @@
                     <td class="p-3  text-gray-900 dark:text-white whitespace-nowrap">
                         {{ $presence->subjects()->first()->name }}
                     </td>
-                    @foreach ($presence->attendances()->get() as $attendance)
+                    @foreach ($presence->attendances()->where('student_id', auth()->user()->id)->get() as $attendance)
                         <td class="p-3  text-gray-900 dark:text-white whitespace-nowrap">
-                            {{ $attendance->state == 'present' ? '✅' : '❌' }}
+                            @if ($attendance->state == 'present')
+                                ✅
+                            @elseif ($attendance->state == 'unpresent')
+                                ❌
+                            @else
+                                -
+                            @endif
                         </td>
                     @endforeach
                 </tr>

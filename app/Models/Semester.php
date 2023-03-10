@@ -67,6 +67,10 @@ class Semester extends Model
         ];
     }
 
+    static function first_open() {
+        return self::where('state', 'ongoing')->first();
+    }
+    
     protected $fillable = [
         'name',
         'part',

@@ -70,7 +70,7 @@ class Presence extends Model
                 relation: 'attendances',
             ),
         ];
-        
+
         self::$route_create = function () {
             return route('web.resource.presence.create');
         };
@@ -93,6 +93,36 @@ class Presence extends Model
                 default => throw new Error("unknown name of $definition->name")
             };
         };
+    }
+
+    static function generate()
+    {
+        $sy = SchoolYear::first_open();
+        $sm = Semester::first_open();
+        $sos = ScheduleOfSubjects::all();
+
+        foreach ($sos as $key => $value) {
+            $pr = new self([
+                'name'=> "{$value->subjects()->sole()->id}_{$value->classrooms()->sole()->id}",
+                'school_year_id' => $sy->id,
+                'semester_id' => $sm->id,
+                'teacher_id' => $value->teacher()->sole()->id,
+                'subjects_id' => $value->subjects()->sole()->id,
+                'classroom_id' => $value->classrooms()->sole()->id,
+            ]);
+            $pr->save();
+            foreach ($value->classrooms()->sole()->students()->get() as $key => $value) {
+                foreach (range(1, 16) as $_) {
+                    $at = new Attendance([
+                        // 'state',
+                        // 'description',
+                        'presence_id' => $pr->id,
+                        'student_id' => $value->id,
+                    ]);
+                    $at->save();
+                }
+            }
+        }
     }
 
     protected $fillable = [

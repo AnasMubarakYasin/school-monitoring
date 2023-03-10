@@ -57,9 +57,13 @@ class SchoolYear extends Model
         );
     }
 
+    static function first_open() {
+        return self::where('state', 'ongoing')->first();
+    }
+
     protected $fillable = [
         'name',
-        'is_active',
+        // 'is_active',
         'state',
         'start_at',
         'end_at',

@@ -2,6 +2,7 @@
     'menu' => true,
     'selection' => true,
     'action' => true,
+    'top' => null,
 ])
 <x-slot:head>
     @vite('resources/js/components/resource/table.js')
@@ -206,6 +207,9 @@
                         </button>
                     </div>
                 </form>
+                @if ($top)
+                    {{ $top }}
+                @endif
         </div>
     @endif
     <div class="overflow-x-auto pb-2">

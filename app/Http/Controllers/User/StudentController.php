@@ -18,7 +18,7 @@ class StudentController extends Controller
         /** @var Student */
         $user = auth()->user();
         $presences = Presence::with('attendances')->whereHas("attendances", function (Builder $builder) use ($user) {
-            $builder->where('student_id', $user->_id);
+            $builder->where('student_id', $user->id);
         })->get();
 
         $academicactivity = AcademicActivity::all()->count();

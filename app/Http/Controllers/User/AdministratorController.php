@@ -387,8 +387,10 @@ class AdministratorController extends Controller
         $resource->route_relation = function ($definition, $item) {
             if ($definition->name == 'major') {
                 return route('web.administrator.data_master.major.list');
-            } else {
+            } else if ($definition->name == 'homeroom') {
                 return route('web.administrator.users.employee.list');
+            } {
+                return route('web.administrator.users.student.list');
             }
         };
         return view('pages.administrator.classroom.list', ['resource' => $resource]);
@@ -772,7 +774,7 @@ class AdministratorController extends Controller
             return route('web.resource.academic_data.scheduleofsubjects.delete', ['scheduleOfSubjects' => $item]);
         };
         $resource->route_relation = function ($definition, $item) {
-            if ($definition->name == 'major') {
+            if ($definition->name == 'subjects') {
                 return route('web.administrator.academic_data.subjects.list');
             } else if ($definition->name == 'classrooms') {
                 return route('web.administrator.data_master.classroom.list');
