@@ -36,6 +36,13 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@host.local',
             'password' => 'admin',
         ]);
+        $staff = Employee::factory()->create([
+            'name' => 'staff',
+            'email' => 'staff@host.local',
+            'password' => 'staff',
+            'task' => 'staff',
+            'fullname' => 'staff',
+        ]);
         SchoolInformation::create([
             'name' => '',
             'npsn' => '',

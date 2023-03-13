@@ -85,10 +85,10 @@ class TeacherController extends Controller
             pagination: ['per' => 5, 'num' => 1],
         );
         $resource->route_store = function () {
-            return route('web.employee.academic_data.materialandassignment.create');
+            return route('web.employee.teacher.academic_data.materialandassignment.create');
         };
         $resource->route_edit = function ($item) {
-            return route('web.employee.academic_data.materialandassignment.update', ['materialAndAssignment' => $item]);
+            return route('web.employee.teacher.academic_data.materialandassignment.update', ['materialAndAssignment' => $item]);
         };
         $resource->route_delete = function ($item) {
             return route('web.resource.academic_data.materialandassignment.delete', ['materialAndAssignment' => $item]);
@@ -120,7 +120,7 @@ class TeacherController extends Controller
             return route('web.resource.academic_data.materialandassignment.create');
         };
         $resource->route_view_any = function () {
-            return route('web.employee.academic_data.materialandassignment.list');
+            return route('web.employee.teacher.academic_data.materialandassignment.list');
         };
         $resource->fetcher_relation = function ($definition) {
             if ($definition->name == 'subjects') {
@@ -156,7 +156,7 @@ class TeacherController extends Controller
             return route('web.resource.academic_data.materialandassignment.update', ['materialAndAssignment' => $item]);
         };
         $resource->route_view_any = function ($item) {
-            return route('web.employee.academic_data.materialandassignment.list');
+            return route('web.employee.teacher.academic_data.materialandassignment.list');
         };
         $resource->fetcher_relation = function ($definition) {
             if ($definition->name == 'subjects') {
