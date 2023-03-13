@@ -44,7 +44,7 @@ Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
         /** SECTION - User */
         Route::get('administrator/users', 'User\AdministratorController@empty')->name('web.administrator.users');
 
-        Route::get('administrator/users/administrator', 'User\AdministratorController@administrator')->name('web.administrator.users.administrator.list');
+        // Route::get('administrator/users/administrator', 'User\AdministratorController@administrator')->name('web.administrator.users.administrator.list');
 
         Route::get('administrator/users/employee/list', 'User\AdministratorController@employee_list')->name('web.administrator.users.employee.list');
         Route::get('administrator/users/employee/create', 'User\AdministratorController@employee_create')->name('web.administrator.users.employee.create');
@@ -53,6 +53,10 @@ Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
         Route::get('administrator/users/student/list', 'User\AdministratorController@student_list')->name('web.administrator.users.student.list');
         Route::get('administrator/users/student/create', 'User\AdministratorController@student_create')->name('web.administrator.users.student.create');
         Route::get('administrator/users/student/{student}/update', 'User\AdministratorController@student_update')->name('web.administrator.users.student.update');
+
+        Route::get('administrator/users/administrator/list', 'User\AdministratorController@administrator_list')->name('web.administrator.users.administrator.list');
+        Route::get('administrator/users/administrator/create', 'User\AdministratorController@administrator_create')->name('web.administrator.users.administrator.create');
+        Route::get('administrator/users/administrator/{administrator}/update', 'User\AdministratorController@administrator_update')->name('web.administrator.users.administrator.update');
         /** !SECTION - User */
 
         /** SECTION - Master */
@@ -239,6 +243,11 @@ Route::middleware(['authc.basic:welcome,administrator,employee'])->group(functio
     Route::patch('resource/student/{student}', 'StudentController@update')->name('web.resource.student.update');
     Route::delete('resource/student/{student}', 'StudentController@delete')->name('web.resource.student.delete');
     Route::delete('resource/student', 'StudentController@delete_any')->name('web.resource.student.delete_any');
+
+    Route::post('resource/administrator', 'AdministratorController@create')->name('web.resource.administrator.create');
+    Route::patch('resource/administrator/{administrator}', 'AdministratorController@update')->name('web.resource.administrator.update');
+    Route::delete('resource/administrator/{administrator}', 'AdministratorController@delete')->name('web.resource.administrator.delete');
+    Route::delete('resource/administrator', 'AdministratorController@delete_any')->name('web.resource.administrator.delete_any');
 
     Route::get('resource/presence/generate', 'PresenceController@generate')->name('web.resource.presence.generate');
     Route::post('resource/presence', 'PresenceController@create')->name('web.resource.presence.create');

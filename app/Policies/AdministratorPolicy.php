@@ -22,31 +22,31 @@ class AdministratorPolicy
 
     public function create(Administrator|Employee $user)
     {
-        return false;
+        return true;
     }
 
     public function update(Administrator|Employee $user, Administrator $administrator)
     {
-        return false;
+        return true;
     }
 
     public function delete_any(Administrator|Employee $user)
     {
-        return false;
+        return true;
     }
 
     public function delete(Administrator|Employee $user, Administrator $administrator)
     {
-        return false;
+        return true;
     }
 
     public function restore(Administrator|Employee $user, Administrator $administrator)
     {
-        return false;
+        return true;
     }
 
     public function forceDelete(Administrator|Employee $user, Administrator $administrator)
     {
-        return false;
+        return true;
     }
 }

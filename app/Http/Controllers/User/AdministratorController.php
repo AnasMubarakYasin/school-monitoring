@@ -286,7 +286,7 @@ class AdministratorController extends Controller
                 'name',
                 'telp',
                 'email',
-                'password',
+                // 'password',
 
                 'nip',
                 'fullname',
@@ -527,7 +527,7 @@ class AdministratorController extends Controller
                 'name',
                 'telp',
                 'email',
-                'password',
+                // 'password',
 
                 'nis',
                 'nisn',
@@ -548,9 +548,82 @@ class AdministratorController extends Controller
     }
     //!SECTION - student
 
-    public function administrator()
+    //SECTION - administrator
+    public function administrator_list()
     {
-        return view('pages.administrator.users.administrator.index');
+        $resource = Administrator::tableable()->from_request(
+            request: request(),
+            columns: [
+                'photo',
+                "name",
+                "email",
+                'telp',
+            ],
+            pagination: ['per' => 5, 'num' => 1],
+        );
+        $resource->route_store = function () {
+            return route('web.administrator.users.administrator.create');
+        };
+        $resource->route_edit = function ($item) {
+            return route('web.administrator.users.administrator.update', ['administrator' => $item]);
+        };
+        $resource->route_delete = function ($item) {
+            return route('web.resource.administrator.delete', ['administrator' => $item]);
+        };
+        $resource->route_delete_any = function ($item) {
+            return route('web.resource.administrator.delete_any');
+        };
+        return view('pages.administrator.administrator.list', ['resource' => $resource]);
+    }
+    public function administrator_create()
+    {
+        $resource = Administrator::formable()->from_create(
+            fields: [
+                'photo',
+                'name',
+                'telp',
+                'email',
+                'password',
+            ],
+        );
+        $resource->route_create = function () {
+            return route('web.resource.administrator.create');
+        };
+        $resource->route_view_any = function ($item) {
+            return route('web.administrator.users.administrator.list');
+        };
+        return view('pages.administrator.administrator.create', ['resource' => $resource]);
+    }
+    public function administrator_update(Administrator $administrator)
+    {
+        $resource = Administrator::formable()->from_update(
+            model: $administrator,
+            fields: [
+                'photo',
+                'name',
+                'telp',
+                'email',
+                // 'password',
+            ],
+        );
+        $resource->route_update = function ($item) {
+            return route('web.resource.administrator.update', ['administrator' => $item]);
+        };
+        $resource->route_view_any = function ($item) {
+            return route('web.administrator.users.administrator.list');
+        };
+        return view('pages.administrator.administrator.update', ['resource' => $resource]);
+    }
+    //!SECTION - administrator
+
+    // public function administrator()
+    // {
+    //     return view('pages.administrator.users.administrator.index');
+    // }
+
+    public function authorization()
+    {
+        return view('pages.administrator.authorization.list');
     }
 
     //SECTION - identitas sekolah

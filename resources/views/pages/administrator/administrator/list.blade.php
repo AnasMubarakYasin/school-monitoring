@@ -1,4 +1,4 @@
-<x-panel.layout :title="'list of employee'">
+<x-panel.layout :title="'list of administrator'">
     <x-slot:top_bar>
         <x-panel.top-bar>
 
@@ -14,5 +14,6 @@
 
         </x-panel.bottom-bar>
     </x-slot>
-    <x-administrator.index></x-administrator.index>
+    <x-resource.table :resource="$resource">
+    </x-resource.table>
 </x-panel.layout>

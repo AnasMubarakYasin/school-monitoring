@@ -4,6 +4,7 @@ namespace App\Dynamic\Panel;
 
 use App\Dynamic\Menu;
 use App\Models\AcademicActivity;
+use App\Models\Administrator as ModelsAdministrator;
 use App\Models\Attendance;
 use App\Models\Classroom;
 use App\Models\Employee;
@@ -151,6 +152,8 @@ class Administrator extends Panel
                     new Menu(
                         name: "administrator",
                         link: route('web.administrator.users.administrator.list'),
+                        pname: "view_any",
+                        pclass: ModelsAdministrator::class,
                     ),
                     new Menu(
                         name: "employee",

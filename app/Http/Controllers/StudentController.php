@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
 use App\Models\Student;
+use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
@@ -28,9 +29,8 @@ class StudentController extends Controller
         $student->delete();
         return back();
     }
-    public function delete_any()
+    public function delete_any(Request $request)
     {
-        $request=request();
         $this->authorize('delete_any', Student::class);
         if ($request->input('all')) {
             Student::truncate();
