@@ -125,22 +125,22 @@ Route::middleware('authc.guest:web.employee.dashboard,employee')->group(function
 });
 Route::middleware(['authc.basic:welcome,employee'])->group(function () {
     Route::middleware(['locale', 'view.share', 'visitor.visit'])->group(function () {
-        Route::get('employee/dashboard', 'User\EmployeeController@dashboard')->name('web.employee.dashboard');
-        Route::get('employee/profile', 'User\EmployeeController@profile')->name('web.employee.profile');
-        Route::get('employee/notification', 'User\EmployeeController@notification')->name('web.employee.notification');
-        Route::get('employee/offline', 'User\EmployeeController@offline')->name('web.employee.offline');
-        Route::get('employee/empty', 'User\EmployeeController@empty')->name('web.employee.empty');
+        Route::get('employee/dashboard', 'User\Employee\TeacherController@dashboard')->name('web.employee.dashboard');
+        Route::get('employee/profile', 'User\Employee\TeacherController@profile')->name('web.employee.profile');
+        Route::get('employee/notification', 'User\Employee\TeacherController@notification')->name('web.employee.notification');
+        Route::get('employee/offline', 'User\Employee\TeacherController@offline')->name('web.employee.offline');
+        Route::get('employee/empty', 'User\Employee\TeacherController@empty')->name('web.employee.empty');
         Route::get('employee/logout', 'Auth\EmployeeController@logout_perfom')->name('web.employee.logout_perfom');
-        Route::get('employee/archive', 'User\EmployeeController@empty')->name('web.employee.archive');
-        Route::get('employee/about', 'User\EmployeeController@empty')->name('web.employee.about');
+        Route::get('employee/archive', 'User\Employee\TeacherController@empty')->name('web.employee.archive');
+        Route::get('employee/about', 'User\Employee\TeacherController@empty')->name('web.employee.about');
 
-        Route::get('employee/academic_data', 'User\EmployeeController@empty')->name('web.employee.academic_data');
+        Route::get('employee/academic_data', 'User\Employee\TeacherController@empty')->name('web.employee.academic_data');
 
-        Route::get('employee/academic_data/scheduleofsubjects/list', 'User\EmployeeController@scheduleofsubjects_list')->name('web.employee.academic_data.scheduleofsubjects.list');
+        Route::get('employee/academic_data/scheduleofsubjects/list', 'User\Employee\TeacherController@scheduleofsubjects_list')->name('web.employee.academic_data.scheduleofsubjects.list');
 
-        Route::get('employee/academic_data/materialandassignment/list', 'User\EmployeeController@materialandassignment_list')->name('web.employee.academic_data.materialandassignment.list');
-        Route::get('employee/academic_data/materialandassignment/create', 'User\EmployeeController@materialandassignment_create')->name('web.employee.academic_data.materialandassignment.create');
-        Route::get('employee/academic_data/materialandassignment/{materialAndAssignment}/update', 'User\EmployeeController@materialandassignment_update')->name('web.employee.academic_data.materialandassignment.update');
+        Route::get('employee/academic_data/materialandassignment/list', 'User\Employee\TeacherController@materialandassignment_list')->name('web.employee.academic_data.materialandassignment.list');
+        Route::get('employee/academic_data/materialandassignment/create', 'User\Employee\TeacherController@materialandassignment_create')->name('web.employee.academic_data.materialandassignment.create');
+        Route::get('employee/academic_data/materialandassignment/{materialAndAssignment}/update', 'User\Employee\TeacherController@materialandassignment_update')->name('web.employee.academic_data.materialandassignment.update');
     });
 });
 /** !SECTION - Employee */

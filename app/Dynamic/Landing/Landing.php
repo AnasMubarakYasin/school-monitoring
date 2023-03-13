@@ -37,11 +37,19 @@ class Landing
                 'demo' => true,
             ],
             'employee' => [
-                'name' => 'Employee (teacher)',
+                'name' => 'Employee',
                 'login' => route('web.employee.login_perform'),
-                'user' => [
-                    'name' => 'kimia_teacher',
-                    'password' => 'kimia_teacher',
+                'users' => [
+                    [
+                        'role' => 'staff',
+                        'name' => 'staff',
+                        'password' => 'staff',
+                    ],
+                    [
+                        'role' => 'teacher',
+                        'name' => 'kimia_teacher',
+                        'password' => 'kimia_teacher',
+                    ],
                 ],
                 'demo' => true,
             ],

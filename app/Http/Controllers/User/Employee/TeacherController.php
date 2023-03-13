@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\User\Employee;
 
 use App\Http\Controllers\Controller;
 use App\Models\Classroom;
@@ -12,7 +12,7 @@ use App\Models\Subjects;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 
-class EmployeeController extends Controller
+class TeacherController extends Controller
 {
     public function dashboard()
     {
@@ -23,7 +23,7 @@ class EmployeeController extends Controller
         })->get();
         $scheduleofsubject = ScheduleOfSubjects::all()->where('teacher_id', $user->id)->count();
         $materialandassignment = MaterialAndAssignment::all()->where('teacher_id', $user->id)->count();
-        return view('pages.employee.dashboard', [
+        return view('pages.employee.teacher.dashboard', [
             'presences' => $presences,
             'scheduleofsubject' => $scheduleofsubject,
             'materialandassignment' => $materialandassignment
@@ -31,19 +31,19 @@ class EmployeeController extends Controller
     }
     public function profile()
     {
-        return view('pages.employee.profile');
+        return view('pages.employee.teacher.profile');
     }
     public function notification()
     {
-        return view('pages.employee.notification');
+        return view('pages.employee.teacher.notification');
     }
     public function offline()
     {
-        return view('pages.employee.offline');
+        return view('pages.employee.teacher.offline');
     }
     public function empty()
     {
-        return view('pages.employee.empty');
+        return view('pages.employee.teacher.empty');
     }
 
     //SECTION - subject of schedule
@@ -64,7 +64,7 @@ class EmployeeController extends Controller
         $resource->filter = ['teacher' =>  Auth::user()->id];
         $resource->init['filter_by_column'] = false;
         $resource->init['reference'] = '';
-        return view('pages.employee.academic_data.scheduleofsubjects.list', ['resource' => $resource]);
+        return view('pages.employee.teacher.academic_data.scheduleofsubjects.list', ['resource' => $resource]);
     }
     //!SECTION - subject of schedule
 
@@ -96,7 +96,7 @@ class EmployeeController extends Controller
         $resource->init['filter_by_column'] = false;
         $resource->init['reference'] = '';
         $resource->filter = ['teacher' =>  Auth::user()->id];
-        return view('pages.employee.academic_data.materialandassigment.list', ['resource' => $resource]);
+        return view('pages.employee.teacher.academic_data.materialandassigment.list', ['resource' => $resource]);
     }
     public function materialandassignment_create()
     {
@@ -132,7 +132,7 @@ class EmployeeController extends Controller
             }
         };
 
-        return view('pages.employee.academic_data.materialandassigment.create', ['resource' => $resource]);
+        return view('pages.employee.teacher.academic_data.materialandassigment.create', ['resource' => $resource]);
     }
     public function materialandassignment_update(MaterialAndAssignment $materialAndAssignment)
     {
@@ -167,7 +167,7 @@ class EmployeeController extends Controller
                 return Employee::all();
             }
         };
-        return view('pages.employee.academic_data.materialandassigment.update', ['resource' => $resource]);
+        return view('pages.employee.teacher.academic_data.materialandassigment.update', ['resource' => $resource]);
     }
     //!SECTION - material and assignment
 }

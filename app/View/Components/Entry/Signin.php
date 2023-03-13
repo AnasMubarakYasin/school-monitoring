@@ -21,7 +21,12 @@ class Signin extends Component
         $demo = request()->query->getBoolean('demo') && config('dynamic.entry.enable_demo', false);
         if ($demo && $for) {
             $landing = Landing::create();
-            $this->data = $landing->get_users()[$for]['user'];
+            $account = $landing->get_users()[$for];
+            if (isset($account['user'])) {
+                $this->data = $account['user'];
+            } else {
+                $this->data = collect($account['users'])->sole("role", request()->query('role'));
+            }
         }
     }
 
