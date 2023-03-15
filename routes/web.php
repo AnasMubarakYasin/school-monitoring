@@ -22,6 +22,7 @@ Route::get('/notification/{notification}/read', 'Notification@read')->name('web.
 Route::delete('/notification/{notification}/delete', 'Notification@delete')->name('web.notification.delete');
 Route::patch('/notification/mark_all', 'Notification@mark_all')->name('web.notification.mark_all');
 Route::delete('/notification/delete_all', 'Notification@delete_all')->name('web.notification.delete_all');
+
 /** SECTION - Administrator */
 Route::redirect('/administrator', '/administrator/dashboard');
 Route::middleware('authc.guest:web.administrator.dashboard,administrator')->group(function () {
@@ -153,6 +154,17 @@ Route::middleware(['authc.basic:welcome,employee'])->group(function () {
         Route::get('employee/staff/empty', 'User\Employee\StaffController@empty')->name('web.employee.staff.empty');
         Route::get('employee/staff/archive', 'User\Employee\StaffController@empty')->name('web.employee.staff.archive');
         Route::get('employee/staff/about', 'User\Employee\StaffController@empty')->name('web.employee.staff.about');
+
+        Route::get('employee/staff/letter', 'User\Employee\StaffController@letter')->name('web.employee.staff.letter');
+        Route::get('employee/staff/surat_keterangan', function () {
+            return view('pages.employee.staff.letter_printing.surat-keterangan');
+        })->name('surat_keterangan');
+        Route::get('employee/staff/surat_rekomendasi', function () {
+            return view('pages.employee.staff.letter_printing.surat-rekomendasi');
+        })->name('surat_rekomendasi');
+        Route::get('employee/staff/surat_pengembalian', function () {
+            return view('pages.employee.staff.letter_printing.surat-pengembalian');
+        })->name('surat_pengembalian');
         /* !SECTION - staff */
     });
 });
