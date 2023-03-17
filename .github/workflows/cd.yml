@@ -8,13 +8,13 @@ on:
   pull_request:
     branches:
     - master
+env:
+  WD: ${{ secrets.WD }}
 
 jobs:
   deploy:
     name: Deploy Changes
     runs-on: ubuntu-latest
-    env:
-      WD: ${{ secrets.WD }}
     steps:
       - name: Configure SSH
         run: |
