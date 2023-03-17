@@ -31,26 +31,4 @@ jobs:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_KEY: ${{ secrets.SSH_KEY }}
       - name: Login SSH
-        run: ssh staging 'echo "welcome"'
-      - name: cd to projec dir
-        run: ssh staging 'cd $WD'
-        env:
-          WD: ${{ secrets.WD }}
-      - name: down app
-        run: ssh staging 'php artisan down'
-      - name: restore if any
-        run: ssh staging 'git restore .'
-      - name: pull update
-        run: ssh staging 'git pull'
-      - name: install npm deps
-        run: ssh staging 'npm i'
-      - name: build resources
-        run: ssh staging 'npm run build'
-      - name: install composer deps
-        run: ssh staging 'composer i'
-      - name: fresh migration
-        run: ssh staging 'php artisan migrate:fresh'
-      - name: seed data
-        run: ssh staging 'php artisan db:seed'
-      - name: up app
-        run: ssh staging 'php artisan up'
+        run: ssh staging 'cd $WD;php artisan down;git restore .;git pull;npm i;npm run build;composer i;php artisan migrate:fresh;php artisan db:seed;php artisan up;'
