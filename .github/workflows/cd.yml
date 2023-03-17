@@ -25,7 +25,7 @@ jobs:
             User $SSH_USER
             IdentityFile ~/.ssh/remote.key
             StrictHostKeyChecking no
-            RemoteCommand cd $WD;
+            SendEnv=WD
           END
         env:
           SSH_USER: ${{ secrets.SSH_USER }}
@@ -33,20 +33,20 @@ jobs:
           SSH_KEY: ${{ secrets.SSH_KEY }}
           WD: ${{ secrets.WD }}
       - name: down app
-        run: ssh remote -t "bash -l; php artisan down;"
+        run: ssh remote "cd $WD; php artisan down"
       - name: restore if any
-        run: ssh remote -t "git restore ."
+        run: ssh remote "cd $WD; git restore ."
       - name: pull update
-        run: ssh remote -t 'git pull'
+        run: ssh remote 'cd $WD; git pull'
       - name: install npm deps
-        run: ssh remote -t 'npm i'
+        run: ssh remote 'cd $WD; npm i'
       - name: build resources
-        run: ssh remote -t 'npm run build'
+        run: ssh remote 'cd $WD; npm run build'
       - name: install composer deps
-        run: ssh remote -t 'composer i'
+        run: ssh remote 'cd $WD; composer i'
       - name: fresh migration
-        run: ssh remote -t 'php artisan migrate:fresh'
+        run: ssh remote 'cd $WD; php artisan migrate:fresh'
       - name: seed data
-        run: ssh remote -t 'php artisan db:seed'
+        run: ssh remote 'cd $WD; php artisan db:seed'
       - name: up app
-        run: ssh remote -t 'php artisan up'
+        run: ssh remote 'cd $WD; php artisan up'
