@@ -36,7 +36,7 @@ jobs:
         env:
           WD: ${{ secrets.WD }}
       - name: down app
-        run: ssh remote "cd $WD; php artisan down"
+        run: ssh remote 'cd $WD; php artisan down'
       - name: restore if any
         run: ssh remote 'cd $WD; git restore .'
       - name: pull update
