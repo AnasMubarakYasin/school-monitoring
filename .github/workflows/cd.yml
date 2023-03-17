@@ -31,7 +31,7 @@ jobs:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_KEY: ${{ secrets.SSH_KEY }}
       - name: Set Env
-        run: ssh remote "export WD='"'$WD'"'"
+        run: ssh remote 'export WD='"'$WD'"''
         env:
           WD: ${{ secrets.WD }}
       - name: down app
