@@ -16,16 +16,16 @@ jobs:
     steps:
       - name: Check SSH
         run: which ssh
-      - name: Modify Permission
-        run: echo $SSH_KEY > key 
+      - name: Copy Key to VM
+        run: echo "$SSH_KEY" > ~/.ssh/key 
         env:
           SSH_KEY: ${{ secrets.SSH_KEY }}
       - name: Check Key
-        run: test -e key && echo file exists || echo file not found
+        run: test -e ~/.ssh/key && echo file exists || echo file not found
       - name: Modify Permission
-        run: chmod 600 key
+        run: chmod 600 ~/.ssh/key
       - name: Login SSH
-        run: ssh $SSH_USER@$SSH_HOST -i key 
+        run: ssh $SSH_USER@$SSH_HOST -i ~/.ssh/key 
         env:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
