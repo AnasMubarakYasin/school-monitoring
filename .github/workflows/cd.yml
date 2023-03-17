@@ -25,30 +25,31 @@ jobs:
             User $SSH_USER
             IdentityFile ~/.ssh/remote.key
             StrictHostKeyChecking no
-            SendEnv LC_WD
           END
         env:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_KEY: ${{ secrets.SSH_KEY }}
-          LC_WD: ${{ secrets.WD }}
-      - name: down app
-        run: ssh remote "cd $WD; php artisan down"
+          WD: ${{ secrets.WD }}
+      - name: Set Env
+        run: ssh remote "export WD=$WD"
         env:
           WD: ${{ secrets.WD }}
+      - name: down app
+        run: ssh remote "cd $WD; php artisan down"
       - name: restore if any
-        run: ssh remote "cd $LC_WD; git restore ."
+        run: ssh remote 'cd $WD; git restore .'
       - name: pull update
-        run: ssh remote 'cd $LC_WD; git pull'
+        run: ssh remote 'cd $WD; git pull'
       - name: install npm deps
-        run: ssh remote 'cd $LC_WD; npm i'
+        run: ssh remote 'cd $WD; npm i'
       - name: build resources
-        run: ssh remote 'cd $LC_WD; npm run build'
+        run: ssh remote 'cd $WD; npm run build'
       - name: install composer deps
-        run: ssh remote 'cd $LC_WD; composer i'
+        run: ssh remote 'cd $WD; composer i'
       - name: fresh migration
-        run: ssh remote 'cd $LC_WD; php artisan migrate:fresh'
+        run: ssh remote 'cd $WD; php artisan migrate:fresh'
       - name: seed data
-        run: ssh remote 'cd $LC_WD; php artisan db:seed'
+        run: ssh remote 'cd $WD; php artisan db:seed'
       - name: up app
-        run: ssh remote 'cd $LC_WD; php artisan up'
+        run: ssh remote 'cd $WD; php artisan up'
