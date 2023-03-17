@@ -1,0 +1,47 @@
+on:
+  push:
+    branches:
+    - main
+    - release/*
+  pull_request:
+    branches:
+    - main
+
+jobs:
+  main:
+    name: main process
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check SSH
+        run: which ssh
+      - name: Copy Key to VM
+        run: echo $SSH_KEY > key
+        env:
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+      - name: Login SSH
+        run: ssh $SSH_USER@$SSH_HOST -i key 
+        env:
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+      - name: cd to projec dir
+        run: cd $WD
+        env:
+          WD: ${{ secrets.WD }}
+      - name: down app
+        run: php artisan down
+      - name: restore if any
+        run: git restore .
+      - name: pull update
+        run: git pull
+      - name: install npm deps
+        run: npm i
+      - name: build resources
+        run: npm run build
+      - name: install composer deps
+        run: composer i
+      - name: fresh migration
+        run: php artisan migrate:fresh
+      - name: seed data
+        run: php artisan db:seed
+      - name: up app
+        run: php artisan up
