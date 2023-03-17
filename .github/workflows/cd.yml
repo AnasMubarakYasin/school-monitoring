@@ -10,8 +10,8 @@ on:
     - master
 
 jobs:
-  main:
-    name: main process
+  deploy:
+    name: Deploy Changes
     runs-on: ubuntu-latest
     steps:
       - name: Check SSH
@@ -21,14 +21,18 @@ jobs:
           mkdir -p ~/.ssh/
           echo "$SSH_KEY" > ~/.ssh/staging.key
           chmod 600 ~/.ssh/staging.key
-          cat >>~/.ssh/config <<END
+          cat >> ~/.ssh/config <<END
           Host staging
             HostName $SSH_HOST
             User $SSH_USER
             IdentityFile ~/.ssh/staging.key
             StrictHostKeyChecking no
           END
-      - name: cd to projec dir
+        env:
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+      - name: Login SSH
         run: ssh staging
       - name: cd to projec dir
         run: cd $WD
