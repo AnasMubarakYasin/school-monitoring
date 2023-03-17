@@ -25,12 +25,14 @@ jobs:
             User $SSH_USER
             IdentityFile ~/.ssh/remote.key
             StrictHostKeyChecking no
-            SendEnv=WD
           END
         env:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_KEY: ${{ secrets.SSH_KEY }}
+      - name: Set Env
+        run: ssh remote "export WD='"'$WD'"'"
+        env:
           WD: ${{ secrets.WD }}
       - name: down app
         run: ssh remote "cd $WD; php artisan down"
