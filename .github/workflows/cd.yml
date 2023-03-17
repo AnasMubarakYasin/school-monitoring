@@ -37,20 +37,20 @@ jobs:
         env:
           WD: ${{ secrets.WD }}
       - name: down app
-        run: php artisan down
+        run: ssh staging 'php artisan down'
       - name: restore if any
-        run: git restore .
+        run: ssh staging 'git restore .'
       - name: pull update
-        run: git pull
+        run: ssh staging 'git pull'
       - name: install npm deps
-        run: npm i
+        run: ssh staging 'npm i'
       - name: build resources
-        run: npm run build
+        run: ssh staging 'npm run build'
       - name: install composer deps
-        run: composer i
+        run: ssh staging 'composer i'
       - name: fresh migration
-        run: php artisan migrate:fresh
+        run: ssh staging 'php artisan migrate:fresh'
       - name: seed data
-        run: php artisan db:seed
+        run: ssh staging 'php artisan db:seed'
       - name: up app
-        run: php artisan up
+        run: ssh staging 'php artisan up'
