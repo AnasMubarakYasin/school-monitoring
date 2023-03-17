@@ -33,7 +33,7 @@ jobs:
       - name: Login SSH
         run: ssh staging 'echo "welcome"'
       - name: cd to projec dir
-        run: cd $WD
+        run: ssh staging 'cd $WD'
         env:
           WD: ${{ secrets.WD }}
       - name: down app
