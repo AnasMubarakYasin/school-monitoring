@@ -17,10 +17,10 @@ jobs:
       - name: Check SSH
         run: which ssh
       - name: Copy Key to VM
-        run: \
-          echo $SSH_KEY > ~/key;
-          chmod 600 ~/key;
-          ssh anas@103.63.25.42 -i ~/key
+        run: |
+          echo $SSH_KEY > key;
+          chmod 600 key;
+          ssh anas@103.63.25.42 -i key;
         env:
           SSH_KEY: ${{ secrets.SSH_KEY }}
           SSH_USER: ${{ secrets.SSH_USER }}
