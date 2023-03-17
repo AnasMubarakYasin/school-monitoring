@@ -18,8 +18,8 @@ jobs:
         run: which ssh
       - name: Copy Key to VM
         run: |
-          echo "$SSH_KEY" > ~/key |
-          chmod 600 ~/key |
+          echo "$SSH_KEY" > ~/key ;
+          chmod 600 ~/key ;
           ssh $SSH_USER@$SSH_HOST -i ~/key
         env:
           SSH_KEY: ${{ secrets.SSH_KEY }}
