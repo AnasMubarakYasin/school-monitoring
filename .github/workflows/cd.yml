@@ -34,7 +34,8 @@ jobs:
           SSH_KEY: ${{ secrets.SSH_KEY }}
       - name: Operate
         run: |
-          ssh remote 
+          ssh remote
+          "
           cd /var/www/school-monitoring/
           php artisan down
           git restore .
@@ -45,3 +46,4 @@ jobs:
           php artisan migrate:fresh
           php artisan db:seed
           php artisan up
+          "
