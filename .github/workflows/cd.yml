@@ -30,5 +30,11 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_KEY: ${{ secrets.SSH_KEY }}
-      - name: Operate
-        run: ssh staging 'cd /var/www/school-monitoring/;php artisan down;git restore .;git pull;npm i;npm run build;composer i;php artisan migrate:fresh;php artisan db:seed;php artisan up;'
+      - name: Login SSH
+        run: ssh server 'echo "action"'
+      - name: cd to projec dir
+        run: ssh server 'cd $WD'
+        env:
+          WD: ${{ secrets.WD }}
+      - name: down app
+        run: ssh server 'php artisan down'
