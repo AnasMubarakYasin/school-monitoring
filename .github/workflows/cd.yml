@@ -27,7 +27,6 @@ jobs:
             User $SSH_USER
             IdentityFile ~/.ssh/remote.key
             StrictHostKeyChecking no
-            RemoteCommand cd $WD; $SHELL -il
           END
         env:
           SSH_USER: ${{ secrets.SSH_USER }}
