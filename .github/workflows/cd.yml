@@ -16,11 +16,17 @@ jobs:
     steps:
       - name: Check SSH
         run: which ssh
-      - name: Copy Key to VM
+      - name: Configure SSH
         run: |
-          echo $SSH_KEY > key;
-          chmod 600 key;
-          ssh anas@103.63.25.42 -i key;
+          mkdir -p ~/.ssh/
+          echo "$SSH_KEY" > ~/.ssh/staging.key
+          chmod 600 ~/.ssh/staging.key
+          cat >>~/.ssh/config <<END
+          Host staging
+            HostName $SSH_HOST
+            User $SSH_USER
+            IdentityFile ~/.ssh/staging.key
+          END
         env:
           SSH_KEY: ${{ secrets.SSH_KEY }}
           SSH_USER: ${{ secrets.SSH_USER }}
