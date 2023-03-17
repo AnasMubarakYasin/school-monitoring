@@ -33,7 +33,7 @@ jobs:
           SSH_KEY: ${{ secrets.SSH_KEY }}
           WD: ${{ secrets.WD }}
       - name: down app
-        run: ssh remote -t "-l php artisan down"
+        run: ssh remote -t "php artisan down -l"
       - name: restore if any
         run: ssh remote -t "git restore ."
       - name: pull update
