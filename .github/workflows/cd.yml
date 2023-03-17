@@ -32,6 +32,8 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_KEY: ${{ secrets.SSH_KEY }}
+      - name: Check Env
+        run: ssh remote "echo $WD"
       - name: down app
         run: ssh remote "cd $WD; php artisan down"
       - name: restore if any
