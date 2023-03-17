@@ -24,6 +24,8 @@ jobs:
         run: test -e ~/key && echo file exists || echo file not found
       - name: Modify Permission
         run: chmod 600 ~/key
+      - name: debug key
+        run: cat ~/key
       - name: Login SSH
         run: ssh $SSH_USER@$SSH_HOST -i ~/key
         env:
