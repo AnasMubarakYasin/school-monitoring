@@ -30,5 +30,5 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_KEY: ${{ secrets.SSH_KEY }}
-      - name: Login SSH
-        run: ssh staging 'cd $WD;php artisan down;git restore .;git pull;npm i;npm run build;composer i;php artisan migrate:fresh;php artisan db:seed;php artisan up;'
+      - name: Operate
+        run: ssh staging 'cd /var/www/school-monitoring/;php artisan down;git restore .;git pull;npm i;npm run build;composer i;php artisan migrate:fresh;php artisan db:seed;php artisan up;'
