@@ -26,4 +26,9 @@ class StaffController extends Controller
     {
         return view('pages.employee.staff.empty');
     }
+
+    public function letter()
+    {
+        return view('pages.employee.staff.letter_printing.letter');
+    }
 }
