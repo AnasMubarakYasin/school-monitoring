@@ -63,12 +63,13 @@
                             {{ config('dynamic.application.version') }}
                         </div>
                     </div>
-                    <div class="flex flex-col gap-1">
+                    <hr>
+                    <div class="flex flex-col gap-2">
                         <div class="text-base font-medium text-gray-600">
-                            Deployment
+                            App Deployment
                         </div>
                         <div class="text-base font-normal text-black">
-                            <a href="https://github.com/AnasMubarakYasin/school-monitoring/actions/workflows/cd.yml">
+                            <a href="https://github.com/AnasMubarakYasin/school-monitoring/actions/workflows/cd.yml" class="inline">
                                 <img src="https://github.com/AnasMubarakYasin/school-monitoring/actions/workflows/cd.yml/badge.svg" alt="">
                             </a>
                         </div>
