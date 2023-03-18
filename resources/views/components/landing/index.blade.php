@@ -63,6 +63,16 @@
                             {{ config('dynamic.application.version') }}
                         </div>
                     </div>
+                    <div class="flex flex-col gap-1">
+                        <div class="text-base font-medium text-gray-600">
+                            Deployment
+                        </div>
+                        <div class="text-base font-normal text-black">
+                            <a href="https://github.com/AnasMubarakYasin/school-monitoring/actions/workflows/cd.yml">
+                                <img src="https://github.com/AnasMubarakYasin/school-monitoring/actions/workflows/cd.yml/badge.svg" alt="">
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </section>
             <section class="flex flex-col gap-4">
