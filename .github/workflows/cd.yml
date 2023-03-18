@@ -14,36 +14,38 @@ jobs:
     name: Deploy Changes
     runs-on: ubuntu-latest
     env:
-      _wd_: ${{ secrets.WD }}
+      WD: ${{ secrets.WD }}
     steps:
       - name: Configure SSH
         run: |
           mkdir -p ~/.ssh/
-          echo "$SSH_KEY" > ~/.ssh/remote.key
-          chmod 600 ~/.ssh/remote.key
+          echo "$SSH_KEY" > ~/.ssh/robot.key
+          chmod 600 ~/.ssh/robot.key
           cat >> ~/.ssh/config <<END
-          Host remote
+          Host robot
             HostName $SSH_HOST
             User $SSH_USER
-            IdentityFile ~/.ssh/remote.key
+            IdentityFile ~/.ssh/robot.key
             StrictHostKeyChecking no
           END
         env:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_KEY: ${{ secrets.SSH_KEY }}
-      - name: Operate
-        run: |
-          ssh remote
-          "
-          cd /var/www/school-monitoring/
-          php artisan down
-          git restore .
-          git pull
-          npm i
-          npm run build
-          composer i
-          php artisan migrate:fresh
-          php artisan db:seed
-          php artisan up
-          "
+      - name: down app
+        run: ssh robot "cd $WD;php artisan down"
+      - name: restore if any
+        run: ssh robot "cd $WD;git restore ."
+      - name: pull update
+        run: ssh robot "cd $WD;git pull"
+      - name: install npm deps
+        run: ssh robot "cd $WD;source ~/.nvm/nvm.sh;npm i"
+      - name: build resources
+        run: ssh robot "cd $WD;source ~/.nvm/nvm.sh;npm run build"
+      - name: install composer deps
+        run: ssh robot "cd $WD;composer i"
+      - name: fresh migration
+        run: ssh robot "cd $WD;php artisan migrate:fresh"
+      - name: seed data
+        run: ssh robot "cd $WD;php artisan db:seed"
+      - name: up app
+        run: ssh robot "cd $WD;php artisan up"
