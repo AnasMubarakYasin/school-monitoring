@@ -14,38 +14,40 @@ jobs:
     name: Deploy Changes
     runs-on: ubuntu-latest
     env:
-      WD: ${{ secrets.WD }}
+      wd: ${{ secrets.WD }}
+      nvm: ~/.nvm/nvm.sh
     steps:
       - name: Configure SSH
         run: |
           mkdir -p ~/.ssh/
-          echo "$SSH_KEY" > ~/.ssh/robot.key
-          chmod 600 ~/.ssh/robot.key
+          echo "$SSH_KEY" > ~/.ssh/remote.key
+          chmod 600 ~/.ssh/remote.key
           cat >> ~/.ssh/config <<END
-          Host robot
+          Host remote
             HostName $SSH_HOST
             User $SSH_USER
-            IdentityFile ~/.ssh/robot.key
+            IdentityFile ~/.ssh/remote.key
             StrictHostKeyChecking no
           END
         env:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_KEY: ${{ secrets.SSH_KEY }}
       - name: down app
-        run: ssh robot "cd $WD;php artisan down"
+        run: ssh remote "cd $wd; php artisan down"
       - name: restore if any
-        run: ssh robot "cd $WD;git restore ."
+        run: ssh remote "cd $wd; git restore ."
       - name: pull update
-        run: ssh robot "cd $WD;git pull"
+        run: ssh remote "cd $wd; git pull"
       - name: install npm deps
-        run: ssh robot "cd $WD;source ~/.nvm/nvm.sh;npm i"
+        run: ssh remote "cd $wd; source $nvm; npm install"
       - name: build resources
-        run: ssh robot "cd $WD;source ~/.nvm/nvm.sh;npm run build"
+        run: ssh remote "cd $wd; source $nvm; npm run build"
       - name: install composer deps
-        run: ssh robot "cd $WD;composer i"
+        run: ssh remote "cd $wd; composer i"
       - name: fresh migration
-        run: ssh robot "cd $WD;php artisan migrate:fresh"
+        run: ssh remote "cd $wd; php artisan migrate:fresh"
       - name: seed data
-        run: ssh robot "cd $WD;php artisan db:seed"
+        run: ssh remote "cd $wd; php artisan db:seed"
       - name: up app
-        run: ssh robot "cd $WD;php artisan up"
+        run: ssh remote "cd $wd; php artisan up"
