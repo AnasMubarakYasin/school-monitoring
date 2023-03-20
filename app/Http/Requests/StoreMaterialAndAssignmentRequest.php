@@ -31,7 +31,7 @@ class StoreMaterialAndAssignmentRequest extends FormRequest
             'start_at' => 'required|date',
             'end_at' => 'required|date',
             'description' => 'nullable|string',
-            'file' => 'required|mimes:csv,txt,xlx,xls,pdf|max:5048'
+            'file' => 'required|mimes:csv,txt,xlx,xls,pdf,docx|max:5048'
         ];
     }
 }

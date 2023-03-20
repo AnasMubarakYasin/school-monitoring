@@ -984,7 +984,7 @@ class AdministratorController extends Controller
         $resource->fetcher_relation = function ($definition) {
             if ($definition->name == 'subjects') {
                 return Subjects::all();
-            } else if ($definition->name == 'classrooms') {
+            } else if ($definition->name == 'classroom') {
                 return Classroom::all();
             } else {
                 return Employee::all();
