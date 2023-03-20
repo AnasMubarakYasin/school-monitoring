@@ -24,6 +24,10 @@ class Attendance extends Model
     {
         self::$caption = "attendance";
         self::$definitions = [
+            'number' => new Definition(
+                name: 'number',
+                type: 'number',
+            ),
             'state' => new Definition(
                 name: 'state',
                 type: 'enum',
@@ -74,6 +78,7 @@ class Attendance extends Model
     }
 
     protected $fillable = [
+        'number',
         'state',
         'description',
 

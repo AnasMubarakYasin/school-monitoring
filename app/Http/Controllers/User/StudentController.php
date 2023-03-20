@@ -150,4 +150,17 @@ class StudentController extends Controller
         return view('pages.student.materialandassignment.list', ['resource' => $resource]);
     }
     //!SECTION - material and assignment
+
+    // //SECTION - presence
+    // public function presence_list()
+    // {
+    //     $resource = Presence::tableable()->from_request(
+    //         request: request(),
+    //         columns: [
+    //         ],
+    //         pagination: ['per' => 5, 'num' => 1],
+    //     );
+    //     return view('pages.student.presence.list', ['resource' => $resource]);
+    // }
+    // //!SECTION - presence
 }

@@ -112,8 +112,9 @@ class Presence extends Model
             ]);
             $pr->save();
             foreach ($value->classrooms()->sole()->students()->get() as $key => $value) {
-                foreach (range(1, 16) as $_) {
+                foreach (range(1, 16) as $key => $_) {
                     $at = new Attendance([
+                        'number' => $key,
                         // 'state',
                         // 'description',
                         'presence_id' => $pr->id,
@@ -160,7 +161,7 @@ class Presence extends Model
 
     public function students()
     {
-        return $this->hasMany(Student::class);
+        return $this->attendances()->get()->groupBy("student_id")->map(fn ($val) => $val[0]->student);
     }
     public function attendances()
     {

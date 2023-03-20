@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
+            $table->integer('number');
             $table->enum('state', ['present', 'unpresent'])->nullable();
             $table->text('description')->nullable();
 

@@ -170,4 +170,29 @@ class TeacherController extends Controller
         return view('pages.employee.teacher.academic_data.materialandassigment.update', ['resource' => $resource]);
     }
     //!SECTION - material and assignment
+    //SECTION - presence
+    public function presence_list()
+    {
+        $resource = Presence::tableable()->from_request(
+            request: request(),
+            columns: [
+                'name',
+
+                'school_year',
+                'semester',
+                'subjects',
+                'classroom',
+            ],
+            pagination: ['per' => 5, 'num' => 1],
+        );
+        $resource->init['filter_by_column'] = false;
+        $resource->init['reference'] = '';
+        $resource->filter = ['teacher' =>  Auth::user()->id];
+        return view('pages.employee.teacher.presence.list', ['resource' => $resource]);
+    }
+    public function presence_view(Presence $presence)
+    {
+        return view('pages.employee.teacher.presence.view', ['presence' => $presence]);
+    }
+    //!SECTION - presence
 }

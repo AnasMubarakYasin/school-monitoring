@@ -149,6 +149,9 @@ Route::middleware(['authc.basic:welcome,employee'])->group(function () {
         Route::get('employee/teacher/academic_data/materialandassignment/list', 'User\Employee\TeacherController@materialandassignment_list')->name('web.employee.teacher.academic_data.materialandassignment.list');
         Route::get('employee/teacher/academic_data/materialandassignment/create', 'User\Employee\TeacherController@materialandassignment_create')->name('web.employee.teacher.academic_data.materialandassignment.create');
         Route::get('employee/teacher/academic_data/materialandassignment/{materialAndAssignment}/update', 'User\Employee\TeacherController@materialandassignment_update')->name('web.employee.teacher.academic_data.materialandassignment.update');
+
+        Route::get('employee/teacher/presence', 'User\Employee\TeacherController@presence_list')->name('web.employee.teacher.presence.list');
+        Route::get('employee/teacher/presence/{presence}', 'User\Employee\TeacherController@presence_view')->name('web.employee.teacher.presence.view');
         /* !SECTION - teacher */
         /* SECTION - staff */
         Route::get('employee/staff/dashboard', 'User\Employee\StaffController@dashboard')->name('web.employee.staff.dashboard');
@@ -199,6 +202,8 @@ Route::middleware(['authc.basic:welcome,student'])->group(function () {
         Route::get('student/scheduleofsubjects/list', 'User\StudentController@scheduleofsubjects_list')->name('web.student.scheduleofsubjects.list');
 
         Route::get('student/materialandassignment/list', 'User\StudentController@materialandassignment_list')->name('web.student.materialandassignment.list');
+
+        // Route::get('student/presence/list', 'User\StudentController@presence_list')->name('web.student.presence.list');
     });
 });
 /** !SECTION - Employee */
@@ -264,6 +269,7 @@ Route::middleware(['authc.basic:welcome,administrator,employee'])->group(functio
     Route::get('resource/presence/generate', 'PresenceController@generate')->name('web.resource.presence.generate');
     Route::post('resource/presence', 'PresenceController@create')->name('web.resource.presence.create');
     Route::patch('resource/presence/{presence}', 'PresenceController@update')->name('web.resource.presence.update');
+    Route::patch('resource/presence/{presence}/attendance', 'PresenceController@attendance')->name('web.resource.presence.attendance');
     Route::delete('resource/presence/{presence}', 'PresenceController@delete')->name('web.resource.presence.delete');
     Route::delete('resource/presence', 'PresenceController@delete_any')->name('web.resource.presence.delete_any');
 

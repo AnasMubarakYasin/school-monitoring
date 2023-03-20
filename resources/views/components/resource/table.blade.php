@@ -3,6 +3,7 @@
     'selection' => true,
     'action' => true,
     'top' => null,
+    'actions' => null,
 ])
 <x-slot:head>
     @vite('resources/js/components/resource/table.js')
@@ -314,6 +315,11 @@
                         @endif
                         <td
                             class="flex justify-center gap-2 p-3 capitalize {{ $loop->last ? 'rounded-br-lg' : '' }}">
+                            @if ($actions)
+                                @foreach ($actions as $name)
+                                    <x-dynamic-component :component="$name" :item="$item"/>
+                                @endforeach
+                            @endif
                             @can('update', $item)
                                 <a id="edt_btn" href="{{ $resource->route_edit($item) }}"
                                     class="p-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -452,12 +458,11 @@
                     @if ($count && $count > 1)
                         @php
                             $index = 1;
-                            $limit = $resource->init['limitpage'];
+                            $limit = 5;
                             if ($count > $limit) {
                                 $div = floor($limit / 2);
                                 $start = $paginator->currentPage() - $div;
                                 $percent = ($paginator->currentPage() / $count) * 100;
-                                $pages = [];
                                 if ($start < 1) {
                                     $start = 1;
                                 } else {
@@ -466,12 +471,12 @@
                                     }
                                 }
                                 $pages = range($start, $limit + ($start - 1));
-                                if ($percent > 70) {
-                                    $elements = [[1, 2], '', $pages];
-                                } elseif ($percent < 30) {
-                                    $elements = [$pages, '', [$count - 1, $count]];
+                                if (in_array(1, $pages)) {
+                                    $elements = [$pages, '', [$count]];
+                                } elseif (in_array($count, $pages)) {
+                                    $elements = [[1], '', $pages];
                                 } else {
-                                    $elements = [[1, 2], '', $pages, '', [$count - 1, $count]];
+                                    $elements = [[1], '', $pages, '', [$count]];
                                 }
                             } else {
                                 $elements = [range(1, $count)];
@@ -497,6 +502,20 @@
                                         </a>
                                     @endif
                                 @endforeach
+                            @endif
+                        @endforeach
+                    @else
+                        @foreach (range(1, $count + 1) as $page)
+                            @if ($paginator->currentPage() == $page)
+                                <div
+                                    class="grid place-content-center p-2 w-5 h-5 aspect-square box-content text-base text-blue-600 border border-blue-300 bg-blue-100 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">
+                                    {{ $page }}
+                                </div>
+                            @else
+                                <a href="{{ $paginator->url($page) }}"
+                                    class="grid place-content-center p-2 w-5 h-5 aspect-square box-content text-base text-gray-700 bg-white border border-gray-300 hover:bg-gray-200 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                    {{ $page }}
+                                </a>
                             @endif
                         @endforeach
                     @endif

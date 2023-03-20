@@ -24,22 +24,34 @@ class PresencePolicy
 
     public function create(Administrator|Employee $user)
     {
-        return true;
+        return match ($user::class) {
+            Administrator::class => true,
+            default => false,
+        };
     }
 
     public function update(Administrator|Employee $user, Presence $presence)
     {
-        return true;
+        return match ($user::class) {
+            Administrator::class => true,
+            default => false,
+        };
     }
 
     public function delete_any(Administrator|Employee $user)
     {
-        return true;
+        return match ($user::class) {
+            Administrator::class => true,
+            default => false,
+        };
     }
 
     public function delete(Administrator|Employee $user, Presence $presence)
     {
-        return true;
+        return match ($user::class) {
+            Administrator::class => true,
+            default => false,
+        };
     }
 
     public function restore(Administrator|Employee $user, Presence $presence)
