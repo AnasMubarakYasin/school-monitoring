@@ -299,6 +299,12 @@
                                     @endif
                                 @break
 
+                                @case('file')
+                                    <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
+                                        <a href="{{ Storage::url($item->{$column}) }}" target="_blank" class="text-blue-500 dark:text-blue-400 hover:underline">{{ basename($item->{$column}) }}</a>
+                                    </td>
+                                @break
+
                                 @default
                                     <td class="p-3 text-gray-900 dark:text-white whitespace-nowrap">
                                         @if (is_array($item->{$column}))
@@ -317,7 +323,7 @@
                             class="flex justify-center gap-2 p-3 capitalize {{ $loop->last ? 'rounded-br-lg' : '' }}">
                             @if ($actions)
                                 @foreach ($actions as $name)
-                                    <x-dynamic-component :component="$name" :item="$item"/>
+                                    <x-dynamic-component :component="$name" :item="$item" />
                                 @endforeach
                             @endif
                             @can('update', $item)

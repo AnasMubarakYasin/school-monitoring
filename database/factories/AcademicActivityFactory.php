@@ -21,7 +21,6 @@ class AcademicActivityFactory extends Factory
             'duration' => fake()->numberBetween(1, 7),
             'executive' => fake()->name(),
             'type' => fake()->jobTitle(),
-            'date' => fake()->date(),
             'start_at' => fake()->dateTimeBetween('-3 month'),
             'end_at' => fake()->dateTimeBetween('now', '+3 month'),
             'description' => fake()->slug(),

@@ -13,13 +13,10 @@ class MaterialAndAssignmentController extends Controller
     {
         $this->authorize('create', MaterialAndAssignment::class);
         $newName = '';
-        if ($request->file('file')) {
-            $extension = $request->file('file')->getClientOriginalExtension();
-            $newName = $request->nama . '-' . now()->timestamp . '.' . $extension;
-            $request->file('file')->storeAs('public/materialandassignment', $newName);
-        }
         $data = $request->validated();
-        $data['file'] = $newName;
+        if ($request->file('file')) {
+            $data['file'] = Storage::put("material_and_assigment", $request->file('file'));
+        }
         MaterialAndAssignment::create($data);
         return redirect()->intended($request->input('_view_any'));
     }
@@ -28,7 +25,7 @@ class MaterialAndAssignmentController extends Controller
         $this->authorize('update', $materialAndAssignment);
         if ($request->file('file')) {
             $extension = $request->file('file')->getClientOriginalExtension();
-            $newName = $request->nama . '-' . now()->timestamp . '.' . $extension;
+            $newName = $request->name . '-' . now()->timestamp . '.' . $extension;
             $request->file('file')->storeAs('public/materialandassignment', $newName);
 
             Storage::delete('public/materialandassignment/' . $materialAndAssignment->file);
@@ -43,7 +40,7 @@ class MaterialAndAssignmentController extends Controller
     public function delete(MaterialAndAssignment $materialAndAssignment)
     {
         $this->authorize('delete', $materialAndAssignment);
-        Storage::delete('public/materialandassignment/' . $materialAndAssignment->file);
+        Storage::delete("material_and_assigment", $materialAndAssignment->file);
         $materialAndAssignment->delete();
         return back();
     }

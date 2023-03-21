@@ -21,9 +21,8 @@ return new class extends Migration
             $table->string('duration');
             $table->string('executive');
             $table->string('type');
-            $table->date('date');
-            $table->time('start_at');
-            $table->time('end_at');
+            $table->dateTime('start_at');
+            $table->dateTime('end_at');
             $table->text('description')->nullable();
         });
     }

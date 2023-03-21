@@ -115,7 +115,7 @@
                                     <div class="grid gap-2">
                                         @foreach ($user['users'] as $item)
                                             <a href="{{ $user['login'] . ($user['demo'] ? '?demo=true&role='.$item['role'] : '?role='.$item['role']) }}"
-                                                class="text-sm font-medium text-gray-700">
+                                                class="text-sm font-medium text-gray-700 hover:text-gray-800">
                                                 {{ $item['role'] }}
                                             </a>
                                         @endforeach
