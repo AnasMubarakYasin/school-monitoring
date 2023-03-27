@@ -115,4 +115,8 @@ class Employee extends Authenticatable
     {
         return visits($this);
     }
+    public function material_and_assignment()
+    {
+        return $this->belongsToMany(MaterialAndAssignment::class);
+    }
 }

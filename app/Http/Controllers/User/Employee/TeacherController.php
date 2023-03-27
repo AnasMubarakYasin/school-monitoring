@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\User\Employee;
 
 use App\Http\Controllers\Controller;
+use App\Models\Answer;
 use App\Models\Classroom;
 use App\Models\Employee;
 use App\Models\MaterialAndAssignment;
 use App\Models\Presence;
 use App\Models\ScheduleOfSubjects;
+use App\Models\Student;
 use App\Models\Subjects;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
@@ -80,7 +82,8 @@ class TeacherController extends Controller
                 'start_at',
                 'end_at',
                 'description',
-                'file'
+                'file',
+                'answer'
             ],
             pagination: ['per' => 5, 'num' => 1],
         );
@@ -96,6 +99,12 @@ class TeacherController extends Controller
         $resource->init['filter_by_column'] = false;
         $resource->init['reference'] = '';
         $resource->filter = ['teacher' =>  Auth::user()->id];
+        $resource->route_relation = function ($definition, $item) {
+            return match ($definition->name) {
+                'answer' => route('web.employee.teacher.answer'),
+                default => ""
+            };
+        };
         return view('pages.employee.teacher.academic_data.materialandassigment.list', ['resource' => $resource]);
     }
     public function materialandassignment_create()
@@ -125,7 +134,7 @@ class TeacherController extends Controller
         $resource->fetcher_relation = function ($definition) {
             if ($definition->name == 'subjects') {
                 return Subjects::all();
-            } else if ($definition->name == 'classrooms') {
+            } else if ($definition->name == 'classroom') {
                 return Classroom::all();
             } else {
                 return collect([Auth::user()]);
@@ -140,7 +149,7 @@ class TeacherController extends Controller
             model: $materialAndAssignment,
             fields: [
                 'subjects',
-                'classrooms',
+                'classroom',
                 'teacher',
                 'type',
                 'start_at',
@@ -161,13 +170,58 @@ class TeacherController extends Controller
         $resource->fetcher_relation = function ($definition) {
             if ($definition->name == 'subjects') {
                 return Subjects::all();
-            } else if ($definition->name == 'classrooms') {
+            } else if ($definition->name == 'classroom') {
                 return Classroom::all();
             } else {
                 return Employee::all();
             }
         };
         return view('pages.employee.teacher.academic_data.materialandassigment.update', ['resource' => $resource]);
+    }
+    public function answer()
+    {
+        $user = auth()->user()->id;
+        $material_and_assignment = MaterialAndAssignment::where('teacher_id', $user)->first();
+        $resource = Answer::tableable()->from_request(
+            request: request(),
+            columns: [
+                'file',
+                'student',
+                'status',
+            ],
+            pagination: ['per' => 5, 'num' => 1],
+        );
+        $resource->route_edit = function ($item) {
+            return route('web.employee.teacher.answer.update', ['answer' => $item]);
+        };
+        $resource->route_delete = function ($item) {
+            return route('web.resource.answer.delete', ['answer' => $item]);
+        };
+        $resource->init['filter_by_column'] = false;
+        $resource->init['reference'] = '';
+        $resource->filter = ['material_and_assignment' =>  $material_and_assignment->id];
+        return view('pages.employee.teacher.answer.view', ['resource' => $resource]);
+    }
+    public function answer_update(Answer $answer)
+    {
+        $resource = Answer::formable()->from_update(
+            model: $answer,
+            fields: [
+                'student',
+                'status',
+                'description'
+            ],
+        );
+        $resource->route_update = function ($item) {
+            return route('web.resource.answer.update', ['answer' => $item]);
+        };
+        $resource->route_view_any = function ($item) {
+            return route('web.employee.teacher.answer');
+        };
+        $resource->fetcher_relation = function ($definition) {
+            return Student::all();
+        };
+        return view('pages.employee.teacher.answer.update', ['resource' => $resource]);
     }
     //!SECTION - material and assignment
     //SECTION - presence
