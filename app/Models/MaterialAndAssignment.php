@@ -73,6 +73,10 @@ class MaterialAndAssignment extends Model
         return new MaterialAndAssignment();
     }
 
+    public static function get_by_classroom(int $classroom_id) {
+        return self::where('classroom_id', $classroom_id)->get();
+    }
+
     protected $fillable = [
         'subjects_id',
         'classroom_id',
@@ -103,12 +107,4 @@ class MaterialAndAssignment extends Model
     {
         return $this->hasMany(Answer::class);
     }
-    // public function material_and_assignment()
-    // {
-    //     return $this->answer()->get()->groupBy("maa_id")->map(fn ($val) => $val[0]->material_and_assignment);
-    // }
-    // public function attendances()
-    // {
-    //     return $this->hasMany(Attendance::class);
-    // }
 }

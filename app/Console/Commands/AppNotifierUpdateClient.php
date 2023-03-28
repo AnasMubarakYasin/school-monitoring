@@ -41,13 +41,12 @@ class AppNotifierUpdateClient extends Command
         $this->line("Notify Update to Client: $email");
 
         try {
-            Mail::to('bladerlaiga.97@gmail.com')->send(new MailAppNotifierUpdateClient());
+            Mail::to($email)->send(new MailAppNotifierUpdateClient());
         } catch (\Throwable $th) {
             $this->error($th->getMessage());
             return Command::FAILURE;
         }
-        // $this->info("Notify Update to Client success");
-        Mail::to($email)->send(new MailAppNotifierUpdateClient());
+        $this->info("Notify Update to Client success");
 
         // $data = range(1, 10);
         // $bar = $this->output->createProgressBar(count($data));

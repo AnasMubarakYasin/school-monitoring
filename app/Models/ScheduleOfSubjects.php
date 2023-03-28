@@ -70,6 +70,10 @@ class ScheduleOfSubjects extends Model
         return new ScheduleOfSubjects();
     }
 
+    public static function get_by_classroom(int $classroom_id) {
+        return self::where('class_id', $classroom_id)->get();
+    }
+
     protected $fillable = [
         'subjects_id',
         'class_id',
