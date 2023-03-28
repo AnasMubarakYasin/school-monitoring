@@ -46,8 +46,8 @@ class AppNotifierUpdateClient extends Command
             $this->error($th->getMessage());
             return Command::FAILURE;
         }
-        $this->info("Notify Update to Client success");
-        // Mail::to($email)->send(new MailAppNotifierUpdateClient());
+        // $this->info("Notify Update to Client success");
+        Mail::to($email)->send(new MailAppNotifierUpdateClient());
 
         // $data = range(1, 10);
         // $bar = $this->output->createProgressBar(count($data));
