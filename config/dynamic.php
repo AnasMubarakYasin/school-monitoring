@@ -10,11 +10,11 @@ use App\Models\Student;
 return [
     'application' => [
         'name' => env('APP_NAME', 'Bladerlaiga'),
-        'version' => env('APP_VERSION', '0.2.7'),
+        'version' => env('APP_VERSION', '0.2.8'),
         'logo' => env('APP_LOGO', '/logo.png'),
         'favicon' => env('APP_LOGO', '/favicon.ico'),
         'vendor_name' => 'Bladerlaiga',
-        'vendor_version' => '0.5.5',
+        'vendor_version' => '0.5.6',
         'vendor_year' => '2023',
         'vendor_logo' => '/logo.png',
     ],
