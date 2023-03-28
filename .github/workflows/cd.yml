@@ -33,9 +33,9 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_KEY: ${{ secrets.SSH_KEY }}
-      - name: down app
+      - name: down application
         run: ssh remote "cd $wd; php artisan down"
-      - name: restore if any
+      - name: restore change
         run: ssh remote "cd $wd; git restore ."
       - name: pull update
         run: ssh remote "cd $wd; git pull"
@@ -47,7 +47,10 @@ jobs:
         run: ssh remote "cd $wd; composer i"
       - name: fresh migration
         run: ssh remote "cd $wd; php artisan migrate:fresh"
-      - name: seed data
+      - name: seed database
         run: ssh remote "cd $wd; php artisan db:seed"
-      - name: up app
+      - name: up application
         run: ssh remote "cd $wd; php artisan up"
+      - name: notify update to client
+        run: ssh remote "cd $wd; php artisan app:notify-update-client"
+         
