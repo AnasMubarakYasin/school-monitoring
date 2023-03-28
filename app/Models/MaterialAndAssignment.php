@@ -61,6 +61,12 @@ class MaterialAndAssignment extends Model
             name: 'file',
             type: 'file',
         );
+        self::$definitions['answer'] = new Definition(
+            name: 'answer',
+            type: 'model',
+            array: true,
+            relation: 'answer',
+        );
     }
     public static function modelable(): Model
     {
@@ -93,4 +99,16 @@ class MaterialAndAssignment extends Model
     {
         return $this->belongsTo(Employee::class, 'teacher_id');
     }
+    public function answer()
+    {
+        return $this->hasMany(Answer::class);
+    }
+    // public function material_and_assignment()
+    // {
+    //     return $this->answer()->get()->groupBy("maa_id")->map(fn ($val) => $val[0]->material_and_assignment);
+    // }
+    // public function attendances()
+    // {
+    //     return $this->hasMany(Attendance::class);
+    // }
 }

@@ -384,15 +384,15 @@ class AdministratorController extends Controller
         $resource->route_delete = function ($item) {
             return route('web.resource.classroom.delete', ['classroom' => $item]);
         };
-        $resource->route_relation = function ($definition, $item) {
-            if ($definition->name == 'major') {
-                return route('web.administrator.data_master.major.list');
-            } else if ($definition->name == 'homeroom') {
-                return route('web.administrator.users.employee.list');
-            } {
-                return route('web.administrator.users.student.list');
-            }
-        };
+        // $resource->route_relation = function ($definition, $item) {
+        //     if ($definition->name == 'major') {
+        //         return route('web.administrator.data_master.major.list');
+        //     } else if ($definition->name == 'homeroom') {
+        //         return route('web.administrator.users.employee.list');
+        //     } {
+        //         return route('web.administrator.users.student.list');
+        //     }
+        // };
         return view('pages.administrator.classroom.list', ['resource' => $resource]);
     }
     public function classroom_create()
@@ -953,7 +953,7 @@ class AdministratorController extends Controller
         $resource->route_relation = function ($definition, $item) {
             if ($definition->name == 'major') {
                 return route('web.administrator.academic_data.subjects.list');
-            } else if ($definition->name == 'classrooms') {
+            } else if ($definition->name == 'classroom') {
                 return route('web.administrator.data_master.classroom.list');
             } else {
                 return route('web.administrator.users.employee.list');
@@ -1016,7 +1016,7 @@ class AdministratorController extends Controller
         $resource->fetcher_relation = function ($definition) {
             if ($definition->name == 'subjects') {
                 return Subjects::all();
-            } else if ($definition->name == 'classrooms') {
+            } else if ($definition->name == 'classroom') {
                 return Classroom::all();
             } else {
                 return Employee::all();

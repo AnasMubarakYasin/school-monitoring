@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\AcademicActivity;
+use App\Models\Answer;
 use App\Models\MaterialAndAssignment;
 use App\Models\Presence;
 use App\Models\ScheduleOfSubjects;
@@ -146,9 +147,36 @@ class StudentController extends Controller
             pagination: ['per' => 5, 'num' => 1],
         );
         $resource->init['reference'] = '';
-        $resource->filter = ['classrooms' => Auth::user()->classroom_id];
+        $resource->filter = ['classroom' => Auth::user()->classroom_id];
         return view('pages.student.materialandassignment.list', ['resource' => $resource]);
     }
+    public function answer_view(MaterialAndAssignment $materialAndAssignment)
+    {
+        $resource = Answer::formable()->from_create(
+            fields: [
+                'file',
+                'material_and_assignment',
+            ],
+            hidden: [
+                'material_and_assignment'
+            ]
+        );
+        $resource->model['material_and_assignment_id'] = $materialAndAssignment->id;
+        $resource->route_create = function () {
+            return route('web.resource.answer.create');
+        };
+        $resource->route_view_any = function () {
+            return route('web.student.materialandassignment.list');
+        };
+        $resource->fetcher_relation = function ($definition) {
+            return MaterialAndAssignment::all();
+        };
+        return view('pages.student.materialandassignment.answare.view', ['resource' => $resource]);
+    }
+    // public function respon_answer()
+    // {
+    //     return view('pages.student.materialandassignment.answare.detail');
+    // }
     //!SECTION - material and assignment
 
     // //SECTION - presence

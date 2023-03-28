@@ -152,6 +152,9 @@ Route::middleware(['authc.basic:welcome,employee'])->group(function () {
 
         Route::get('employee/teacher/presence', 'User\Employee\TeacherController@presence_list')->name('web.employee.teacher.presence.list');
         Route::get('employee/teacher/presence/{presence}', 'User\Employee\TeacherController@presence_view')->name('web.employee.teacher.presence.view');
+
+        Route::get('employee/teacher/answer', 'User\Employee\TeacherController@answer')->name('web.employee.teacher.answer');
+        Route::get('employee/teacher/answer/{answer}', 'User\Employee\TeacherController@answer_update')->name('web.employee.teacher.answer.update');
         /* !SECTION - teacher */
         /* SECTION - staff */
         Route::get('employee/staff/dashboard', 'User\Employee\StaffController@dashboard')->name('web.employee.staff.dashboard');
@@ -202,12 +205,13 @@ Route::middleware(['authc.basic:welcome,student'])->group(function () {
         Route::get('student/scheduleofsubjects/list', 'User\StudentController@scheduleofsubjects_list')->name('web.student.scheduleofsubjects.list');
 
         Route::get('student/materialandassignment/list', 'User\StudentController@materialandassignment_list')->name('web.student.materialandassignment.list');
+        Route::get('student/materialandassignment/answer/{materialAndAssignment}', 'User\StudentController@answer_view')->name('web.student.answer.view');
 
         // Route::get('student/presence/list', 'User\StudentController@presence_list')->name('web.student.presence.list');
     });
 });
 /** !SECTION - Employee */
-Route::middleware(['authc.basic:welcome,administrator,employee'])->group(function () {
+Route::middleware(['authc.basic:welcome,administrator,employee,student'])->group(function () {
     Route::post('resource/school_year', 'SchoolYearController@create')->name('web.resource.school_year.create');
     Route::patch('resource/school_year/{school_year}', 'SchoolYearController@update')->name('web.resource.school_year.update');
     Route::delete('resource/school_year/{school_year}', 'SchoolYearController@delete')->name('web.resource.school_year.delete');
@@ -282,4 +286,8 @@ Route::middleware(['authc.basic:welcome,administrator,employee'])->group(functio
     Route::patch('resource/academic_activity/{academic_activity}', 'AcademicActivityController@update')->name('web.resource.academic_activity.update');
     Route::delete('resource/academic_activity/{academic_activity}', 'AcademicActivityController@delete')->name('web.resource.academic_activity.delete');
     Route::delete('resource/academic_activity', 'AcademicActivityController@delete_any')->name('web.resource.academic_activity.delete_any');
+
+    Route::post('resource/answer', 'AnswerController@store')->name('web.resource.answer.create');
+    Route::patch('resource/answer/{answer}', 'AnswerController@update')->name('web.resource.answer.update');
+    Route::delete('resource/answer/{answer}', 'AnswerController@destroy')->name('web.resource.answer.delete');
 });

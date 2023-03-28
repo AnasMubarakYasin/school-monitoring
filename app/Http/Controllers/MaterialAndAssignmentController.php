@@ -12,7 +12,6 @@ class MaterialAndAssignmentController extends Controller
     public function create(StoreMaterialAndAssignmentRequest $request)
     {
         $this->authorize('create', MaterialAndAssignment::class);
-        $newName = '';
         $data = $request->validated();
         if ($request->file('file')) {
             $data['file'] = Storage::put("material_and_assigment", $request->file('file'));
@@ -23,17 +22,14 @@ class MaterialAndAssignmentController extends Controller
     public function update(UpdateMaterialAndAssignmentRequest $request, MaterialAndAssignment $materialAndAssignment)
     {
         $this->authorize('update', $materialAndAssignment);
-        if ($request->file('file')) {
-            $extension = $request->file('file')->getClientOriginalExtension();
-            $newName = $request->name . '-' . now()->timestamp . '.' . $extension;
-            $request->file('file')->storeAs('public/materialandassignment', $newName);
-
-            Storage::delete('public/materialandassignment/' . $materialAndAssignment->file);
-        } else {
-            $newName = $materialAndAssignment->file;
-        }
         $data = $request->validated();
-        $data['file'] = $newName;
+        if ($request->file('file')) {
+            $data['file'] = Storage::put("material_and_assigment", $request->file('file'));
+
+            Storage::delete("material_and_assigment", $materialAndAssignment->file);
+        } else {
+            $data['file'] = $materialAndAssignment->file;
+        }
         $materialAndAssignment->update($data);
         return redirect()->intended($request->input('_view_any'));
     }

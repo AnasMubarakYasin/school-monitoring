@@ -1,4 +1,4 @@
-<x-panel.layout :title="'list of presence'">
+<x-panel.layout :title="'update answer'">
     <x-slot:top_bar>
         <x-panel.top-bar>
 
@@ -14,5 +14,5 @@
 
                 </x-panel.bottom-bar>
                 </x-slot>
-                <x-resource.table :resource="$resource" :selection="false" :actions="['action.attendance']"></x-resource.table>
+                <x-resource.form :resource="$resource"></x-resource.form>
 </x-panel.layout>
