@@ -39,6 +39,10 @@ jobs:
         run: ssh remote "cd $wd; git restore ."
       - name: pull update
         run: ssh remote "cd $wd; git pull"
+      - name: clear log
+        run: ssh remote "cd $wd; truncate -s 0 storage/logs/laravel.log"
+      - name: clear storage
+        run: ssh remote "cd $wd; php artisan storage:clear"
       - name: install npm deps
         run: ssh remote "cd $wd; source $nvm; npm install"
       - name: build resources
@@ -53,4 +57,3 @@ jobs:
         run: ssh remote "cd $wd; php artisan up"
       - name: notify update to client
         run: ssh remote "cd $wd; php artisan app:notify-update-client"
-         
