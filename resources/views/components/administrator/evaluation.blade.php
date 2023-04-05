@@ -26,14 +26,19 @@
                 @foreach ($ScheduleOfSubjects::get_by_classroom($student->classroom->id) as $schedule_of_subjects)
                     @php
                         $subjects = $schedule_of_subjects->subjects()->first();
-                        $material_and_assignments = $MaterialAndAssignment::where('classroom_id', $student->classroom->id)->where('subjects_id', $subjects->id)->get();
+                        $material_and_assignments = $MaterialAndAssignment
+                            ::where('classroom_id', $student->classroom->id)
+                            ->where('subjects_id', $subjects->id)
+                            ->get();
                         $answers = 0;
                         foreach ($material_and_assignments as $material_and_assignment) {
                             $answer = $material_and_assignment
                                 ->answer()
                                 ->where('student_id', $student->id)
                                 ->first();
-                            if ($answer) $answers++;
+                            if ($answer && $answer->status == 'have been checked') {
+                                $answers++;
+                            }
                         }
                     @endphp
                     <div class="flex flex-col gap-1">
@@ -42,8 +47,7 @@
                             {{ $answers }}:{{ $material_and_assignments->count() }}/{{ $total }}
                         </div>
                         <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                            <div class="bg-blue-600 h-2.5 rounded-full"
-                                style="width: {{ ($answers / $total) * 100 }}%">
+                            <div class="bg-blue-600 h-2.5 rounded-full" style="width: {{ ($answers / $total) * 100 }}%">
                             </div>
                         </div>
                     </div>
