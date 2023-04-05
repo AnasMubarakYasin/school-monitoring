@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Panel\Account;
+namespace Dynamic\Account;
 
 class Context
 {

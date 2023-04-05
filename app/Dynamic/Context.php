@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Panel;
+namespace Dynamic\Panel;
 
-use App\Panel\Account\Context as AccountContext;
-use App\Panel\Contracts\Accountable;
+use Dynamic\Account\Context as AccountContext;
+use Dynamic\Contracts\Accountable;
 
 class Context
 {

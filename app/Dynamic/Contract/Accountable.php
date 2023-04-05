@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Panel\Contract;
+namespace Dynamic\Contract;
 
 interface Accountable
 {

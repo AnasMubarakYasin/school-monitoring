@@ -33,7 +33,7 @@ class AppUpdates extends Mailable
     {
         return new Envelope(
             from: new Address('bladerlaiga.97@gmail.com', 'Anas Mubarak Yasin'),
-            subject: "$this->updates->name New Updates v$this->updates->version",
+            subject: "{$this->updates->name} New Updates v{$this->updates->version}",
         );
     }
 

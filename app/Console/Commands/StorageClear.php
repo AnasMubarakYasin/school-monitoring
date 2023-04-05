@@ -12,7 +12,7 @@ class StorageClear extends Command
      *
      * @var string
      */
-    protected $signature = 'storage:clear';
+    protected $signature = 'storage-clear';
 
     /**
      * The console command description.

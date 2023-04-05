@@ -6,7 +6,7 @@ use App\Dynamic\Init;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 
-class StorageClear extends Command
+class AppInit extends Command
 {
     /**
      * The name and signature of the console command.

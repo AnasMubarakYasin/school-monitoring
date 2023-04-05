@@ -21,7 +21,7 @@ return [
     ],
     'stakeholder' => [
         'dev' => ['wm337708@gmail.com'],
-        'client' => ['unknonwkillerreaper@gmail.com'],
+        'client' => ['unknownkillerreaper@gmail.com'],
     ],
     'panel' => [
         Administrator::class => PanelAdministrator::class,

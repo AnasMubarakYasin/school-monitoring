@@ -2,7 +2,6 @@
 
 namespace App\Dynamic;
 
-use Error;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Process\Process;
 
