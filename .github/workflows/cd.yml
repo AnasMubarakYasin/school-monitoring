@@ -45,6 +45,10 @@ jobs:
         run: ssh remote "cd $wd; source $nvm; npm install"
       - name: build resources
         run: ssh remote "cd $wd; source $nvm; npm run build"
+      - name: remove pwa
+        run: ssh remote "cd $wd; source $nvm; node script pwa:remove"
+      - name: build pwa
+        run: ssh remote "cd $wd; source $nvm; node script pwa:build"
       - name: install composer deps
         run: ssh remote "cd $wd; composer i"
       - name: fresh migration
