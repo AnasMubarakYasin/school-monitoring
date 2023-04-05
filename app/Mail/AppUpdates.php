@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Dynamic\Updates;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -10,7 +11,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class AppNotifierUpdateClient extends Mailable
+class AppUpdates extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -19,9 +20,8 @@ class AppNotifierUpdateClient extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(public string $stakeholder, public Updates $updates)
     {
-        //
     }
 
     /**
@@ -31,11 +31,9 @@ class AppNotifierUpdateClient extends Mailable
      */
     public function envelope()
     {
-        $name = config('dynamic.application.name');
-        $num = config('dynamic.application.version');
         return new Envelope(
             from: new Address('bladerlaiga.97@gmail.com', 'Anas Mubarak Yasin'),
-            subject: "$name Update v$num",
+            subject: "$this->updates->name New Updates v$this->updates->version",
         );
     }
 
@@ -46,15 +44,16 @@ class AppNotifierUpdateClient extends Mailable
      */
     public function content()
     {
-        $name = config('dynamic.application.name');
-        $num = config('dynamic.application.version');
         return new Content(
-            markdown: 'emails.app.notifier-update-client',
+            markdown: 'emails.app.updates',
             with: [
-                'name' => $name,
-                'num' => $num,
-                'url' => env('APP_URL'),
-                'vendor' => config('dynamic.application.vendor_name'),
+                'name' => $this->updates->name,
+                'version' => $this->updates->version,
+                'last_version' => $this->updates->last_version,
+                'changes' => $this->updates->changes,
+                'link' => $this->updates->link,
+                'vendor' => $this->updates->vendor,
+                'stakeholder' => $this->stakeholder,
             ],
         );
     }

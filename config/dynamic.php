@@ -10,13 +10,18 @@ use App\Models\Student;
 return [
     'application' => [
         'name' => env('APP_NAME', 'Bladerlaiga'),
-        'version' => env('APP_VERSION', '0.2.9'),
+        'version' => env('APP_VER', '0.2.10'),
         'logo' => env('APP_LOGO', '/logo.png'),
-        'favicon' => env('APP_LOGO', '/favicon.ico'),
+        'favicon' => env('APP_FAV', '/favicon.ico'),
         'vendor_name' => 'Bladerlaiga',
-        'vendor_version' => '0.5.6',
+        'vendor_version' => '0.5.7',
         'vendor_year' => '2023',
         'vendor_logo' => '/logo.png',
+        'commit' => '99af12f',
+    ],
+    'stakeholder' => [
+        'dev' => ['wm337708@gmail.com'],
+        'client' => ['unknonwkillerreaper@gmail.com'],
     ],
     'panel' => [
         Administrator::class => PanelAdministrator::class,
