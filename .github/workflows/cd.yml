@@ -53,5 +53,6 @@ jobs:
         run: ssh remote "cd $wd; php artisan db:seed"
       - name: up application
         run: ssh remote "cd $wd; php artisan up"
-      - name: notify update to client
-        run: ssh remote "cd $wd; php artisan app:notify-update-client"
+      - name: notify update
+        run: ssh remote "cd $wd; php artisan app:notify-updates"
+         
