@@ -4,7 +4,6 @@ namespace App\Console\Commands;
 
 use App\Dynamic\Init;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Storage;
 
 class AppInit extends Command
 {
