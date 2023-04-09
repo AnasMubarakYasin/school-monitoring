@@ -83,7 +83,8 @@ class AnswerController extends Controller
         $this->authorize('update', $answer);
         $data = $request->validated();
         $answer->update($data);
-        return redirect()->intended($request->input('_view_any'));
+        // return redirect()->intended($request->input('_view_any'));
+        return redirect(route('web.employee.teacher.academic_data.materialandassignment.list'));
     }
 
     /**
