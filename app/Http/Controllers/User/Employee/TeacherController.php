@@ -180,9 +180,6 @@ class TeacherController extends Controller
     }
     public function answer()
     {
-        // $user = auth()->user()->id;
-        // $material_and_assignment = MaterialAndAssignment::where('teacher_id', $user)->first();
-        // dd($material_and_assignment);
         $resource = Answer::tableable()->from_request(
             request: request(),
             columns: [
@@ -200,7 +197,6 @@ class TeacherController extends Controller
         };
         $resource->init['filter_by_column'] = false;
         $resource->init['reference'] = '';
-        // $resource->filter = ['material_and_assignment' =>  $material_and_assignment->id];
         return view('pages.employee.teacher.answer.view', ['resource' => $resource]);
     }
     public function answer_update(Answer $answer)

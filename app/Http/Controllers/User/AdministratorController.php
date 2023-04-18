@@ -415,11 +415,11 @@ class AdministratorController extends Controller
             return route('web.administrator.data_master.classroom.list');
         };
         $resource->fetcher_relation = function ($definition) {
-            if ($definition->name == "major") {
-                return Major::all();
-            } else {
-                return Employee::all();
-            }
+            return match ($definition->name) {
+                "major" => Major::all(),
+                "students" => Student::all(),
+                default => Employee::all(),
+            };
         };
         return view('pages.administrator.classroom.create', ['resource' => $resource]);
     }
