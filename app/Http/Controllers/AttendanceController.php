@@ -30,8 +30,14 @@ class AttendanceController extends Controller
     }
     public function delete_any()
     {
+        $request = request();
         $this->authorize('delete_any', Attendance::class);
-        return abort(501);
+        if ($request->collect('id')->count() == Attendance::count()) {
+            Attendance::truncate();
+        } else {
+            Attendance::destroy($request->input('id', []));
+        }
+        return back();
     }
     public function restore(Attendance $attendance)
     {

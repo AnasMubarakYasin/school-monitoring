@@ -48,7 +48,7 @@ class PresenceController extends Controller
     {
         $request = request();
         $this->authorize('delete_any', Presence::class);
-        if ($request->input('all')) {
+        if ($request->collect('id')->count() == Presence::count()) {
             Presence::truncate();
         } else {
             Presence::destroy($request->input('id', []));
