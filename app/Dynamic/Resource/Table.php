@@ -88,8 +88,12 @@ class Table extends Resource
                 }
             }
         }
-        if ($this->id) {
-            $query->whereIn('id', $this->id);
+        if (!is_null($this->id)) {
+            if ($this->id) {
+                $query->whereIn('id', $this->id);
+            } else {
+                $query->whereIn('id', [0]);
+            }
         }
         if ($this->pagination) {
             /** @var LengthAwarePaginator */
