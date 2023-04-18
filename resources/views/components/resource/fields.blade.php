@@ -185,7 +185,74 @@
 
             @case('model')
                 @if ($model->definition($field)->array)
-                    <div> {{ trans($model->definition($field)->name) }} models </div>
+                    <script>
+                        models.push("{{ $model->definition($field)->alias }}");
+                    </script>
+                    {{-- <div> {{ trans($model->definition($field)->name) }} models </div> --}}
+                    <div class="flex flex-col gap-2 {{ $resource->hidden($field) }}">
+                        <label for="{{ $model->definition($field)->alias }}"
+                            class="capitalize text-sm font-medium text-gray-900 dark:text-white">
+                            {{ trans($model->definition($field)->name) }}
+                        </label>
+                        <div class="flex items-center gap-2">
+                            <div class="relative w-full">
+                                <input type="text" list="{{ $model->definition($field)->alias }}_dlist" multiple
+                                    autocomplete="off" id="{{ $model->definition($field)->alias }}_box"
+                                    name="{{ $model->definition($field)->alias }}_box"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="{{ trans($model->definition($field)->name) }}">
+                                <datalist id="{{ $model->definition($field)->alias }}_dlist">
+                                    @foreach ($resource->fetch_relation($model->definition($field)) as $relation)
+                                        <option value="{{ $relation->id }}">{{ $relation->name }}</option>
+                                    @endforeach
+                                </datalist>
+                            </div>
+                            <button type="button" id="{{ $model->definition($field)->alias }}_add"
+                                class="p-2.5 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6">
+                                    </path>
+                                </svg>
+                                <span class="sr-only">add</span>
+                            </button>
+                        </div>
+                        @error($model->definition($field)->alias)
+                            <p class="text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
+                        @enderror
+                        <div class="divide-y divide-gray-100 dark:divide-gray-600 w-full"></div>
+                        <ul id="{{ $model->definition($field)->alias }}_list" class="flex flex-col gap-2">
+                            {{-- @dd($model->{$field}) --}}
+                            @foreach (old("{$model->definition($field)->alias}") ?? $model->{$field} as $value)
+                                @php
+                                    if (is_object($value)) {
+                                        $value = $value->id;
+                                    }
+                                @endphp
+                                <li class="flex items-center gap-2">
+                                    <div class="relative w-full">
+                                        <input type="text"
+                                            id="{{ $model->definition($field)->alias }}_{{ $loop->iteration }}"
+                                            name="{{ $model->definition($field)->alias }}[]" value="{{ $value }}"
+                                            class="block w-full p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            required>
+                                    </div>
+                                    <button type="button"
+                                        id="{{ $model->definition($field)->alias }}_{{ $loop->iteration }}_del"
+                                        class="p-2.5 text-sm font-medium text-white bg-red-700 rounded-lg border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M20 12H4">
+                                            </path>
+                                        </svg>
+                                        <span class="sr-only">delete</span>
+                                    </button>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
                 @else
                     <div class="flex flex-col gap-2 {{ $resource->hidden($field) }}">
                         <label for="{{ $model->definition($field)->alias }}"
@@ -193,7 +260,8 @@
                             {{ trans($model->definition($field)->name) }}
                         </label>
                         <input type="text" list="{{ $model->definition($field)->alias }}_list" multiple
-                            id="{{ $model->definition($field)->alias }}" name="{{ $model->definition($field)->alias }}"
+                            autocomplete="off" id="{{ $model->definition($field)->alias }}"
+                            name="{{ $model->definition($field)->alias }}"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="{{ trans($model->definition($field)->name) }}"
                             value="{{ old($model->definition($field)->alias) ?? $model->{$model->definition($field)->alias} }}">
