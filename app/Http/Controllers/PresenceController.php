@@ -31,10 +31,10 @@ class PresenceController extends Controller
     }
     public function attendance(Request $request, Presence $presence)
     {
+        $presence->meet = $request->input("meet");
+        $presence->save();
         foreach ($request->input("attendances") as $id => $value) {
-            if (!is_null($value)) {
-                Attendance::find($id)->update(["state" => $value == "on" ? "present" : "unpresent"]);
-            }
+            Attendance::find($id)->update(["state" => $value]);
         }
         return back();
     }

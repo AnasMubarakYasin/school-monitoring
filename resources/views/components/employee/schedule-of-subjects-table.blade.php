@@ -1,6 +1,13 @@
 <div class="overflow-x-auto pb-2 rounded-lg">
     <table id="table"
         class="w-full text-sm text-left text-gray-500 dark:text-gray-400 bg-gray-300 dark:bg-gray-900 border border-separate border-spacing-0.5 dark:border-gray-700 rounded-lg shadow-md dark:shadow-none">
+        <caption
+            class="px-4 py-2 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+            <div>Schedule of Subjects</div>
+            <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">
+                List of Schedule of Subjects
+            </p>
+        </caption>
         <thead>
             <tr class="text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <th rowspan="2" scope="col" class="p-3 text-base capitalize">

@@ -5,6 +5,7 @@ namespace App\View\Components\Employee;
 use App\Models\Employee;
 use App\Models\ScheduleOfSubjects;
 use App\Models\Student;
+use App\Models\StudentParent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
 
@@ -33,6 +34,8 @@ class ScheduleOfSubjectsTable extends Component
             $resource = ScheduleOfSubjects::with('subjects', 'classrooms')->where('class_id', $user->classroom_id)->get();
         } else if ($user::class == Employee::class) {
             $resource = ScheduleOfSubjects::with('subjects', 'classrooms')->where('teacher_id', $user->id)->get();
+        } else if ($user::class == StudentParent::class) {
+            $resource = ScheduleOfSubjects::with('subjects', 'classrooms')->where('class_id', $user->student()->first()->classroom_id)->get();
         }
         return view('components.employee.schedule-of-subjects-table', ['resource' => $resource, 'authUser' => $authUser]);
     }

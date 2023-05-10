@@ -18,6 +18,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->string('name')->unique();
+            $table->string('meet')->default(0);
 
             $table->foreignId('school_year_id')->constrained('school_years')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('semester_id')->constrained('semesters')->cascadeOnUpdate()->cascadeOnDelete();

@@ -28,6 +28,10 @@ class Presence extends Model
                 name: 'name',
                 type: 'string',
             ),
+            'meet' => new Definition(
+                name: 'meet',
+                type: 'number',
+            ),
             'school_year' => new Definition(
                 name: 'school year',
                 type: 'model',
@@ -128,6 +132,7 @@ class Presence extends Model
 
     protected $fillable = [
         'name',
+        'meet',
 
         'school_year_id',
         'semester_id',
