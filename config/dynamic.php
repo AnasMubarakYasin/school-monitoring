@@ -3,9 +3,11 @@
 use App\Dynamic\Panel\Administrator as PanelAdministrator;
 use App\Dynamic\Panel\Employee as PanelEmployee;
 use App\Dynamic\Panel\Student as PanelStudent;
+use App\Dynamic\Panel\StudentParent as PanelStudentParent;
 use App\Models\Administrator;
 use App\Models\Employee;
 use App\Models\Student;
+use App\Models\StudentParent;
 
 return [
     'application' => [
@@ -27,6 +29,7 @@ return [
         Administrator::class => PanelAdministrator::class,
         Employee::class => PanelEmployee::class,
         Student::class => PanelStudent::class,
+        StudentParent::class => PanelStudentParent::class,
     ],
     'entry' => [
         'enable_demo' => true,
@@ -53,6 +56,15 @@ return [
             ],
             Student::class => [
                 'name' => 'student',
+                'index' =>  '',
+                'dashboard' =>  '',
+                'webmanifest' => '',
+                'logo' => '',
+                'favicon' => '',
+                'route' => [],
+            ],
+            StudentParent::class => [
+                'name' => 'student_parent',
                 'index' =>  '',
                 'dashboard' =>  '',
                 'webmanifest' => '',

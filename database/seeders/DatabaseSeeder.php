@@ -17,6 +17,7 @@ use App\Models\ScheduleOfSubjects;
 use App\Models\SchoolYear;
 use App\Models\Semester;
 use App\Models\Student;
+use App\Models\StudentParent;
 use App\Models\Subjects;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
@@ -335,6 +336,50 @@ class DatabaseSeeder extends Seeder
                 'grade' => 11,
                 'major_id' => $major_ips->id,
                 'classroom_id' => $classroom_11_a->id,
+            ]);
+
+        // StudentParent::factory()
+        //     ->create([
+        //         'name' => 'parent',
+        //         'password' => 'parent',
+        //         'student_id' => 1,
+        //     ]);
+
+        $student_parent_10_a_1 = StudentParent::factory()
+            ->create([
+                'name' => '10_a_1',
+                'password' => '10_a_1',
+                'student_id' => $student_10_a_1->id,
+            ]);
+        $student_parent_10_a_2 = StudentParent::factory()
+            ->create([
+                'name' => '10_a_2',
+                'password' => '10_a_2',
+                'student_id' => $student_10_a_2->id,
+            ]);
+        $student_parent_10_b_1 = StudentParent::factory()
+            ->create([
+                'name' => '10_b_1',
+                'password' => '10_b_1',
+                'student_id' => $student_10_b_1->id,
+            ]);
+        $student_parent_10_b_2 = StudentParent::factory()
+            ->create([
+                'name' => '10_b_2',
+                'password' => '10_b_2',
+                'student_id' => $student_10_b_2->id,
+            ]);
+        $student_parent_11_a_1 = StudentParent::factory()
+            ->create([
+                'name' => '11_a_1',
+                'password' => '11_a_1',
+                'student_id' => $student_11_a_1->id,
+            ]);
+        $student_parent_11_a_2 = StudentParent::factory()
+            ->create([
+                'name' => '11_a_2',
+                'password' => '11_a_2',
+                'student_id' => $student_11_a_2->id,
             ]);
 
         // $students_kimia_10 = Student::factory()

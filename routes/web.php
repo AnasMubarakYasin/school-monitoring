@@ -179,7 +179,7 @@ Route::middleware(['authc.basic:welcome,employee'])->group(function () {
     });
 });
 /** !SECTION - Employee */
-/** SECTION - Employee */
+/** SECTION - Student */
 Route::redirect('/student', '/student/dashboard');
 Route::middleware('authc.guest:web.student.dashboard,student')->group(function () {
     Route::middleware('locale:en')->group(function () {
@@ -210,8 +210,28 @@ Route::middleware(['authc.basic:welcome,student'])->group(function () {
         // Route::get('student/presence/list', 'User\StudentController@presence_list')->name('web.student.presence.list');
     });
 });
-/** !SECTION - Employee */
-Route::middleware(['authc.basic:welcome,administrator,employee,student'])->group(function () {
+/** !SECTION - Student */
+/** SECTION - Student Parent */
+Route::redirect('/student_parent', '/student_parent/dashboard');
+Route::middleware('authc.guest:web.student_parent.dashboard,student_parent')->group(function () {
+    Route::middleware('locale:en')->group(function () {
+        Route::get('student_parent/login', 'Auth\StudentParentController@login_show')->name('web.student_parent.login_show');
+    });
+    Route::post('student_parent/login', 'Auth\StudentParentController@login_perfom')->name('web.student_parent.login_perform');
+});
+Route::middleware(['authc.basic:welcome,student_parent'])->group(function () {
+    Route::middleware(['locale', 'view.share'])->group(function () {
+        Route::get('student_parent/dashboard', 'User\StudentParentController@dashboard')->name('web.student_parent.dashboard');
+        Route::get('student_parent/profile', 'User\StudentParentController@profile')->name('web.student_parent.profile');
+        Route::get('student_parent/notification', 'User\StudentParentController@notification')->name('web.student_parent.notification');
+        Route::get('student_parent/offline', 'User\StudentParentController@offline')->name('web.student_parent.offline');
+        Route::get('student_parent/empty', 'User\StudentParentController@empty')->name('web.student_parent.empty');
+        Route::get('student_parent/logout', 'Auth\StudentParentController@logout_perfom')->name('web.student_parent.logout_perfom');
+        Route::get('student_parent/about', 'User\StudentParentController@empty')->name('web.student_parent.about');
+    });
+});
+/** !SECTION - Student Parent */
+Route::middleware(['authc.basic:welcome,administrator,employee,student,student_parent'])->group(function () {
     Route::post('resource/school_year', 'SchoolYearController@create')->name('web.resource.school_year.create');
     Route::patch('resource/school_year/{school_year}', 'SchoolYearController@update')->name('web.resource.school_year.update');
     Route::delete('resource/school_year/{school_year}', 'SchoolYearController@delete')->name('web.resource.school_year.delete');

@@ -62,6 +62,15 @@ class Landing
                 ],
                 'demo' => true,
             ],
+            'student_parent' => [
+                'name' => 'Parent',
+                'login' => route('web.student_parent.login_perform'),
+                'user' => [
+                    'name' => '10_a_1',
+                    'password' => '10_a_1',
+                ],
+                'demo' => true,
+            ],
         ];
     }
 }
