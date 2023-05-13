@@ -57,7 +57,7 @@ class Employee extends Panel
                       ',
                 ),
                 new Menu(
-                    name: "Presence",
+                    name: "presence",
                     link: route('web.employee.teacher.presence.list'),
                     pname: "view_any",
                     pclass: Presence::class,

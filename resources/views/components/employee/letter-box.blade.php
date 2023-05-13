@@ -6,14 +6,14 @@
                 d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
         </svg>
     </div>
-    <div class="col-span-2 grid content-around">
+    <div class="col-span-2 grid content-around capitalize">
         <div>
             <small>{{ trans('letter of information') }}</small>
         </div>
         <button data-modal-target="modal-surat-keterangan" data-modal-toggle="modal-surat-keterangan"
-            class="w-max block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            class="w-max block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 capitalize"
             type="button">
-            add letter
+            {{ trans('add letter') }}
         </button>
     </div>
 </div>
@@ -25,14 +25,14 @@
                 d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
         </svg>
     </div>
-    <div class="col-span-2 grid content-around">
+    <div class="col-span-2 grid content-around capitalize">
         <div>
             <small>{{ trans('letter of recommendation') }}</small>
         </div>
         <button data-modal-target="modal-surat-rekomendasi" data-modal-toggle="modal-surat-rekomendasi"
-            class="w-max block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            class="w-max block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 capitalize"
             type="button">
-            add letter
+            {{ trans('add letter') }}
         </button>
     </div>
 </div>
@@ -44,7 +44,7 @@
                 d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
         </svg>
     </div>
-    <div class="col-span-2 grid content-around">
+    <div class="col-span-2 grid content-around capitalize">
         <div>
             <small>{{ trans('student return letter') }}</small>
         </div>
@@ -52,9 +52,9 @@
             class="w-max p-1 px-2 font-normal rounded-lg bg-blue-500 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">add
             letter</a> --}}
         <button data-modal-target="modal-surat-pengembalian" data-modal-toggle="modal-surat-pengembalian"
-            class="w-max block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            class="w-max block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 capitalize"
             type="button">
-            add letter
+            {{ trans('add letter') }}
         </button>
     </div>
 </div>

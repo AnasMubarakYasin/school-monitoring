@@ -19,7 +19,7 @@
         <span class="capitalize">{{ trans('students') }}</span>
         <div>
             <span class="font-bold">{{ $student }}</span>
-            <small>{{ trans('person') }}</small>
+            <small class="capitalize">{{ trans('person') }}</small>
         </div>
     </div>
 </a>
@@ -35,7 +35,7 @@
         <span class="capitalize">{{ trans('academic activities') }}</span>
         <div>
             <span class="font-bold">{{ $academicactivity }}</span>
-            <small>{{ trans('person') }}</small>
+            <small class="capitalize">{{ trans('activity') }}</small>
         </div>
     </div>
 </a>
@@ -51,7 +51,7 @@
         <span class="capitalize">{{ trans('educators and employees') }}</span>
         <div>
             <span class="font-bold">{{ $teacher }}</span>
-            <small>{{ trans('person') }}</small>
+            <small class="capitalize">{{ trans('person') }}</small>
         </div>
     </div>
 </a>
@@ -68,7 +68,7 @@
         <span class="capitalize font-medium text-gray-800 dark:text-gray-100">{{ trans('visitors today') }}</span>
         <div>
             <span class="font-bold">{{ $visitors }}</span>
-            <small class="text-gray-900 dark:text-gray-100 font-medium">{{ trans('user') }}</small>
+            <small class="text-gray-900 dark:text-gray-100 font-medium capitalize">{{ trans('user') }}</small>
         </div>
     </div>
 </a>
