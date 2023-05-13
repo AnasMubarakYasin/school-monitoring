@@ -12,7 +12,7 @@ use App\Models\StudentParent;
 return [
     'application' => [
         'name' => env('APP_NAME', 'Bladerlaiga'),
-        'version' => env('APP_VER', '0.3.0'),
+        'version' => env('APP_VER', '0.3.1'),
         'logo' => env('APP_LOGO', '/logo.png'),
         'favicon' => env('APP_FAV', '/favicon.ico'),
         'vendor_name' => 'Bladerlaiga',
