@@ -2,7 +2,7 @@
 # Application New Updates!
 
 Dear {{ $stakeholder }}.  
-The {{ $name }} v{{ $last_version }} was update to v{{ $version }}.  
+The {{ $name }} **v{{ $last_version }}** was update to **v{{ $version }}**.  
 You can see **[here]({{ $link }})**.
 
 ## What's Changes
