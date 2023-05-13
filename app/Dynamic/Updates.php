@@ -16,6 +16,8 @@ class Updates
     public string $changes;
     public string $vendor;
     public string $link;
+    public string $date_inited;
+    public string $date_updated;
     public function __construct()
     {
         $this->name = config('dynamic.application.name');
@@ -43,10 +45,14 @@ class Updates
         if (!$this->last_version) {
             throw new Error("last version empty");
         }
+        $this->date_inited = Storage::disk('local')->get(".date_inited");
+        $this->date_updated = Storage::disk('local')->get(".date_updated");
     }
     public function save()
     {
+        $this->date_updated = now();
         Storage::disk('local')->put(".last_commit", "$this->commit");
         Storage::disk('local')->put(".last_version", "$this->version");
+        Storage::disk('local')->put(".date_updated", "$this->date_updated");
     }
 }

@@ -66,12 +66,42 @@
                     <hr>
                     <div class="flex flex-col gap-2">
                         <div class="text-base font-medium text-gray-600">
+                            App Date
+                        </div>
+                        <div class="w-max text-base font-normal text-black">
+                            <div class="grid grid-cols-[min-content_auto] grid-rows-2 gap-x-2">
+                                <div>Inited:</div>
+                                <div>{{ $updates->date_inited }}</div>
+                                <div>Updated:</div>
+                                <div>{{ $updates->date_updated }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="flex flex-col gap-2">
+                        <div class="text-base font-medium text-gray-600">
                             App Deployment
                         </div>
                         <div class="text-base font-normal text-black">
-                            <a href="https://github.com/AnasMubarakYasin/school-monitoring/actions/workflows/cd.yml" class="inline">
-                                <img src="https://github.com/AnasMubarakYasin/school-monitoring/actions/workflows/cd.yml/badge.svg" alt="">
+                            <a href="https://github.com/AnasMubarakYasin/school-monitoring/actions/workflows/cd.yml"
+                                class="inline">
+                                <img src="https://github.com/AnasMubarakYasin/school-monitoring/actions/workflows/cd.yml/badge.svg"
+                                    alt="">
                             </a>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="flex flex-col gap-2">
+                        <div class="text-base font-medium text-gray-600">
+                            App Changelog
+                        </div>
+                        <div class="text-base font-normal text-black">
+                            <details>
+                                <summary>Show</summary>
+                                <pre class="text-sm">
+                                    {{ "\n" . $updates->changes }}
+                                </pre>
+                            </details>
                         </div>
                     </div>
                 </div>
@@ -114,7 +144,7 @@
                                     </div>
                                     <div class="grid gap-2">
                                         @foreach ($user['users'] as $item)
-                                            <a href="{{ $user['login'] . ($user['demo'] ? '?demo=true&role='.$item['role'] : '?role='.$item['role']) }}"
+                                            <a href="{{ $user['login'] . ($user['demo'] ? '?demo=true&role=' . $item['role'] : '?role=' . $item['role']) }}"
                                                 class="text-sm font-medium text-gray-700 hover:text-gray-800">
                                                 {{ $item['role'] }}
                                             </a>
