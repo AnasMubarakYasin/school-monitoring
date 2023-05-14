@@ -2,24 +2,24 @@
     <table id="table"
         class="w-full text-sm text-left text-gray-500 dark:text-gray-400 bg-gray-300 dark:bg-gray-900 border border-separate border-spacing-0.5 dark:border-gray-700 rounded-lg shadow-md dark:shadow-none">
         <caption
-            class="px-4 py-2 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-            <div>Schedule of Subjects</div>
-            <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">
-                List of Schedule of Subjects
+            class="px-4 py-2 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800 capitalize">
+            <div>{{ trans('schedule of subjects') }}</div>
+            <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400 capitalize">
+                {{ trans('list of schedule of subjects') }}
             </p>
         </caption>
         <thead>
             <tr class="text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <th rowspan="2" scope="col" class="p-3 text-base capitalize">
-                    <div class="flex items-center w-full h-full">
+                    <div class="flex items-center w-full h-full justify-center">
                         <span>no</span>
                     </div>
                 </th>
 
                 @if ($authUser == App\Models\Employee::class)
                     <th rowspan="2" scope="col" class="p-3 text-base capitalize">
-                        <div class="flex items-center w-full h-full">
-                            <span>classrooms</span>
+                        <div class="flex items-center w-full h-full justify-center">
+                            <span>{{ trans('classrooms') }}</span>
 
                         </div>
                     </th>
@@ -27,54 +27,54 @@
 
                 <th colspan="2" scope="col" class="p-3 text-base capitalize">
                     <div class="flex items-center justify-center w-full h-full">
-                        <span>subjects</span>
+                        <span>{{ trans('subjects') }}</span>
                     </div>
                 </th>
                 <th colspan="6" scope="col" class="p-3 text-base capitalize">
                     <div class="flex items-center justify-center w-full h-full">
-                        <span>schedule</span>
+                        <span>{{ trans('schedule') }}</span>
                     </div>
                 </th>
             </tr>
             <tr class="text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <td scope="col" class="p-3 text-base capitalize">
-                    <div class="flex items-center w-full h-full">
-                        <span>code</span>
+                    <div class="flex items-center w-full h-full justify-center">
+                        <span>{{ trans('code') }}</span>
                     </div>
                 </td>
                 <td scope="col" class="p-3 text-base capitalize">
-                    <div class="flex items-center w-full h-full">
-                        <span>name</span>
+                    <div class="flex items-center w-full h-full justify-center">
+                        <span>{{ trans('name') }}</span>
                     </div>
                 </td>
                 <td scope="col" class="p-3 text-base capitalize">
-                    <div class="flex items-center w-full h-full">
-                        <span>monday</span>
+                    <div class="flex items-center w-full h-full justify-center">
+                        <span>{{ trans('monday') }}</span>
                     </div>
                 </td>
                 <td scope="col" class="p-3 text-base capitalize">
-                    <div class="flex items-center w-full h-full">
-                        <span>tuesday</span>
+                    <div class="flex items-center w-full h-full justify-center">
+                        <span>{{ trans('tuesday') }}</span>
                     </div>
                 </td>
                 <td scope="col" class="p-3 text-base capitalize">
-                    <div class="flex items-center w-full h-full">
-                        <span>wednesday</span>
+                    <div class="flex items-center w-full h-full justify-center">
+                        <span>{{ trans('wednesday') }}</span>
                     </div>
                 </td>
                 <td scope="col" class="p-3 text-base capitalize">
-                    <div class="flex items-center w-full h-full">
-                        <span>thursday</span>
+                    <div class="flex items-center w-full h-full justify-center">
+                        <span>{{ trans('thursday') }}</span>
                     </div>
                 </td>
                 <td scope="col" class="p-3 text-base capitalize">
-                    <div class="flex items-center w-full h-full">
-                        <span>friday</span>
+                    <div class="flex items-center w-full h-full justify-center">
+                        <span>{{ trans('friday') }}</span>
                     </div>
                 </td>
                 <td scope="col" class="p-3 text-base capitalize">
-                    <div class="flex items-center w-full h-full">
-                        <span>saturday</span>
+                    <div class="flex items-center w-full h-full justify-center">
+                        <span>{{ trans('saturday') }}</span>
                     </div>
                 </td>
             </tr>

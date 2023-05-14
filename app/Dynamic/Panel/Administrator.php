@@ -58,7 +58,7 @@ class Administrator extends Panel
                         pclass: SchoolInformation::class,
                     ),
                     new Menu(
-                        name: "facility and infrastrukture",
+                        name: "facility and infrastructure",
                         link: route('web.administrator.data_master.facilityandinfrastructure.list'),
                         pname: "view_any",
                         pclass: FacilityAndInfrastructure::class,

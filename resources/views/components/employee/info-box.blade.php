@@ -13,7 +13,7 @@
     <div class="col-span-2 grid content-around">
         <span class="font-bold text-[30px]">{{ $scheduleofsubject }}</span>
         <div>
-            <small>{{ trans('schedule of subjects') }}</small>
+            <small class="capitalize">{{ trans('schedule of subjects') }}</small>
         </div>
     </div>
 </a>
@@ -28,7 +28,7 @@
     <div class="col-span-2 grid content-around">
         <span class="font-bold text-[30px]">{{ $materialandassignment }}</span>
         <div>
-            <small>{{ trans('material and assignment') }}</small>
+            <small class="capitalize">{{ trans('material and assignment') }}</small>
         </div>
     </div>
 </a>

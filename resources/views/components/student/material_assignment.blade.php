@@ -8,10 +8,10 @@
     <table id="table"
         class="w-full text-sm text-left text-gray-500 dark:text-gray-400 bg-gray-300 dark:bg-gray-900 border border-separate border-spacing-0.5 dark:border-gray-700 shadow-md dark:shadow-none">
         <caption
-            class="px-4 py-2 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-            <div>Assignments</div>
-            <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">
-                List of Assignments Student
+            class="px-4 py-2 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800 capitalize">
+            <div>{{ trans('assignment') }}</div>
+            <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400 capitalize">
+                {{ trans('list of assignment student') }}
             </p>
         </caption>
         <thead>
@@ -20,10 +20,10 @@
                     no
                 </th>
                 <th rowspan="2" scope="col" class="p-2 text-base text-center capitalize">
-                    subjects
+                    {{ trans('subjects') }}
                 </th>
                 <th colspan="16" scope="col" class="p-2 text-base text-center capitalize">
-                    meeting
+                    {{ trans('meeting') }}
                 </th>
             </tr>
             <tr class="text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

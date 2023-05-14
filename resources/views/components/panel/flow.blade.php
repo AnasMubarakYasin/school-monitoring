@@ -3,7 +3,7 @@
 @endphp
 <div class="grid gap-2">
     <div class="grid gap-2">
-        <div class="text-gray-900 font-medium dark:text-gray-300">{{ trans('Flow') }}</div>
+        <div class="text-gray-900 font-medium dark:text-gray-300 capitalize">{{ trans('flow') }}</div>
         @if ($flow->meet_maximum_requirement())
             <div class="flex p-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
                 role="alert">
@@ -51,7 +51,7 @@
         @endif
     </div>
     <div class="grid gap-2">
-        <div class="text-gray-900 font-medium dark:text-gray-300">{{ trans('Steps') }}</div>
+        <div class="text-gray-900 font-medium dark:text-gray-300 capitalize">{{ trans('steps') }}</div>
         <ol class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {{-- @dd($requirements) --}}
             @foreach ($requirements as $key => $requirement)
