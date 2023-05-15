@@ -13,6 +13,7 @@ class Updates
     public string $last_version;
     public string $commit;
     public string $last_commit;
+    public string $last_commit2;
     public string $changes;
     public string $vendor;
     public string $link;
@@ -26,6 +27,9 @@ class Updates
     }
     public function generate_changes()
     {
+        if ($this->commit == $this->last_commit) {
+            $this->last_commit = $this->last_commit2;
+        }
         $git_log = new Process(['git', 'log', '--pretty=- %s', "$this->commit...$this->last_commit"], "./");
         $git_log->run();
         $this->changes = trim($git_log->getOutput());
@@ -39,6 +43,10 @@ class Updates
         $this->last_commit = Storage::disk('local')->get(".last_commit");
         if (!$this->last_commit) {
             throw new Error("last commit empty");
+        }
+        $this->last_commit2 = Storage::disk('local')->get(".last_commit2");
+        if (!$this->last_commit2) {
+            throw new Error("last commit 2 empty");
         }
         $this->version = config('dynamic.application.version');
         $this->last_version = Storage::disk('local')->get(".last_version");
