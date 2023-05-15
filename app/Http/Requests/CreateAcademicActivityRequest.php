@@ -28,7 +28,6 @@ class CreateAcademicActivityRequest extends FormRequest
             'duration' => 'required|string',
             'executive' => 'required|string',
             'type' => 'required|string',
-            'date' => 'required|date',
             'start_at' => 'required|string',
             'end_at' => 'required|string',
             'description' => 'nullable|string',

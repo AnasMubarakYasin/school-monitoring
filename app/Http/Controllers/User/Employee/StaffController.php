@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User\Employee;
 
 use App\Http\Controllers\Controller;
+use App\Models\Employee;
 
 class StaffController extends Controller
 {
@@ -12,7 +13,18 @@ class StaffController extends Controller
     }
     public function profile()
     {
-        return view('pages.employee.staff.profile');
+        $resource = Employee::formable()->from_update(
+            model: auth()->user(),
+            fields: [
+                'photo', 'name', 'telp', 'email',
+                'nip',
+                'fullname',
+                'gender',
+                'state',
+                'task',
+            ],
+        );
+        return view('pages.employee.staff.profile', ['resource' => $resource]);
     }
     public function notification()
     {

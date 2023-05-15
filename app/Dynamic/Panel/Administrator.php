@@ -179,6 +179,14 @@ class Administrator extends Panel
     {
         return route('web.administrator.profile');
     }
+    public function profile_update()
+    {
+        return "";
+    }
+    public function change_password()
+    {
+        return route("web.administrator.change_password");
+    }
     public function notifications()
     {
         return route('web.administrator.notification');

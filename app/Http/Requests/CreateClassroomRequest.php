@@ -30,7 +30,6 @@ class CreateClassroomRequest extends FormRequest
             'description' => 'nullable|string',
 
             'major_id' => 'required|integer',
-            'students_id' => 'required|array',
             'students_id.*' => 'required|integer|distinct|min:1',
             'homeroom_id' => 'required|integer',
         ];

@@ -14,7 +14,7 @@
 
         </x-panel.bottom-bar>
     </x-slot>
-    <div class="grid gap-4">
+    <div class="grid gap-4 p-4">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <x-student.info-box :academicactivity="$academicactivity" :scheduleofsubject="$scheduleofsubject" :materialandassignment="$materialandassignment"></x-student.info-box>
         </div>

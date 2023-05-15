@@ -29,7 +29,7 @@ class Employee extends Authenticatable
         self::$definitions = [
             'photo' => new Definition(
                 name: 'photo',
-                type: 'string',
+                type: 'file:image',
             ),
             'name' => new Definition(
                 name: 'name',

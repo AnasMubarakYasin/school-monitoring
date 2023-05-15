@@ -55,6 +55,33 @@
                 </div>
             @break
 
+            @case('file:image')
+                <div class="flex gap-4 {{ $resource->hidden($field) }}">
+                    <div
+                        class="grid place-content-center h-full aspect-square bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg">
+                        @if ($model->{$field})
+                            <img id="photo_preview" class="w-[9rem] aspect-square object-cover object-center text-gray-400"
+                                src="{{ $model->{$field."_url"} }}" alt="">
+                        @else
+                            <svg id="photo_preview" class="w-full aspect-square text-gray-400" fill="currentColor"
+                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                                    clip-rule="evenodd">
+                                </path>
+                            </svg>
+                        @endif
+                    </div>
+                    <div class="flex flex-col gap-2 self-end">
+                        <label for="{{ $field }}" class="text-sm font-medium text-gray-900 dark:text-white">
+                            {{ trans($model->definition($field)->name) }}
+                        </label>
+                        <input
+                            class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                            id="{{ $field }}" name="{{ $field }}" type="file" accept="image/*">
+                    </div>
+                </div>
+            @break
+
             @case('boolean')
                 <div class="flex flex-col gap-2 {{ $resource->hidden($field) }}">
                     <label class="relative flex items-center gap-2 cursor-pointer">

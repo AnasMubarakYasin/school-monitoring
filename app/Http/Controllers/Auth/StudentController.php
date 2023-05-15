@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SignInAdministratorRequest;
+use App\Models\Student;
 use Illuminate\Support\Arr;
 
 class StudentController extends Controller

@@ -15,7 +15,7 @@ class ClassroomController extends Controller
         $data = $request->validated();
         /** @var Classroom */
         $classroom = Classroom::create($data);
-        Student::whereIn('id', array_values($data['students_id']))->update(['classroom_id' => $classroom->id]);
+        isset($data['students_id']) && Student::whereIn('id', array_values($data['students_id']))->update(['classroom_id' => $classroom->id]);
         return redirect()->intended($request->input('_view_any'));
     }
     public function update(UpdateClassroomRequest $request, Classroom $classroom)
@@ -23,7 +23,11 @@ class ClassroomController extends Controller
         $this->authorize('update', $classroom);
         $data = $request->validated();
         $classroom->update($data);
-        Student::whereIn('id', array_values($data['students_id']))->update(['classroom_id' => $classroom->id]);
+        $students = $classroom->students()->get()->map(fn ($student) => $student->id)->toArray();
+        $new_students = $data['students_id'] ?? [];
+        Student::whereIn('id', array_values(array_diff($students, $new_students)))->update(['classroom_id' => null]);
+        Student::whereIn('id', array_values(array_diff($new_students, $students)))->update(['classroom_id' => $classroom->id]);
+        // dd($data, $students, $new_students, array_diff($students, $new_students), array_diff($new_students, $students));
         return redirect()->intended($request->input('_view_any'));
     }
     public function delete(Classroom $classroom)

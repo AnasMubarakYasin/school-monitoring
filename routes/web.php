@@ -32,6 +32,7 @@ Route::middleware('authc.guest:web.administrator.dashboard,administrator')->grou
     Route::post('administrator/login', 'Auth\AdministratorController@login_perfom')->name('web.administrator.login_perform');
 });
 Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
+    Route::post('administrator/change_password', 'Auth\AdministratorController@change_password')->name('web.administrator.change_password');
     Route::middleware(['locale', 'view.share', 'visitor.visit'])->group(function () {
         Route::get('administrator/dashboard', 'User\AdministratorController@dashboard')->name('web.administrator.dashboard');
         Route::get('administrator/profile', 'User\AdministratorController@profile')->name('web.administrator.profile');
@@ -129,6 +130,7 @@ Route::middleware('authc.guest:web.employee.index,employee')->group(function () 
     Route::post('employee/login', 'Auth\EmployeeController@login_perfom')->name('web.employee.login_perform');
 });
 Route::middleware(['authc.basic:welcome,employee'])->group(function () {
+    Route::post('employee/change_password', 'Auth\EmployeeController@change_password')->name('web.employee.change_password');
     Route::middleware(['locale', 'view.share', 'visitor.visit'])->group(function () {
         Route::get('employee/entry', 'Auth\EmployeeController@entry')->name('web.employee.entry');
         Route::get('employee/logout', 'Auth\EmployeeController@logout_perfom')->name('web.employee.logout_perfom');

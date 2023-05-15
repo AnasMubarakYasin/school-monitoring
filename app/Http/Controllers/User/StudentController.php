@@ -35,7 +35,18 @@ class StudentController extends Controller
     }
     public function profile()
     {
-        return view('pages.student.profile');
+        $resource = Student::formable()->from_update(
+            model: auth()->user(),
+            fields: [
+                'photo', 'name', 'telp', 'email',
+                'nis',
+                'nisn',
+                'fullname',
+                'gender',
+                'grade',
+            ],
+        );
+        return view('pages.student.profile', ['resource' => $resource]);
     }
     public function notification()
     {

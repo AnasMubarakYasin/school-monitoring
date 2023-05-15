@@ -96,6 +96,14 @@ class Employee extends Panel
         $tag = $this->get_tag();
         return route("web.employee.$tag.profile");
     }
+    public function profile_update()
+    {
+        return "";
+    }
+    public function change_password()
+    {
+        return route("web.employee.change_password");
+    }
     public function notifications()
     {
         $tag = $this->get_tag();

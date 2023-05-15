@@ -71,6 +71,14 @@ class Panel
     {
         return "";
     }
+    public function profile_update()
+    {
+        return "";
+    }
+    public function change_password()
+    {
+        return "";
+    }
     public function notifications()
     {
         return "";

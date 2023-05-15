@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ChangePasswordAdministratorRequest;
 use App\Http\Requests\SignInAdministratorRequest;
 use App\Models\Employee;
 use Illuminate\Http\Request;
@@ -28,6 +29,21 @@ class EmployeeController extends Controller
         }
     }
 
+    public function change_password(ChangePasswordAdministratorRequest $request)
+    {
+        $data = $request->validated();
+        /** @var User */
+        $user = auth()->user();
+        if (!auth()->validate(['name' => $user->name, 'password' => $data['password_current']])) {
+            return back()->withErrors(["password_current" => ['password mismatch']]);
+        }
+        if ($data['password_current'] == $data['password']) {
+            return back()->withErrors(["password" => ['new password cannot same with current password']]);
+        }
+        $user->password = $data['password'];
+        $user->save();
+        return back();
+    }
     public function login_show()
     {
         return view('pages.employee.login');

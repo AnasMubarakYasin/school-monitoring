@@ -24,22 +24,38 @@ class StudentPolicy
 
     public function create(Administrator|Employee $user)
     {
-        return true;
+        return match ($user::class) {
+            Administrator::class => true,
+            default => false,
+        };
     }
 
-    public function update(Administrator|Employee $user, Student $student)
+    public function update(Administrator|Employee|Student $user, Student $student)
     {
-        return true;
+        dd($student);
+
+        if ($user::class == Administrator::class) {
+            return true;
+        } else if ($user::class == Student::class) {
+            
+        }
+        return false;
     }
 
     public function delete_any(Administrator|Employee $user)
     {
-        return true;
+        return match ($user::class) {
+            Administrator::class => true,
+            default => false,
+        };
     }
 
     public function delete(Administrator|Employee $user, Student $student)
     {
-        return true;
+        return match ($user::class) {
+            Administrator::class => true,
+            default => false,
+        };
     }
 
     public function restore(Administrator|Employee $user, Student $student)

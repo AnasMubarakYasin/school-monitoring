@@ -14,7 +14,7 @@
 
         </x-panel.bottom-bar>
     </x-slot>
-    <div class="grid gap-4">
+    <div class="grid gap-4 p-4">
         <x-employee.schedule-of-subjects-table></x-employee.schedule-of-subjects-table>
         <x-student.presence :presences="$presences"></x-student.presence>
         <x-student.material_assignment :material-assignments="$material_assignments"></x-student.presence>

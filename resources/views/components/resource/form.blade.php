@@ -8,7 +8,7 @@
     </script>
 </x-slot>
 <form
-    class="grid gap-4 px-5 py-3 lg:w-1/2 text-gray-700 border border-gray-200 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700"
+    class="grid gap-4 p-4 px-5 py-3 lg:w-1/2 text-gray-700 border border-gray-200 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700"
     action="{{ $resource->is_create() ? $resource->route_create() : $resource->route_update($model) }}" method="post"
     enctype="multipart/form-data">
     @csrf

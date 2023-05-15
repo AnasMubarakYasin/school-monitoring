@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateAcademicActivityRequest extends FormRequest
+class ChangePasswordAdministratorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +24,8 @@ class UpdateAcademicActivityRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string',
-            'duration' => 'required|string',
-            'executive' => 'required|string',
-            'type' => 'required|string',
-            'start_at' => 'required|string',
-            'end_at' => 'required|string',
-            'description' => 'nullable|string',
+            'password_current' => 'required|string',
+            'password' => 'required|string|confirmed',
         ];
     }
 }

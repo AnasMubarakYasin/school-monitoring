@@ -60,24 +60,26 @@
                         $presences = $Presence
                             ::where('classroom_id', $student->classroom->id)
                             ->where('subjects_id', $subjects->id)
-                            ->get();
+                            ->first();
                         $attendances = 0;
-                        $attendance = $presences[0]
-                            ->attendances()
-                            ->where('student_id', $student->id)
-                            ->get();
-                        foreach ($attendance as $data) {
-                            if ($data && $data->state == 'present') {
-                                $attendances++;
+                        $meet = 0;
+                        if ($presences) {
+                            $meet = $presences->meet;
+                            $attendance = $presences
+                                ->attendances()
+                                ->where('student_id', $student->id)
+                                ->get();
+                            foreach ($attendance as $data) {
+                                if ($data && $data->state == 'present') {
+                                    $attendances++;
+                                }
                             }
                         }
-                        // foreach ($presences as $presence) {
-                        // }
                     @endphp
                     <div class="flex flex-col gap-1">
                         <div class="text-base font-medium">
                             {{ $subjects->name }}
-                            @if ($presences[0]->meet == 16)
+                            @if ($meet == 16)
                                 @if ($attendances > 16 - 3)
                                     <span class="opacity-70">(lulus)</span>
                                 @else
@@ -102,7 +104,7 @@
                                 <div class="text-base font-normal text-gray-800 dark:text-gray-100">
                                     <div><span>{{ trans('attendance') }}</span> <span
                                             class="text-base font-medium">({{ $attendances }})</span> -
-                                        <span>{{ $presences[0]->meet }}/{{ $total }}</span>
+                                        <span>{{ $meet }}/{{ $total }}</span>
                                     </div>
                                 </div>
                                 <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">

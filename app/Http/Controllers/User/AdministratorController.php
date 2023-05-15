@@ -110,7 +110,11 @@ class AdministratorController extends Controller
     }
     public function profile()
     {
-        return view('pages.administrator.profile');
+        $resource = Administrator::formable()->from_update(
+            model: auth()->user(),
+            fields: ['photo', 'name', 'telp', 'email'],
+        );
+        return view('pages.administrator.profile', ['resource' => $resource]);
     }
     public function notification()
     {
@@ -444,11 +448,11 @@ class AdministratorController extends Controller
             return route('web.administrator.data_master.classroom.list');
         };
         $resource->fetcher_relation = function ($definition) {
-            if ($definition->name == "major") {
-                return Major::all();
-            } else {
-                return Employee::all();
-            }
+            return match ($definition->name) {
+                "major" => Major::all(),
+                "students" => Student::all(),
+                default => Employee::all(),
+            };
         };
         return view('pages.administrator.classroom.update', ['resource' => $resource]);
     }

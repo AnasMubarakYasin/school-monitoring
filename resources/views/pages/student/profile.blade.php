@@ -14,5 +14,5 @@
 
         </x-panel.bottom-bar>
     </x-slot>
-    <x-panel.profile></x-panel.profile>
+    <x-panel.profile :resource="$resource"></x-panel.profile>
 </x-panel.layout>
