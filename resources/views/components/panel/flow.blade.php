@@ -53,7 +53,6 @@
     <div class="grid gap-2">
         <div class="text-gray-900 font-medium dark:text-gray-300 capitalize">{{ trans('steps') }}</div>
         <ol class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {{-- @dd($requirements) --}}
             @foreach ($requirements as $key => $requirement)
                 @if ($requirement['pass'])
                     <li>

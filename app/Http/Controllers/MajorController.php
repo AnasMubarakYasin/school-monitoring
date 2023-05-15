@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateMajorRequest;
 use App\Http\Requests\UpdateMajorRequest;
 use App\Models\Major;
+use Illuminate\Http\Request;
 
 class MajorController extends Controller
 {
@@ -28,10 +29,15 @@ class MajorController extends Controller
         $major->delete();
         return back();
     }
-    public function delete_any()
+    public function delete_any(Request $request)
     {
         $this->authorize('delete_any', Major::class);
-        return abort(501);
+        if ($request->input('all')) {
+            Major::truncate();
+        } else {
+            Major::destroy($request->input('id', []));
+        }
+        return back();
     }
     public function restore(Major $major)
     {

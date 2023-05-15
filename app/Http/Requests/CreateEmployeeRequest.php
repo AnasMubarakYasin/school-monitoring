@@ -26,8 +26,8 @@ class CreateEmployeeRequest extends FormRequest
         return [
             'photo' => 'nullable|string',
             'name' => 'required|string',
-            'telp' => 'required|string',
-            'email' => 'required|email',
+            'telp' => "nullable|string",
+            'email' => "nullable|string",
             'password' => 'required|string',
 
             'nip' => 'required|string',

@@ -26,8 +26,8 @@ class CreateStudentRequest extends FormRequest
         return [
             'photo'=>"nullable|string",
             'name'=>"required|string",
-            'telp'=>"required|string",
-            'email'=>"required|string",
+            'telp' => "nullable|string",
+            'email' => "nullable|string",
             'password'=>"required|string",
 
             'nis'=>"required|string",

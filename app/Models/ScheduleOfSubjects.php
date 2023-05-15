@@ -18,6 +18,10 @@ class ScheduleOfSubjects extends Model
     public static function defining()
     {
         self::$caption = "schedule of subjects";
+        self::$definitions['id'] = new Definition(
+            name: 'id',
+            type: 'number',
+        );
         self::$definitions['subjects'] = new Definition(
             name: 'subjects',
             type: 'model',

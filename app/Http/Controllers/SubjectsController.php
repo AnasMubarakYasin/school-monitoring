@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreSubjectsRequest;
 use App\Http\Requests\UpdateSubjectsRequest;
 use App\Models\Subjects;
+use Illuminate\Http\Request;
 
 class SubjectsController extends Controller
 {
@@ -28,10 +29,15 @@ class SubjectsController extends Controller
         $subjects->delete();
         return back();
     }
-    public function delete_any()
+    public function delete_any(Request $request)
     {
         $this->authorize('delete_any', Subjects::class);
-        return abort(501);
+        if ($request->input('all')) {
+            Subjects::truncate();
+        } else {
+            Subjects::destroy($request->input('id', []));
+        }
+        return back();
     }
     public function restore(Subjects $subjects)
     {

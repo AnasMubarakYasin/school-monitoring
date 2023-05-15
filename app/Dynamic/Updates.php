@@ -27,7 +27,7 @@ class Updates
     }
     public function generate_changes()
     {
-        if ($this->commit == $this->last_commit) {
+        if (trim($this->commit) == trim($this->last_commit)) {
             $this->last_commit = $this->last_commit2;
         }
         $git_log = new Process(['git', 'log', '--pretty=- %s', "$this->commit...$this->last_commit"], "./");

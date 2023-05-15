@@ -17,6 +17,10 @@ class Subjects extends Model
     public static function defining()
     {
         self::$caption = "subjects";
+        self::$definitions['id'] = new Definition(
+            name: 'id',
+            type: 'number',
+        );
         self::$definitions['code'] = new Definition(
             name: 'subjects code',
             type: 'string',

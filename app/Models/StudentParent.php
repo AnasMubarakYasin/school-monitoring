@@ -18,7 +18,6 @@ class StudentParent extends Authenticatable
     protected $fillable = [
         'photo',
         'name',
-        // 'email',
         'password',
 
         'student_id',

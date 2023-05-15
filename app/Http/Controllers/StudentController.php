@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
 use App\Models\Student;
+use App\Models\StudentParent;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -13,7 +14,9 @@ class StudentController extends Controller
     {
         $this->authorize('create', Student::class);
         $data = $request->validated();
-        Student::create($data);
+        $student = Student::create($data);
+        $data['student_id'] = $student->id;
+        StudentParent::create($data);
         return redirect()->intended($request->input('_view_any'));
     }
     public function update(UpdateStudentRequest $request, Student $student)

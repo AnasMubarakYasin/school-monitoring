@@ -19,7 +19,6 @@ class EmployeeController extends Controller
     }
 
     private function re_route(Employee $user) {
-        // dd($user);
         if ($user->task == "teacher") {
             return to_route('web.employee.teacher.dashboard');
         } else if ($user->task == "staff") {

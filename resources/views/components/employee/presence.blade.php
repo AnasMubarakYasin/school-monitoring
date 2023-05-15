@@ -43,9 +43,6 @@
                     'bg-white capitalize text-center dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-600 dark:border-gray-700',
                     'border-b',
                 ])>
-                    {{-- <td class="p-3  text-gray-900 dark:text-white whitespace-nowrap">
-                    {{ $presence->student() }}
-                </td> --}}
                     <td rowspan="{{ $presence->classroom->students->count() }}"
                         class="p-3  text-gray-900 dark:text-white whitespace-nowrap">
                         {{ $loop->iteration }}
@@ -61,7 +58,7 @@
                     <td class="p-3  text-gray-900 dark:text-white whitespace-nowrap">
                         {{ $presence->classroom->students[0]->fullname }}
                     </td>
-                    @foreach ($presence->attendances()->where('student_id', $presence->classroom->students[0]->id)->get()->sortBy("number") as $attendance)
+                    @foreach ($presence->attendances()->where('student_id', $presence->classroom->students[0]->id)->get()->sortBy('number') as $attendance)
                         <td class="p-3  text-gray-900 dark:text-white whitespace-nowrap">
                             @if ($attendance->state == 'present')
                                 ✅
@@ -73,27 +70,29 @@
                         </td>
                     @endforeach
                 </tr>
-                @foreach (range(1, $presence->classroom->students->count() - 1) as $index)
-                    <tr @class([
-                        'bg-white capitalize text-center dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-600 dark:border-gray-700',
-                        'border-b',
-                    ])>
-                        <td sc class="p-3  text-gray-900 dark:text-white whitespace-nowrap">
-                            {{ $presence->classroom->students[$index]->fullname }}
-                        </td>
-                        @foreach ($presence->attendances()->where('student_id', $presence->classroom->students[$index]->id)->get()->sortBy("number") as $attendance)
-                            <td class="p-3  text-gray-900 dark:text-white whitespace-nowrap">
-                                @if ($attendance->state == 'present')
-                                    ✅
-                                @elseif ($attendance->state == 'unpresent')
-                                    ❌
-                                @else
-                                    -
-                                @endif
+                @if ($presence->classroom->students->count() > 1)
+                    @foreach (range(1, $presence->classroom->students->count() - 1) as $index)
+                        <tr @class([
+                            'bg-white capitalize text-center dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-600 dark:border-gray-700',
+                            'border-b',
+                        ])>
+                            <td sc class="p-3  text-gray-900 dark:text-white whitespace-nowrap">
+                                {{ $presence->classroom->students[$index]->fullname }}
                             </td>
-                        @endforeach
-                    </tr>
-                @endforeach
+                            @foreach ($presence->attendances()->where('student_id', $presence->classroom->students[$index]->id)->get()->sortBy('number') as $attendance)
+                                <td class="p-3  text-gray-900 dark:text-white whitespace-nowrap">
+                                    @if ($attendance->state == 'present')
+                                        ✅
+                                    @elseif ($attendance->state == 'unpresent')
+                                        ❌
+                                    @else
+                                        -
+                                    @endif
+                                </td>
+                            @endforeach
+                        </tr>
+                    @endforeach
+                @endif
             @empty
                 <tr>
                     <td class="p-4 text-center text-lg text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 rounded-b-lg capitalize"

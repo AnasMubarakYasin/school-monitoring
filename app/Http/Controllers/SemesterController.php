@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateSemesterRequest;
 use App\Http\Requests\UpdateSemesterRequest;
 use App\Models\Semester;
+use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
 class SemesterController extends Controller
@@ -34,10 +35,15 @@ class SemesterController extends Controller
         $semester->delete();
         return back();
     }
-    public function delete_any()
+    public function delete_any(Request $request)
     {
         $this->authorize('delete_any', Semester::class);
-        return abort(501);
+        if ($request->input('all')) {
+            Semester::truncate();
+        } else {
+            Semester::destroy($request->input('id', []));
+        }
+        return back();
     }
     public function restore(Semester $semester)
     {

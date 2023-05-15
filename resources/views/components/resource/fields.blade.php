@@ -250,7 +250,6 @@
                         @enderror
                         <div class="divide-y divide-gray-100 dark:divide-gray-600 w-full"></div>
                         <ul id="{{ $model->definition($field)->alias }}_list" class="flex flex-col gap-2">
-                            {{-- @dd($model->{$field}) --}}
                             @foreach (old("{$model->definition($field)->alias}") ?? $model->{$field} as $value)
                                 @php
                                     if (is_object($value)) {

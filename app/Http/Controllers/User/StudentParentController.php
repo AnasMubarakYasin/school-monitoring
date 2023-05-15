@@ -26,7 +26,6 @@ class StudentParentController extends Controller
         $material_assignments = MaterialAndAssignment::with('answer')->whereHas("answer", function (Builder $builder) use ($student) {
             $builder->where('student_id', $student->id);
         })->get();
-        // dd($material_assignments);
 
         // $academicactivity = AcademicActivity::all()->count();
         // $scheduleofsubject = ScheduleOfSubjects::all()->where('class_id', $user->classroom_id)->count();

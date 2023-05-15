@@ -8,6 +8,7 @@ use App\Models\AcademicActivity;
 use App\Models\Student;
 use App\Models\User;
 use App\Notifications\AcademicActivityReleased;
+use Illuminate\Http\Request;
 
 class AcademicActivityController extends Controller
 {
@@ -35,10 +36,15 @@ class AcademicActivityController extends Controller
         $academic_activity->delete();
         return back();
     }
-    public function delete_any()
+    public function delete_any(Request $request)
     {
         $this->authorize('delete_any', AcademicActivity::class);
-        return abort(501);
+        if ($request->input('all')) {
+            AcademicActivity::truncate();
+        } else {
+            AcademicActivity::destroy($request->input('id', []));
+        }
+        return back();
     }
     public function restore(AcademicActivity $academic_activity)
     {

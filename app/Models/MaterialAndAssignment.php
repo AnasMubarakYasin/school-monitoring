@@ -17,6 +17,10 @@ class MaterialAndAssignment extends Model
     public static function defining()
     {
         self::$caption = "material and assignment";
+        self::$definitions['id'] = new Definition(
+            name: 'id',
+            type: 'number',
+        );
         self::$definitions['subjects'] = new Definition(
             name: 'subjects',
             type: 'model',

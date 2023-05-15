@@ -32,14 +32,10 @@ class StudentPolicy
 
     public function update(Administrator|Employee|Student $user, Student $student)
     {
-        dd($student);
-
-        if ($user::class == Administrator::class) {
-            return true;
-        } else if ($user::class == Student::class) {
-            
-        }
-        return false;
+        return match ($user::class) {
+            Administrator::class => true,
+            default => false,
+        };
     }
 
     public function delete_any(Administrator|Employee $user)

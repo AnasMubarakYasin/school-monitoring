@@ -22,6 +22,10 @@ class Classroom extends Model
     {
         self::$caption = "classroom";
         self::$definitions = [
+            'id' => new Definition(
+                name: 'id',
+                type: 'number',
+            ),
             'code' => new Definition(
                 name: 'code',
                 type: 'string',

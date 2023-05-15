@@ -8,7 +8,6 @@
 <x-slot:head>
     @vite('resources/js/components/resource/table.js')
     </x-slot>
-    {{-- @dd($resource->model::$definitions) --}}
     <div class="grid gap-4 p-4">
         @if ($menu)
             <div class="flex gap-2 items-center">

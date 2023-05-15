@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreScheduleOfSubjectsRequest;
 use App\Http\Requests\UpdateScheduleOfSubjectsRequest;
 use App\Models\ScheduleOfSubjects;
+use Illuminate\Http\Request;
 
 class ScheduleOfSubjectsController extends Controller
 {
@@ -14,7 +15,6 @@ class ScheduleOfSubjectsController extends Controller
         $data = $request->validated();
         $schedule = new ScheduleOfSubjects();
         $schedule->fill($data);
-        // dd($schedule);
         $schedule->save();
         return redirect()->intended($request->input('_view_any'));
     }
@@ -31,10 +31,15 @@ class ScheduleOfSubjectsController extends Controller
         $scheduleOfSubjects->delete();
         return back();
     }
-    public function delete_any()
+    public function delete_any(Request $request)
     {
         $this->authorize('delete_any', ScheduleOfSubjects::class);
-        return abort(501);
+        if ($request->input('all')) {
+            ScheduleOfSubjects::truncate();
+        } else {
+            ScheduleOfSubjects::destroy($request->input('id', []));
+        }
+        return back();
     }
     public function restore(ScheduleOfSubjects $scheduleOfSubjects)
     {

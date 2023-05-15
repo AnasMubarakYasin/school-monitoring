@@ -22,6 +22,10 @@ class Major extends Model
     {
         self::$caption = "major";
         self::$definitions = [
+            'id' => new Definition(
+                name: 'id',
+                type: 'number',
+            ),
             'name' => new Definition(
                 name: 'name',
                 type: 'string',

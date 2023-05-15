@@ -6,6 +6,7 @@ use App\Http\Requests\CreateClassroomRequest;
 use App\Http\Requests\UpdateClassroomRequest;
 use App\Models\Classroom;
 use App\Models\Student;
+use Illuminate\Http\Request;
 
 class ClassroomController extends Controller
 {
@@ -27,7 +28,6 @@ class ClassroomController extends Controller
         $new_students = $data['students_id'] ?? [];
         Student::whereIn('id', array_values(array_diff($students, $new_students)))->update(['classroom_id' => null]);
         Student::whereIn('id', array_values(array_diff($new_students, $students)))->update(['classroom_id' => $classroom->id]);
-        // dd($data, $students, $new_students, array_diff($students, $new_students), array_diff($new_students, $students));
         return redirect()->intended($request->input('_view_any'));
     }
     public function delete(Classroom $classroom)
@@ -36,11 +36,10 @@ class ClassroomController extends Controller
         $classroom->delete();
         return back();
     }
-    public function delete_any()
+    public function delete_any(Request $request)
     {
-        $request = request();
         $this->authorize('delete_any', Classroom::class);
-        if ($request->collect('id')->count() == Classroom::count()) {
+        if ($request->input('all')) {
             Classroom::truncate();
         } else {
             Classroom::destroy($request->input('id', []));
