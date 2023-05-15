@@ -16,7 +16,7 @@ return [
         'logo' => env('APP_LOGO', '/logo.png'),
         'favicon' => env('APP_FAV', '/favicon.ico'),
         'vendor_name' => 'Bladerlaiga',
-        'vendor_version' => '0.5.10',
+        'vendor_version' => '0.5.11',
         'vendor_year' => '2023',
         'vendor_logo' => '/logo.png',
         'commit' => '99af12f',
