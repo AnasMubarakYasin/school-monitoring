@@ -24,7 +24,7 @@ class CreateAdministratorRequest extends FormRequest
     public function rules()
     {
         return [
-            'photo' => "nullable|string",
+            'photo' => "nullable|image",
             'name' => "required|string",
             'telp' => "nullable|string",
             'email' => "nullable|string",

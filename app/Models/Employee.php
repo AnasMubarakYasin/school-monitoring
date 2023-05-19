@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 
 class Employee extends Authenticatable
@@ -33,10 +35,6 @@ class Employee extends Authenticatable
             ),
             'name' => new Definition(
                 name: 'name',
-                type: 'string',
-            ),
-            'photo' => new Definition(
-                name: 'photo',
                 type: 'string',
             ),
             'email' => new Definition(
@@ -109,6 +107,28 @@ class Employee extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
+    }
+    public function setPhotoAttribute($value)
+    {
+        if (is_null($value)) {
+            $this->attributes['photo'] = null;
+        } else if (is_string($value)) {
+            $this->attributes['photo'] = $value;
+        } else {
+            if (isset($this->attributes['photo'])) {
+                Storage::delete($this->attributes['photo']);
+            }
+            $path = $this->id ? "$this->id" : 'temp';
+            $this->attributes['photo'] = Storage::put("administrator/$path", $value);
+        }
+    }
+    public function getPhotoUrlAttribute()
+    {
+        if (Str::of($this->photo)->startsWith('http')) {
+            return $this->photo;
+        } else {
+            return Storage::url($this->photo);
+        }
     }
 
     public function visits()

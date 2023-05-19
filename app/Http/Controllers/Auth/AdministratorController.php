@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ChangePasswordAdministratorRequest;
 use App\Http\Requests\SignInAdministratorRequest;
+use App\Http\Requests\UpdateAdministratorRequest;
 use App\Models\User;
 use Illuminate\Support\Arr;
 

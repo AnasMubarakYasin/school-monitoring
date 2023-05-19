@@ -98,7 +98,7 @@ class Employee extends Panel
     }
     public function profile_update()
     {
-        return "";
+        return route('web.resource.employee.update', ['employee' => auth()->user()]);
     }
     public function change_password()
     {

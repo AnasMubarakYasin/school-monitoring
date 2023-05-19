@@ -8,6 +8,7 @@ class Menu
         public string $name = "",
         public string $link = "",
         public string $icon = "",
+        public string $index = "",
         public array $submenu = [],
         public string $pname = "",
         public string $pclass = "",

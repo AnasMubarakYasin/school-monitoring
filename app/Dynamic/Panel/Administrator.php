@@ -181,7 +181,7 @@ class Administrator extends Panel
     }
     public function profile_update()
     {
-        return "";
+        return route('web.resource.administrator.update', ['administrator' => auth()->user()]);
     }
     public function change_password()
     {

@@ -42,12 +42,12 @@ class Administrator extends Authenticatable
                 name: 'name',
                 type: 'string',
             ),
-            'email' => new Definition(
-                name: 'email',
-                type: 'string',
-            ),
             'telp' => new Definition(
                 name: 'telp',
+                type: 'string',
+            ),
+            'email' => new Definition(
+                name: 'email',
                 type: 'string',
             ),
             'password' => new Definition(
@@ -70,6 +70,7 @@ class Administrator extends Authenticatable
     protected $fillable = [
         'photo',
         'name',
+        'telp',
         'email',
         'password',
     ];

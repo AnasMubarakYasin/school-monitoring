@@ -620,11 +620,6 @@ class AdministratorController extends Controller
     }
     //!SECTION - administrator
 
-    // public function administrator()
-    // {
-    //     return view('pages.administrator.users.administrator.index');
-    // }
-
     public function authorization()
     {
         return view('pages.administrator.authorization.list');
