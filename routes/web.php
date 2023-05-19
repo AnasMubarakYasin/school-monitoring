@@ -46,17 +46,15 @@ Route::middleware(['authc.basic:welcome,administrator'])->group(function () {
         /** SECTION - User */
         Route::get('administrator/users', 'User\AdministratorController@empty')->name('web.administrator.users');
 
-        // Route::get('administrator/users/administrator', 'User\AdministratorController@administrator')->name('web.administrator.users.administrator.list');
-
-        Route::get('administrator/users/employee/list', 'User\AdministratorController@employee_list')->name('web.administrator.users.employee.list');
+        Route::get('administrator/users/employee', 'User\AdministratorController@employee_list')->name('web.administrator.users.employee.list');
         Route::get('administrator/users/employee/create', 'User\AdministratorController@employee_create')->name('web.administrator.users.employee.create');
         Route::get('administrator/users/employee/{employee}/update', 'User\AdministratorController@employee_update')->name('web.administrator.users.employee.update');
 
-        Route::get('administrator/users/student/list', 'User\AdministratorController@student_list')->name('web.administrator.users.student.list');
+        Route::get('administrator/users/student', 'User\AdministratorController@student_list')->name('web.administrator.users.student.list');
         Route::get('administrator/users/student/create', 'User\AdministratorController@student_create')->name('web.administrator.users.student.create');
         Route::get('administrator/users/student/{student}/update', 'User\AdministratorController@student_update')->name('web.administrator.users.student.update');
 
-        Route::get('administrator/users/administrator/list', 'User\AdministratorController@administrator_list')->name('web.administrator.users.administrator.list');
+        Route::get('administrator/users/administrator', 'User\AdministratorController@administrator_list')->name('web.administrator.users.administrator.list');
         Route::get('administrator/users/administrator/create', 'User\AdministratorController@administrator_create')->name('web.administrator.users.administrator.create');
         Route::get('administrator/users/administrator/{administrator}/update', 'User\AdministratorController@administrator_update')->name('web.administrator.users.administrator.update');
         /** !SECTION - User */
