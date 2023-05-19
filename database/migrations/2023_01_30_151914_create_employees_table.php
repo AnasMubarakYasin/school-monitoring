@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
 
-            $table->string('nip')->unique();
+            $table->string('nip')->nullable()->unique();
             $table->string('fullname');
             $table->enum('gender', ['male', 'female']);
             $table->enum('state', ['honor', 'pns']);

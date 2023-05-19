@@ -24,13 +24,13 @@ class CreateEmployeeRequest extends FormRequest
     public function rules()
     {
         return [
-            'photo' => 'nullable|string',
+            'photo' => "nullable|image",
             'name' => 'required|string',
             'telp' => "nullable|string",
             'email' => "nullable|string",
             'password' => 'required|string',
 
-            'nip' => 'required|string',
+            'nip' => 'nullable|string',
             'fullname' => 'required|string',
             'gender' => 'required|in:male,female',
             'state' => 'required|in:honor,pns',
