@@ -1,4 +1,13 @@
-import { create_element } from "../../lib";
+import { create_element, input_img_preview } from "../../lib";
+
+console.log(resource);
+console.log(definitions);
+
+for (const [name, definition] of Object.entries(definitions)) {
+    if (definition.type == "file:image") {
+        input_img_preview(name, `photo_preview_${name}`);
+    }
+}
 
 models.forEach((element) => {
     create_model(element);
@@ -27,7 +36,7 @@ function create_model(name) {
         btn.addEventListener("click", () => {
             element.remove();
         });
-        models.push(element.querySelector('input').value);
+        models.push(element.querySelector("input").value);
     }
 
     function create_item({ id, value }) {

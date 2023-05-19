@@ -5,6 +5,8 @@
     @vite('resources/js/components/resource/form.js')
     <script>
         var models = [];
+        var resource = @json($resource);
+        var definitions = @json($model::$definitions);
     </script>
 </x-slot>
 <form

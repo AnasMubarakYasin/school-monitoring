@@ -6,8 +6,14 @@
     'button' => false,
     'pname' => '',
     'pclass' => '',
+    'indent' => 0,
+    'index' => '',
+    'alink' => '',
 ])
 @if ($button)
+    @if ($index)
+        <a href="{{ $index }}">
+    @endif
     <button type="button" data-collapse-toggle="{{ $for }}" aria-controls="{{ $for }}"
         @class([
             'sidebar-menus flex items-center w-full p-2 text-base font-normal rounded-lg',
@@ -26,7 +32,7 @@
                 {!! $icon !!}
             </div>
         @endif
-        <span class="flex-1 ml-3 text-left whitespace-nowrap capitalize">
+        <span class="flex-1 text-left whitespace-nowrap capitalize" style="margin-left: {{ $indent * (3 * 4) }}px">
             {{ trans($name) }}
         </span>
         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -35,28 +41,31 @@
                 clip-rule="evenodd"></path>
         </svg>
     </button>
+    @if ($index)
+        </a>
+    @endif
 @else
     @if ($pname)
         @can($pname, $pclass)
             <li>
                 <a href="{{ $link }}" @class([
                     'flex items-center p-2 text-base font-normal rounded-lg',
-                    'dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' =>
-                        request()->url() != $link,
-                    'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' =>
-                        request()->url() == $link,
+                    'dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' => !str(
+                        request()->url())->startsWith($link),
+                    'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' => str(
+                        request()->url())->startsWith($link),
                 ])>
                     @if ($icon)
                         <div
                             {{ $icon->attributes->class([
                                 'w-6 h-6 transition',
-                                'text-gray-700 dark:text-white' => request()->url() != $link,
-                                '' => request()->url() == $link,
+                                'text-gray-700 dark:text-white' => !str(request()->url())->startsWith($link),
+                                '' => str(request()->url())->startsWith($link),
                             ]) }}>
                             {!! $icon !!}
                         </div>
                     @endif
-                    <span class="ml-3 capitalize">{{ trans($name) }}</span>
+                    <span class="capitalize" style="margin-left: {{ $indent * (3 * 4) }}px">{{ trans($name) }}</span>
                 </a>
             </li>
         @endcan
@@ -64,22 +73,22 @@
         <li>
             <a href="{{ $link }}" @class([
                 'flex items-center p-2 text-base font-normal rounded-lg',
-                'dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' =>
-                    request()->url() != $link,
-                'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' =>
-                    request()->url() == $link,
+                'dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' => !str(
+                    request()->url())->startsWith($link),
+                'text-white bg-blue-500 hover:text-black hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700' => str(
+                    request()->url())->startsWith($link),
             ])>
                 @if ($icon)
                     <div
                         {{ $icon->attributes->class([
                             'w-6 h-6 transition',
-                            'text-gray-700 dark:text-white' => request()->url() != $link,
-                            '' => request()->url() == $link,
+                            'text-gray-700 dark:text-white' => !str(request()->url())->startsWith($link),
+                            '' => str(request()->url())->startsWith($link),
                         ]) }}>
                         {!! $icon !!}
                     </div>
                 @endif
-                <span class="ml-3 capitalize">{{ trans($name) }}</span>
+                <span class="capitalize" style="margin-left: {{ $indent * (3 * 4) }}px">{{ trans($name) }}</span>
             </a>
         </li>
     @endif

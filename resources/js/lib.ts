@@ -14,7 +14,13 @@ export function input_img_preview(
         if (typeof img_id == "string") {
             const img = document.getElementById(img_id) as HTMLImageElement;
             if (!img) return;
-            img.src = input_img_preview_data[input_id];
+            if (img.nodeName != "IMG") {
+                img.replaceWith(
+                    create_element(`<img id="${img_id}" class="w-[9rem] aspect-square object-cover object-center text-gray-400" src="${input_img_preview_data[input_id]}" alt="">`)
+                )
+            } else {
+                img.src = input_img_preview_data[input_id];
+            }
         } else {
             img_id(input_img_preview_data[input_id], file);
         }
@@ -100,20 +106,20 @@ export function wait<
     ThisArg = undefined,
     Callback = (this: ThisArg, arg: Arg) => unknown,
     Return = Callback extends (this: any, arg: Arg) => infer R
-        ? R extends Promise<infer T>
-            ? T
-            : R
-        : unknown
+    ? R extends Promise<infer T>
+    ? T
+    : R
+    : unknown
 >(
     opt:
         | number
         | {
-              timeout: number;
-              delay?: number;
-              callback?: Callback;
-              arg?: Arg;
-              thisArg?: ThisArg;
-          }
+            timeout: number;
+            delay?: number;
+            callback?: Callback;
+            arg?: Arg;
+            thisArg?: ThisArg;
+        }
 ): Promise<Return> {
     const promise = new Promiseify();
     if (typeof opt == "number") {
@@ -141,111 +147,111 @@ export function wait<
 }
 
 interface SequenceOptions {
-	max: number;
-	time: number;
-	timeout: number;
-	progress: number;
-	completion: number;
-	alwaysReset: boolean;
+    max: number;
+    time: number;
+    timeout: number;
+    progress: number;
+    completion: number;
+    alwaysReset: boolean;
 }
 
 export class Sequence {
-	time = 0;
-	progress = 0;
-	timeout = 2000;
+    time = 0;
+    progress = 0;
+    timeout = 2000;
 
-	startValue = 0;
-	max = 100;
+    startValue = 0;
+    max = 100;
 
-	private interval = 16;
-	private delay = 100;
-	private percent = 0;
-	private id: any = 0;
-	private idEnd: any = 0;
+    private interval = 16;
+    private delay = 100;
+    private percent = 0;
+    private id: any = 0;
+    private idEnd: any = 0;
 
-	options: SequenceOptions;
+    options: SequenceOptions;
 
-	constructor(options?: Partial<SequenceOptions>) {
-		const opts = Object.assign({}, {max: 100, time: 0, progress: 0, timeout: 2000, completion: 1000, alwaysReset: false} as SequenceOptions, options);
-		this.max = opts.max;
-		this.time = opts.time;
-		this.timeout = opts.timeout;
-		this.progress = opts.progress;
-		this.percent = this.genPercent();
-		this.options = opts;
-	}
+    constructor(options?: Partial<SequenceOptions>) {
+        const opts = Object.assign({}, { max: 100, time: 0, progress: 0, timeout: 2000, completion: 1000, alwaysReset: false } as SequenceOptions, options);
+        this.max = opts.max;
+        this.time = opts.time;
+        this.timeout = opts.timeout;
+        this.progress = opts.progress;
+        this.percent = this.genPercent();
+        this.options = opts;
+    }
 
-	onStart?: () => void;
-	onProgress?: (value: number) => void;
-	onFinish?: () => void;
+    onStart?: () => void;
+    onProgress?: (value: number) => void;
+    onFinish?: () => void;
 
-	start() {
-		this.addStart();
-		this.addFinish();
-	}
-	resume() {
-		this.addStart();
-		this.addFinish();
-	}
-	pause() {
-		clearInterval(this.id);
-		clearTimeout(this.idEnd);
-	}
-	finish() {
-		this.pause();
-		this.time = 0;
-		this.timeout = this.options.completion;
-		this.percent = this.genPercent();
-		this.addStart();
-		this.addFinish();	
-	}
-	stop() {
-		this.pause();
-	}
-	reset() {
-		this.time = 0;
-		this.timeout = this.options.timeout;
-		this.percent = this.genPercent();
-		this.progress = 0;
-	}
-	private genPercent() {
-		return this.max / this.timeout;
-	}
-	private addStart() {
-		const interval = this.interval;
-		const percent = this.percent;
+    start() {
+        this.addStart();
+        this.addFinish();
+    }
+    resume() {
+        this.addStart();
+        this.addFinish();
+    }
+    pause() {
+        clearInterval(this.id);
+        clearTimeout(this.idEnd);
+    }
+    finish() {
+        this.pause();
+        this.time = 0;
+        this.timeout = this.options.completion;
+        this.percent = this.genPercent();
+        this.addStart();
+        this.addFinish();
+    }
+    stop() {
+        this.pause();
+    }
+    reset() {
+        this.time = 0;
+        this.timeout = this.options.timeout;
+        this.percent = this.genPercent();
+        this.progress = 0;
+    }
+    private genPercent() {
+        return this.max / this.timeout;
+    }
+    private addStart() {
+        const interval = this.interval;
+        const percent = this.percent;
 
-		this.onStart?.();
-        
-		this.id = setInterval(() => {
-			this.onProgress?.(this.progress);
+        this.onStart?.();
 
-			this.time += interval;
-			this.progress += percent * interval;
-		}, interval);
-	}
-	private addFinish() {
-		this.idEnd = setTimeout(() => {
-			clearInterval(this.id);
+        this.id = setInterval(() => {
+            this.onProgress?.(this.progress);
 
-			this.onFinish?.();
-			this.stop();
+            this.time += interval;
+            this.progress += percent * interval;
+        }, interval);
+    }
+    private addFinish() {
+        this.idEnd = setTimeout(() => {
+            clearInterval(this.id);
 
-			if (this.options.alwaysReset) {
-				this.reset();
-			}
-		}, this.timeout + this.delay - this.time);
-	}
+            this.onFinish?.();
+            this.stop();
+
+            if (this.options.alwaysReset) {
+                this.reset();
+            }
+        }, this.timeout + this.delay - this.time);
+    }
 }
 export function urlBase64ToUint8Array(base64String: string) {
-	var padding = '='.repeat((4 - (base64String.length % 4)) % 4);
-	var base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/');
+    var padding = '='.repeat((4 - (base64String.length % 4)) % 4);
+    var base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/');
 
-	var rawData = window.atob(base64);
-	var outputArray = new Uint8Array(rawData.length);
+    var rawData = window.atob(base64);
+    var outputArray = new Uint8Array(rawData.length);
 
-	for (var i = 0; i < rawData.length; ++i) {
-		outputArray[i] = rawData.charCodeAt(i);
-	}
-	return outputArray;
+    for (var i = 0; i < rawData.length; ++i) {
+        outputArray[i] = rawData.charCodeAt(i);
+    }
+    return outputArray;
 }

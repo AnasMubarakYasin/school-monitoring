@@ -60,10 +60,10 @@
                     <div
                         class="grid place-content-center h-full aspect-square bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg">
                         @if ($model->{$field})
-                            <img id="photo_preview" class="w-[9rem] aspect-square object-cover object-center text-gray-400"
+                            <img id="photo_preview_{{ $field }}" class="w-[9rem] aspect-square object-cover object-center text-gray-400"
                                 src="{{ $model->{$field."_url"} }}" alt="">
                         @else
-                            <svg id="photo_preview" class="w-full aspect-square text-gray-400" fill="currentColor"
+                            <svg id="photo_preview_{{ $field }}" class="w-[9rem] aspect-square text-gray-400" fill="currentColor"
                                 viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
                                     clip-rule="evenodd">

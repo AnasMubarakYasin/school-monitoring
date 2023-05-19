@@ -109,11 +109,11 @@
         <button id="ProfileButton" data-dropdown-toggle="Profile"
             class="flex items-center gap-2 text-sm font-medium text-gray-900 rounded-lg hover:text-blue-600 dark:hover:text-blue-500 md:mr-0 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-white">
             <span class="sr-only">Open user menu</span>
-            <div class="bg-gray-100 p-2 rounded-lg dark:bg-gray-600">
+            <div class="bg-gray-100 p-0.5 rounded-lg dark:bg-gray-600">
                 @if ($user->photo)
-                    <img class="w-6 h-6 rounded" src="{{ $user->photo }}" alt="{{ $user->name }}">
+                    <img class="w-9 h-9 object-cover object-center rounded-lg" src="{{ $user->photo_url }}" alt="{{ $user->name }}">
                 @else
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    <svg class="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
