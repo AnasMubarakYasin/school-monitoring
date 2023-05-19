@@ -25,19 +25,19 @@ class UpdateStudentRequest extends FormRequest
     {
         return [
             'photo' => "nullable|image",
-            'name'=>"required|string",
+            'name' => "required|string",
             'telp' => "nullable|string",
             'email' => "nullable|string",
-            'password'=>"required|string",
+            'password' => "nullable|string",
 
-            'nis'=>"required|string",
-            'nisn'=>"required|string",
-            'fullname'=>"required|string",
-            'gender'=>"required|string",
-            'grade'=>"required|string",
+            'nis' => "required|string",
+            'nisn' => "required|string",
+            'fullname' => "required|string",
+            'gender' => "required|string",
+            'grade' => "required|string",
 
-            'major_id'=>"required|integer",
-            'classroom_id'=>"required|integer",
+            'major_id' => "required|integer",
+            'classroom_id' => "required|integer",
         ];
     }
 }

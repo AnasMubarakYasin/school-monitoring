@@ -28,7 +28,7 @@ class UpdateEmployeeRequest extends FormRequest
             'name' => 'required|string',
             'telp' => "nullable|string",
             'email' => "nullable|string",
-            'password' => 'required|string',
+            'password' => "nullable|string",
 
             'nip' => 'nullable|string',
             'fullname' => 'required|string',
