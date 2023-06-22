@@ -36,22 +36,22 @@ jobs:
         run: ssh remote "cd $wd; git restore ."
       - name: pull update
         run: ssh remote "cd $wd; git pull"
-      - name: clear storage
-        run: ssh remote "cd $wd; php artisan storage:clear"
+      # - name: clear storage
+      #   run: ssh remote "cd $wd; php artisan storage:clear"
       - name: install npm deps
-        run: ssh remote "cd $wd; source $nvm; npm install"
+        run: ssh remote "cd $wd; source $nvm; nvm use 18; npm install"
       - name: build resources
-        run: ssh remote "cd $wd; source $nvm; npm run build"
+        run: ssh remote "cd $wd; source $nvm; nvm use 18; npm run build"
       - name: remove pwa
-        run: ssh remote "cd $wd; source $nvm; node script pwa:remove"
+        run: ssh remote "cd $wd; source $nvm; nvm use 18; node script pwa:remove"
       - name: build pwa
-        run: ssh remote "cd $wd; source $nvm; node script pwa:build"
+        run: ssh remote "cd $wd; source $nvm; nvm use 18; node script pwa:build"
       - name: install composer deps
         run: ssh remote "cd $wd; composer i"
       - name: fresh migration
-        run: ssh remote "cd $wd; php artisan migrate:fresh"
-      - name: seed database
-        run: ssh remote "cd $wd; php artisan db:seed"
+      #   run: ssh remote "cd $wd; php artisan migrate:fresh"
+      # - name: seed database
+      #   run: ssh remote "cd $wd; php artisan db:seed"
       - name: up application
         run: ssh remote "cd $wd; php artisan up"
       - name: notify update
