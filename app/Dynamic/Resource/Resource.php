@@ -33,6 +33,8 @@ class Resource
         public ?Closure $route_delete_any = null,
         public ?Closure $route_restore = null,
 
+        public ?Closure $route_import = null,
+
         public ?Closure $route_relation = null,
     ) {
         $this->model = $model;
@@ -51,6 +53,8 @@ class Resource
         $this->route_delete ??= $route_default;
         $this->route_delete_any ??= $route_default;
         $this->route_restore ??= $route_default;
+
+        $this->route_import ??= $route_default;
 
         $this->route_relation ??= $route_default;
     }
@@ -98,6 +102,11 @@ class Resource
     public function route_delete(mixed $item)
     {
         return $this->route_delete->call($this, $item);
+    }
+
+    public function route_import()
+    {
+        return $this->route_import->call($this);
     }
 
     public function route_relation(Definition $definition, mixed $params)

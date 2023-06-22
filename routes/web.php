@@ -284,6 +284,7 @@ Route::middleware(['authc.basic:welcome,administrator,employee,student,student_p
     Route::patch('resource/student/{student}', 'StudentController@update')->name('web.resource.student.update');
     Route::delete('resource/student/{student}', 'StudentController@delete')->name('web.resource.student.delete');
     Route::delete('resource/student', 'StudentController@delete_any')->name('web.resource.student.delete_any');
+    Route::post('resource/student/import', 'StudentController@import')->name('web.resource.student.import');
 
     Route::post('resource/administrator', 'AdministratorController@create')->name('web.resource.administrator.create');
     Route::patch('resource/administrator/{administrator}', 'AdministratorController@update')->name('web.resource.administrator.update');

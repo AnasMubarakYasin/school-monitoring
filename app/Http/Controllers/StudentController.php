@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
+use App\Imports\StudentsImport;
 use App\Models\Student;
 use App\Models\StudentParent;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StudentController extends Controller
 {
@@ -46,5 +48,11 @@ class StudentController extends Controller
     {
         $this->authorize('restore', $student);
         return abort(501);
+    }
+    public function import(Request $request)
+    {
+        $this->authorize('import', Student::class);
+        Excel::import(new StudentsImport, $request->file('import'));
+        return back();
     }
 }

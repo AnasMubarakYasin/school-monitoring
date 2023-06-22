@@ -63,4 +63,12 @@ class StudentPolicy
     {
         return true;
     }
+
+    public function import(Administrator|Employee $user)
+    {
+        return match ($user::class) {
+            Administrator::class => true,
+            default => false,
+        };
+    }
 }

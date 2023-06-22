@@ -48,7 +48,7 @@ jobs:
         run: ssh remote "cd $wd; source $nvm; nvm use 18; node script pwa:build"
       - name: install composer deps
         run: ssh remote "cd $wd; composer i"
-      - name: fresh migration
+      # - name: fresh migration
       #   run: ssh remote "cd $wd; php artisan migrate:fresh"
       # - name: seed database
       #   run: ssh remote "cd $wd; php artisan db:seed"
