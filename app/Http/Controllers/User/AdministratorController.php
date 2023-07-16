@@ -1232,7 +1232,7 @@ class AdministratorController extends Controller
     }
     public function evaluation_list()
     {
-        $data = Student::paginate(10);
+        $data = Student::all();
         return view('pages.administrator.evaluation', ['evaluations' => $data]);
     }
 }
