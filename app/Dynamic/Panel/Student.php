@@ -69,6 +69,9 @@ class Student extends Panel
     {
         return route('web.student.profile');
     }
+    public function profile_update  () {
+        return route('web.resource.student.update', ['student' => auth()->user()]);
+    }
     public function notifications()
     {
         return route('web.student.notification');

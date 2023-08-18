@@ -13,7 +13,7 @@
 <div class="flex gap-4 p-4 flex-col lg:flex-row">
     <form
         class="grid gap-4 p-4 w-full h-fit text-gray-700 border border-gray-200 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700"
-        action="{{ $panel->profile_update() }}" method="post" enctype="multipart/form-data">
+        action="{{ $panel->profile_update() }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
         <input type="hidden" name="_view_any" value="{{ $panel->profile() }}">

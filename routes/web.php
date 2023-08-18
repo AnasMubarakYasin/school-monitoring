@@ -14,12 +14,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    if (env('local')) {
+    if (env('APP_ENV') == 'local') {
         return view('landing');
     } else {
-        return view('pages.student.login');
+        return view('pages.landing');
     }
 })->name('welcome');
+Route::get('/landing', function () {
+    return view('pages.landing');
+})->name('landing');
+Route::get('/entry', function () {
+    return view('pages.entry');
+})->name('entry');
 Route::get('/locale/{locale}', 'Locale@set')->name('web.locale.set');
 Route::patch('/notification/{notification}/mark', 'Notification@mark')->name('web.notification.mark');
 Route::get('/notification/{notification}/read', 'Notification@read')->name('web.notification.read');

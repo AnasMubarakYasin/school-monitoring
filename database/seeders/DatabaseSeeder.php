@@ -59,7 +59,7 @@ class DatabaseSeeder extends Seeder
             'website' => '',
         ]);
 
-        if (!env('local')) return;
+        if (!env('APP_ENV') == 'local') return;
 
         // $teacher = Employee::factory()->create([
         //     'name' => 'teacher',

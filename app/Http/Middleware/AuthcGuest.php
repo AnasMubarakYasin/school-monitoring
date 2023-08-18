@@ -17,7 +17,7 @@ class AuthcGuest
      */
     public function handle(Request $request, Closure $next, $redirect = null, $guard = null)
     {
-        if (Auth::guard($guard)->check()) {
+        if (Auth::guard($guard)->viaRemember() || Auth::guard($guard)->check()) {
             return to_route($redirect);
         }
         Auth::shouldUse($guard);

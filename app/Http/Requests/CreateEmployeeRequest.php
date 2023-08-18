@@ -24,7 +24,7 @@ class CreateEmployeeRequest extends FormRequest
     public function rules()
     {
         return [
-            'photo' => "nullable|image",
+            'photo' => "nullable|image|max:8192",
             'name' => 'required|string',
             'telp' => "nullable|string",
             'email' => "nullable|string",

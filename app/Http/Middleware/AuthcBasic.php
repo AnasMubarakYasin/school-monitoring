@@ -19,18 +19,12 @@ class AuthcBasic
     {
         $authenticated = false;
         foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
+            if (Auth::guard($guard)->viaRemember() || Auth::guard($guard)->check()) {
                 Auth::shouldUse($guard);
                 $authenticated = true;
                 break;
             }
         }
-        // if (auth($guard)->viaRemember()) {
-        //     return to_route($redirect);
-        // }
-        // if (!Auth::check()) {
-        //     return to_route($redirect);
-        // }
         if (!$authenticated) {
             return to_route($redirect);
         }
