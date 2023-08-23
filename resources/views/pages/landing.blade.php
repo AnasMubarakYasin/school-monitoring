@@ -30,13 +30,13 @@
                 </div>
                 <div class="hidden @2xl:block @2xl:flex-grow"></div>
                 <nav class="hidden @2xl:block">
-                    <ul class="flex gap-4 items-center justify-center">
+                    <ul class="flex gap-8 items-center justify-center">
                         <li class="relative">
                             <a href="{{ route('landing') }}" @class(['peer font-medium text-base opacity-70 hover:opacity-100'])>Home</a>
                             <div @class([
                                 'w-full h-1.5',
                                 'bg-[#4652F6] opacity-70 peer-hover:opacity-100 rounded' =>
-                                    url()->full() == route('landing'),
+                                    url()->full() == route('landing') || url()->full() == route('welcome'),
                             ])></div>
                         </li>
                         <li class="relative">
@@ -44,7 +44,7 @@
                             <div @class([
                                 'w-full h-1.5',
                                 'bg-[#4652F6] opacity-70 peer-hover:opacity-100 rounded' =>
-                                    url()->full() == route('welcome'),
+                                    url()->full() == route('entry'),
                             ])></div>
                         </li>
                         <li class="relative">
@@ -52,15 +52,7 @@
                             <div @class([
                                 'w-full h-1.5',
                                 'bg-[#4652F6] opacity-70 peer-hover:opacity-100 rounded' =>
-                                    url()->full() == route('welcome'),
-                            ])></div>
-                        </li>
-                        <li class="relative">
-                            <a href="{{ route('landing') }}" @class(['peer font-medium text-base opacity-70 hover:opacity-100'])>Administrator</a>
-                            <div @class([
-                                'w-full h-1.5',
-                                'bg-[#4652F6] opacity-70 peer-hover:opacity-100 rounded' =>
-                                    url()->full() == route('welcome'),
+                                    url()->full() == route('entry'),
                             ])></div>
                         </li>
                         <li class="relative">
@@ -98,33 +90,28 @@
                 class="w-screen aspect-square @2xl:w-full @2xl:aspect-[0] object-cover object-right">
         </div>
     </header>
-    <div id="backdrop" class="hidden fixed top-0 w-screen h-screen backdrop-brightness-50"></div>
+    <div id="backdrop" class="hidden fixed top-0 w-screen h-screen transition-all"></div>
     <aside id="sidebar" class="fixed top-0 left-[-100%] w-4/5 h-screen bg-white transition-all">
         <nav class="px-8 py-4">
             <ul class="flex flex-col gap-4">
                 <li class="relative">
                     <a href="{{ route('landing') }}" @class([
                         'peer font-medium text-base opacity-70 hover:opacity-100',
-                        'text-[#4652F6]' => url()->full() == route('landing'),
+                        'text-[#4652F6]' =>
+                            url()->full() == route('landing') || url()->full() == route('welcome'),
                     ])>Home</a>
                 </li>
                 <li class="relative">
                     <a href="{{ route('landing') }}" @class([
                         'peer font-medium text-base opacity-70 hover:opacity-100',
-                        'text-[#4652F6]' => url()->full() == route('welcome'),
+                        'text-[#4652F6]' => url()->full() == route('entry'),
                     ])>About Us</a>
                 </li>
                 <li class="relative">
                     <a href="{{ route('landing') }}" @class([
                         'peer font-medium text-base opacity-70 hover:opacity-100',
-                        'text-[#4652F6]' => url()->full() == route('welcome'),
+                        'text-[#4652F6]' => url()->full() == route('entry'),
                     ])>Blog</a>
-                </li>
-                <li class="relative">
-                    <a href="{{ route('landing') }}" @class([
-                        'peer font-medium text-base opacity-70 hover:opacity-100',
-                        'text-[#4652F6]' => url()->full() == route('welcome'),
-                    ])>Administrator</a>
                 </li>
                 <li class="relative">
                     <a href="{{ route('entry') }}" @class([
@@ -141,6 +128,9 @@
             sidebar.style.left = '0'
             backdrop.style.display = 'block'
             requestAnimationFrame(() => {
+                backdrop.style['backdrop-filter'] = 'brightness(.5)';
+            })
+            requestAnimationFrame(() => {
                 addEventListener('click', close_handler, {
                     once: true
                 })
@@ -149,7 +139,10 @@
             function close_handler(e) {
                 if (!sidebar.contains(e.target)) {
                     sidebar.style.left = '-100%'
-                    backdrop.style.display = 'none'
+                    backdrop.style['backdrop-filter'] = 'brightness(1)';
+                    requestAnimationFrame(() => {
+                        backdrop.style.display = 'none'
+                    })
                 } else {
                     addEventListener('click', close_handler, {
                         once: true
