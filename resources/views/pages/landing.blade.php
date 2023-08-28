@@ -9,9 +9,9 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body>
-    <header class="@container flex flex-col w-screen h-screen">
-        {{-- <img src="{{ asset('images/hero.svg') }}" alt="hero" class="absolute right-0 h-screen"> --}}
+<body class="flex flex-col">
+    {{-- <img src="{{ asset('images/hero.svg') }}" alt="hero" class="absolute top-16 z-0 w-full"> --}}
+    <header class="@container flex flex-col w-full">
         <div class="@container">
             <div class="flex @xs:px-4 @xl:px-8 py-4 justify-center @2xl:justify-start relative">
                 <button id="sidebar_toggle" class="absolute left-4 grid place-content-center p-2 @2xl:hidden">
@@ -35,7 +35,7 @@
                             <a href="{{ route('landing') }}" @class(['peer font-medium text-base opacity-70 hover:opacity-100'])>Home</a>
                             <div @class([
                                 'w-full h-1.5',
-                                'bg-[#4652F6] opacity-70 peer-hover:opacity-100 rounded' =>
+                                'bg-primary opacity-70 peer-hover:opacity-100 rounded' =>
                                     url()->full() == route('landing') || url()->full() == route('welcome'),
                             ])></div>
                         </li>
@@ -43,7 +43,7 @@
                             <a href="{{ route('landing') }}" @class(['peer font-medium text-base opacity-70 hover:opacity-100'])>About Us</a>
                             <div @class([
                                 'w-full h-1.5',
-                                'bg-[#4652F6] opacity-70 peer-hover:opacity-100 rounded' =>
+                                'bg-primary opacity-70 peer-hover:opacity-100 rounded' =>
                                     url()->full() == route('entry'),
                             ])></div>
                         </li>
@@ -51,24 +51,24 @@
                             <a href="{{ route('landing') }}" @class(['peer font-medium text-base opacity-70 hover:opacity-100'])>Blog</a>
                             <div @class([
                                 'w-full h-1.5',
-                                'bg-[#4652F6] opacity-70 peer-hover:opacity-100 rounded' =>
+                                'bg-primary opacity-70 peer-hover:opacity-100 rounded' =>
                                     url()->full() == route('entry'),
                             ])></div>
                         </li>
                         <li class="relative">
                             <a href="{{ route('entry') }}" @class([
-                                'peer px-4 py-2 font-medium text-base text-white bg-[#4652F6] opacity-70 hover:opacity-100 rounded-full',
+                                'peer px-4 py-2 font-medium text-base text-white bg-primary opacity-70 hover:opacity-100 rounded-full',
                             ])>Login</a>
                         </li>
                     </ul>
                 </nav>
             </div>
         </div>
-        <div class="@container relative flex flex-col @2xl:flex-row">
+        <div class="@container flex flex-col @2xl:flex-row">
             <div
-                class="@2xl:absolute top-0 pt-10 @xs:px-4 @xl:px-8 @4xl:px-16 @6xl:px-32 @7xl:px-40 grid @2xl:grid-cols-2 @2xl:grid-rows-2">
-                <div class="flex flex-col gap-2">
-                    <h1 class="text-[#4652F6] text-5xl font-bold">
+                class="@2xl:absolute top-0 px-2 py-10 @xs:px-4 @xl:px-8 @4xl:px-16 @6xl:px-32 @7xl:px-40 grid @2xl:grid-cols-2 @2xl:grid-rows-1">
+                <div class="flex flex-col gap-4">
+                    <h1 class="text-primary text-5xl font-bold">
                         SI
                         <br>
                         MOKA
@@ -79,17 +79,58 @@
                         Progressive Web Apps
                     </p>
                     <a href="{{ route('landing') }}" @class([
-                        'w-fit px-8 py-2 font-medium text-base text-black bg-[#61cb89] hover:opacity-70 opacity-100 rounded-full',
+                        'w-fit px-8 py-2 font-medium text-base text-black bg-secondary hover:opacity-70 opacity-100 rounded-full',
                     ])>Get Start</a>
                 </div>
                 <div></div>
-                <div></div>
-                <div></div>
             </div>
-            <img src="{{ asset('images/hero.svg') }}" alt="hero"
-                class="w-screen aspect-square @2xl:w-full @2xl:aspect-[0] object-cover object-right">
+            <img src="{{ asset('images/hero.svg') }}" alt="hero" class="w-full">
         </div>
     </header>
+    <main class="@container relative flex flex-col gap-10 w-full py-10">
+        <section class="flex flex-col gap-4 px-2 @xs:px-4 @xl:px-8 @4xl:px-16 @6xl:px-32 @7xl:px-96">
+            <h2 class="text-primary text-center text-4xl font-bold">
+                SI MOKA
+            </h2>
+            <p class="text-justify text-lg">
+                SI MOKA adalah platform terintegrasi yang dirancang khusus untuk sekolah-sekolah modern. Kami
+                menghadirkan kemudahan dalam memantau, mencatat, dan menganalisis berbagai kegiatan akademik. Dari
+                catatan nilai hingga absensi, semua informasi penting dapat diakses dalam satu tempat.
+            </p>
+        </section>
+        <section class="flex flex-col gap-4 px-2 @xs:px-4 @xl:px-8 @4xl:px-16 @6xl:px-32 @7xl:px-64">
+            <h2 class="text-primary text-center text-4xl font-bold">
+                Kenapa Memilih Kami
+            </h2>
+            <div class="flex flex-col @2xl:flex-row gap-4">
+                <div class="flex flex-col gap-2 p-4 bg-primary/10 rounded-lg">
+                    <img src="{{ asset('images/easily_accessible.svg') }}" alt="" class="w-16 h-16 self-center">
+                    <h3 class="text-center text-xl font-bold">Mudah Diakses</h3>
+                    <p>
+                        SI MOKA memberikan akses yang mudah serta dapat diakses dimanapun tanpa batasan
+                    </p>
+                </div>
+                <div class="flex flex-col gap-2 p-4 bg-primary/10 rounded-lg">
+                    <img src="{{ asset('images/realtime.svg') }}" alt="" class="w-16 h-16 self-center">
+                    <h3 class="text-center text-xl font-bold">Realtime</h3>
+                    <p>
+                        Dapatkan Pembaruan secara real-time mengenai proses serta kegiatan akademik sekolah
+                    </p>
+                </div>
+                <div class="flex flex-col gap-2 p-4 bg-primary/10 rounded-lg">
+                    <img src="{{ asset('images/pwa.svg') }}" alt="" class="w-16 h-16 self-center">
+                    <h3 class="text-center text-xl font-bold">Progressive Web Apps</h3>
+                    <p>
+                        Didukung dengan teknologi terkini yang memberikan pengalaman seperti menggunakan aplikasi
+                    </p>
+                </div>
+            </div>
+        </section>
+        <img src="{{ asset('images/main.svg') }}" alt="main" class="absolute top-0 w-full -z-10">
+        <section class="h-[20vh]"></section>
+    </main>
+    {{-- <img src="{{ asset('images/hero.svg') }}" alt="hero"
+        class="absolute w-screen aspect-square @2xl:w-full @2xl:aspect-[0] object-cover object-right"> --}}
     <div id="backdrop" class="hidden fixed top-0 w-screen h-screen transition-all"></div>
     <aside id="sidebar" class="fixed top-0 left-[-100%] w-4/5 h-screen bg-white transition-all">
         <nav class="px-8 py-4">
@@ -97,25 +138,25 @@
                 <li class="relative">
                     <a href="{{ route('landing') }}" @class([
                         'peer font-medium text-base opacity-70 hover:opacity-100',
-                        'text-[#4652F6]' =>
+                        'text-primary' =>
                             url()->full() == route('landing') || url()->full() == route('welcome'),
                     ])>Home</a>
                 </li>
                 <li class="relative">
                     <a href="{{ route('landing') }}" @class([
                         'peer font-medium text-base opacity-70 hover:opacity-100',
-                        'text-[#4652F6]' => url()->full() == route('entry'),
+                        'text-primary' => url()->full() == route('entry'),
                     ])>About Us</a>
                 </li>
                 <li class="relative">
                     <a href="{{ route('landing') }}" @class([
                         'peer font-medium text-base opacity-70 hover:opacity-100',
-                        'text-[#4652F6]' => url()->full() == route('entry'),
+                        'text-primary' => url()->full() == route('entry'),
                     ])>Blog</a>
                 </li>
                 <li class="relative">
                     <a href="{{ route('entry') }}" @class([
-                        'peer px-4 py-2 font-medium text-base text-white bg-[#4652F6] opacity-70 hover:opacity-100 rounded-full',
+                        'peer px-4 py-2 font-medium text-base text-white bg-primary opacity-70 hover:opacity-100 rounded-full',
                     ])>Login</a>
                 </li>
             </ul>

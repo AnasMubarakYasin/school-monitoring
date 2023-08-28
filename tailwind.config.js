@@ -9,7 +9,12 @@ module.exports = {
         "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
     ],
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                primary: "#4652F6",
+                secondary: "#61cb89",
+            }
+        },
     },
     plugins: [
         require("@tailwindcss/container-queries"),

@@ -1,7 +1,7 @@
 @aware([
     'user' => null,
 ])
-<div class="grid grid-flow-col grid-cols-2 gap-4">
+<div class="grid grid-flow-col grid-cols-2 gap-4 p-4">
     <div class="h-fit p-4 bg-white border rounded-lg shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
         <div class="flex items-center justify-between mb-4">
             <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">
