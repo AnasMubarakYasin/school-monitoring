@@ -9,11 +9,11 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="flex flex-col">
-    {{-- <img src="{{ asset('images/hero.svg') }}" alt="hero" class="absolute top-16 z-0 w-full"> --}}
+<body class="@container flex flex-col">
+    <img src="{{ asset('images/background.svg') }}" alt="background" class="absolute top-[390px] @sm:top-[260px] @2xl:top-16 z-0 w-full">
     <header class="@container flex flex-col w-full">
         <div class="@container">
-            <div class="flex @xs:px-4 @xl:px-8 py-4 justify-center @2xl:justify-start relative">
+            <div class="flex @xs:px-4 @xl:px-8 py-4 items-center justify-center @2xl:justify-start relative">
                 <button id="sidebar_toggle" class="absolute left-4 grid place-content-center p-2 @2xl:hidden">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                         stroke="currentColor" class="w-6 h-6">
@@ -65,10 +65,11 @@
             </div>
         </div>
         <div class="@container flex flex-col @2xl:flex-row">
+            {{--  @xs:px-4 @xl:px-8 @4xl:px-16 @6xl:px-32 @7xl:px-40 --}}
             <div
-                class="@2xl:absolute top-0 px-2 py-10 @xs:px-4 @xl:px-8 @4xl:px-16 @6xl:px-32 @7xl:px-40 grid @2xl:grid-cols-2 @2xl:grid-rows-1">
-                <div class="flex flex-col gap-4">
-                    <h1 class="text-primary text-5xl font-bold">
+                class="h-[520px] @2xl:h-auto py-10 grid grid-cols-12 grid-rows-1 @4xl:grid-rows-2 @6xl:grid-rows-3">
+                <div class="flex flex-col gap-4 col-start-2 @2xl:col-end-6 col-end-11">
+                    <h1 class="text-primary text-5xl font-bold font-outline">
                         SI
                         <br>
                         MOKA
@@ -84,7 +85,7 @@
                 </div>
                 <div></div>
             </div>
-            <img src="{{ asset('images/hero.svg') }}" alt="hero" class="w-full">
+            {{-- <img src="{{ asset('images/hero.svg') }}" alt="hero" class="w-full"> --}}
         </div>
     </header>
     <main class="@container relative flex flex-col gap-10 w-full py-10">
@@ -126,7 +127,8 @@
                 </div>
             </div>
         </section>
-        <img src="{{ asset('images/main.svg') }}" alt="main" class="absolute top-0 w-full -z-10">
+        {{-- <img src="{{ asset('images/main.svg') }}" alt="main" class="absolute top-0 w-full -z-10"> --}}
+        {{-- <img src="{{ asset('images/background.svg') }}" alt="background" class="absolute top-0 w-full -z-10"> --}}
         <section class="h-[20vh]"></section>
     </main>
     {{-- <img src="{{ asset('images/hero.svg') }}" alt="hero"

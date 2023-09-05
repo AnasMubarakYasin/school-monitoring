@@ -11,8 +11,8 @@
 
 <body>
     <nav class="@container grid place-content-center min-h-screen p-8 bg-gray-100">
-        <ul class="grid @xs:grid-cols-1 @md:grid-cols-2 @xl:grid-cols-3 @4xl:grid-cols-4 gap-4">
-            <li>
+        <ul class="grid @xs:grid-cols-1 @md:grid-cols-2 @xl:grid-cols-3 {{-- @4xl:grid-cols-4 --}} gap-4">
+            {{-- <li>
                 <a href="{{ route('web.administrator.login_show') }}"
                     class="grid w-[200px] gap-4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:bg-gray-50 overflow-hidden cursor-pointer transition-colors">
                     <div class="grid place-content-center aspect-square bg-gray-200 p-2 rounded-lg">
@@ -27,7 +27,7 @@
                         Administrator
                     </div>
                 </a>
-            </li>
+            </li> --}}
             <li>
                 <div
                     class="panel relative w-[200px] h-[240px] bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:bg-gray-50 overflow-hidden transition-colors">
