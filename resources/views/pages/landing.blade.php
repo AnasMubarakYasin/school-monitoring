@@ -10,7 +10,7 @@
 </head>
 
 <body class="@container flex flex-col">
-    <img src="{{ asset('images/background.svg') }}" alt="background" class="absolute top-[390px] @sm:top-[260px] @2xl:top-16 z-0 w-full">
+    <img src="{{ asset('images/background.svg') }}" alt="background" class="absolute top-[390px] @sm:top-[260px] @2xl:top-28 @3xl:top-32 @4xl:top-16 z-0 w-full">
     <header class="@container flex flex-col w-full">
         <div class="@container">
             <div class="flex @xs:px-4 @xl:px-8 py-4 items-center justify-center @2xl:justify-start relative">
@@ -67,7 +67,7 @@
         <div class="@container flex flex-col @2xl:flex-row">
             {{--  @xs:px-4 @xl:px-8 @4xl:px-16 @6xl:px-32 @7xl:px-40 --}}
             <div
-                class="h-[520px] @2xl:h-auto py-10 grid grid-cols-12 grid-rows-1 @4xl:grid-rows-2 @6xl:grid-rows-3">
+                class="@2xl:absolute py-10 grid grid-cols-12 grid-rows-1">
                 <div class="flex flex-col gap-4 col-start-2 @2xl:col-end-6 col-end-11">
                     <h1 class="text-primary text-5xl font-bold font-outline">
                         SI
@@ -85,7 +85,7 @@
                 </div>
                 <div></div>
             </div>
-            {{-- <img src="{{ asset('images/hero.svg') }}" alt="hero" class="w-full"> --}}
+            <img src="{{ asset('images/hero.svg') }}" alt="hero" class="w-3/5 @sm:h-3/4 @2xl:h-[500px] @3xl:h-[560px] @4xl:w-full @4xl:h-full invisible">
         </div>
     </header>
     <main class="@container relative flex flex-col gap-10 w-full py-10">
