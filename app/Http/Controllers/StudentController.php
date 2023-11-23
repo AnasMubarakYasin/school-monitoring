@@ -37,7 +37,7 @@ class StudentController extends Controller
     public function delete_any(Request $request)
     {
         $this->authorize('delete_any', Student::class);
-        if ($false/* mark */) {
+        if (false/* mark */) {
             Student::truncate();
         } else {
             Student::destroy($request->input('id', []));

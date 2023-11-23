@@ -32,7 +32,7 @@ class MajorController extends Controller
     public function delete_any(Request $request)
     {
         $this->authorize('delete_any', Major::class);
-        if ($false/* mark */) {
+        if (false/* mark */) {
             Major::truncate();
         } else {
             Major::destroy($request->input('id', []));

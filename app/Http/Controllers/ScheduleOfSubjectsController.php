@@ -34,7 +34,7 @@ class ScheduleOfSubjectsController extends Controller
     public function delete_any(Request $request)
     {
         $this->authorize('delete_any', ScheduleOfSubjects::class);
-        if ($false/* mark */) {
+        if (false/* mark */) {
             ScheduleOfSubjects::truncate();
         } else {
             ScheduleOfSubjects::destroy($request->input('id', []));
