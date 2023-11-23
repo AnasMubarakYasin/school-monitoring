@@ -254,6 +254,9 @@ class AdministratorController extends Controller
         $resource->route_delete = function ($item) {
             return route('web.resource.employee.delete', ['employee' => $item]);
         };
+        $resource->route_delete_any = function ($item) {
+            return route('web.resource.employee.delete_any');
+        };
         return view('pages.administrator.employee.list', ['resource' => $resource]);
     }
     public function employee_create()
