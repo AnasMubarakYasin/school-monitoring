@@ -32,7 +32,7 @@ class EmployeeController extends Controller
     public function delete_any(Request $request)
     {
         $this->authorize('delete_any', Employee::class);
-        if ($request->input('all')) {
+        if ($false/* mark */) {
             Employee::truncate();
         } else {
             Employee::destroy($request->input('id', []));

@@ -38,7 +38,7 @@ class SemesterController extends Controller
     public function delete_any(Request $request)
     {
         $this->authorize('delete_any', Semester::class);
-        if ($request->input('all')) {
+        if ($false/* mark */) {
             Semester::truncate();
         } else {
             Semester::destroy($request->input('id', []));

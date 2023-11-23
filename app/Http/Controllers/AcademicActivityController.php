@@ -39,7 +39,7 @@ class AcademicActivityController extends Controller
     public function delete_any(Request $request)
     {
         $this->authorize('delete_any', AcademicActivity::class);
-        if ($request->input('all')) {
+        if ($false/* mark */) {
             AcademicActivity::truncate();
         } else {
             AcademicActivity::destroy($request->input('id', []));

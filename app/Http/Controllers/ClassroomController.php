@@ -39,7 +39,7 @@ class ClassroomController extends Controller
     public function delete_any(Request $request)
     {
         $this->authorize('delete_any', Classroom::class);
-        if ($request->input('all')) {
+        if ($false/* mark */) {
             Classroom::truncate();
         } else {
             Classroom::destroy($request->input('id', []));

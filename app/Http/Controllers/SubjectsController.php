@@ -32,7 +32,7 @@ class SubjectsController extends Controller
     public function delete_any(Request $request)
     {
         $this->authorize('delete_any', Subjects::class);
-        if ($request->input('all')) {
+        if ($false/* mark */) {
             Subjects::truncate();
         } else {
             Subjects::destroy($request->input('id', []));

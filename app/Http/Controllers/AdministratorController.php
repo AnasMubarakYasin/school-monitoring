@@ -33,7 +33,7 @@ class AdministratorController extends Controller
     public function delete_any(Request $request)
     {
         $this->authorize('delete_any', Administrator::class);
-        if ($request->input('all')) {
+        if ($false/* mark */) {
             Administrator::truncate();
         } else {
             Administrator::destroy($request->input('id', []));
